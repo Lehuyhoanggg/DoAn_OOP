@@ -17,6 +17,9 @@ public class TinNhan {
         this.ngayGui = ThoiGian.chuyenStrThanhDate(ngayGui);
     }
 
+    public TinNhan() {
+    };
+
     public String getMa() {
         return ma;
     }
