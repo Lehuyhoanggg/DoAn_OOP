@@ -1,9 +1,11 @@
 package model;
 
+import java.time.LocalDate;
+
 import util.ThoiGian;
 
 public class TaiKhoan {
-    private String ngayTao;
+    private LocalDate ngayTao;
     private String tenDangNhap;
     private String matKhau;
     private User user;
@@ -13,13 +15,12 @@ public class TaiKhoan {
         this.matKhau = matKhau;
         this.user = user;
         user.capTaiKhoan(this);
-        this.ngayTao = ThoiGian.layNgayHienTai();
     }
 
-    public TaiKhoan(String tenDangNhap, String matKhau) {
+    public TaiKhoan(String tenDangNhap, String matKhau, String ngay) {
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
-        this.ngayTao = ThoiGian.layNgayHienTai();
+        this.ngayTao = ThoiGian.chuyenStrThanhDate(ngay);
     }
 
     public TaiKhoan() {
@@ -37,7 +38,7 @@ public class TaiKhoan {
         return user;
     }
 
-    public String getNgayTao() {
+    public LocalDate getNgayTao() {
         return ngayTao;
     }
 
@@ -54,6 +55,10 @@ public class TaiKhoan {
     }
 
     public void setNgayTao(String ngayTao) {
+        this.ngayTao = ThoiGian.chuyenStrThanhDate(ngayTao);
+    }
+
+    public void setNgayTao(LocalDate ngayTao) {
         this.ngayTao = ngayTao;
     }
 }

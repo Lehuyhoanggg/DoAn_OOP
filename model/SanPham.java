@@ -10,6 +10,21 @@ public class SanPham {
     private String moTa;
     private int trangThai;
 
+    public SanPham(String ma, String ten, String danhMuc, String thuongHieu, long gia, int tonKho, String moTa,
+            int trangThai) {
+        this.ma = ma;
+        this.ten = ten;
+        this.danhMuc = danhMuc;
+        this.thuongHieu = thuongHieu;
+        this.gia = gia;
+        this.tonKho = tonKho;
+        this.moTa = moTa;
+        this.trangThai = trangThai;
+    }
+
+    public SanPham() {
+    }
+
     public String getDanhMuc() {
         return danhMuc;
     }

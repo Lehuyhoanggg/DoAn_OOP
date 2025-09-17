@@ -105,6 +105,7 @@ public abstract class User {
         this.listTinNhan = listTinNhan;
     }
 
+    //////////////// ham rieng cua doi tuong  
     public void nhanTinNhan(TinNhan tinNhan) {
         if (tinNhan == null) {
             return;
