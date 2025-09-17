@@ -1,5 +1,82 @@
 package model;
 
 public class SanPham {
+    private String ma;
+    private String ten;
+    private String danhMuc;
+    private String thuongHieu;
+    private long gia;
+    private int tonKho;
+    private String moTa;
+    private int trangThai;
 
+    public String getDanhMuc() {
+        return danhMuc;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public long getGia() {
+        return gia;
+    }
+
+    public String getMa() {
+        return ma;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public String getThuongHieu() {
+        return thuongHieu;
+    }
+
+    public int getTonKho() {
+        return tonKho;
+    }
+
+    public String getTrangThai() {
+        if (trangThai == 0) {
+            return "Con Hang";
+        } else if (trangThai == 1) {
+            return "Het Hang";
+        } else {
+            return "Ngung Kinh Doanh";
+        }
+    }
+
+    public void setDanhMuc(String danhMuc) {
+        this.danhMuc = danhMuc;
+    }
+
+    public void setGia(long gia) {
+        this.gia = gia;
+    }
+
+    public void setMa(String ma) {
+        this.ma = ma;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
+    }
+
+    public void setThuongHieu(String thuongHieu) {
+        this.thuongHieu = thuongHieu;
+    }
+
+    public void setTonKho(int tonKho) {
+        this.tonKho = tonKho;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
 }

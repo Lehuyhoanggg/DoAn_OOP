@@ -1,5 +1,16 @@
 package model;
 
-public class QuanLy {
+public class QuanLy extends User {
+    public QuanLy(String ma, String cccd, String ten,
+            String ngaySinh, String sdt, String gioiTinh,
+            TaiKhoan taiKhoan) {
+        super(ma, cccd, ten, ngaySinh, sdt, gioiTinh, taiKhoan);
+        setQuyenHang("QuanLy");
+    }
 
+    public QuanLy(String ma, String cccd, String ten,
+            String ngaySinh, String sdt, String gioiTinh) {
+        super(ma, cccd, ten, ngaySinh, sdt, gioiTinh);
+        setQuyenHang("QuanLy");
+    }
 }
