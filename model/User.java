@@ -120,4 +120,8 @@ public abstract class User {
         this.taiKhoan = tk;
         tk.setUser(this);
     }
+
+    public void goTaiKhoan() {
+        this.taiKhoan = null;
+    }
 }

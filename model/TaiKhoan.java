@@ -61,4 +61,11 @@ public class TaiKhoan {
     public void setNgayTao(LocalDate ngayTao) {
         this.ngayTao = ngayTao;
     }
+
+    public boolean kiemTraTaiKhoan(String tenDangNhap, String matKhau) {
+        if (getTenDangNhap().equals(tenDangNhap) && getMatKhau().equals(matKhau)) {
+            return true;
+        }
+        return false;
+    }
 }

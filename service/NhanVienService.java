@@ -23,4 +23,8 @@ public class NhanVienService {
         this.listNhanVien = listNhanVien;
     }
 
+    public void themNhanVien(NhanVien nhanVien) {
+        listNhanVien.add(nhanVien);
+    }
+
 }

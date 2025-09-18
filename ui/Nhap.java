@@ -1,4 +1,4 @@
-package giaodien;
+package ui;
 
 import java.util.Scanner;
 
