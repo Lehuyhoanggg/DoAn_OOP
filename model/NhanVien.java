@@ -1,7 +1,6 @@
 package model;
 
 public class NhanVien extends User {
-    private LichLamViec lichLamViec;
     private long luong;
 
     public NhanVien() {
@@ -17,16 +16,7 @@ public class NhanVien extends User {
         return luong;
     }
 
-    public LichLamViec getLichLamViec() {
-        return lichLamViec;
-    }
-
     public void setLuong(long luong) {
         this.luong = luong;
     }
-
-    public void setLichLamViec(LichLamViec lichLamViec) {
-        this.lichLamViec = lichLamViec;
-    }
-
 }
