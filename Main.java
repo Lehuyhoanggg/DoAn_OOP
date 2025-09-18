@@ -41,8 +41,8 @@ public class Main {
             tenTaiKhoan = Nhap.nhapStr("Tai khoan : ");
             matKhau = Nhap.nhapStr("Mat khau : ");
             user = taiKhoanService.layUserBangTk(tenTaiKhoan, matKhau);
-
         } while (user == null);
+        dieuHuongMenu();
         System.out.println("Da thoat khoi chuong trinh");
     }
 
