@@ -3,7 +3,14 @@ import java.util.List;
 import model.NhanVien;
 
 public class NhanVienService{
-    private List<NhanVien> dsnv = new ArrayList<>();
+    private List<NhanVien> dsnv;
+    //contructor
+    public NhanVienService(){
+        
+    }
+    public NhanVienService(List<NhanVien> dsnv){
+        this.dsnv = dsnv;
+    }
     //them nhan vien 
     public void themNhanVien(NhanVien nv){
 
@@ -19,13 +26,11 @@ public class NhanVienService{
         return null;
     }
     //xoa nhan vien 
-    public boolean xoanhanvien(String ma){
+    public void xoanhanvien(String ma){
         NhanVien nv =  timnhanvien(ma);
-        if(nv != null){
-            dsnv.remove(nv);
-            return true;
-        }
-        return false;
+
+        dsnv.remove(nv);
+
     }
     //sua thong tin nhan vien 
     public void suathongtin(String ma, NhanVien nvMoi){
