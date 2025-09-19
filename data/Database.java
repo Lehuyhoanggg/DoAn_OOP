@@ -1,7 +1,6 @@
-package repository;
+package data;
 
 import java.util.ArrayList;
-
 import model.CaLam;
 import model.ChiTietHoaDon;
 import model.HoaDon;
@@ -14,7 +13,7 @@ import model.QuanLy;
 import model.SanPham;
 import model.TaiKhoan;
 
-public class Datadabase {
+public class Database {
     private ArrayList<NhanVien> listNhanVien;
     private ArrayList<QuanLy> listQuanLy;
     private ArrayList<HoaDon> listHoaDon;
@@ -27,7 +26,7 @@ public class Datadabase {
     private ArrayList<MaGiamGia> listMaGiamGia;
     private LichLamViec lichTuan;
 
-    public Datadabase() {
+    public Database() {
         listNhanVien = new ArrayList<>();
         listQuanLy = new ArrayList<>();
         listHoaDon = new ArrayList<>();

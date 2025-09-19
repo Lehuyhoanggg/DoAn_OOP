@@ -1,30 +1,53 @@
 package service;
 
 import java.util.ArrayList;
-
 import model.NhanVien;
 
 public class NhanVienService {
-    ArrayList<NhanVien> listNhanVien;
+    private ArrayList<NhanVien> dsnv;
 
+    // contructor
     public NhanVienService() {
 
     }
 
-    public NhanVienService(ArrayList<NhanVien> listNhanVien) {
-        this.listNhanVien = listNhanVien;
+    public NhanVienService(ArrayList<NhanVien> dsnv) {
+        this.dsnv = dsnv;
     }
 
-    public ArrayList<NhanVien> getListNhanVien() {
-        return listNhanVien;
+    // them nhan vien
+    public void themNhanVien(NhanVien nv) {
+
+        dsnv.add(nv);
     }
 
-    public void setListNhanVien(ArrayList<NhanVien> listNhanVien) {
-        this.listNhanVien = listNhanVien;
+    // tim nhan vien theo ma tra ve NhanVien
+    public NhanVien timnhanvien(String ma) {
+        for (int i = 0; i < dsnv.size(); i++) {
+            NhanVien nv = dsnv.get(i);
+            if (nv.getMa().equals(ma))
+                return nv;
+        }
+        return null;
     }
 
-    public void themNhanVien(NhanVien nhanVien) {
-        listNhanVien.add(nhanVien);
+    // xoa nhan vien
+    public void xoanhanvien(String ma) {
+        NhanVien nv = timnhanvien(ma);
+
+        dsnv.remove(nv);
+
     }
 
+    // sua thong tin nhan vien
+    public void suathongtin(String ma, NhanVien nvMoi) {
+        NhanVien nv = timnhanvien(ma);
+        if (nv != null) {
+            nv.setCccd(nvMoi.getCccd());
+            nv.setTen(nvMoi.getTen());
+            nv.setngaySinh(nvMoi.getngaySinh());
+            nv.setSdt(nvMoi.getSdt());
+            nv.setGioiTinh(nvMoi.getGioiTinh());
+        }
+    }
 }

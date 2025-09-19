@@ -34,4 +34,11 @@ public class MenuQuanLy implements QuanLiChung, GiaoTiep {
     public void xemTatCaTinNhan(User user) {
     }
 
+    public void xemTinNhanTrongNgay() {
+    }
+
+    public void menu() {
+
+    }
+
 }

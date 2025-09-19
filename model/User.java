@@ -49,6 +49,10 @@ public abstract class User {
         this.quyenHang = quyenHang;
     }
 
+    public String getNgaySinh() {
+        return ngaySinh;
+    }
+
     public String getMa() {
         return ma;
     }
@@ -87,6 +91,14 @@ public abstract class User {
 
     public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
+    }
+
+    public void setNgaySinh(String ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
     public void setngaySinh(String ngaySinh) {
