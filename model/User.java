@@ -80,6 +80,9 @@ public abstract class User {
     public String getTen() {
         return ten;
     }
+    public void setTen(String ten){
+        this.ten = ten;
+    }
 
     public void setCccd(String cccd) {
         this.cccd = cccd;
@@ -105,7 +108,6 @@ public abstract class User {
         this.listTinNhan = listTinNhan;
     }
 
-    //////////////// ham rieng cua doi tuong  
     public void nhanTinNhan(TinNhan tinNhan) {
         if (tinNhan == null) {
             return;
@@ -119,9 +121,5 @@ public abstract class User {
         }
         this.taiKhoan = tk;
         tk.setUser(this);
-    }
-
-    public void goTaiKhoan() {
-        this.taiKhoan = null;
     }
 }
