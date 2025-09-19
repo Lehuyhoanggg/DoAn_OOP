@@ -48,6 +48,7 @@ public class Main {
                 }
 
             } while (user == null);
+            dem = 0;
             xacNhan = Nhap.nhapInt("(1)Tiep tuc dang nhap (khac)Thoat");
         } while (xacNhan == 1);
         System.out.println("Da thoat khoi chuong trinh");

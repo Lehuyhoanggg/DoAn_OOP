@@ -19,4 +19,17 @@ public class NhanVien extends User {
     public void setLuong(long luong) {
         this.luong = luong;
     }
+
+    @Override
+    public String toString() {
+        return "ma : " + getMa() + "\n"
+                + "ten : " + getTen() + "\n"
+                + "cccd : " + getCccd() + "\n"
+                + "ngaySinh : " + getNgaySinh() + "\n"
+                + "sdt : " + getSdt() + "\n"
+                + "gioiTinh : " + getGioiTinh() + "\n"
+                + "quyenHang : " + getQuyenHang() + "\n"
+                + "luong : " + luong
+                + "------------------------------------";
+    }
 }
