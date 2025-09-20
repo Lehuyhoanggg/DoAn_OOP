@@ -1,9 +1,11 @@
 package file;
 
-import data.Database;
+import database.Database;
 
 public class GhiFile {
-    public static void GhiDatabaseVaoData(Database db) {
+    private Database db;
+
+    public static void GhiDatabaseVaoData() {
 
     }
 }

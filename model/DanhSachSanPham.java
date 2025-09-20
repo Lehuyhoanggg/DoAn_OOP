@@ -3,10 +3,10 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DanhSachSpDaMua {
+public class DanhSachSanPham {
     private Map<SanPham, Integer> mapSanPham;
 
-    public DanhSachSpDaMua() {
+    public DanhSachSanPham() {
         mapSanPham = new HashMap<>();
     }
 

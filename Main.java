@@ -1,4 +1,4 @@
-import data.Database;
+import database.Database;
 import file.DocFile;
 import file.GhiFile;
 import model.User;
@@ -13,7 +13,7 @@ public class Main {
 
     public Main() {
         user = null;
-        DocFile.docDataVaoDatabase(datadabase);
+        DocFile.docDataVaoDatabase();
     }
 
     public void dieuHuongMenu() {
@@ -57,7 +57,7 @@ public class Main {
     public static void main(String[] args) {
         Main cellPhoneX = new Main();
         cellPhoneX.dangNhap();
-        GhiFile.GhiDatabaseVaoData(cellPhoneX.datadabase);
+        GhiFile.GhiDatabaseVaoData();
 
     }
 }

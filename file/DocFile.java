@@ -3,6 +3,7 @@ package file;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import database.Database;
+import interfaces.Xuli_File_Datakhoidau;
 import model.KhachHang;
 import model.MaGiamGia;
 import model.NhanVien;
@@ -15,7 +16,7 @@ import service.NhanVienService;
 import service.QuanLyService;
 import service.SanPhamService;
 
-public class DocFile {
+public class DocFile implements Xuli_File_Datakhoidau {
     Database db;
 
     public DocFile(Database db) {
@@ -107,7 +108,7 @@ public class DocFile {
         }
     }
 
-    public void doc_MaKhachHang(String path) {
+    public void doc_MaGiamGiatxt(String path) {
         MaGiamGiaService maGgService = new MaGiamGiaService(db.getListMaGiamGia());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
@@ -129,12 +130,24 @@ public class DocFile {
         }
     }
 
-    public void doctxtVaoDatabase(Database db) {
+    public void doc_ChiTietHoaDontxt(String path) {
+
+    }
+
+    public void doc_ChiTietHoaDon_BaoHanhtxt(String path) {
+
+    }
+
+    public void doc_ChiTietHoaDon_SanPhamtxt(String path) {
+
+    }
+
+    public void docDataKhoiDauVaoDatabase() {
 
     }
 
     ////////////////////////////////
-    public static void docDataVaoDatabase(Database db) {
+    public static void docDataVaoDatabase() {
 
     }
 }

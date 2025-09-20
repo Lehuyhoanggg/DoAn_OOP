@@ -7,7 +7,7 @@ public class KhachHang {
     private String tenKh;
     private String sdt;
     private HangThanhVien hangThanhVien;
-    private DanhSachSpDaMua listSanDaMua;
+    private DanhSachSanPham listSanDaMua;
     private long tienDaChi;
     private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
     private ArrayList<BaoHanh> listBaoHanh;
@@ -36,7 +36,7 @@ public class KhachHang {
         this.listPhieuBaoHanh = listPhieuBaoHanh;
     }
 
-    public void setListSanDaMua(DanhSachSpDaMua listSanDaMua) {
+    public void setListSanDaMua(DanhSachSanPham listSanDaMua) {
         this.listSanDaMua = listSanDaMua;
     }
 
@@ -64,7 +64,7 @@ public class KhachHang {
         return listPhieuBaoHanh;
     }
 
-    public DanhSachSpDaMua getListSanDaMua() {
+    public DanhSachSanPham getListSanDaMua() {
         return listSanDaMua;
     }
 

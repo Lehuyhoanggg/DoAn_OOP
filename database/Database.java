@@ -1,7 +1,8 @@
 package database;
 
 import java.util.ArrayList;
-import model.CaLam;
+
+import model.BaoHanh;
 import model.ChiTietHoaDon;
 import model.HangThanhVien;
 import model.HoaDon;
@@ -18,10 +19,10 @@ public class Database {
     private ArrayList<NhanVien> listNhanVien;
     private ArrayList<QuanLy> listQuanLy;
     private ArrayList<HoaDon> listHoaDon;
-    private ArrayList<CaLam> listCaLam;
     private ArrayList<TaiKhoan> listTaiKhoan;
     private ArrayList<SanPham> listSanPham;
     private ArrayList<ChiTietHoaDon> listChiTietHoaDon;
+    private ArrayList<BaoHanh> listBaoHanh;
     private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
     private ArrayList<KhachHang> listKhachHang;
     private ArrayList<MaGiamGia> listMaGiamGia;
@@ -32,7 +33,6 @@ public class Database {
         listNhanVien = new ArrayList<>();
         listQuanLy = new ArrayList<>();
         listHoaDon = new ArrayList<>();
-        listCaLam = new ArrayList<>();
         listTaiKhoan = new ArrayList<>();
         listSanPham = new ArrayList<>();
         listChiTietHoaDon = new ArrayList<>();
@@ -41,6 +41,7 @@ public class Database {
         listMaGiamGia = new ArrayList<>();
         lichTuan = new LichLamViec();
         listHangThanhVien = new ArrayList<>();
+        listBaoHanh = new ArrayList<>();
     }
 
     public ArrayList<HangThanhVien> getListHangThanhVien() {
@@ -51,8 +52,8 @@ public class Database {
         return lichTuan;
     }
 
-    public ArrayList<CaLam> getListCaLam() {
-        return listCaLam;
+    public ArrayList<BaoHanh> getListBaoHanh() {
+        return listBaoHanh;
     }
 
     public ArrayList<ChiTietHoaDon> getListChiTietHoaDon() {
@@ -95,12 +96,12 @@ public class Database {
         this.lichTuan = lichTuan;
     }
 
-    public void setListCaLam(ArrayList<CaLam> listCaLam) {
-        this.listCaLam = listCaLam;
-    }
-
     public void setListChiTietHoaDon(ArrayList<ChiTietHoaDon> listChiTietHoaDon) {
         this.listChiTietHoaDon = listChiTietHoaDon;
+    }
+
+    public void setListBaoHanh(ArrayList<BaoHanh> listBaoHanh) {
+        this.listBaoHanh = listBaoHanh;
     }
 
     public void setListHoaDon(ArrayList<HoaDon> listHoaDon) {
