@@ -1,11 +1,28 @@
 package model;
 
+import java.time.LocalDate;
+
+import util.ThoiGian;
+
 public class MaGiamGia {
     private String ma;
     private String tenMa;
     private String loaiDoanhMuc;
     private String loaiThuongHieu;
     private long soTieniam;
+    LocalDate ngayBatDau;
+    LocalDate ngayKetThuc;
+
+    public MaGiamGia(String ma, String tenMa, String loaiDoanhMuc, String loaiThuongHieu, long soTieniam,
+            String ngayBatDau, String ngayKetThuc) {
+        this.ma = ma;
+        this.tenMa = tenMa;
+        this.loaiDoanhMuc = loaiDoanhMuc;
+        this.loaiThuongHieu = loaiDoanhMuc;
+        this.soTieniam = soTieniam;
+        this.ngayBatDau = ThoiGian.chuyenStrThanhDate(ngayBatDau);
+        this.ngayKetThuc = ThoiGian.chuyenStrThanhDate(ngayKetThuc);
+    }
 
     public long getGiam() {
         return soTieniam;

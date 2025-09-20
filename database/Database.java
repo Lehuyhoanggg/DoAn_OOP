@@ -1,8 +1,9 @@
-package data;
+package database;
 
 import java.util.ArrayList;
 import model.CaLam;
 import model.ChiTietHoaDon;
+import model.HangThanhVien;
 import model.HoaDon;
 import model.KhachHang;
 import model.LichLamViec;
@@ -24,6 +25,7 @@ public class Database {
     private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
     private ArrayList<KhachHang> listKhachHang;
     private ArrayList<MaGiamGia> listMaGiamGia;
+    private ArrayList<HangThanhVien> listHangThanhVien;
     private LichLamViec lichTuan;
 
     public Database() {
@@ -38,6 +40,11 @@ public class Database {
         listKhachHang = new ArrayList<>();
         listMaGiamGia = new ArrayList<>();
         lichTuan = new LichLamViec();
+        listHangThanhVien = new ArrayList<>();
+    }
+
+    public ArrayList<HangThanhVien> getListHangThanhVien() {
+        return listHangThanhVien;
     }
 
     public LichLamViec getLichTuan() {
@@ -114,5 +121,21 @@ public class Database {
 
     public void setListPhieuBaoHanh(ArrayList<PhieuBaoHanh> listPhieuBaoHanh) {
         this.listPhieuBaoHanh = listPhieuBaoHanh;
+    }
+
+    public void setListHangThanhVien(ArrayList<HangThanhVien> listHangThanhVien) {
+        this.listHangThanhVien = listHangThanhVien;
+    }
+
+    public void setListQuanLy(ArrayList<QuanLy> listQuanLy) {
+        this.listQuanLy = listQuanLy;
+    }
+
+    public void setListSanPham(ArrayList<SanPham> listSanPham) {
+        this.listSanPham = listSanPham;
+    }
+
+    public void setListTaiKhoan(ArrayList<TaiKhoan> listTaiKhoan) {
+        this.listTaiKhoan = listTaiKhoan;
     }
 }

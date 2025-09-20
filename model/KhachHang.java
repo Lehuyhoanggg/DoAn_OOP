@@ -10,6 +10,14 @@ public class KhachHang {
     private ArrayList<HoaDon> listHoaDon;
     private long tienDaChi;
 
+    public KhachHang(String maKh, String tenKh, String sdt, HangThanhVien hangThanhVien, long tienDaChi) {
+        this.maKh = maKh;
+        this.tenKh = tenKh;
+        this.sdt = sdt;
+        this.hangThanhVien = hangThanhVien;
+        this.tienDaChi = tienDaChi;
+    }
+
     public void setHangThanhVien(HangThanhVien hangThanhVien) {
         this.hangThanhVien = hangThanhVien;
     }

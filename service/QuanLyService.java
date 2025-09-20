@@ -22,4 +22,11 @@ public class QuanLyService {
         }
         return null;
     }
+
+    public void themQuanLy(QuanLy quanLy) {
+        if (quanLy == null) {
+            return;
+        }
+        listQuanLy.add(quanLy);
+    }
 }
