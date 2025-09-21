@@ -1,7 +1,7 @@
+import database.Database;
+import file.DocFile;
+import file.GhiFile;
 import model.User;
-import repository.Datadabase;
-import repository.DocFile;
-import repository.GhiFile;
 import service.TaiKhoanService;
 import ui.MenuNhanVien;
 import ui.MenuQuanLy;
@@ -9,11 +9,11 @@ import ui.Nhap;
 
 public class Main {
     private User user;
-    private Datadabase datadabase = new Datadabase();
+    private Database datadabase = new Database();
 
     public Main() {
         user = null;
-        DocFile.docDataVaoDatabase(datadabase);
+        DocFile.docDataVaoDatabase();
     }
 
     public void dieuHuongMenu() {
@@ -29,26 +29,35 @@ public class Main {
     }
 
     public void dangNhap() {
-        int dem = 0;
-        TaiKhoanService taiKhoanService = new TaiKhoanService(datadabase.getListTaiKhoan());
-        String tenTaiKhoan;
-        String matKhau;
+        int xacNhan = 1;
         do {
-            if (dem == 3) {
-                break;
-            }
-            dem++;
-            tenTaiKhoan = Nhap.nhapStr("Tai khoan : ");
-            matKhau = Nhap.nhapStr("Mat khau : ");
-            user = taiKhoanService.layUserBangTk(tenTaiKhoan, matKhau);
-        } while (user == null);
-        dieuHuongMenu();
+            int dem = 0;
+            TaiKhoanService taiKhoanService = new TaiKhoanService(datadabase.getListTaiKhoan());
+            String tenTaiKhoan;
+            String matKhau;
+            do {
+                if (dem == 3) {
+                    break;
+                }
+                dem++;
+                tenTaiKhoan = Nhap.nhapStr("Tai khoan : ");
+                matKhau = Nhap.nhapStr("Mat khau : ");
+                user = taiKhoanService.layUserBangTk(tenTaiKhoan, matKhau);
+                if (user == null) {
+                    System.out.println("Tai khoan hoac mat khau khong khong dung vui long nhap lai");
+                }
+
+            } while (user == null);
+            dem = 0;
+            xacNhan = Nhap.nhapInt("(1)Tiep tuc dang nhap (khac)Thoat");
+        } while (xacNhan == 1);
         System.out.println("Da thoat khoi chuong trinh");
     }
 
     public static void main(String[] args) {
         Main cellPhoneX = new Main();
         cellPhoneX.dangNhap();
-        GhiFile.GhiDatabaseVaoData(cellPhoneX.datadabase);
+        GhiFile.GhiDatabaseVaoData();
+
     }
 }

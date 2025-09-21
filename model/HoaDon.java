@@ -1,15 +1,12 @@
 package model;
 
-import java.time.LocalDate;
-
 public class HoaDon {
     private String ma;
     private String khachHang;
     private ChiTietHoaDon chiTietHoaDon;
     private String maNgTaoHoaDon;
-    private LocalDate ngayTaoHoaDon;
+    private String ngayTaoHoaDon;
     private String ghiChu;
-    private long thanhTien;
 
     public ChiTietHoaDon getChiTietHoaDon() {
         return chiTietHoaDon;
@@ -31,12 +28,8 @@ public class HoaDon {
         return maNgTaoHoaDon;
     }
 
-    public LocalDate getNgayTaoHoaDon() {
+    public String getNgayTaoHoaDon() {
         return ngayTaoHoaDon;
-    }
-
-    public long getThanhTien() {
-        return thanhTien;
     }
 
     public void setChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
@@ -59,11 +52,8 @@ public class HoaDon {
         this.maNgTaoHoaDon = maNgTaoHoaDon;
     }
 
-    public void setNgayTaoHoaDon(LocalDate ngayTaoHoaDon) {
+    public void setNgayTaoHoaDon(String ngayTaoHoaDon) {
         this.ngayTaoHoaDon = ngayTaoHoaDon;
     }
 
-    public void setThanhTien(long thanhTien) {
-        this.thanhTien = thanhTien;
-    }
 }

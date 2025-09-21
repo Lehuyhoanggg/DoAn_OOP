@@ -4,31 +4,39 @@ import java.util.ArrayList;
 
 public class ChiTietHoaDon {
     private String ma;
-    private ArrayList<SanPham> listSanPham;
-    private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
-
-    public ArrayList<PhieuBaoHanh> getListPhieuBaoHanh() {
-        return listPhieuBaoHanh;
-    }
-
-    public ArrayList<SanPham> getListSanPham() {
-        return listSanPham;
-    }
+    private DanhSachSanPham danhSachSanPham;
+    private ArrayList<BaoHanh> listBaoHanh;
+    private long thanhTien;
 
     public String getMa() {
         return ma;
     }
 
-    public void setListPhieuBaoHanh(ArrayList<PhieuBaoHanh> listPhieuBaoHanh) {
-        this.listPhieuBaoHanh = listPhieuBaoHanh;
+    public long getThanhTien() {
+        return thanhTien;
     }
 
-    public void setListSanPham(ArrayList<SanPham> listSanPham) {
-        this.listSanPham = listSanPham;
+    public ArrayList<BaoHanh> getListBaoHanh() {
+        return listBaoHanh;
+    }
+
+    public DanhSachSanPham getDanhSachSanPham() {
+        return danhSachSanPham;
     }
 
     public void setMa(String ma) {
         this.ma = ma;
     }
 
+    public void setThanhTien(long thanhTien) {
+        this.thanhTien = thanhTien;
+    }
+
+    public void setListBaoHanh(ArrayList<BaoHanh> listBaoHanh) {
+        this.listBaoHanh = listBaoHanh;
+    }
+
+    public void setDanhSachSanPham(DanhSachSanPham danhSachSanPham) {
+        this.danhSachSanPham = danhSachSanPham;
+    }
 }

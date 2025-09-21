@@ -7,19 +7,37 @@ public class KhachHang {
     private String tenKh;
     private String sdt;
     private HangThanhVien hangThanhVien;
-    private ArrayList<HoaDon> listHoaDon;
+    private DanhSachSanPham listSanDaMua;
     private long tienDaChi;
+    private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
+    private ArrayList<BaoHanh> listBaoHanh;
+
+    public KhachHang(String maKh, String tenKh, String sdt, HangThanhVien hangThanhVien, long tienDaChi) {
+        this.maKh = maKh;
+        this.tenKh = tenKh;
+        this.sdt = sdt;
+        this.hangThanhVien = hangThanhVien;
+        this.tienDaChi = tienDaChi;
+    }
 
     public void setHangThanhVien(HangThanhVien hangThanhVien) {
         this.hangThanhVien = hangThanhVien;
     }
 
-    public void setListHoaDon(ArrayList<HoaDon> listHoaDon) {
-        this.listHoaDon = listHoaDon;
-    }
-
     public void setMaKh(String maKh) {
         this.maKh = maKh;
+    }
+
+    public void setListBaoHanh(ArrayList<BaoHanh> listBaoHanh) {
+        this.listBaoHanh = listBaoHanh;
+    }
+
+    public void setListPhieuBaoHanh(ArrayList<PhieuBaoHanh> listPhieuBaoHanh) {
+        this.listPhieuBaoHanh = listPhieuBaoHanh;
+    }
+
+    public void setListSanDaMua(DanhSachSanPham listSanDaMua) {
+        this.listSanDaMua = listSanDaMua;
     }
 
     public void setSdt(String sdt) {
@@ -38,8 +56,16 @@ public class KhachHang {
         return hangThanhVien;
     }
 
-    public ArrayList<HoaDon> getListHoaDon() {
-        return listHoaDon;
+    public ArrayList<BaoHanh> getListBaoHanh() {
+        return listBaoHanh;
+    }
+
+    public ArrayList<PhieuBaoHanh> getListPhieuBaoHanh() {
+        return listPhieuBaoHanh;
+    }
+
+    public DanhSachSanPham getListSanDaMua() {
+        return listSanDaMua;
     }
 
     public String getMaKh() {

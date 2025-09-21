@@ -21,4 +21,11 @@ public class Nhap {
         System.out.print(tuKhoa);
         return sc.next().charAt(0);
     }
+
+    public static int nhapXacNhanThoat() {
+        System.out.print("(1)Tiep tuc (khac)thoat : ");
+        int luaChon = sc.nextInt();
+        sc.nextLine();
+        return luaChon;
+    }
 }
