@@ -142,6 +142,26 @@ public class DocFile implements Xuli_File_Datakhoidau {
 
     }
 
+    public void doc_BaoHanhtxt(String path) {
+
+    }
+
+    public void doc_HangThanhVientxt(String path) {
+
+    }
+
+    public void doc_LichLamViectxt(String path) {
+
+    }
+
+    public void doc_PhieuBaoHanhtxt(String path) {
+
+    }
+
+    public void doc_TaiKhoantxt(String path) {
+
+    }
+
     public void docDataKhoiDauVaoDatabase() {
 
     }

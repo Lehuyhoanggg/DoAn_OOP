@@ -1,7 +1,5 @@
 package interfaces;
 
-import database.Database;
-
 public interface Xuli_File_Datakhoidau {
     public void doc_NhanVientxt(String path);
 
@@ -18,6 +16,16 @@ public interface Xuli_File_Datakhoidau {
     public void doc_ChiTietHoaDon_BaoHanhtxt(String path);
 
     public void doc_ChiTietHoaDon_SanPhamtxt(String path);
+
+    public void doc_BaoHanhtxt(String path);
+
+    public void doc_HangThanhVientxt(String path);
+
+    public void doc_LichLamViectxt(String path);
+
+    public void doc_PhieuBaoHanhtxt(String path);
+
+    public void doc_TaiKhoantxt(String path);
 
     public void docDataKhoiDauVaoDatabase();
 }
