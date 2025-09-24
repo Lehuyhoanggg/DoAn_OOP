@@ -1,1 +1,2 @@
 2 1 gioBatDau gioKetThuc 2 nhanvienA nhanVienB
+2 2 gioBatDau gioKetThuc 2 nhanvienA nhanVienB

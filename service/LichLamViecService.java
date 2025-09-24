@@ -59,19 +59,16 @@ public class LichLamViecService {
 
     public LichTrongNgay lichTrongNgayHomNay() {
         String ngayHomNay = ThoiGian.layNgayHienTaiStr();
-        LichTrongNgay[] lichTuan = lichLamViec.getLichTuan();
+        ArrayList<LichTrongNgay> lichTuan = lichLamViec.getLichTuan();
         if (lichTuan == null) {
             return null;
         }
-        for (int i = 0; i < lichTuan.length; i++) {
-            if (lichTuan[i].getNgay() == ngayHomNay) {
-                return lichTuan[i];
+        for (int i = 0; i < lichTuan.size(); i++) {
+            if (lichTuan.get(i).getNgay() == ngayHomNay) {
+                return lichTuan.get(i);
             }
         }
         return null;
     }
 
-    public void xemLichLam() {
-
-    }
 }

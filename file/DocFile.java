@@ -204,6 +204,22 @@ public class DocFile implements Xuli_File_Datakhoidau {
         }
     }
 
+    public void doc_LichTrongNgaytxt(String path){
+        LichLamViecService lichLamViecService = new LichLamViecService(db.getLichTuan());
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] thanhPhan = line.split("\\s+");
+                LichTrongNgay lichTrongNgay = new LichTrongNgay(Integer.parseInt( thanhPhan[0]),thanhPhan[1]);
+                lichLamViecService.getLichLamViec().
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    }
+
     public void doc_LichLamViectxt(String path) {///////////////
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {

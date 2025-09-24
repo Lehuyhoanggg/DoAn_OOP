@@ -36,8 +36,8 @@ public class MenuSanPham {
     public void suaSanPham() {
         String ma = Nhap.nhapStr("Nhap ma san pham can sua: ");
         SanPham spCu = sanPhamService.getListSanPham().stream()
-            .filter(sp -> sp.getMa().equals(ma))
-            .findFirst().orElse(null);
+                .filter(sp -> sp.getMa().equals(ma))
+                .findFirst().orElse(null);
         if (spCu == null) {
             System.out.println("Khong tim thay san pham!");
             return;
@@ -56,7 +56,6 @@ public class MenuSanPham {
         System.out.println("2. Them san pham");
         System.out.println("3. Xoa san pham");
         System.out.println("4. Sua san pham");
-        System.out.println("5. Doc du lieu khoi dau");
         System.out.println("0. Thoat Menu");
     }
 
@@ -79,12 +78,5 @@ public class MenuSanPham {
             thucHienChucNang(choice);
             thoat = Nhap.nhapXacNhanThoat();
         }
-    }
-
-    public static void main(String[] args) {
-        Database db = new Database();
-        SanPhamService sanPhamService = new SanPhamService();
-        MenuSanPham menu = new MenuSanPham(db, sanPhamService);
-        menu.menu();
     }
 }

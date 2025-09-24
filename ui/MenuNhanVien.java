@@ -1,7 +1,11 @@
 package ui;
 
 import model.User;
+import model.MaGiamGia;
 import model.NhanVien;
+
+import java.util.ArrayList;
+
 import database.Database;
 import interfaces.GiaoTiep;
 import interfaces.LamViec;
