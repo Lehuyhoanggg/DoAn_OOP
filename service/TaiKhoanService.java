@@ -3,7 +3,9 @@ package service;
 import java.util.ArrayList;
 import model.TaiKhoan;
 import model.User;
-
+public TaiKhoanService(){
+        
+    }
 public class TaiKhoanService {
     private ArrayList<TaiKhoan> listTaiKhoan;
 
