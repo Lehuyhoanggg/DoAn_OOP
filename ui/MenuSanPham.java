@@ -56,10 +56,6 @@ public class MenuSanPham {
             System.out.println(sp);
         }
     }
-    public void docDuLieuKhoiDau() {
-        // Tùy bạn triển khai, ví dụ đọc từ file/database
-        System.out.println("Chuc nang chua duoc trien khai!");
-    }
 
     public void xuatMenu() {
         System.out.println("===== MENU SAN PHAM =====");
@@ -68,7 +64,6 @@ public class MenuSanPham {
         System.out.println("3. Xoa san pham");
         System.out.println("4. Sua san pham");
         System.out.println("5. Tim san pham");
-        System.out.println("6. Doc du lieu khoi dau");
         System.out.println("0. Thoat Menu");
     }
 
@@ -79,7 +74,6 @@ public class MenuSanPham {
             case 3 -> xoaSanPham();
             case 4 -> suaSanPham();
             case 5 -> timSanPham();
-            case 6 -> docDuLieuKhoiDau();
             default -> System.out.println("Da thoat Menu!");
         }
     }
