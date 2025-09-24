@@ -8,10 +8,10 @@ public class SanPham {
     private long gia;
     private int tonKho;
     private String moTa;
-    private int trangThai;
+    private String trangThai;
 
     public SanPham(String ma, String ten, String danhMuc, String thuongHieu, long gia, int tonKho, String moTa,
-            int trangThai) {
+            String trangThai) {
         this.ma = ma;
         this.ten = ten;
         this.danhMuc = danhMuc;
@@ -53,15 +53,7 @@ public class SanPham {
         return tonKho;
     }
 
-    public String getTrangThai() {
-        if (trangThai == 0) {
-            return "Con Hang";
-        } else if (trangThai == 1) {
-            return "Het Hang";
-        } else {
-            return "Ngung Kinh Doanh";
-        }
-    }
+    
 
     public void setDanhMuc(String danhMuc) {
         this.danhMuc = danhMuc;
@@ -91,7 +83,7 @@ public class SanPham {
         this.tonKho = tonKho;
     }
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
 }
