@@ -18,7 +18,7 @@ public class DanhSachSanPham {
         this.mapSanPham = mapSanPham;
     }
 
-    public void luuSanPham(SanPham sanPham) {
+    public void themSanPham(SanPham sanPham) {
         mapSanPham.put(sanPham, mapSanPham.containsKey(sanPham) ? mapSanPham.get(sanPham) + 1 : 0);
     }
 

@@ -14,4 +14,16 @@ public class KhacHangService {
     public void themKhachHang(KhachHang khachHang) {
         listKhachHang.add(khachHang);
     }
+
+    public KhachHang timKhachHang(String ma) {
+        if (listKhachHang == null) {
+            return null;
+        }
+        for (int i = 0; i < listKhachHang.size(); i++) {
+            if (listKhachHang.get(i).getMaKh().equals(ma)) {
+                return listKhachHang.get(i);
+            }
+        }
+        return null;
+    }
 }

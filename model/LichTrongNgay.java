@@ -1,18 +1,22 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LichTrongNgay {
-    private ArrayList<CaLam> listCaLam;
-    private LocalDate ngay;
     private int thu;
+    private ArrayList<CaLam> listCaLam;
+    private String ngay;
+
+    public LichTrongNgay(int thu, String ngay) {
+        this.thu = thu;
+        this.ngay = ngay;
+    }
 
     public void setListCaLam(ArrayList<CaLam> listCaLam) {
         this.listCaLam = listCaLam;
     }
 
-    public void setNgay(LocalDate ngay) {
+    public void setNgay(String ngay) {
         this.ngay = ngay;
     }
 
@@ -24,7 +28,7 @@ public class LichTrongNgay {
         return listCaLam;
     }
 
-    public LocalDate getNgay() {
+    public String getNgay() {
         return ngay;
     }
 

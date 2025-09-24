@@ -14,7 +14,8 @@ public class MenuQuanLy implements QuanLiChung {
     }
 
     public void quanLySanPham() {
-
+        MenuSanPham menu = new MenuSanPham();
+        
     }
 
     public void quanLyNhanVien() {

@@ -6,6 +6,11 @@ public class HangThanhVien {
     private String tenHang;
     private ArrayList<MaGiamGia> listMaGiamGiaDQ;
 
+    public HangThanhVien(String tenHang) {
+        this.tenHang = tenHang;
+        this.listMaGiamGiaDQ = new ArrayList<>();
+    }
+
     public void setListMaGiamGiaDQ(ArrayList<MaGiamGia> listMaGiamGiaDQ) {
         this.listMaGiamGiaDQ = listMaGiamGiaDQ;
     }
@@ -20,5 +25,9 @@ public class HangThanhVien {
 
     public String getTenHang() {
         return tenHang;
+    }
+
+    public void themMaGiamGia(MaGiamGia maGiamGia) {
+        listMaGiamGiaDQ.add(maGiamGia);
     }
 }

@@ -8,6 +8,13 @@ public class ChiTietHoaDon {
     private ArrayList<BaoHanh> listBaoHanh;
     private long thanhTien;
 
+    public ChiTietHoaDon(String ma, Long thanhTien) {
+        this.ma = ma;
+        this.thanhTien = thanhTien;
+        listBaoHanh = new ArrayList<>();
+        danhSachSanPham = new DanhSachSanPham();
+    }
+
     public String getMa() {
         return ma;
     }
@@ -38,5 +45,13 @@ public class ChiTietHoaDon {
 
     public void setDanhSachSanPham(DanhSachSanPham danhSachSanPham) {
         this.danhSachSanPham = danhSachSanPham;
+    }
+
+    public void themBaoHanh(BaoHanh baoHanh) {
+        listBaoHanh.add(baoHanh);
+    }
+
+    public void themSanPham(SanPham sanPham) {
+        danhSachSanPham.themSanPham(sanPham);
     }
 }

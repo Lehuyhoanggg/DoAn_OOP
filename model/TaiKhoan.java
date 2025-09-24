@@ -68,4 +68,8 @@ public class TaiKhoan {
         }
         return false;
     }
+
+    public void doiMatKhau(String matKhau) {
+        setMatKhau(matKhau);
+    }
 }

@@ -84,9 +84,6 @@ public abstract class User {
     public String getTen() {
         return ten;
     }
-    public void setTen(String ten){
-        this.ten = ten;
-    }
 
     public void setCccd(String cccd) {
         this.cccd = cccd;
@@ -133,5 +130,9 @@ public abstract class User {
         }
         this.taiKhoan = tk;
         tk.setUser(this);
+    }
+
+    public void goTaiKhoan() {
+        taiKhoan = null;
     }
 }

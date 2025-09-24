@@ -22,4 +22,8 @@ public class HangThanhVienService {
         }
         return null;
     }
+
+    public void themHangThanhVien(HangThanhVien hangThanhVien) {
+        listHangThanhVien.add(hangThanhVien);
+    }
 }

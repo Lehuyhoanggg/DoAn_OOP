@@ -1,13 +1,19 @@
 package model;
 
-import java.time.LocalDate;
-
 public class PhieuBaoHanh {
     private String maBaoHanh;
     private KhachHang khachHang;
     private SanPham sanPham;
-    private LocalDate ngayBaoHanh;
+    private String ngayBaoHanh;
     private String ChiTietLoi;
+
+    public PhieuBaoHanh(String ma, KhachHang khachHang, SanPham sanPham, String ngayBaoHanh, String chiTietLoi) {
+        this.maBaoHanh = ma;
+        this.khachHang = khachHang;
+        this.sanPham = sanPham;
+        this.ngayBaoHanh = ngayBaoHanh;
+        this.ChiTietLoi = chiTietLoi;
+    }
 
     public String getChiTietLoi() {
         return ChiTietLoi;
@@ -21,7 +27,7 @@ public class PhieuBaoHanh {
         return maBaoHanh;
     }
 
-    public LocalDate getNgayBaoHanh() {
+    public String getNgayBaoHanh() {
         return ngayBaoHanh;
     }
 
@@ -41,7 +47,7 @@ public class PhieuBaoHanh {
         this.maBaoHanh = maBaoHanh;
     }
 
-    public void setNgayBaoHanh(LocalDate ngayBaoHanh) {
+    public void setNgayBaoHanh(String ngayBaoHanh) {
         this.ngayBaoHanh = ngayBaoHanh;
     }
 

@@ -1,33 +1,52 @@
 package model;
 
-import java.time.LocalTime;
-
 public class CaLam {
-    private int caSo;
-    private LocalTime gioBatDau;
-    private LocalTime gioKetThuc;
+    private int so;
+    private String gioBatDau;
+    private String gioKetThuc;
+    private NhanVienDiemDanh listNhanVien;
+    private int soLuongCan;
 
-    public int getCaSo() {
-        return caSo;
+    public CaLam(int so, String gioBatBau, String gioKetThuc) {
+        this.so = so;
+        this.gioBatDau = gioBatBau;
+        this.gioKetThuc = gioKetThuc;
+        listNhanVien = new NhanVienDiemDanh();
     }
 
-    public LocalTime getGioBatDau() {
+    public String getGioBatDau() {
         return gioBatDau;
     }
 
-    public LocalTime getGioKetThuc() {
+    public String getGioKetThuc() {
         return gioKetThuc;
     }
 
-    public void setCaSo(int caSo) {
-        this.caSo = caSo;
+    public int getSo() {
+        return so;
     }
 
-    public void setGioBatDau(LocalTime gioBatDau) {
+    public NhanVienDiemDanh getListNhanVien() {
+        return listNhanVien;
+    }
+
+    public void setGioBatDau(String gioBatDau) {
         this.gioBatDau = gioBatDau;
     }
 
-    public void setGioKetThuc(LocalTime gioKetThuc) {
+    public void setGioKetThuc(String gioKetThuc) {
         this.gioKetThuc = gioKetThuc;
+    }
+
+    public void setSo(int so) {
+        this.so = so;
+    }
+
+    public void setListNhanVien(NhanVienDiemDanh listNhanVien) {
+        this.listNhanVien = listNhanVien;
+    }
+
+    public void diemDanh(NhanVien nhanVien) {
+        listNhanVien.diemDanhNhanVien(nhanVien);
     }
 }
