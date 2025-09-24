@@ -11,6 +11,19 @@ public class Nhap {
         sc.nextLine();
         return luaChon;
     }
+    public static double nhapDouble(String tuKhoa) {
+        System.out.print(tuKhoa);
+        double luaChon = sc.nextDouble();
+        sc.nextLine();
+        return luaChon;
+    }
+
+    public static long nhapLong(String tuKhoa) {
+        System.out.print(tuKhoa);
+        long luaChon = sc.nextLong();
+        sc.nextLine();
+        return luaChon;
+    }
 
     public static String nhapStr(String tuKhoa) {
         System.out.print(tuKhoa);
