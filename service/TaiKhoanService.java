@@ -3,7 +3,9 @@ package service;
 import java.util.ArrayList;
 import model.TaiKhoan;
 import model.User;
-
+public TaiKhoanService(){
+        
+    }
 public class TaiKhoanService {
     private ArrayList<TaiKhoan> listTaiKhoan;
 
@@ -54,5 +56,8 @@ public class TaiKhoanService {
         }
         tk.setTenDangNhap(tenDangNhap);
         tk.setMatKhau(matKhau);
+    }
+        public void doiMatKhau(String matKhauMoi, TaiKhoan tk){
+        tk.setMatKhau(matKhauMoi);
     }
 }

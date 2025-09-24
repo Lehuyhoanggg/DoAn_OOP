@@ -1,5 +1,9 @@
 package service;
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import model.SanPham;
 
 public class SanPhamService {
@@ -39,8 +43,18 @@ public class SanPhamService {
             }
         }
     }
-    public void searchSanPham(String ten) {
-        if (listSanPham == null) return;
-        listSanPham.removeIf(sp -> !sp.getTen().toLowerCase().contains(ten.toLowerCase()));
+
+    public static String removeAccent(String s) {
+        String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(temp).replaceAll("").toLowerCase();
+    }
+
+    public List<SanPham> searchSanPham(String ten) {
+        if (listSanPham == null) return null;
+        String keyword = removeAccent(ten);
+        return listSanPham.stream()
+                          .filter(sp -> removeAccent(sp.getTen()).contains(keyword))
+                          .collect(Collectors.toList());
     }
 }

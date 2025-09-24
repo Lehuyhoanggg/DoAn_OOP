@@ -34,4 +34,16 @@ public class PhieuBaoHanhService {
         }
         return null;
     }
+
+    public void xoaPhieuBaoHanh(String ma) {
+        PhieuBaoHanh phieuBaoHanh = timPhieuBaoHanh(ma);
+        if (phieuBaoHanh != null) {
+            listPhieuBaoHanh.remove(phieuBaoHanh);
+        }
+    }
+    // listPhieuBaoHanh
+    // them (tao)
+    // xoa
+    // sua ++
+    // tim kiem
 }

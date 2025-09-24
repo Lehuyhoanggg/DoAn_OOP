@@ -45,9 +45,17 @@ public class MenuSanPham {
         System.out.println("Sua san pham thanh cong!");
     }
 
-    public void docDuLieuKhoiDau() {
-        // Tùy bạn triển khai, ví dụ đọc từ file/database
-        System.out.println("Chuc nang chua duoc trien khai!");
+    public void timSanPham() {
+        String ten = Nhap.nhapStr("Nhap ten san pham can tim: ");
+        var ketQua = sanPhamService.searchSanPham(ten);
+        if (ketQua == null || ketQua.isEmpty()) {
+            System.out.println("Khong tim thay san pham!");
+            return;
+        }
+        System.out.println("Ket qua tim kiem:");
+        for (SanPham sp : ketQua) {
+            System.out.println(sp);
+        }
     }
 
     public void xuatMenu() {
@@ -56,6 +64,7 @@ public class MenuSanPham {
         System.out.println("2. Them san pham");
         System.out.println("3. Xoa san pham");
         System.out.println("4. Sua san pham");
+        System.out.println("5. Doc du lieu khoi dau");
         System.out.println("0. Thoat Menu");
     }
 
@@ -65,7 +74,7 @@ public class MenuSanPham {
             case 2 -> themSanPham();
             case 3 -> xoaSanPham();
             case 4 -> suaSanPham();
-            case 5 -> docDuLieuKhoiDau();
+            case 5 -> timSanPham();
             default -> System.out.println("Da thoat Menu!");
         }
     }
