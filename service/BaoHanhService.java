@@ -34,6 +34,37 @@ public class BaoHanhService {
         }
         return null;
     }
+
+    public ArrayList<BaoHanh> timKiemBaoHanh(String ten) {
+        ArrayList<BaoHanh> ketQua = new ArrayList<>();
+        if (ten == null || listBaoHanh == null) {
+            return ketQua;
+        }
+        if (listBaoHanh != null) {
+            for (int i = 0; i < listBaoHanh.size(); i++) {
+                if (listBaoHanh.get(i).getTenBaoHanh().toLowerCase().contains(ten.toLowerCase())) {
+                    ketQua.add(listBaoHanh.get(i));
+                }
+            }
+        }
+        return ketQua;
+    }
+
+    public void xoaBaoHanh(String ma) {
+        BaoHanh baoHanh = timBaoHanh(ma);
+        if (baoHanh != null) {
+            listBaoHanh.remove(baoHanh);
+        }
+    }
+
+    public void suaBaoHanh(String ma, BaoHanh baoHanhMoi) {
+        BaoHanh baoHanh = timBaoHanh(ma);
+        if (baoHanh != null) {
+            int index = listBaoHanh.indexOf(baoHanh);
+            listBaoHanh.set(index, baoHanhMoi);
+        }
+    }
+
     // listBaoHanh
     // them
     // xoa
