@@ -55,4 +55,7 @@ public class TaiKhoanService {
         tk.setTenDangNhap(tenDangNhap);
         tk.setMatKhau(matKhau);
     }
+        public void doiMatKhau(String matKhauMoi, TaiKhoan tk){
+        tk.setMatKhau(matKhauMoi);
+    }
 }
