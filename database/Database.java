@@ -11,6 +11,7 @@ import model.LichLamViec;
 import model.MaGiamGia;
 import model.NhanVien;
 import model.PhieuBaoHanh;
+import model.PhieuTraHang;
 import model.QuanLy;
 import model.SanPham;
 import model.TaiKhoan;
@@ -25,6 +26,7 @@ public class Database {
     private ArrayList<ChiTietHoaDon> listChiTietHoaDon;
     private ArrayList<BaoHanh> listBaoHanh;
     private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
+    private ArrayList<PhieuTraHang> listPhieuTraHang;
     private ArrayList<KhachHang> listKhachHang;
     private ArrayList<MaGiamGia> listMaGiamGia;
     private ArrayList<HangThanhVien> listHangThanhVien;
@@ -44,6 +46,7 @@ public class Database {
         lichTuan = new LichLamViec();
         listHangThanhVien = new ArrayList<>();
         listBaoHanh = new ArrayList<>();
+        listPhieuTraHang = new ArrayList<>();
     }
 
     public ArrayList<HangThanhVien> getListHangThanhVien() {
@@ -56,6 +59,10 @@ public class Database {
 
     public ArrayList<BaoHanh> getListBaoHanh() {
         return listBaoHanh;
+    }
+
+    public ArrayList<PhieuTraHang> getListPhieuTraHang() {
+        return listPhieuTraHang;
     }
 
     public ArrayList<ChiTietHoaDon> getListChiTietHoaDon() {
@@ -140,6 +147,10 @@ public class Database {
 
     public void setListTaiKhoan(ArrayList<TaiKhoan> listTaiKhoan) {
         this.listTaiKhoan = listTaiKhoan;
+    }
+
+    public void setListPhieuTraHang(ArrayList<PhieuTraHang> listPhieuTraHang) {
+        this.listPhieuTraHang = listPhieuTraHang;
     }
 
     public ArrayList<User> getListUser() {

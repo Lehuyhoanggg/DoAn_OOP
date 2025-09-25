@@ -1,6 +1,7 @@
 package util;
 
 import model.NhanVien;
+import model.PhieuTraHang;
 import model.SanPham;
 import model.TinNhan;
 import ui.Nhap;
@@ -31,5 +32,9 @@ public class TaoDoiTuong {
         String moTa = Nhap.nhapStr("Nhap mo ta: ");
         String trangThai = Nhap.nhapStr("Nhap trang thai (Con Hang,Het Hang,Ngung Kinh doanh): ");
         return new SanPham(ma, ten, danhMuc, thuongHieu, gia, tonKho, moTa, trangThai);
+    }
+
+    public static PhieuTraHang taoPhieuTraHang() {
+        return new PhieuTraHang();
     }
 }

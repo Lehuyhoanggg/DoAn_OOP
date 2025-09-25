@@ -11,8 +11,8 @@ public class KhacHangService {
         this.listKhachHang = listKhachHang;
     }
 
-    public void themKhachHang(KhachHang khachHang) {
-        listKhachHang.add(khachHang);
+    public boolean themKhachHang(KhachHang khachHang) {
+        return listKhachHang.add(khachHang);
     }
 
     public KhachHang timKhachHang(String ma) {
@@ -27,9 +27,21 @@ public class KhacHangService {
         return null;
     }
 
-    public void xoaKhachHang(String ma) {
+    public KhachHang timKhachHangTheoSdt(String sdt) {
+        if (listKhachHang == null) {
+            return null;
+        }
+        for (int i = 0; i < listKhachHang.size(); i++) {
+            if (listKhachHang.get(i).getSdt().equals(sdt)) {
+                return listKhachHang.get(i);
+            }
+        }
+        return null;
+    }
+
+    public boolean xoaKhachHang(String ma) {
         KhachHang khachHang = timKhachHang(ma);
-        listKhachHang.remove(khachHang);
+        return listKhachHang.remove(khachHang);
     }
 
 }

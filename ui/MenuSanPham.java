@@ -25,15 +25,23 @@ public class MenuSanPham {
     public void themSanPham() {
         SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
         SanPham sp = TaoDoiTuong.taoSanPham();
-        sanPhamService.themSanPham(sp);
-        System.out.println("Them san pham thanh cong!");
+        if (sanPhamService.themSanPham(sp)) {
+            System.out.println("Them san pham thanh cong!");
+        } else {
+            System.out.println("Them san pham khong thanh cong!");
+        }
+
     }
 
     public void xoaSanPham() {
         SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
         String ma = Nhap.nhapStr("Nhap ma san pham can xoa: ");
-        sanPhamService.xoaSanPham(ma);
-        System.out.println("Xoa san pham thanh cong!");
+        if (sanPhamService.xoaSanPham(ma)) {
+            System.out.println("Xoa san pham thanh cong!");
+        } else {
+            System.out.println("Xoa san pham khong thanh cong!");
+        }
+
     }
 
     public void xuatSuaSanPham() {
@@ -96,40 +104,53 @@ public class MenuSanPham {
                 default:
                     System.out.println("Lua chon khong hop le");
             }
+            if (chon == 1) {
+                chon = Nhap.nhapInt("(1)Tiep tuc sua (Khac)Thoat");
+            }
+
         }
     }
 
-    public void timSanPhamTheoTen() {
-        String ten = Nhap.nhapStr("Nhap ten san pham can tim");
+    public void traCuuSanPham() {
+        String tuKhoa = Nhap.nhapStr("Nhap tu khoa de tim : ");
+        boolean timThay = false;
         ArrayList<SanPham> listSanPham = db.getListSanPham();
         if (listSanPham == null || listSanPham.size() == 0) {
             System.out.println("khong tim thay san pham");
         }
         for (int i = 0; i < listSanPham.size(); i++) {
-            if (listSanPham.get(i).getTen().contains(ten)) {
+            if (listSanPham.get(i).getTen().contains(tuKhoa)) {
+                timThay = true;
                 System.out.println(i + ". " + listSanPham.get(i).getMa() + " " + listSanPham.get(i).getTen() + " "
                         + listSanPham.get(i).getGia() + " " + listSanPham.get(i).getThuongHieu());
             }
         }
-        int luaChon = Nhap.nhapInt("lua chon san pham de hien thi : ");
-        if (listSanPham.size() > luaChon && 0 < luaChon) {
-            System.out.println(listSanPham.get(luaChon));
-        } else {
-            System.out.println("lua chon khong hop le");
-        }
-    }
 
-    public void timSanPham() {
-        String ma = Nhap.nhapStr("Nhap ma san pham can tim");
-        ArrayList<SanPham> listSanPham = db.getListSanPham();
-        if (listSanPham == null || listSanPham.size() == 0) {
+        if (timThay) {
+            int luaChon = Nhap.nhapInt("lua chon san pham de hien thi : ");
+            if (listSanPham.size() > luaChon && 0 < luaChon) {
+                System.out.println(listSanPham.get(luaChon));
+            } else {
+                System.out.println("lua chon khong hop le");
+            }
+        } else {
+            // neu tim theo ten khong thay thi tim theo ma
+            for (int i = 0; i < listSanPham.size(); i++) {
+                if (listSanPham.get(i).getMa().equals(tuKhoa)) {
+                    System.out.println(i + ". " + listSanPham.get(i).getMa() + " " + listSanPham.get(i).getTen()
+                            + " " + listSanPham.get(i).getGia() + " " + listSanPham.get(i).getThuongHieu());
+
+                    timThay = true;
+                    break;
+                }
+            }
+
+        }
+
+        if (!timThay) {
             System.out.println("khong tim thay san pham");
         }
-        for (int i = 0; i < listSanPham.size(); i++) {
-            if (listSanPham.get(i).getMa().equals(ma)) {
-                System.out.println(listSanPham.get(i));
-            }
-        }
+
     }
 
     private void xuatMenu() {
@@ -138,19 +159,21 @@ public class MenuSanPham {
         System.out.println("2. Them san pham");
         System.out.println("3. Xoa san pham");
         System.out.println("4. Sua san pham");
-        System.out.println("5. Hien thi tat ca san pham");
+        System.out.println("5. Tra cuu san pham");
+        System.out.println("6. Hien thi tat ca san pham");
         System.out.println("0. Thoat Menu");
     }
 
-    public void thucHienChucNang(int choice) {
+    private void thucHienChucNang(int choice) {
         switch (choice) {
+            case 0 -> System.out.println("Da thoat Menu!");
             case 1 -> hienThiTatCaSanPham();
             case 2 -> themSanPham();
             case 3 -> xoaSanPham();
             case 4 -> suaSanPham();
-            case 5 -> timSanPham();
+            case 5 -> traCuuSanPham();
             case 6 -> hienThiTatCaSanPham();
-            default -> System.out.println("Da thoat Menu!");
+            default -> System.out.println("Lua chon khong hop le");
         }
     }
 

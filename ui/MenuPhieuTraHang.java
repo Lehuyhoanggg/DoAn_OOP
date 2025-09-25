@@ -1,6 +1,13 @@
 package ui;
 
+import java.util.ArrayList;
+
 import database.Database;
+import model.PhieuTraHang;
+import service.KhacHangService;
+import service.PhieuTraHangService;
+import service.SanPhamService;
+import util.TaoDoiTuong;
 
 public class MenuPhieuTraHang {
     private Database db;
@@ -9,41 +16,134 @@ public class MenuPhieuTraHang {
         this.db = db;
     }
 
-    public void taoPhieuTraHang() {
+    public void hienThiTatCaPhieuTraHang() {
+        System.out.println("===== DANH SACH PHIEU TRA HANG =====");
+        ArrayList<PhieuTraHang> listPhieuTraHang = db.getListPhieuTraHang();
+        if (listPhieuTraHang.size() == 0) {
+            System.out.println("khong tim thay phieu tra hang nao");
+            return;
+        }
+        for (int i = 0; i < listPhieuTraHang.size(); i++) {
+            System.out.println(listPhieuTraHang.get(i));
+        }
+    }
 
+    public void taoPhieuTraHang() {
+        PhieuTraHangService service = new PhieuTraHangService(db.getListPhieuTraHang());
+        PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang();
+        if (service.themPhieuTraHang(pth)) {
+            System.out.println("Tao phieu tra hang thanh cong!");
+        } else {
+            System.out.println("Tao phieu tra hang that bai!");
+        }
     }
 
     public void xoaPhieuTraHang() {
-
+        PhieuTraHangService service = new PhieuTraHangService(db.getListPhieuTraHang());
+        String ma = Nhap.nhapStr("Nhap ma phieu can xoa: ");
+        if (service.xoaPhieuTraHang(ma)) {
+            System.out.println("Xoa phieu tra hang thanh cong!");
+        } else {
+            System.out.println("Khong tim thay ma phieu hoac xoa that bai!");
+        }
     }
 
-    public void suaPhieuTraHang() {
-
-    }
-
-    public void timPhieuTraHang() {
-
-    }
-
-    public void hienThiTatCaPhieuTraHang() {
-
-    }
-
-    private void xuatMenu() {
-        System.out.println("1. Tao phieu tra hang");
-        System.out.println("2. Sua phieu tra hang");
-        System.out.println("3. Tra cuu phieu tra hang");
-        System.out.println("4. Xoa Phieu Tra Hang");
-        System.out.println("5. Hien thi tat ca phieu bao hanh");
+    private void xuatSuaTraHang() {
+        System.out.println("===== SUA PHIEU TRA HANG =====");
+        System.out.println("1. Sua khach hang");
+        System.out.println("2. Sua san pham");
+        System.out.println("3. Sua ngay tra");
+        System.out.println("4. Sua ly do tra");
         System.out.println("0. Thoat");
     }
 
-    public void menu() {
-        int xacNhan = 1;
-        while (xacNhan == 1) {
-            xuatMenu();
+    public void suaPhieuTraHang() {
+        PhieuTraHangService service = new PhieuTraHangService(db.getListPhieuTraHang());
+        String ma = Nhap.nhapStr("Nhap ma phieu can sua: ");
+        PhieuTraHang pth = service.timPhieuTraHang(ma);
+        if (pth == null) {
+            System.out.println("Khong tim thay phieu tra hang!");
+            return;
+        }
 
-            xacNhan = Nhap.nhapXacNhanThoat();
+        int tiep = 1;
+        while (tiep == 1) {
+            xuatSuaTraHang();
+            int chon = Nhap.nhapInt("Chon muc can sua: ");
+            switch (chon) {
+                case 1:
+                    KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+                    pth.setKhachHang(khacHangService.timKhachHang(Nhap.nhapStr("Nhap ma khach hang de them vao : ")));
+                    break;
+
+                case 2:
+                    SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
+                    pth.setSanPham(sanPhamService.timSanPham("Nhap ma san pham de them vao : "));
+                    break;
+                case 3:
+                    pth.setNgayTra(Nhap.nhapStr("Nhap ngay tra moi (yyyy-MM-dd): "));
+                    System.out.println("Da thay doi ngay tra");
+                    break;
+                case 4:
+                    pth.setLyDoTra(Nhap.nhapStr("Nhap ly do moi: "));
+                    System.out.println("Da thay doi ly do tra");
+                    break;
+                case 0:
+                    System.out.println("Thoat sua phieu tra hang.");
+                    tiep = 0;
+                    break;
+
+                default:
+                    System.out.println("Lua chon khong hop le!");
+                    break;
+            }
+
+            if (tiep == 1) {
+                tiep = Nhap.nhapInt("(1) Tiep tuc sua / (khac) Thoat: ");
+            }
+        }
+    }
+
+    public void traCuuPhieuTraHang() {
+        PhieuTraHangService phieuTraHangService = new PhieuTraHangService(db.getListPhieuTraHang());
+        String ma = Nhap.nhapStr("Nhap ma phieu bao hanh can tim : ");
+        PhieuTraHang phieuTraHang = phieuTraHangService.timPhieuTraHang(ma);
+        if (phieuTraHang == null) {
+            System.out.println("khong tim thay");
+        } else {
+            System.out.println(phieuTraHang);
+        }
+    }
+
+    private void xuatMenu() {
+        System.out.println("===== MENU PHIEU TRA HANG =====");
+        System.out.println("1. Tao phieu tra hang");
+        System.out.println("2. Sua phieu tra hang");
+        System.out.println("3. Tra cuu phieu tra hang");
+        System.out.println("4. Xoa phieu tra hang");
+        System.out.println("5. Hien thi tat ca phieu tra hang");
+        System.out.println("0. Thoat");
+    }
+
+    private void thucHienChucNang(int chon) {
+        switch (chon) {
+            case 1 -> taoPhieuTraHang();
+            case 2 -> suaPhieuTraHang();
+            case 3 -> traCuuPhieuTraHang();
+            case 4 -> xoaPhieuTraHang();
+            case 5 -> hienThiTatCaPhieuTraHang();
+            case 0 -> System.out.println("Da thoat menu phieu tra hang!");
+            default -> System.out.println("Lua chon khong hop le!");
+        }
+    }
+
+    public void menu() {
+        int tiep = 1;
+        while (tiep == 1) {
+            xuatMenu();
+            int chon = Nhap.nhapInt("Nhap lua chon: ");
+            thucHienChucNang(chon);
+            tiep = Nhap.nhapXacNhanThoat();
         }
     }
 }

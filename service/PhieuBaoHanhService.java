@@ -19,8 +19,8 @@ public class PhieuBaoHanhService {
         this.listPhieuBaoHanh = listPhieuBaoHanh;
     }
 
-    public void themPhieuBaoHanh(PhieuBaoHanh phieuBaoHanh) {
-        listPhieuBaoHanh.add(phieuBaoHanh);
+    public boolean themPhieuBaoHanh(PhieuBaoHanh phieuBaoHanh) {
+        return listPhieuBaoHanh.add(phieuBaoHanh);
     }
 
     public PhieuBaoHanh timPhieuBaoHanh(String ma) {
@@ -35,15 +35,11 @@ public class PhieuBaoHanhService {
         return null;
     }
 
-    public void xoaPhieuBaoHanh(String ma) {
+    public boolean xoaPhieuBaoHanh(String ma) {
         PhieuBaoHanh phieuBaoHanh = timPhieuBaoHanh(ma);
         if (phieuBaoHanh != null) {
-            listPhieuBaoHanh.remove(phieuBaoHanh);
+            return listPhieuBaoHanh.remove(phieuBaoHanh);
         }
+        return false;
     }
-    // listPhieuBaoHanh
-    // them (tao)
-    // xoa
-    // sua ++
-    // tim kiem
 }

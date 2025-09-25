@@ -18,14 +18,19 @@ public class SanPhamService {
         this.listSanPham = listSanPham;
     }
 
-    public void themSanPham(SanPham sanPham) {
-        listSanPham.add(sanPham);
+    public boolean themSanPham(SanPham sanPham) {
+        return listSanPham.add(sanPham);
     }
 
-    public void xoaSanPham(String ma) {
-        if (listSanPham == null)
-            return;
-        listSanPham.removeIf(sp -> sp.getMa().equals(ma));
+    public boolean xoaSanPham(String ma) {
+        if (listSanPham == null) {
+            return false;
+        }
+        SanPham sanPham = timSanPham(ma);
+        if (sanPham == null) {
+            return false;
+        }
+        return listSanPham.remove(sanPham);
     }
 
     public SanPham timSanPhamTheoTen(String ten) {

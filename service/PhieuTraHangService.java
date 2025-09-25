@@ -19,8 +19,8 @@ public class PhieuTraHangService {
         this.listPhieuTrahang = listPhieuTrahang;
     }
 
-    public void themPhieuTraHang(PhieuTraHang phieuTraHang) {
-        listPhieuTrahang.add(phieuTraHang);
+    public boolean themPhieuTraHang(PhieuTraHang phieuTraHang) {
+        return listPhieuTrahang.add(phieuTraHang);
     }
 
     public PhieuTraHang timPhieuTraHang(String ma) {
@@ -35,11 +35,11 @@ public class PhieuTraHangService {
         return null;
     }
 
-    public void xoaPhieuTraHang(String ma) {
+    public boolean xoaPhieuTraHang(String ma) {
         PhieuTraHang phieuTraHang = timPhieuTraHang(ma);
         if (phieuTraHang == null) {
-            return;
+            return false;
         }
-        listPhieuTrahang.remove(phieuTraHang);
+        return listPhieuTrahang.remove(phieuTraHang);
     }
 }
