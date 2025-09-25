@@ -53,7 +53,9 @@ public class SanPham {
         return tonKho;
     }
 
-    
+    public String getTrangThai() {
+        return trangThai;
+    }
 
     public void setDanhMuc(String danhMuc) {
         this.danhMuc = danhMuc;
@@ -86,4 +88,5 @@ public class SanPham {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
+
 }

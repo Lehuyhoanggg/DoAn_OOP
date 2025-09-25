@@ -18,6 +18,9 @@ public class KhachHang {
         this.sdt = sdt;
         this.hangThanhVien = hangThanhVien;
         this.tienDaChi = tienDaChi;
+        this.listBaoHanh = new ArrayList<>();
+        this.listSanDaMua = new DanhSachSanPham();
+        this.listPhieuBaoHanh = new ArrayList<>();
     }
 
     public void setHangThanhVien(HangThanhVien hangThanhVien) {
@@ -82,5 +85,13 @@ public class KhachHang {
 
     public long getTienDaChi() {
         return tienDaChi;
+    }
+
+    public void themBaoHanh(BaoHanh baoHanh) {
+        listBaoHanh.add(baoHanh);
+    }
+
+    public void themPhieuBaoHanh(PhieuBaoHanh phieuBaoHanh) {
+        listPhieuBaoHanh.add(phieuBaoHanh);
     }
 }

@@ -1,4 +1,4 @@
-package database;;
+package database;
 
 import java.util.ArrayList;
 
@@ -14,6 +14,7 @@ import model.PhieuBaoHanh;
 import model.QuanLy;
 import model.SanPham;
 import model.TaiKhoan;
+import model.User;
 
 public class Database {
     private ArrayList<NhanVien> listNhanVien;
@@ -27,6 +28,7 @@ public class Database {
     private ArrayList<KhachHang> listKhachHang;
     private ArrayList<MaGiamGia> listMaGiamGia;
     private ArrayList<HangThanhVien> listHangThanhVien;
+    private ArrayList<User> listUser;
     private LichLamViec lichTuan;
 
     public Database() {
@@ -138,5 +140,14 @@ public class Database {
 
     public void setListTaiKhoan(ArrayList<TaiKhoan> listTaiKhoan) {
         this.listTaiKhoan = listTaiKhoan;
+    }
+
+    public ArrayList<User> getListUser() {
+        if (listUser == null) {
+            listUser = new ArrayList<>();
+            listUser.addAll(listNhanVien);
+            listUser.addAll(listQuanLy);
+        }
+        return listUser;
     }
 }

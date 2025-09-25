@@ -18,15 +18,7 @@ public class TinNhanService implements GiaoTiep {
 
     public void guiTinNhan(String maNguoiNhan, TinNhan tinNhan) {
         User nguoiNhan = null;
-        NhanVienService nvService = new NhanVienService(listNhanVien);
-        nguoiNhan = nvService.timnhanvien(maNguoiNhan);
-        if (nguoiNhan == null) {
-            QuanLyService qlService = new QuanLyService(listQuanLy);
-            nguoiNhan = qlService.timQuanLy(maNguoiNhan);
-        }
-        if (nguoiNhan == null) {
-            return;
-        }
+
         nguoiNhan.nhanTinNhan(tinNhan);
     }
 

@@ -1,6 +1,8 @@
 import database.Database;
 import file.DocFile;
 import file.GhiFile;
+import model.NhanVien;
+import model.QuanLy;
 import model.User;
 import service.TaiKhoanService;
 import ui.MenuNhanVien;
@@ -9,7 +11,7 @@ import ui.Nhap;
 
 public class Main {
     private User user;
-    private Database datadabase = new Database();
+    private Database db = new Database();
 
     public Main() {
         user = null;
@@ -18,10 +20,10 @@ public class Main {
 
     public void dieuHuongMenu() {
         if (user.getQuyenHang() == "NhanVien") {
-            MenuNhanVien menuNv = new MenuNhanVien();
+            MenuNhanVien menuNv = new MenuNhanVien(db, (NhanVien) user);
 
         } else if (user.getQuyenHang() == "QuanLy") {
-            MenuQuanLy menuQl = new MenuQuanLy();
+            MenuQuanLy menuQl = new MenuQuanLy(db, (QuanLy) user);
 
         } else {
             System.out.println("Tai Khoan chua duoc cap quyen");
@@ -32,7 +34,7 @@ public class Main {
         int xacNhan = 1;
         do {
             int dem = 0;
-            TaiKhoanService taiKhoanService = new TaiKhoanService(datadabase.getListTaiKhoan());
+            TaiKhoanService taiKhoanService = new TaiKhoanService(db.getListTaiKhoan());
             String tenTaiKhoan;
             String matKhau;
             do {

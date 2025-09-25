@@ -8,14 +8,14 @@ public class MenuQuanLy implements QuanLiChung {
     private Database db;
     private QuanLy user;
 
-    public void QuanLy(Database db, QuanLy user) {
+    public MenuQuanLy(Database db, QuanLy user) {
         this.user = user;
         this.db = db;
     }
 
     public void quanLySanPham() {
-        MenuSanPham menu = new MenuSanPham();
-        
+        MenuSanPham menuSanPham = new MenuSanPham(db);
+        menuSanPham.menu();
     }
 
     public void quanLyNhanVien() {
@@ -46,7 +46,6 @@ public class MenuQuanLy implements QuanLiChung {
     }
 
     public void xemDoanhThu() {
-
     }
 
     public void xemLichTuan() {

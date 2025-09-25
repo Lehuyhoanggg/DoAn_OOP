@@ -26,4 +26,10 @@ public class KhacHangService {
         }
         return null;
     }
+
+    public void xoaKhachHang(String ma) {
+        KhachHang khachHang = timKhachHang(ma);
+        listKhachHang.remove(khachHang);
+    }
+
 }
