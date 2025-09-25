@@ -112,7 +112,14 @@ public class MenuPhieuBaoHanh {
     }
 
     public void traCuuPhieuBaoHanh() {
-
+        PhieuBaoHanhService phieuBaoHanhService = new PhieuBaoHanhService(db.getListPhieuBaoHanh());
+        PhieuBaoHanh phieuBaoHanh = phieuBaoHanhService
+                .timPhieuBaoHanh(Nhap.nhapStr("Nhap ma phieu bao hanh can tim : "));
+        if (phieuBaoHanh == null) {
+            System.out.println("khong tim thay phieu bao hanh");
+        } else {
+            System.out.println(phieuBaoHanh);
+        }
     }
 
     public void xuatMenu() {

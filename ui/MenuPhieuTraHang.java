@@ -30,7 +30,7 @@ public class MenuPhieuTraHang {
 
     public void taoPhieuTraHang() {
         PhieuTraHangService service = new PhieuTraHangService(db.getListPhieuTraHang());
-        PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang();
+        PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(db);
         if (service.themPhieuTraHang(pth)) {
             System.out.println("Tao phieu tra hang thanh cong!");
         } else {
@@ -74,11 +74,13 @@ public class MenuPhieuTraHang {
                 case 1:
                     KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
                     pth.setKhachHang(khacHangService.timKhachHang(Nhap.nhapStr("Nhap ma khach hang de them vao : ")));
+                    System.out.println("Da thay doi khach hang");
                     break;
 
                 case 2:
                     SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
                     pth.setSanPham(sanPhamService.timSanPham("Nhap ma san pham de them vao : "));
+                    System.out.println("da thay doi san pham");
                     break;
                 case 3:
                     pth.setNgayTra(Nhap.nhapStr("Nhap ngay tra moi (yyyy-MM-dd): "));
@@ -99,7 +101,7 @@ public class MenuPhieuTraHang {
             }
 
             if (tiep == 1) {
-                tiep = Nhap.nhapInt("(1) Tiep tuc sua / (khac) Thoat: ");
+                tiep = Nhap.nhapInt("(1) Tiep tuc sua (khac) Thoat: ");
             }
         }
     }

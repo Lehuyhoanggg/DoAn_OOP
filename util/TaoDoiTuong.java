@@ -1,9 +1,15 @@
 package util;
 
+import javax.swing.plaf.ScrollBarUI;
+
+import database.Database;
+import model.KhachHang;
 import model.NhanVien;
 import model.PhieuTraHang;
 import model.SanPham;
 import model.TinNhan;
+import service.KhacHangService;
+import service.SanPhamService;
 import ui.Nhap;
 
 public class TaoDoiTuong {
@@ -34,7 +40,14 @@ public class TaoDoiTuong {
         return new SanPham(ma, ten, danhMuc, thuongHieu, gia, tonKho, moTa, trangThai);
     }
 
-    public static PhieuTraHang taoPhieuTraHang() {
-        return new PhieuTraHang();
+    public static PhieuTraHang taoPhieuTraHang(Database db) {
+        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
+        String maTraHang = CapMa.capMaBaoHanh(db);
+        KhachHang khachHang = khacHangService.timKhachHang(Nhap.nhapStr("Nhap ma khach hang can them : "));
+        SanPham sanPham = sanPhamService.timSanPham(Nhap.nhapStr("Nhap ma san pham can them : "));
+        String ngayTra = Nhap.nhapStr("Nhap ngay tra : ");
+        String lyDoTra = Nhap.nhapStr("Nhap ly do tra : ");
+        return new PhieuTraHang(maTraHang, khachHang, sanPham, ngayTra, lyDoTra);
     }
 }
