@@ -10,8 +10,8 @@ public class MaGiamGia {
     private String loaiDoanhMuc;
     private String loaiThuongHieu;
     private long soTieniam;
-    LocalDate ngayBatDau;
-    LocalDate ngayKetThuc;
+    String ngayBatDau;
+    String ngayKetThuc;
 
     public MaGiamGia(String ma, String tenMa, String loaiDoanhMuc, String loaiThuongHieu, long soTieniam,
             String ngayBatDau, String ngayKetThuc) {

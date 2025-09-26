@@ -3,11 +3,13 @@ package util;
 import javax.swing.plaf.ScrollBarUI;
 
 import database.Database;
+import model.HangThanhVien;
 import model.KhachHang;
 import model.NhanVien;
 import model.PhieuTraHang;
 import model.SanPham;
 import model.TinNhan;
+import service.HangThanhVienService;
 import service.KhacHangService;
 import service.SanPhamService;
 import ui.Nhap;
@@ -50,4 +52,15 @@ public class TaoDoiTuong {
         String lyDoTra = Nhap.nhapStr("Nhap ly do tra : ");
         return new PhieuTraHang(maTraHang, khachHang, sanPham, ngayTra, lyDoTra);
     }
+
+    public static KhachHang taoKhachHang(Database db) {
+        String maKh = Nhap.nhapStr("Nhap ma khach hang: ");
+        String tenKh = Nhap.nhapStr("Nhap ten khach hang: ");
+        String sdt = Nhap.nhapStr("Nhap so dien thoai: ");
+        String tenHangThanhVien = Nhap.nhapStr("Nhap ten hang thanh vien : ");
+        HangThanhVienService hangThanhVienService = new HangThanhVienService(db.getListHangThanhVien());
+        HangThanhVien hangThanhVien = hangThanhVienService.timHangThanhVien(tenHangThanhVien);
+        return new KhachHang(maKh, tenKh, sdt, hangThanhVien);
+    }
+
 }

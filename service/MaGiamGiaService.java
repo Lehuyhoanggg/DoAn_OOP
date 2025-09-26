@@ -11,10 +11,6 @@ public class MaGiamGiaService {
         this.listMaGiamGia = listMaGiamGia;
     }
 
-    public void xemMaGiamConHang() {
-
-    }
-
     public ArrayList<MaGiamGia> ListMaApDungChoSp() {
         return null;
     }

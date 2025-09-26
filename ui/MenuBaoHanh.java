@@ -98,8 +98,11 @@ public class MenuBaoHanh {
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
         String ma = Nhap.nhapStr("Nhap ma bao hanh can xoa: ");
         BaoHanh baoHanh = baoHanhService.timBaoHanh(ma);
-        baoHanh.getKhachHang().getListBaoHanh().remove(baoHanh);
-        System.out.println("Da xoa bao hanh (neu ton tai).");
+        if (baoHanh.getKhachHang().getListBaoHanh().remove(baoHanh)) {
+            System.out.println("Da xoa bao hanh (neu ton tai).");
+        } else {
+            System.out.println("Xoa khong thanh cong");
+        }
     }
 
     public void xemTatCaBaoHanh() {
@@ -113,7 +116,18 @@ public class MenuBaoHanh {
     }
 
     public void traCuuBaoHanh() {
-
+        String ma = Nhap.nhapStr("Nhap ma bao hanh can tra cuu : ");
+        ArrayList<BaoHanh> listBaoHanh = db.getListBaoHanh();
+        if (listBaoHanh == null || listBaoHanh.size() == 0) {
+            System.out.println("khong tim thay bao hanh");
+            return;
+        }
+        for (int i = 0; i < listBaoHanh.size(); i++) {
+            if (listBaoHanh.get(i).getMaBh().equals(ma)) {
+                System.out.println(listBaoHanh.get(i));
+                return;
+            }
+        }
     }
 
     public void xuatMenu() {

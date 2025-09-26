@@ -12,12 +12,26 @@ public class KhachHang {
     private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
     private ArrayList<BaoHanh> listBaoHanh;
 
+    public KhachHang() {
+
+    }
+
     public KhachHang(String maKh, String tenKh, String sdt, HangThanhVien hangThanhVien, long tienDaChi) {
         this.maKh = maKh;
         this.tenKh = tenKh;
         this.sdt = sdt;
         this.hangThanhVien = hangThanhVien;
         this.tienDaChi = tienDaChi;
+        this.listBaoHanh = new ArrayList<>();
+        this.listSanDaMua = new DanhSachSanPham();
+        this.listPhieuBaoHanh = new ArrayList<>();
+    }
+
+    public KhachHang(String maKh, String tenKh, String sdt, HangThanhVien hangThanhVien) {
+        this.maKh = maKh;
+        this.tenKh = tenKh;
+        this.sdt = sdt;
+        this.hangThanhVien = hangThanhVien;
         this.listBaoHanh = new ArrayList<>();
         this.listSanDaMua = new DanhSachSanPham();
         this.listPhieuBaoHanh = new ArrayList<>();
