@@ -46,11 +46,4 @@ public class MaGiamGiaService {
         }
         return -1;
     }
-
-    public void suaMaGiamGia(String ma, MaGiamGia newMaGiamGia) {
-        int indexMa = timMaGiamGiaIndex(ma);
-        if (indexMa != -1) {
-            listMaGiamGia.set(indexMa, newMaGiamGia);
-        }
-    }
 }

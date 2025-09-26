@@ -26,6 +26,10 @@ public class CaLam {
         return so;
     }
 
+    public int getSoLuongCan() {
+        return soLuongCan;
+    }
+
     public NhanVienDiemDanh getListNhanVien() {
         return listNhanVien;
     }
@@ -40,6 +44,10 @@ public class CaLam {
 
     public void setSo(int so) {
         this.so = so;
+    }
+
+    public void setSoLuongCan(int soLuongCan) {
+        this.soLuongCan = soLuongCan;
     }
 
     public void setListNhanVien(NhanVienDiemDanh listNhanVien) {

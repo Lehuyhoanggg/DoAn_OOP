@@ -7,8 +7,9 @@ public class HangThanhVien {
     private ArrayList<MaGiamGia> listMaGiamGiaDQ;
     private String moTa;
 
-    public HangThanhVien(String tenHang) {
+    public HangThanhVien(String tenHang, String moTa) {
         this.tenHang = tenHang;
+        this.moTa = moTa;
         this.listMaGiamGiaDQ = new ArrayList<>();
     }
 

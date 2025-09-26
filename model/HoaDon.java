@@ -8,6 +8,20 @@ public class HoaDon {
     private String ngayTaoHoaDon;
     private String ghiChu;
 
+    public HoaDon() {
+
+    }
+
+    public HoaDon(String ma, String khachHang, ChiTietHoaDon chiTietHoaDon, String maNGTaoHoaDon, String ngayTaoHoaDon,
+            String ghiChu) {
+        this.ma = ma;
+        this.khachHang = khachHang;
+        this.chiTietHoaDon = chiTietHoaDon;
+        this.maNgTaoHoaDon = maNGTaoHoaDon;
+        this.ngayTaoHoaDon = ngayTaoHoaDon;
+        this.ghiChu = ghiChu;
+    }
+
     public ChiTietHoaDon getChiTietHoaDon() {
         return chiTietHoaDon;
     }
@@ -56,4 +70,18 @@ public class HoaDon {
         this.ngayTaoHoaDon = ngayTaoHoaDon;
     }
 
+    public long getThanhTien() {
+        return chiTietHoaDon.getThanhTien();
+    }
+
+    @Override
+    public String toString() {
+        return "Chi tiet hoa don: " + getChiTietHoaDon() + "\n"
+                + "Khach hang: " + getKhachHang() + "\n"
+                + "ma: " + getMa() + "\n"
+                + "Ghi chu: " + getGhiChu() + "\n"
+                + "Nguoi tao don: " + getMaNgTaoHoaDon() + "\n"
+                + "Ngay tao don: " + getNgayTaoHoaDon() + "\n"
+                + "----------------------------\n";
+    }
 }

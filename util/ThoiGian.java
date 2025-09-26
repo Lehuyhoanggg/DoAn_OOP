@@ -3,6 +3,10 @@ package util;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class ThoiGian {
     public static String layNgayHienTaiStr() {
@@ -38,5 +42,31 @@ public class ThoiGian {
     public static LocalDate chuyenStrThanhDate(String ngay) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(ngay, fmt);
+    }
+
+    public static ArrayList<String> layTuanHienTaiStr() {
+        ArrayList<String> listNgay = new ArrayList<>();
+
+        LocalDate today = LocalDate.now();
+        TemporalField dayOfWeekField = WeekFields.of(Locale.getDefault()).dayOfWeek();
+        LocalDate batDau = today.with(dayOfWeekField, 1);
+        LocalDate ketThuc = today.with(dayOfWeekField, 7);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        LocalDate date = batDau;
+        while (!date.isAfter(ketThuc)) {
+            listNgay.add(date.format(formatter));
+            date = date.plusDays(1);
+        }
+
+        return listNgay;
+
+    }
+
+    public static String layThangHienTai() {
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+        return today.format(formatter);
     }
 }

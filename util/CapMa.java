@@ -15,4 +15,8 @@ public class CapMa {
     public static String capMaPhieuBaoHanh(Database db) {
         return "";
     }
+
+    public static String capMaKhachHang(Database db) {
+        return "";
+    }
 }

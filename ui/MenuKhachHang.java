@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import database.Database;
 import model.HangThanhVien;
 import model.KhachHang;
-import model.SanPham;
 import service.HangThanhVienService;
 import service.KhacHangService;
 import util.TaoDoiTuong;

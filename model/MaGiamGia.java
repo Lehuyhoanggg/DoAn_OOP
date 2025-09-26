@@ -1,9 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-
-import util.ThoiGian;
-
 public class MaGiamGia {
     private String ma;
     private String tenMa;
@@ -20,8 +16,8 @@ public class MaGiamGia {
         this.loaiDoanhMuc = loaiDoanhMuc;
         this.loaiThuongHieu = loaiDoanhMuc;
         this.soTieniam = soTieniam;
-        this.ngayBatDau = ThoiGian.chuyenStrThanhDate(ngayBatDau);
-        this.ngayKetThuc = ThoiGian.chuyenStrThanhDate(ngayKetThuc);
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
     }
 
     public long getGiam() {
@@ -42,6 +38,10 @@ public class MaGiamGia {
 
     public long getSoTieniam() {
         return soTieniam;
+    }
+
+    public String getNgayBatDau() {
+        return ngayBatDau;
     }
 
     public String getTenMa() {
@@ -70,5 +70,9 @@ public class MaGiamGia {
 
     public void setTenMa(String tenMa) {
         this.tenMa = tenMa;
+    }
+
+    public void setNgayBatDau(String ngayBatDau) {
+        this.ngayBatDau = ngayBatDau;
     }
 }

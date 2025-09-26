@@ -23,7 +23,18 @@ public class HangThanhVienService {
         return null;
     }
 
-    public void themHangThanhVien(HangThanhVien hangThanhVien) {
-        listHangThanhVien.add(hangThanhVien);
+    public boolean themHangThanhVien(HangThanhVien hangThanhVien) {
+        if (timHangThanhVien(hangThanhVien.getTenHang()) != null) {
+            return false; // đã tồn tại
+        }
+        return listHangThanhVien.add(hangThanhVien);
+    }
+
+    public boolean xoaHangThanhVien(String ten) {
+        HangThanhVien htv = timHangThanhVien(ten);
+        if (htv != null) {
+            return listHangThanhVien.remove(htv);
+        }
+        return false;
     }
 }

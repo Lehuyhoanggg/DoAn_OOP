@@ -1,10 +1,9 @@
 package util;
 
-import javax.swing.plaf.ScrollBarUI;
-
 import database.Database;
 import model.HangThanhVien;
 import model.KhachHang;
+import model.MaGiamGia;
 import model.NhanVien;
 import model.PhieuTraHang;
 import model.SanPham;
@@ -53,6 +52,29 @@ public class TaoDoiTuong {
         return new PhieuTraHang(maTraHang, khachHang, sanPham, ngayTra, lyDoTra);
     }
 
+    public static HangThanhVien taoHangThanhVien(Database db) {
+        String ten = Nhap.nhapStr("Nhap ten hang thanh vien: ");
+        String moTa = Nhap.nhapStr("Nhap mo ta: ");
+        return new HangThanhVien(ten, moTa);
+    }
+
+    public static MaGiamGia taoMaGiamGia() {
+        String ma = Nhap.nhapStr("Nhập mã giảm giá: ");
+        String tenMa = Nhap.nhapStr("Nhập tên mã: ");
+        String loaiDoanhMuc = Nhap.nhapStr("Nhập loại danh mục (để trống nếu không muốn): ");
+        String loaiThuongHieu = Nhap.nhapStr("Nhập loại thương hiệu (để trống nếu không muốn): ");
+        String mucGiamGiaStr = Nhap.nhapStr("Nhập số tiền giảm (để trống nếu không muốn): ");
+        long soTienGiam = 0;
+        if (!mucGiamGiaStr.isEmpty()) {
+            soTienGiam = Long.parseLong(mucGiamGiaStr);
+        }
+
+        String ngayBatDau = Nhap.nhapStr("Nhập ngày bắt đầu (yyyy-MM-dd): ");
+        String ngayKetThuc = Nhap.nhapStr("Nhập ngày kết thúc (yyyy-MM-dd): ");
+
+        return new MaGiamGia(ma, tenMa, loaiDoanhMuc, loaiThuongHieu, soTienGiam, ngayBatDau, ngayKetThuc);
+    }
+
     public static KhachHang taoKhachHang(Database db) {
         String maKh = Nhap.nhapStr("Nhap ma khach hang: ");
         String tenKh = Nhap.nhapStr("Nhap ten khach hang: ");
@@ -62,5 +84,4 @@ public class TaoDoiTuong {
         HangThanhVien hangThanhVien = hangThanhVienService.timHangThanhVien(tenHangThanhVien);
         return new KhachHang(maKh, tenKh, sdt, hangThanhVien);
     }
-
 }
