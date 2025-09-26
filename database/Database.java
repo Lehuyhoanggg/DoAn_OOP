@@ -15,6 +15,7 @@ import model.PhieuTraHang;
 import model.QuanLy;
 import model.SanPham;
 import model.TaiKhoan;
+import model.TinNhan;
 import model.User;
 
 public class Database {
@@ -30,7 +31,7 @@ public class Database {
     private ArrayList<KhachHang> listKhachHang;
     private ArrayList<MaGiamGia> listMaGiamGia;
     private ArrayList<HangThanhVien> listHangThanhVien;
-    private ArrayList<User> listUser;
+    private ArrayList<TinNhan> listTinNhan;
     private LichLamViec lichTuan;
 
     public Database() {
@@ -55,6 +56,10 @@ public class Database {
 
     public LichLamViec getLichTuan() {
         return lichTuan;
+    }
+
+    public ArrayList<TinNhan> getListTinNhan() {
+        return listTinNhan;
     }
 
     public ArrayList<BaoHanh> getListBaoHanh() {
@@ -117,6 +122,10 @@ public class Database {
         this.listHoaDon = listHoaDon;
     }
 
+    public void setListTinNhan(ArrayList<TinNhan> listTinNhan) {
+        this.listTinNhan = listTinNhan;
+    }
+
     public void setListKhachHang(ArrayList<KhachHang> listKhachHang) {
         this.listKhachHang = listKhachHang;
     }
@@ -154,11 +163,9 @@ public class Database {
     }
 
     public ArrayList<User> getListUser() {
-        if (listUser == null) {
-            listUser = new ArrayList<>();
-            listUser.addAll(listNhanVien);
-            listUser.addAll(listQuanLy);
-        }
+        ArrayList<User> listUser = new ArrayList<>();
+        listUser.addAll(listNhanVien);
+        listUser.addAll(listQuanLy);
         return listUser;
     }
 }

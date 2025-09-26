@@ -44,6 +44,7 @@ public class MenuSanPham {
 
     }
 
+    ///// sua san pham
     public void xuatSuaSanPham() {
         System.out.println("===== Menu Sua San Pham =====");
         System.out.println("1. Sua ten san pham");
@@ -56,6 +57,44 @@ public class MenuSanPham {
         System.out.println("0. Thoat");
     }
 
+    private void suaThanhPhanSanPham(SanPham sp, int chon) {
+        switch (chon) {
+            case 1:
+                sp.setTen(Nhap.nhapStr("Nhap ten san pham moi: "));
+                System.out.println("Da thay doi");
+                break;
+            case 2:
+                sp.setDanhMuc(Nhap.nhapStr("Nhap danh muc moi: "));
+                System.out.println("Da thay doi");
+                break;
+            case 3:
+                sp.setThuongHieu(Nhap.nhapStr("Nhap thuong hieu moi: "));
+                System.out.println("Da thay doi");
+                break;
+            case 4:
+                sp.setGia(Nhap.nhapLong("Nhap gia moi: "));
+                System.out.println("Da thay doi");
+                break;
+            case 5:
+                sp.setTonKho(Nhap.nhapInt("Nhap so luong ton kho moi: "));
+                System.out.println("Da thay doi");
+                break;
+            case 6:
+                sp.setMoTa(Nhap.nhapStr("Nhap mo ta moi: "));
+                System.out.println("Da thay doi");
+                break;
+            case 7:
+                sp.setTrangThai(Nhap.nhapStr("Nhap trang thai moi: "));
+                System.out.println("Da thay doi");
+                break;
+            case 0:
+                System.out.println("Thoat sua san pham");
+                break;
+            default:
+                System.out.println("Lua chon khong hop le");
+        }
+    }
+
     public void suaSanPham() {
         SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
         SanPham sp = sanPhamService.timSanPham(Nhap.nhapStr("Nhap ma san pham can sua"));
@@ -63,60 +102,23 @@ public class MenuSanPham {
             System.out.println("khong tim thay ma san pham");
             return;
         }
-        int chon = 1;
-        while (chon == 1) {
+        int xacNhan = 1;
+        while (xacNhan == 1) {
             xuatSuaSanPham();
-            chon = Nhap.nhapInt("Chon muc can sua: ");
-            switch (chon) {
-                case 1:
-                    sp.setTen(Nhap.nhapStr("Nhap ten san pham moi: "));
-                    System.out.println("Da thay doi");
-                    break;
-                case 2:
-                    sp.setDanhMuc(Nhap.nhapStr("Nhap danh muc moi: "));
-                    System.out.println("Da thay doi");
-                    break;
-                case 3:
-                    sp.setThuongHieu(Nhap.nhapStr("Nhap thuong hieu moi: "));
-                    System.out.println("Da thay doi");
-                    break;
-                case 4:
-                    sp.setGia(Nhap.nhapLong("Nhap gia moi: "));
-                    System.out.println("Da thay doi");
-                    break;
-                case 5:
-                    sp.setTonKho(Nhap.nhapInt("Nhap so luong ton kho moi: "));
-                    System.out.println("Da thay doi");
-                    break;
-                case 6:
-                    sp.setMoTa(Nhap.nhapStr("Nhap mo ta moi: "));
-                    System.out.println("Da thay doi");
-                    break;
-                case 7:
-                    sp.setTrangThai(Nhap.nhapStr("Nhap trang thai moi: "));
-                    System.out.println("Da thay doi");
-                    break;
-                case 0:
-                    chon = 0;
-                    System.out.println("Thoat sua san pham");
-                    System.out.println("Da thay doi");
-                    break;
-                default:
-                    System.out.println("Lua chon khong hop le");
-            }
-            if (chon == 1) {
-                chon = Nhap.nhapInt("(1)Tiep tuc sua (Khac)Thoat");
-            }
-
+            int chon = Nhap.nhapInt("Chon muc can sua: ");
+            suaThanhPhanSanPham(sp, chon);
+            xacNhan = Nhap.nhapInt("(1)Tiep tuc sua (Khac)Thoat");
         }
     }
 
+    //////////
     public void traCuuSanPham() {
         String tuKhoa = Nhap.nhapStr("Nhap tu khoa de tim : ");
         boolean timThay = false;
         ArrayList<SanPham> listSanPham = db.getListSanPham();
         if (listSanPham == null || listSanPham.size() == 0) {
             System.out.println("khong tim thay san pham");
+            return;
         }
         for (int i = 0; i < listSanPham.size(); i++) {
             if (listSanPham.get(i).getTen().contains(tuKhoa)) {
@@ -128,7 +130,7 @@ public class MenuSanPham {
 
         if (timThay) {
             int luaChon = Nhap.nhapInt("lua chon san pham de hien thi : ");
-            if (listSanPham.size() > luaChon && 0 < luaChon) {
+            if (listSanPham.size() > luaChon && 0 <= luaChon) {
                 System.out.println(listSanPham.get(luaChon));
             } else {
                 System.out.println("lua chon khong hop le");
@@ -160,7 +162,6 @@ public class MenuSanPham {
         System.out.println("3. Xoa san pham");
         System.out.println("4. Sua san pham");
         System.out.println("5. Tra cuu san pham");
-        System.out.println("6. Hien thi tat ca san pham");
         System.out.println("0. Thoat Menu");
     }
 
@@ -172,7 +173,6 @@ public class MenuSanPham {
             case 3 -> xoaSanPham();
             case 4 -> suaSanPham();
             case 5 -> traCuuSanPham();
-            case 6 -> hienThiTatCaSanPham();
             default -> System.out.println("Lua chon khong hop le");
         }
     }

@@ -27,10 +27,12 @@ public class MenuKhachHang {
         String tuKhoa = Nhap.nhapStr("Nhap tu khoa de tim : ");
         boolean timThay = false;
         ArrayList<KhachHang> listKhachHang = db.getListKhachHang();
+
         if (listKhachHang == null || listKhachHang.size() == 0) {
             System.out.println("khong tim thay khach hang");
             return;
         }
+
         for (int i = 0; i < listKhachHang.size(); i++) {
             if (listKhachHang.get(i).getSdt().contains(tuKhoa)) {
                 timThay = true;
@@ -79,8 +81,11 @@ public class MenuKhachHang {
         }
     }
 
-    public void suaThanhPhanKhachHang(KhachHang khachHang, int luaChon) {
+    private void suaThanhPhanKhachHang(KhachHang khachHang, int luaChon) {
         switch (luaChon) {
+            case 0:
+                System.out.println("Thoat sua khach hang");
+                break;
             case 1:
                 khachHang.setTenKh(Nhap.nhapStr("Nhap ten khach hang de thay doi : "));
                 System.out.println("Da thay doi");
@@ -91,7 +96,8 @@ public class MenuKhachHang {
                 break;
             case 3:
                 HangThanhVienService hangThanhVienService = new HangThanhVienService(db.getListHangThanhVien());
-                HangThanhVien hangThanhVienMoi = hangThanhVienService.timHangThanhVien(Nhap.nhapStr(null));
+                HangThanhVien hangThanhVienMoi = hangThanhVienService
+                        .timHangThanhVien(Nhap.nhapStr("Nhap hang thanh vien moi : "));
                 if (hangThanhVienMoi == null) {
                     System.out.println("Khong tim thay hang thanh vien");
                     return;
@@ -104,10 +110,11 @@ public class MenuKhachHang {
         }
     }
 
-    public void menuSuaKhachHang() {
+    private void xuatSuaKhachHang() {
         System.out.println("1. Sua ten khach hang");
         System.out.println("2. Sua so dien thoai");
         System.out.println("3. Sua hang thanh vien");
+        System.out.println("0. Thoat");
     }
 
     public void suaThongTinKhachHang() {
@@ -119,7 +126,7 @@ public class MenuKhachHang {
         }
         int xacNhan = 1;
         while (xacNhan == 1) {
-            xuatMenu();
+            xuatSuaKhachHang();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             suaThanhPhanKhachHang(khachHang, luaChon);
             xacNhan = Nhap.nhapInt("(1)Tiep tuc sua (Khac)Thoat");
@@ -128,8 +135,7 @@ public class MenuKhachHang {
 
     private void xuatMenu() {
         System.out.println("1. Tao khach hang");
-        System.out.println("2. Tra cuu thong tin khach hang");// theo ten(chon trong nhieu khach hang) , theo ma, theo
-                                                              // // so dien thoai, hoac thu tat ca cach
+        System.out.println("2. Tra cuu thong tin khach hang");
         System.out.println("3. Xoa khach hang");
         System.out.println("4. Sua thong tin khach hang");
         System.out.println("0. Thoat");

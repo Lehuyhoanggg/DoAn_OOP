@@ -9,28 +9,19 @@ import model.SanPham;
 import service.KhacHangService;
 import service.PhieuBaoHanhService;
 import service.SanPhamService;
-import util.CapMa;
+import util.TaoDoiTuong;
 
 public class MenuPhieuBaoHanh {
     private Database db;
 
+    public MenuPhieuBaoHanh(Database db) {
+        this.db = db;
+    }
+
     public void taoPhieuBaoHanh() {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
-        SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
         PhieuBaoHanhService phieuBaoHanhService = new PhieuBaoHanhService(db.getListPhieuBaoHanh());
-        System.out.println("Tao phieu bao hanh");
-        String maPhieuBaoHanh = CapMa.capMaPhieuBaoHanh(db);
-        String maKhachHang = Nhap.nhapStr("Nhap ma khach hang: ");
-        KhachHang khachHang = khacHangService.timKhachHang(maKhachHang);
-
-        String maSanPham = Nhap.nhapStr("Nhap ma san pham : ");
-        SanPham sanPham = sanPhamService.timSanPham(maSanPham);
-
-        String ngayBaoHanh = Nhap.nhapStr("Nhap ngay bao hanh (dd/MM/yyyy): ");
-        String chiTietLoi = Nhap.nhapStr("Nhap chi tiet loi");
-        PhieuBaoHanh phieuBaoHanh = new PhieuBaoHanh(maPhieuBaoHanh, khachHang, sanPham, ngayBaoHanh, chiTietLoi);
+        PhieuBaoHanh phieuBaoHanh = TaoDoiTuong.taoPhieuBaoHanh(db);
         phieuBaoHanhService.themPhieuBaoHanh(phieuBaoHanh);
-        khachHang.themPhieuBaoHanh(phieuBaoHanh);
         System.out.println("Da tao phieu bao hanh thanh cong.");
     }
 
@@ -39,10 +30,14 @@ public class MenuPhieuBaoHanh {
         System.out.println("2. Sua san pham");
         System.out.println("3. Sua ngay bao hanh");
         System.out.println("4. Sua chi tiet loi");
+        System.out.println("0. Thoat");
     }
 
-    public void suaThanhPhanPhieu(PhieuBaoHanh phieuBaoHanh, int luaChon) {
+    private void suaThanhPhanPhieu(PhieuBaoHanh phieuBaoHanh, int luaChon) {
         switch (luaChon) {
+            case 0:
+                System.out.println("Thoat sua khach hang");
+                break;
             case 1:
                 KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
                 KhachHang khachHang = khacHangService.timKhachHang("Nhap ma khach hang can thay doi vao trong phieu");
@@ -79,6 +74,10 @@ public class MenuPhieuBaoHanh {
         PhieuBaoHanhService phieuBaoHanhService = new PhieuBaoHanhService(db.getListPhieuBaoHanh());
         String maPhieu = Nhap.nhapStr("Nhap ma phieu bao hanh can sua: ");
         PhieuBaoHanh phieuBaoHanh = phieuBaoHanhService.timPhieuBaoHanh(maPhieu);
+        if (phieuBaoHanh == null) {
+            System.out.println("Khong tim thay phieu bao hanh");
+            return;
+        }
         int xacNhan = 1;
         while (xacNhan == 1) {
             xuatSuaPhieuBaoHanh();
@@ -93,6 +92,10 @@ public class MenuPhieuBaoHanh {
         PhieuBaoHanhService phieuBaoHanhService = new PhieuBaoHanhService(db.getListPhieuBaoHanh());
         String ma = Nhap.nhapStr("Nhap ma phieu bao hanh can xoa: ");
         PhieuBaoHanh phieuBaoHanh = phieuBaoHanhService.timPhieuBaoHanh(ma);
+        if (phieuBaoHanh == null) {
+            System.out.println("Khong tim thay phieu bao hanh");
+            return;
+        }
         KhachHang khachHang = phieuBaoHanh.getKhachHang();
         khachHang.getListPhieuBaoHanh().remove(phieuBaoHanh);
         phieuBaoHanhService.xoaPhieuBaoHanh(ma);
@@ -103,11 +106,12 @@ public class MenuPhieuBaoHanh {
         ArrayList<PhieuBaoHanh> listPhieuBaoHanh = db.getListPhieuBaoHanh();
         if (listPhieuBaoHanh == null || listPhieuBaoHanh.size() == 0) {
             System.out.println("Chua co phieu bao hanh nao.");
-        } else {
-            System.out.println("Danh sach tat ca phieu bao hanh:");
-            for (int i = 0; i < listPhieuBaoHanh.size(); i++) {
-                System.out.println(listPhieuBaoHanh.get(i));
-            }
+            return;
+        }
+        System.out.println("Danh sach tat ca phieu bao hanh:");
+        for (int i = 0; i < listPhieuBaoHanh.size(); i++) {
+            System.out.println(listPhieuBaoHanh.get(i));
+
         }
     }
 
@@ -117,12 +121,12 @@ public class MenuPhieuBaoHanh {
                 .timPhieuBaoHanh(Nhap.nhapStr("Nhap ma phieu bao hanh can tim : "));
         if (phieuBaoHanh == null) {
             System.out.println("khong tim thay phieu bao hanh");
-        } else {
-            System.out.println(phieuBaoHanh);
+            return;
         }
+        System.out.println(phieuBaoHanh);
     }
 
-    public void xuatMenu() {
+    private void xuatMenu() {
         System.out.println("\nQUAN LY PHIEU BAO HANH");
         System.out.println("1. Tao phieu bao hanh");
         System.out.println("2. Sua phieu bao hanh");

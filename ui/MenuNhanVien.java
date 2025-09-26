@@ -13,7 +13,7 @@ import service.MaGiamGiaService;
 import service.NhanVienService;
 import model.MaGiamGia;
 
-public class MenuNhanVien implements LamViec {
+public class MenuNhanVien implements LamViec, GiaoTiep {
     private Database db;
     private NhanVien nv;
 
@@ -31,27 +31,33 @@ public class MenuNhanVien implements LamViec {
     }
 
     public void traCuuThongTinKhachHang() {
-
+        MenuKhachHang menuKhachHang = new MenuKhachHang(db);
+        menuKhachHang.traCuuThongTinKhachHang();
     }
 
     public void taoHoaDon() {
-        MenuHoaDon menuDonHang = new MenuHoaDon(db);
+        MenuHoaDon menuHoaDon = new MenuHoaDon(db);
+
     }
 
     public void taoPhieuTraHang() {
         MenuPhieuTraHang menuPhieuTraHang = new MenuPhieuTraHang(db);
+        menuPhieuTraHang.taoPhieuTraHang();
     }
 
-    public void timKiemSanPham() {
+    public void traCuuSanPham() {
         MenuSanPham menuSanPham = new MenuSanPham(db);
+        menuSanPham.traCuuSanPham();
     }
 
-    public void TimKiemBaoHanh() {
-
+    public void TraCuuBaoHanh() {
+        MenuBaoHanh menuBaoHanh = new MenuBaoHanh(db);
+        menuBaoHanh.traCuuBaoHanh();
     }
 
     public void taoBaoHanh() {
-
+        MenuBaoHanh menuBaoHanh = new MenuBaoHanh(db);
+        menuBaoHanh.taoBaoHanh();
     }
 
     public void xemTatCaMaGiamGia() {
@@ -71,7 +77,8 @@ public class MenuNhanVien implements LamViec {
     }
 
     public void doiTraHang() {
-
+        MenuPhieuTraHang menuPhieuTraHang = new MenuPhieuTraHang(db);
+        menuPhieuTraHang.taoPhieuTraHang();
     }
 
     public void hienThiThongTin() {
@@ -79,18 +86,20 @@ public class MenuNhanVien implements LamViec {
     }
 
     public void xuatMenu() {
-        System.out.println("1. Hien thi thong tin");
-        System.out.println("2. Diem danh ca lam");
-        System.out.println("3. Tra cuu thong tin khanh hang");
-        System.out.println("4. Tao hoa don");
-        System.out.println("5. Doi/Tra hang");
-        System.out.println("6. Tim kiem san pham");
-        System.out.println("7. Xem tat ca ma giam gia");
-        System.out.println("8. Xem lich lam trong tuan");
-        System.out.println("9. Doi mat khau");
+        System.out.println("1.  Hien thi thong tin");
+        System.out.println("2.  Diem danh ca lam");
+        System.out.println("3.  Tra cuu thong tin khanh hang");
+        System.out.println("4.  Tao hoa don");
+        System.out.println("5.  Doi/Tra hang");
+        System.out.println("6.  Tim kiem san pham");
+        System.out.println("7.  Xem tat ca ma giam gia");
+        System.out.println("8.  Xem lich lam trong tuan");
+        System.out.println("9.  Doi mat khau");
         System.out.println("10. Tra cuu thong tin bao hanh");
         System.out.println("11. Tao phieu bao hanh");
-        System.out.println("0. Thoat Menu");
+        System.out.println("12. Gui Tin Nhan");
+        System.out.println("13. Hop thu");
+        System.out.println("0.  Thoat Menu");
 
     }
 
@@ -102,11 +111,11 @@ public class MenuNhanVien implements LamViec {
             case 3 -> traCuuThongTinKhachHang();
             case 4 -> taoHoaDon();
             case 5 -> doiTraHang();
-            case 6 -> timKiemSanPham();
+            case 6 -> traCuuSanPham();
             case 7 -> xemTatCaMaGiamGia();
             case 8 -> xemLichLamViec();
             case 9 -> doiMatKhau();
-            case 10 -> TimKiemBaoHanh();
+            case 10 -> TraCuuBaoHanh();
             case 11 -> taoBaoHanh();
             default -> System.out.println("Da thoat Menu!");
         }

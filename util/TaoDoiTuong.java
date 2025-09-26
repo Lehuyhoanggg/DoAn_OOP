@@ -1,13 +1,16 @@
 package util;
 
 import database.Database;
+import model.BaoHanh;
 import model.HangThanhVien;
 import model.KhachHang;
 import model.MaGiamGia;
 import model.NhanVien;
+import model.PhieuBaoHanh;
 import model.PhieuTraHang;
 import model.SanPham;
 import model.TinNhan;
+import service.BaoHanhService;
 import service.HangThanhVienService;
 import service.KhacHangService;
 import service.SanPhamService;
@@ -83,5 +86,46 @@ public class TaoDoiTuong {
         HangThanhVienService hangThanhVienService = new HangThanhVienService(db.getListHangThanhVien());
         HangThanhVien hangThanhVien = hangThanhVienService.timHangThanhVien(tenHangThanhVien);
         return new KhachHang(maKh, tenKh, sdt, hangThanhVien);
+    }
+
+    public static PhieuBaoHanh taoPhieuBaoHanh(Database db) {
+        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
+        System.out.println("Tao phieu bao hanh");
+        String maPhieuBaoHanh = CapMa.capMaPhieuBaoHanh(db);
+        String maKhachHang = Nhap.nhapStr("Nhap ma khach hang: ");
+        KhachHang khachHang = khacHangService.timKhachHang(maKhachHang);
+
+        String maSanPham = Nhap.nhapStr("Nhap ma san pham : ");
+        SanPham sanPham = sanPhamService.timSanPham(maSanPham);
+
+        String ngayBaoHanh = Nhap.nhapStr("Nhap ngay bao hanh (dd/MM/yyyy): ");
+        String chiTietLoi = Nhap.nhapStr("Nhap chi tiet loi");
+        PhieuBaoHanh phieuBaoHanh = new PhieuBaoHanh(maPhieuBaoHanh, khachHang, sanPham, ngayBaoHanh, chiTietLoi);
+        khachHang.themPhieuBaoHanh(phieuBaoHanh);
+        return phieuBaoHanh;
+    }
+
+    public static BaoHanh taoBaoHanh(Database db) {
+        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
+
+        System.out.println("Tao bao hanh");
+        String maBaoHanh = CapMa.capMaBaoHanh(db);
+        String tenBaoHanh = Nhap.nhapStr("Nhap ten bao hanh : ");
+        String maKhachHang = Nhap.nhapStr("Nhap ma khach hang: ");
+        KhachHang khachHang = khacHangService.timKhachHang(maKhachHang);
+
+        String maSanPham = Nhap.nhapStr("Nhap ma san pham : ");
+        SanPham sanPham = sanPhamService.timSanPham(maSanPham);
+
+        String ngayBatDau = Nhap.nhapStr("Nhap ngay bat dau bao hanh  ");
+        String ngayKetThuc = Nhap.nhapStr("Nhap ngay ket thuc bao hanh (dd/MM/yyyy): ");
+        if (sanPham == null || khachHang == null) {
+            return null;
+        }
+        BaoHanh baoHanh = new BaoHanh(maBaoHanh, tenBaoHanh, khachHang, sanPham, ngayBatDau, ngayKetThuc);
+        khachHang.themBaoHanh(baoHanh);
+        return baoHanh;
     }
 }
