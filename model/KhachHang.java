@@ -37,6 +37,15 @@ public class KhachHang {
         this.listPhieuBaoHanh = new ArrayList<>();
     }
 
+    public KhachHang(String maKh, String tenKh, String sdt) {
+        this.maKh = maKh;
+        this.tenKh = tenKh;
+        this.sdt = sdt;
+        this.listBaoHanh = new ArrayList<>();
+        this.listSanDaMua = new DanhSachSanPham();
+        this.listPhieuBaoHanh = new ArrayList<>();
+    }
+
     public void setHangThanhVien(HangThanhVien hangThanhVien) {
         this.hangThanhVien = hangThanhVien;
     }

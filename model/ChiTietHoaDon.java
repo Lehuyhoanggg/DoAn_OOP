@@ -15,6 +15,12 @@ public class ChiTietHoaDon {
         danhSachSanPham = new DanhSachSanPham();
     }
 
+    public ChiTietHoaDon(String ma) {
+        this.ma = ma;
+        listBaoHanh = new ArrayList<>();
+        danhSachSanPham = new DanhSachSanPham();
+    }
+
     public String getMa() {
         return ma;
     }
@@ -53,5 +59,13 @@ public class ChiTietHoaDon {
 
     public void themSanPham(SanPham sanPham) {
         danhSachSanPham.themSanPham(sanPham);
+    }
+
+    public void xoaSanPham(SanPham sanPham) {
+        danhSachSanPham.xoa1SanPham(sanPham);
+    }
+
+    public void xoaBaoHanh(BaoHanh baoHanh) {
+        listBaoHanh.remove(baoHanh);
     }
 }

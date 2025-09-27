@@ -28,7 +28,22 @@ public class MenuBaoHanh {
         System.out.println("Da tao bao hanh thanh cong.");
     }
 
-    public void xuatSuaBaoHanh() {
+    public void xoaPhieuBaoHanh() {
+        BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
+        String ma = Nhap.nhapStr("Nhap ma bao hanh can xoa: ");
+        BaoHanh baoHanh = baoHanhService.timBaoHanh(ma);
+        if (baoHanh == null) {
+            System.out.println("Khong tim thay bao hanh");
+            return;
+        }
+        if (baoHanh.getKhachHang().getListBaoHanh().remove(baoHanh)) {
+            System.out.println("Da xoa bao hanh (neu ton tai).");
+        } else {
+            System.out.println("Xoa khong thanh cong");
+        }
+    }
+
+    private void xuatSuaBaoHanh() {
         System.out.println("1. Sua khach hang");
         System.out.println("2. Sua ten bao hanh");
         System.out.println("3. Sua san pham");
@@ -78,6 +93,10 @@ public class MenuBaoHanh {
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
         String maBaoHanh = Nhap.nhapStr("Nhap ma phieu bao hanh can sua: ");
         BaoHanh baoHanh = baoHanhService.timBaoHanh(maBaoHanh);
+        if (baoHanh == null) {
+            System.out.println("Khong tim thay bao hanh");
+            return;
+        }
         int xacNhan = 1;
         while (xacNhan == 1) {
             xuatSuaBaoHanh();
@@ -86,17 +105,6 @@ public class MenuBaoHanh {
             xacNhan = Nhap.nhapInt("(1) Tiep tuc sua (Khac) Thoat");
         }
         System.out.println("Da cap nhat bao hanh.");
-    }
-
-    public void xoaPhieuBaoHanh() {
-        BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
-        String ma = Nhap.nhapStr("Nhap ma bao hanh can xoa: ");
-        BaoHanh baoHanh = baoHanhService.timBaoHanh(ma);
-        if (baoHanh.getKhachHang().getListBaoHanh().remove(baoHanh)) {
-            System.out.println("Da xoa bao hanh (neu ton tai).");
-        } else {
-            System.out.println("Xoa khong thanh cong");
-        }
     }
 
     public void xemTatCaBaoHanh() {

@@ -50,7 +50,7 @@ public class LichLamViecService {
             return null;
         }
         for (int i = 0; i < listCaLam.size(); i++) {
-            if (ThoiGian.trongKhoan(gio, listCaLam.get(i).getGioBatDau(), listCaLam.get(i).getGioKetThuc())) {
+            if (ThoiGian.gioTrongKhoan(gio, listCaLam.get(i).getGioBatDau(), listCaLam.get(i).getGioKetThuc())) {
                 return listCaLam.get(i);
             }
         }

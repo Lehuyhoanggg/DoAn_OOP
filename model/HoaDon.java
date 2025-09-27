@@ -2,7 +2,7 @@ package model;
 
 public class HoaDon {
     private String ma;
-    private String khachHang;
+    private KhachHang khachHang;
     private ChiTietHoaDon chiTietHoaDon;
     private String maNgTaoHoaDon;
     private String ngayTaoHoaDon;
@@ -12,12 +12,23 @@ public class HoaDon {
 
     }
 
-    public HoaDon(String ma, String khachHang, ChiTietHoaDon chiTietHoaDon, String maNGTaoHoaDon, String ngayTaoHoaDon,
+    public HoaDon(String ma, KhachHang khachHang, ChiTietHoaDon chiTietHoaDon, String maNGTaoHoaDon,
+            String ngayTaoHoaDon,
             String ghiChu) {
         this.ma = ma;
         this.khachHang = khachHang;
         this.chiTietHoaDon = chiTietHoaDon;
         this.maNgTaoHoaDon = maNGTaoHoaDon;
+        this.ngayTaoHoaDon = ngayTaoHoaDon;
+        this.ghiChu = ghiChu;
+    }
+
+    public HoaDon(String ma, KhachHang khachHang, ChiTietHoaDon chiTietHoaDon,
+            String ngayTaoHoaDon,
+            String ghiChu) {
+        this.ma = ma;
+        this.khachHang = khachHang;
+        this.chiTietHoaDon = chiTietHoaDon;
         this.ngayTaoHoaDon = ngayTaoHoaDon;
         this.ghiChu = ghiChu;
     }
@@ -30,7 +41,7 @@ public class HoaDon {
         return ghiChu;
     }
 
-    public String getKhachHang() {
+    public KhachHang getKhachHang() {
         return khachHang;
     }
 
@@ -54,7 +65,7 @@ public class HoaDon {
         this.ghiChu = ghiChu;
     }
 
-    public void setKhachHang(String khachHang) {
+    public void setKhachHang(KhachHang khachHang) {
         this.khachHang = khachHang;
     }
 

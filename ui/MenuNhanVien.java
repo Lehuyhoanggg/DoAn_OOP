@@ -2,6 +2,8 @@ package ui;
 
 import model.User;
 import model.NhanVien;
+import model.TinNhan;
+
 import java.util.ArrayList;
 import service.TaiKhoanService;
 import database.Database;
@@ -83,6 +85,18 @@ public class MenuNhanVien implements LamViec, GiaoTiep {
 
     public void hienThiThongTin() {
         System.out.println(nv);
+    }
+
+    public void guiTinNhan(String maNguoiNhan, TinNhan tinNhan) {
+
+    }
+
+    public void xemTatCaTinNhan(User user) {
+
+    }
+
+    public void xemTinNhanTrongNgay() {
+
     }
 
     public void xuatMenu() {

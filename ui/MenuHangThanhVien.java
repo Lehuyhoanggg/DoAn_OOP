@@ -92,7 +92,6 @@ public class MenuHangThanhVien {
 
     /////
     public void traCuuHangThanhVien() {
-        System.out.println("TRA CUU HANG THANH VIEN");
         String ten = Nhap.nhapStr("Nhap ten hang thanh vien can tra cuu: ");
         HangThanhVienService service = new HangThanhVienService(db.getListHangThanhVien());
         HangThanhVien htv = service.timHangThanhVien(ten);

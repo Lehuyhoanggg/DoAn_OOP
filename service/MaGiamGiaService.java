@@ -15,12 +15,12 @@ public class MaGiamGiaService {
         return null;
     }
 
-    public void themMaGiamGia(MaGiamGia ma) {
-        listMaGiamGia.add(ma);
+    public boolean themMaGiamGia(MaGiamGia ma) {
+        return listMaGiamGia.add(ma);
     }
 
-    public void xoaMaGiamGia(MaGiamGia ma) {
-        listMaGiamGia.remove(ma);
+    public boolean xoaMaGiamGia(MaGiamGia ma) {
+        return listMaGiamGia.remove(ma);
     }
 
     public MaGiamGia timMaGiamGia(String ma) {
@@ -33,17 +33,5 @@ public class MaGiamGiaService {
             }
         }
         return null;
-    }
-
-    public int timMaGiamGiaIndex(String ma) {
-        if (listMaGiamGia == null) {
-            return -1;
-        }
-        for (int i = 0; i < listMaGiamGia.size(); i++) {
-            if (listMaGiamGia.get(i).getMa() == ma) {
-                return i;
-            }
-        }
-        return -1;
     }
 }

@@ -39,4 +39,7 @@ public class ChiTietHoaDonService {
         return null;
     }
 
+    public void tinhThanhTien(ChiTietHoaDon chiTietHoaDon) {
+
+    }
 }

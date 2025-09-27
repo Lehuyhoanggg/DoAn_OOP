@@ -19,7 +19,18 @@ public class DanhSachSanPham {
     }
 
     public void themSanPham(SanPham sanPham) {
-        mapSanPham.put(sanPham, mapSanPham.containsKey(sanPham) ? mapSanPham.get(sanPham) + 1 : 0);
+        mapSanPham.put(sanPham, mapSanPham.containsKey(sanPham) ? mapSanPham.get(sanPham) + 1 : 1);
     }
 
+    public boolean xoa1SanPham(SanPham sanPham) {
+        if (mapSanPham.containsKey(sanPham)) {
+            if (mapSanPham.get(sanPham) > 1) {
+                mapSanPham.put(sanPham, mapSanPham.get(sanPham) - 1);
+            } else {
+                mapSanPham.remove(sanPham);
+            }
+            return true;
+        }
+        return false;
+    }
 }

@@ -5,23 +5,19 @@ public class MaGiamGia {
     private String tenMa;
     private String loaiDoanhMuc;
     private String loaiThuongHieu;
-    private long soTieniam;
+    private String tienGiam;
     String ngayBatDau;
     String ngayKetThuc;
 
-    public MaGiamGia(String ma, String tenMa, String loaiDoanhMuc, String loaiThuongHieu, long soTieniam,
+    public MaGiamGia(String ma, String tenMa, String loaiDoanhMuc, String loaiThuongHieu, String tienGiam,
             String ngayBatDau, String ngayKetThuc) {
         this.ma = ma;
         this.tenMa = tenMa;
         this.loaiDoanhMuc = loaiDoanhMuc;
         this.loaiThuongHieu = loaiDoanhMuc;
-        this.soTieniam = soTieniam;
+        this.tienGiam = tienGiam;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
-    }
-
-    public long getGiam() {
-        return soTieniam;
     }
 
     public String getLoaiDoanhMuc() {
@@ -36,8 +32,12 @@ public class MaGiamGia {
         return ma;
     }
 
-    public long getSoTieniam() {
-        return soTieniam;
+    public String getNgayKetThuc() {
+        return ngayKetThuc;
+    }
+
+    public String getTienGiam() {
+        return tienGiam;
     }
 
     public String getNgayBatDau() {
@@ -48,8 +48,8 @@ public class MaGiamGia {
         return tenMa;
     }
 
-    public void setGiam(long soTieniam) {
-        this.soTieniam = soTieniam;
+    public void setTienGiam(String tienGiam) {
+        this.tienGiam = tienGiam;
     }
 
     public void setLoaiDoanhMuc(String loaiDoanhMuc) {
@@ -64,15 +64,15 @@ public class MaGiamGia {
         this.ma = ma;
     }
 
-    public void setSoTieniam(long soTieniam) {
-        this.soTieniam = soTieniam;
-    }
-
     public void setTenMa(String tenMa) {
         this.tenMa = tenMa;
     }
 
     public void setNgayBatDau(String ngayBatDau) {
         this.ngayBatDau = ngayBatDau;
+    }
+
+    public void setNgayKetThuc(String ngayKetThuc) {
+        this.ngayKetThuc = ngayKetThuc;
     }
 }
