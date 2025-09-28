@@ -19,7 +19,8 @@ public class MenuQuanLy implements QuanLiChung {
     }
 
     public void quanLyNhanVien() {
-
+        MenuQuanLyNhanVien menuQuanLyNhanVien = new MenuQuanLyNhanVien(db);
+        menuQuanLyNhanVien.menu();
     }
 
     public void quanLyHoaDon() {
@@ -58,7 +59,8 @@ public class MenuQuanLy implements QuanLiChung {
     }
 
     public void xemLichTuan() {
-
+        MenuLichLamViec menuLichLamViec = new MenuLichLamViec(db);
+        menuLichLamViec.xemLichLamViec();
     }
 
     public void xuatMenu() {

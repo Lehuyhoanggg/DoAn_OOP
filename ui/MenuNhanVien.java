@@ -17,11 +17,13 @@ public class MenuNhanVien implements LamViec, GiaoTiep {
     }
 
     public void diemDanhCaLam() {
-
+        MenuLichLamViec menuLichLamViec = new MenuLichLamViec(db);
+        menuLichLamViec.diemDanh(nv);
     }
 
     public void xemLichLamViec() {
-
+        MenuLichLamViec menuLichLamViec = new MenuLichLamViec(db);
+        menuLichLamViec.xemLichLamViec();
     }
 
     public void traCuuThongTinKhachHang() {
@@ -56,11 +58,8 @@ public class MenuNhanVien implements LamViec, GiaoTiep {
     }
 
     public void xemTatCaMaGiamGia() {
-        ArrayList<MaGiamGia> listmGiamGia = db.getListMaGiamGia();
-        System.out.println("list ma giam gia:");
-        for (int i = 0; i < listmGiamGia.size(); i++) {
-            System.out.println(listmGiamGia.get(i));
-        }
+        MenuMaGiamGia menuMaGiamGia = new MenuMaGiamGia(db);
+        menuMaGiamGia.xemTatCaMaGiamGia();
     }
 
     //

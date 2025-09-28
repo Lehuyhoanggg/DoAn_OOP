@@ -28,7 +28,7 @@ public class MenuMaGiamGia {
     }
 
     // xuat all ma giam gia
-    public void xuatTatCaMaGiamGia() {
+    public void xemTatCaMaGiamGia() {
         System.out.println("====Tat ca ma giam gia====");
         ArrayList<MaGiamGia> listMaGiamGia = db.getListMaGiamGia();
         if (listMaGiamGia.size() == 0 || listMaGiamGia == null) {
