@@ -3,7 +3,6 @@ package ui;
 import database.Database;
 import interfaces.QuanLiChung;
 import model.QuanLy;
-import service.TaiKhoanService;
 
 public class MenuQuanLy implements QuanLiChung {
     private Database db;
@@ -39,11 +38,18 @@ public class MenuQuanLy implements QuanLiChung {
     }
 
     public void guiTinNhan() {
-
+        MenuTinNhan menuTinNhan = new MenuTinNhan(db);
+        menuTinNhan.guiTinNhan(ql);
     }
 
     public void xemTatCaTinNhan() {
+        MenuTinNhan menuTinNhan = new MenuTinNhan(db);
+        menuTinNhan.xemTatCaTinNhan(ql);
+    }
 
+    public void xemTinNhanGanDay() {
+        MenuTinNhan menuTinNhan = new MenuTinNhan(db);
+        menuTinNhan.xemTinNhanGanDay(ql);
     }
 
     public void xemDoanhThu() {
@@ -71,10 +77,8 @@ public class MenuQuanLy implements QuanLiChung {
     }
 
     public void doiMatKhau() {
-        TaiKhoanService tKhoanService = new TaiKhoanService(db.getListTaiKhoan());
-        System.out.println("Doi mat khau:");
-        String matKhauMoi = Nhap.nhapStr("Nhap mat khau moi : ");
-        tKhoanService.doiMatKhau(matKhauMoi, ql.getTaiKhoan());
+        MenuTaiKhoan menuTaiKhoan = new MenuTaiKhoan(db);
+        menuTaiKhoan.doiMatKhau(ql);
     }
 
     public void thucHienChucNang(int luaChon) {
@@ -82,7 +86,7 @@ public class MenuQuanLy implements QuanLiChung {
             case 1 -> System.out.println(ql);
             case 2 -> quanLyNhanVien();
             case 3 -> quanLySanPham();
-            case 4 -> quanLyDonHang();
+            case 4 -> quanLyHoaDon();
             case 5 -> quanLyBaoHanh();
             case 6 -> xemDoanhThu();
             case 7 -> guiTinNhan();

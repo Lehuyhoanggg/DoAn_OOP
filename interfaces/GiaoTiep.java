@@ -1,12 +1,9 @@
 package interfaces;
 
-import model.TinNhan;
-import model.User;
-
 public interface GiaoTiep {
-    public void guiTinNhan(String maNguoiNhan, TinNhan tinNhan);
+    public void guiTinNhan();
 
-    public void xemTatCaTinNhan(User user);
+    public void xemTatCaTinNhan();
 
-    public void xemTinNhanTrongNgay();
+    public void xemTinNhanGanDay();
 }

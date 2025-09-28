@@ -170,4 +170,14 @@ public class TaoDoiTuong {
         String ghiChu = Nhap.nhapStr("Nhap ghi chu neu co : ");
         return new HoaDon(ma, khachHang, chiTietHoaDon, ngayTaoHoaDon, ghiChu);
     }
+
+    public static NhanVien taoNhanVien(Database db) {
+        String ma = CapMa.capMaNhanVien(db);
+        String cccd = Nhap.nhapStr("Nhap cccd: ");
+        String ten = Nhap.nhapStr("Nhap ten: ");
+        String ngaySinh = Nhap.nhapStr("Nhap ngay sinh (yyyy-MM-dd): ");
+        String sdt = Nhap.nhapStr("Nhap so dien thoai: ");
+        String gioiTinh = Nhap.nhapStr("Nhap gioi tinh: ");
+        return new NhanVien(ma, cccd, ten, ngaySinh, sdt, gioiTinh);
+    }
 }

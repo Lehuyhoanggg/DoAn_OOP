@@ -5,7 +5,7 @@ public interface QuanLiChung {
 
     public void quanLyNhanVien();
 
-    public void quanLyDonHang();
+    public void quanLyHoaDon();
 
     public void quanLyBaoHanh();
 

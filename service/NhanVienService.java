@@ -17,7 +17,7 @@ public class NhanVienService {
     }
 
     // tim nhan vien theo ma tra ve NhanVien
-    public NhanVien timnhanvien(String ma) {
+    public NhanVien timNhanVien(String ma) {
         for (int i = 0; i < listNhanVien.size(); i++) {
             NhanVien nv = listNhanVien.get(i);
             if (nv.getMa().equals(ma))
@@ -27,8 +27,8 @@ public class NhanVienService {
     }
 
     // xoa nhan vien
-    public void xoanhanvien(String ma) {
-        NhanVien nv = timnhanvien(ma);
+    public void xoaNhanVien(String ma) {
+        NhanVien nv = timNhanVien(ma);
         listNhanVien.remove(nv);
     }
 }

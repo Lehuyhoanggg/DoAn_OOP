@@ -1,19 +1,14 @@
 package service;
 
 import java.util.ArrayList;
-
-import model.NhanVien;
-import model.QuanLy;
 import model.TaiKhoan;
 import model.User;
 
 public class UserService {
     private ArrayList<User> listUser;
 
-    public UserService(ArrayList<NhanVien> listNhanVien, ArrayList<QuanLy> listQuanLy) {
-        listUser = new ArrayList<>();
-        listUser.addAll(listNhanVien);
-        listUser.addAll(listNhanVien);
+    public UserService(ArrayList<User> listUser) {
+        this.listUser = listUser;
     }
 
     public User timUser(String ma) {

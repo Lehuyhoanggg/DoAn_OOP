@@ -20,16 +20,17 @@ public class LichLamViecService {
         return lichLamViec;
     }
 
-    public void diemDanh(NhanVien nhanVien) {
+    public boolean diemDanh(NhanVien nhanVien) {
         LichTrongNgay lichTrongNgay = lichTrongNgayHomNay();
         String gioHienTai = ThoiGian.layGioHienTai();
         CaLam caLam = caLamHienTai(gioHienTai, lichTrongNgay);
         if (lichTrongNgay == null || caLam == null) {
-            return;
+            return false;
         }
         if (tonTaiNhanVienTrongCa(nhanVien, caLam)) {
             caLam.diemDanh(nhanVien);
         }
+        return true;
     }
 
     public boolean tonTaiNhanVienTrongCa(NhanVien nhanVien, CaLam caLam) {
@@ -64,7 +65,7 @@ public class LichLamViecService {
             return null;
         }
         for (int i = 0; i < lichTuan.size(); i++) {
-            if (lichTuan.get(i).getNgay() == ngayHomNay) {
+            if (lichTuan.get(i).getNgay().equals(ngayHomNay)) {
                 return lichTuan.get(i);
             }
         }

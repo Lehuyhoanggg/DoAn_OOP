@@ -47,16 +47,4 @@ public class TaiKhoanService {
         tk.getUser().goTaiKhoan();
         listTaiKhoan.remove(tk);
     }
-
-    public void doiTaiKhoan(TaiKhoan tk, String tenDangNhap, String matKhau) {
-        if (tk == null) {
-            return;
-        }
-        tk.setTenDangNhap(tenDangNhap);
-        tk.setMatKhau(matKhau);
-    }
-
-    public void doiMatKhau(String matKhauMoi, TaiKhoan tk) {
-        tk.setMatKhau(matKhauMoi);
-    }
 }

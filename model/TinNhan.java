@@ -1,20 +1,16 @@
 package model;
 
-import java.time.LocalDate;
-
-import util.ThoiGian;
-
 public class TinNhan {
     private String ma;
     private String tenNgGui;
     private String noiDung;
-    private LocalDate ngayGui;
+    private String ngayGui;
 
     public TinNhan(String ma, String tenNgGui, String noiDung, String ngayGui) {
         this.ma = ma;
         this.tenNgGui = tenNgGui;
         this.noiDung = noiDung;
-        this.ngayGui = ThoiGian.chuyenStrThanhDate(ngayGui);
+        this.ngayGui = ngayGui;
     }
 
     public TinNhan() {
@@ -32,7 +28,7 @@ public class TinNhan {
         return tenNgGui;
     }
 
-    public LocalDate getNgayGui() {
+    public String getNgayGui() {
         return ngayGui;
     }
 
@@ -48,7 +44,7 @@ public class TinNhan {
         this.tenNgGui = tenNgGui;
     }
 
-    public void setNgayGui(LocalDate ngayGui) {
+    public void setNgayGui(String ngayGui) {
         this.ngayGui = ngayGui;
     }
 }

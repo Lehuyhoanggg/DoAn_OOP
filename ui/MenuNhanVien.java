@@ -69,10 +69,8 @@ public class MenuNhanVien implements LamViec, GiaoTiep {
 
     //
     public void doiMatKhau() {
-        TaiKhoanService tKhoanService = new TaiKhoanService(db.getListTaiKhoan());
-        System.out.println("Doi mat khau:");
-        String matKhauMoi = Nhap.nhapStr("Nhap mat khau moi : ");
-        tKhoanService.doiMatKhau(matKhauMoi, nv.getTaiKhoan());
+        MenuTaiKhoan menuTaiKhoan = new MenuTaiKhoan(db);
+        menuTaiKhoan.doiMatKhau(nv);
     }
 
     public void doiTraHang() {
@@ -84,16 +82,19 @@ public class MenuNhanVien implements LamViec, GiaoTiep {
         System.out.println(nv);
     }
 
-    public void guiTinNhan(String maNguoiNhan, TinNhan tinNhan) {
-
+    public void guiTinNhan() {
+        MenuTinNhan menuTinNhan = new MenuTinNhan(db);
+        menuTinNhan.guiTinNhan(nv);
     }
 
-    public void xemTatCaTinNhan(User user) {
-
+    public void xemTatCaTinNhan() {
+        MenuTinNhan menuTinNhan = new MenuTinNhan(db);
+        menuTinNhan.xemTatCaTinNhan(nv);
     }
 
-    public void xemTinNhanTrongNgay() {
-
+    public void xemTinNhanGanDay() {
+        MenuTinNhan menuTinNhan = new MenuTinNhan(db);
+        menuTinNhan.xemTatCaTinNhan(nv);
     }
 
     public void xuatMenu() {
