@@ -10,7 +10,9 @@ import model.MaGiamGia;
 import model.NhanVien;
 import model.PhieuBaoHanh;
 import model.PhieuTraHang;
+import model.QuanLy;
 import model.SanPham;
+import model.TaiKhoan;
 import model.TinNhan;
 import service.BaoHanhService;
 import service.KhacHangService;
@@ -179,5 +181,21 @@ public class TaoDoiTuong {
         String sdt = Nhap.nhapStr("Nhap so dien thoai: ");
         String gioiTinh = Nhap.nhapStr("Nhap gioi tinh: ");
         return new NhanVien(ma, cccd, ten, ngaySinh, sdt, gioiTinh);
+    }
+
+    public static TaiKhoan taoTaiKhoan() {
+        String tenDangNhap = Nhap.nhapStr("Nhap ten dang nhap : ");
+        String matKhau = Nhap.nhapStr("Nhap mat khau : ");
+        return new TaiKhoan(tenDangNhap, matKhau);
+    }
+
+    public static QuanLy TaoDoiTuongQuanLy(Database db) {
+        String ma = Nhap.nhapStr("Nhap ma nhan vien: ");
+        String cccd = Nhap.nhapStr("Nhap cccd: ");
+        String ten = Nhap.nhapStr("Nhap ten: ");
+        String ngaySinh = Nhap.nhapStr("Nhap ngay sinh (dd/MM/yyyy): ");
+        String sdt = Nhap.nhapStr("Nhap so dien thoai: ");
+        String gioiTinh = Nhap.nhapStr("Nhap gioi tinh: ");
+        return new QuanLy(ma, cccd, ten, ngaySinh, sdt, gioiTinh);
     }
 }

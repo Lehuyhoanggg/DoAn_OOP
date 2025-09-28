@@ -20,11 +20,11 @@ public class Main {
 
     public void dieuHuongMenu() {
         if (user.getQuyenHang() == "NhanVien") {
-            MenuNhanVien menuNv = new MenuNhanVien(db, (NhanVien) user);
-
+            MenuNhanVien menuNhanVien = new MenuNhanVien(db, (NhanVien) user);
+            menuNhanVien.menu();
         } else if (user.getQuyenHang() == "QuanLy") {
-            MenuQuanLy menuQl = new MenuQuanLy(db, (QuanLy) user);
-
+            MenuQuanLy menuQuanLy = new MenuQuanLy(db, (QuanLy) user);
+            menuQuanLy.menu();
         } else {
             System.out.println("Tai Khoan chua duoc cap quyen");
         }

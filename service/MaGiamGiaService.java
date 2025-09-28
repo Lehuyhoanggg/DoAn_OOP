@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import model.ChiTietHoaDon;
-import model.DanhSachSanPham;
-import model.HoaDon;
 import model.MaGiamGia;
 import model.SanPham;
 import util.ThoiGian;

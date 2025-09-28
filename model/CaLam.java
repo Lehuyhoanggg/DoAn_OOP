@@ -57,4 +57,23 @@ public class CaLam {
     public void diemDanh(NhanVien nhanVien) {
         listNhanVien.diemDanhNhanVien(nhanVien);
     }
+
+    public int soNguoiTrongCa() {
+        return this.listNhanVien.soNhanVienDaXep();
+    }
+
+    public boolean caLamTrong() {
+        if (soNguoiTrongCa() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public void themNhanVienVaoCa(NhanVien nhanVien) {
+        listNhanVien.themNhanVien(nhanVien);
+    }
+
+    public void xoaNhanVienKhoiCa(NhanVien nhanVien) {
+        listNhanVien.xoaNhanVien(nhanVien);
+    }
 }

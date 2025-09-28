@@ -1,11 +1,7 @@
 package ui;
 
-import model.User;
 import model.NhanVien;
-import model.TinNhan;
-
 import java.util.ArrayList;
-import service.TaiKhoanService;
 import database.Database;
 import interfaces.GiaoTiep;
 import interfaces.LamViec;

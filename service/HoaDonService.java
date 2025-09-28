@@ -1,12 +1,7 @@
 package service;
 
 import java.util.ArrayList;
-
-import model.ChiTietHoaDon;
 import model.HoaDon;
-import model.KhachHang;
-import model.MaGiamGia;
-import model.SanPham;
 import ui.Nhap;
 import util.ThoiGian;
 

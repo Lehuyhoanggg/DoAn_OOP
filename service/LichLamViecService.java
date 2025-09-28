@@ -72,4 +72,13 @@ public class LichLamViecService {
         return null;
     }
 
+    public CaLam timCaLam(int soCa, LichTrongNgay lichTrongNgay) {
+        ArrayList<CaLam> listCaLam = lichTrongNgay.getListCaLam();
+        for (CaLam caLam : listCaLam) {
+            if (caLam.getSo() == soCa) {
+                return caLam;
+            }
+        }
+        return null;
+    }
 }

@@ -23,10 +23,21 @@ public class QuanLyService {
         return null;
     }
 
-    public void themQuanLy(QuanLy quanLy) {
+    public boolean themQuanLy(QuanLy quanLy) {
         if (quanLy == null) {
-            return;
+            return false;
         }
         listQuanLy.add(quanLy);
+        return true;
     }
+
+    // xoa quang ly
+    public boolean xoaQuanLy(QuanLy quangLy) {
+        if (quangLy == null) {
+            return false;
+        }
+        listQuanLy.remove(quangLy);
+        return true;
+    }
+    //
 }
