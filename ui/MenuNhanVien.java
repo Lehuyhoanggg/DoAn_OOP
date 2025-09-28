@@ -1,11 +1,9 @@
 package ui;
 
 import model.NhanVien;
-import java.util.ArrayList;
 import database.Database;
 import interfaces.GiaoTiep;
 import interfaces.LamViec;
-import model.MaGiamGia;
 
 public class MenuNhanVien implements LamViec, GiaoTiep {
     private Database db;
