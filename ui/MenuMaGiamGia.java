@@ -78,6 +78,39 @@ public class MenuMaGiamGia {
         System.out.println("0. thoat");
     }
 
+    private void thucHienChucNang(MaGiamGia mGG, int choice) {
+        switch (choice) {
+            case 1:
+                mGG.setTenMa(Nhap.nhapStr("nhap ten moi: "));
+                System.out.println("thay doi ten ma giam gia thanh cong!");
+                break;
+            case 2:
+                mGG.setLoaiDoanhMuc(Nhap.nhapStr("nhap loai danh muc moi "));
+                System.out.println("thay doi danh muc moi thanh cong!");
+                break;
+            case 3:
+                mGG.setLoaiThuongHieu(Nhap.nhapStr("nhap loai thuong hieu moi: "));
+                System.out.println("thay doi loai thuong hieu thanh cong!");
+                break;
+            case 4:
+                mGG.setTienGiam(Nhap.nhapStr("nhap so phan tram giam moi: "));
+                System.out.println("da thay doi so tien giam thanh cong!");
+                break;
+            case 5:
+                mGG.setNgayBatDau("nhap ngay bat dau moi (yyyy-mm-dd): ");
+                System.out.println("thay doi ngay batg dau moi thanh cong!");
+                break;
+            case 6:
+                mGG.setNgayKetThuc(Nhap.nhapStr("nhap ngay ket thuc moi (yyyy-mm-dd): "));
+                System.out.println("thay doi ngay ket thuc thanh cong!");
+                break;
+            case 0:
+                System.out.println("da thoat!");
+            default:
+                System.out.println("lua chon khong hop le!");
+        }
+    }
+
     public void suaMaGiamGia() {
         MaGiamGiaService maGiamGiaService = new MaGiamGiaService(db.getListMaGiamGia());
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can xoa: ");
@@ -86,36 +119,8 @@ public class MenuMaGiamGia {
         while (xacNhan == 1) {
             xuatMenuSuaMaGiamGia();
             int choice = Nhap.nhapInt("nhap lua chon: ");
-            switch (choice) {
-                case 1:
-                    mGG.setTenMa(Nhap.nhapStr("nhap ten moi: "));
-                    System.out.println("thay doi ten ma giam gia thanh cong!");
-                    break;
-                case 2:
-                    mGG.setLoaiDoanhMuc(Nhap.nhapStr("nhap loai danh muc moi "));
-                    System.out.println("thay doi danh muc moi thanh cong!");
-                    break;
-                case 3:
-                    mGG.setLoaiThuongHieu(Nhap.nhapStr("nhap loai thuong hieu moi: "));
-                    System.out.println("thay doi loai thuong hieu thanh cong!");
-                    break;
-                case 4:
-                    mGG.setTienGiam(Nhap.nhapStr("nhap so phan tram giam moi: "));
-                    System.out.println("da thay doi so tien giam thanh cong!");
-                    break;
-                case 5:
-                    mGG.setNgayBatDau("nhap ngay bat dau moi (yyyy-mm-dd): ");
-                    System.out.println("thay doi ngay batg dau moi thanh cong!");
-                    break;
-                case 6:
-                    mGG.setNgayKetThuc(Nhap.nhapStr("nhap ngay ket thuc moi (yyyy-mm-dd): "));
-                    System.out.println("thay doi ngay ket thuc thanh cong!");
-                    break;
-                case 0:
-                    System.out.println("da thoat!");
-                default:
-                    System.out.println("lua chon khong hop le!");
-            }
+            thucHienChucNang(mGG, choice);
+            xacNhan = Nhap.nhapXacNhanThoat();
         }
     }
 

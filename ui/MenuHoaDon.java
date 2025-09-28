@@ -44,9 +44,9 @@ public class MenuHoaDon {
     }
 
     /// sua hoa don
-    private void xuatSuaHoaDon_ChiTietHoaDon() {
-        System.out.println("1. Xoa san pham");
-        System.out.println("2. Them san pham");
+    private void xuatSuaHoaDon_BaoHanh() {
+        System.out.println("1. them san pham");
+        System.out.println("2. Xoa san pham");
         System.out.println("3. Them bao hanh");
         System.out.println("4. Xoa bao hanh");
         System.out.println("0. Thoat");
@@ -54,20 +54,20 @@ public class MenuHoaDon {
 
     private void suaThanhPhanChiTietHoaDon(ChiTietHoaDon chiTietHoaDon, int luaChon) {
         SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
-        ChiTietHoaDonService chiTietHoaDonService = new ChiTietHoaDonService(db.getListChiTietHoaDon());
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
+        ChiTietHoaDonService chiTietHoaDonService = new ChiTietHoaDonService(db.getListChiTietHoaDon());
         switch (luaChon) {
             case 0:
                 System.out.println("Da Thoat");
                 break;
             case 1:
-                SanPham sanPham = sanPhamService.timSanPham(Nhap.nhapStr("Nhap ma san pham can xoa : "));
+                SanPham sanPham = sanPhamService.timSanPham(Nhap.nhapStr("Nhap ma san pham can them : "));
                 if (sanPham == null) {
                     System.out.println("Khong tim thay san pham");
                     return;
                 }
-                chiTietHoaDon.xoaSanPham(sanPham);
-                chiTietHoaDonService.tinhThanhTien(chiTietHoaDon);
+                chiTietHoaDon.themSanPham(sanPham);
+                System.out.println("Them thanh cong");
                 break;
             case 2:
                 SanPham sanPham1 = sanPhamService.timSanPham(Nhap.nhapStr("Nhap ma san pham can them : "));
@@ -75,8 +75,9 @@ public class MenuHoaDon {
                     System.out.println("Khong tim thay san pham");
                     return;
                 }
-                chiTietHoaDon.themSanPham(sanPham1);
-                chiTietHoaDonService.tinhThanhTien(chiTietHoaDon);
+                chiTietHoaDon.xoaSanPham(sanPham1);
+
+                System.out.println("xoa thanh cong");
                 break;
             case 3:
                 BaoHanh baoHanh = baoHanhService.timBaoHanh(Nhap.nhapStr("Nhap ma bao hanh can them : "));
@@ -104,7 +105,7 @@ public class MenuHoaDon {
 
     private void xuatSuaHoaDon() {
         System.out.println("1. Sua Khach hang");
-        System.out.println("2. Sua Chi tiet hoa");
+        System.out.println("2. Sua bao hanh");
         System.out.println("3. Sua nguoi tao hoa don");
         System.out.println("4. Sua ngay tao hoa don");
         System.out.println("5. Sua ghi chu");
@@ -140,7 +141,7 @@ public class MenuHoaDon {
     private void suaHoaDon_ChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
         int xacNhan = 1;
         while (xacNhan == 1) {
-            xuatSuaHoaDon_ChiTietHoaDon();
+            xuatSuaHoaDon_BaoHanh();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             suaThanhPhanChiTietHoaDon(chiTietHoaDon, luaChon);
             xacNhan = Nhap.nhapInt("(1) Tiep tuc sua (Khac)Thoat");

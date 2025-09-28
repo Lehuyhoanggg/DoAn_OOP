@@ -11,6 +11,7 @@ public class KhachHang {
     private long tienDaChi;
     private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
     private ArrayList<BaoHanh> listBaoHanh;
+    private ArrayList<MaGiamGia> listMaGiamGia;
 
     public KhachHang() {
 
@@ -25,6 +26,7 @@ public class KhachHang {
         this.listBaoHanh = new ArrayList<>();
         this.listSanDaMua = new DanhSachSanPham();
         this.listPhieuBaoHanh = new ArrayList<>();
+        this.listMaGiamGia = new ArrayList<>();
     }
 
     public KhachHang(String maKh, String tenKh, String sdt, HangThanhVien hangThanhVien) {
@@ -35,6 +37,7 @@ public class KhachHang {
         this.listBaoHanh = new ArrayList<>();
         this.listSanDaMua = new DanhSachSanPham();
         this.listPhieuBaoHanh = new ArrayList<>();
+        this.listMaGiamGia = new ArrayList<>();
     }
 
     public KhachHang(String maKh, String tenKh, String sdt) {
@@ -44,6 +47,7 @@ public class KhachHang {
         this.listBaoHanh = new ArrayList<>();
         this.listSanDaMua = new DanhSachSanPham();
         this.listPhieuBaoHanh = new ArrayList<>();
+        this.listMaGiamGia = new ArrayList<>();
     }
 
     public void setHangThanhVien(HangThanhVien hangThanhVien) {
@@ -70,6 +74,10 @@ public class KhachHang {
         this.sdt = sdt;
     }
 
+    public void setListMaGiamGia(ArrayList<MaGiamGia> listMaGiamGia) {
+        this.listMaGiamGia = listMaGiamGia;
+    }
+
     public void setTenKh(String tenKh) {
         this.tenKh = tenKh;
     }
@@ -88,6 +96,10 @@ public class KhachHang {
 
     public ArrayList<PhieuBaoHanh> getListPhieuBaoHanh() {
         return listPhieuBaoHanh;
+    }
+
+    public ArrayList<MaGiamGia> getListMaGiamGia() {
+        return listMaGiamGia;
     }
 
     public DanhSachSanPham getListSanDaMua() {
@@ -116,5 +128,9 @@ public class KhachHang {
 
     public void themPhieuBaoHanh(PhieuBaoHanh phieuBaoHanh) {
         listPhieuBaoHanh.add(phieuBaoHanh);
+    }
+
+    public void themMaGiamGia(MaGiamGia maGiamGia) {
+        listMaGiamGia.add(maGiamGia);
     }
 }

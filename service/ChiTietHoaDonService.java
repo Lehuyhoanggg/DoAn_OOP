@@ -3,6 +3,9 @@ package service;
 import java.util.ArrayList;
 
 import model.ChiTietHoaDon;
+import model.KhachHang;
+import model.MaGiamGia;
+import model.SanPham;
 
 public class ChiTietHoaDonService {
     private ArrayList<ChiTietHoaDon> listChiTietHoaDon;
@@ -39,7 +42,21 @@ public class ChiTietHoaDonService {
         return null;
     }
 
-    public void tinhThanhTien(ChiTietHoaDon chiTietHoaDon) {
+    public void xoaSanPhamThuHoiMa(SanPham sanPham, ChiTietHoaDon chiTietHoaDon, KhachHang khachHang) {
+        chiTietHoaDon.xoaSanPham(sanPham);
+        thuHoiMaGiamGiaSauKhiXoa(sanPham, chiTietHoaDon, khachHang);
+    }
 
+    public void thuHoiMaGiamGiaSauKhiXoa(SanPham sanPham, ChiTietHoaDon chiTietHoaDon, KhachHang khachHang) {
+        ArrayList<MaGiamGia> listMaGiamGia = chiTietHoaDon.getListMaGiamGiaDaDung();
+        if (listMaGiamGia == null) {
+            return;
+        }
+        for (int i = listMaGiamGia.size() - 1; i >= 0; i--) {
+            if (listMaGiamGia.get(i).getSanPhamDaDung().equals(sanPham)) {
+                khachHang.themMaGiamGia(listMaGiamGia.get(i));
+                listMaGiamGia.remove(i);
+            }
+        }
     }
 }

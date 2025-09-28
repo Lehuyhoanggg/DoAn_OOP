@@ -14,6 +14,7 @@ import model.SanPham;
 import model.TinNhan;
 import service.BaoHanhService;
 import service.KhacHangService;
+import service.MaGiamGiaService;
 import service.SanPhamService;
 import ui.Nhap;
 
@@ -122,10 +123,11 @@ public class TaoDoiTuong {
         return baoHanh;
     }
 
-    public static ChiTietHoaDon taoChiTietHoaDon(Database db) {
+    public static ChiTietHoaDon taoChiTietHoaDon(Database db, KhachHang khachHang) {
+        String ma = CapMa.capMaChiTietHoaDon(db);
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
         SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
-        String ma = CapMa.capMaChiTietHoaDon(db);
+        MaGiamGiaService maGiamGiaService = new MaGiamGiaService(khachHang.getListMaGiamGia());
         ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(ma);
         int soSp = Nhap.nhapInt("Nhap so san pham can them : ");
         int soBh = Nhap.nhapInt("Nhap so bao hanh can them : ");
@@ -139,6 +141,7 @@ public class TaoDoiTuong {
             chiTietHoaDon.themSanPham(sanPham);
             System.out.println("Them thanh cong");
         }
+        maGiamGiaService.setThanhTienDaApMaGG(chiTietHoaDon);
         for (int i = 0; i < soBh; i++) {
             String maBh = Nhap.nhapStr("Nhap ma bao hanh " + (i + 1) + " : ");
             BaoHanh baoHanh = baoHanhService.timBaoHanh(maBh);
@@ -153,16 +156,16 @@ public class TaoDoiTuong {
     }
 
     public static HoaDon taoHoaDon(Database db) {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
         String ma = CapMa.capMaHoaDon(db);
+        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
         KhachHang khachHang = khacHangService.timKhachHang(Nhap.nhapStr("Nhap so dien thoai khach hang : "));
         if (khachHang == null) {
             System.out.println("Khach hang khong ton tai");
             System.out.println("Tao moi khach hang");
             khachHang = taoKhachHang(db);
         }
-        ChiTietHoaDon chiTietHoaDon = taoChiTietHoaDon(db);
 
+        ChiTietHoaDon chiTietHoaDon = taoChiTietHoaDon(db, khachHang);
         String ngayTaoHoaDon = ThoiGian.layNgayHienTaiStr();
         String ghiChu = Nhap.nhapStr("Nhap ghi chu neu co : ");
         return new HoaDon(ma, khachHang, chiTietHoaDon, ngayTaoHoaDon, ghiChu);

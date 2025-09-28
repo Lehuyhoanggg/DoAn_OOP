@@ -7,12 +7,8 @@ import model.TinNhan;
 import java.util.ArrayList;
 import service.TaiKhoanService;
 import database.Database;
-import file.DocFile;
-import file.GhiFile;
 import interfaces.GiaoTiep;
 import interfaces.LamViec;
-import service.MaGiamGiaService;
-import service.NhanVienService;
 import model.MaGiamGia;
 
 public class MenuNhanVien implements LamViec, GiaoTiep {
@@ -39,6 +35,7 @@ public class MenuNhanVien implements LamViec, GiaoTiep {
 
     public void taoHoaDon() {
         MenuHoaDon menuHoaDon = new MenuHoaDon(db);
+        menuHoaDon.taoHoaDon();
 
     }
 

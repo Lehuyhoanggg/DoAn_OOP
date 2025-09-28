@@ -7,12 +7,14 @@ public class ChiTietHoaDon {
     private DanhSachSanPham danhSachSanPham;
     private ArrayList<BaoHanh> listBaoHanh;
     private long thanhTien;
+    private ArrayList<MaGiamGia> listMaGiamGiaDaDung;
 
     public ChiTietHoaDon(String ma, Long thanhTien) {
         this.ma = ma;
         this.thanhTien = thanhTien;
         listBaoHanh = new ArrayList<>();
         danhSachSanPham = new DanhSachSanPham();
+        listMaGiamGiaDaDung = new ArrayList<>();
     }
 
     public ChiTietHoaDon(String ma) {
@@ -29,6 +31,10 @@ public class ChiTietHoaDon {
         return thanhTien;
     }
 
+    public ArrayList<MaGiamGia> getListMaGiamGiaDaDung() {
+        return listMaGiamGiaDaDung;
+    }
+
     public ArrayList<BaoHanh> getListBaoHanh() {
         return listBaoHanh;
     }
@@ -43,6 +49,10 @@ public class ChiTietHoaDon {
 
     public void setThanhTien(long thanhTien) {
         this.thanhTien = thanhTien;
+    }
+
+    public void setListMaGiamGiaDaDung(ArrayList<MaGiamGia> listMaGiamGiaDaDung) {
+        this.listMaGiamGiaDaDung = listMaGiamGiaDaDung;
     }
 
     public void setListBaoHanh(ArrayList<BaoHanh> listBaoHanh) {
@@ -67,5 +77,9 @@ public class ChiTietHoaDon {
 
     public void xoaBaoHanh(BaoHanh baoHanh) {
         listBaoHanh.remove(baoHanh);
+    }
+
+    public void themMaGiamGiaDaDung(MaGiamGia maGiamGia) {
+        listMaGiamGiaDaDung.add(maGiamGia);
     }
 }
