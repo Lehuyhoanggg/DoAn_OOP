@@ -11,15 +11,10 @@ public class PhieuBaoHanhService {
         this.listPhieuBaoHanh = listPhieuBaoHanh;
     }
 
-    public ArrayList<PhieuBaoHanh> getListPhieuBaoHanh() {
-        return listPhieuBaoHanh;
-    }
-
-    public void setListPhieuBaoHanh(ArrayList<PhieuBaoHanh> listPhieuBaoHanh) {
-        this.listPhieuBaoHanh = listPhieuBaoHanh;
-    }
-
     public boolean themPhieuBaoHanh(PhieuBaoHanh phieuBaoHanh) {
+        if (phieuBaoHanh == null) {
+            return false;
+        }
         return listPhieuBaoHanh.add(phieuBaoHanh);
     }
 

@@ -63,23 +63,38 @@ public class ChiTietHoaDon {
         this.danhSachSanPham = danhSachSanPham;
     }
 
-    public void themBaoHanh(BaoHanh baoHanh) {
-        listBaoHanh.add(baoHanh);
+    public boolean themBaoHanh(BaoHanh baoHanh) {
+        if (baoHanh == null) {
+            return false;
+        }
+        return listBaoHanh.add(baoHanh);
     }
 
-    public void themSanPham(SanPham sanPham) {
-        danhSachSanPham.themSanPham(sanPham);
+    public boolean themSanPham(SanPham sanPham) {
+        if (sanPham == null) {
+            return false;
+        }
+        return danhSachSanPham.themSanPham(sanPham);
     }
 
-    public void xoaSanPham(SanPham sanPham) {
-        danhSachSanPham.xoa1SanPham(sanPham);
+    public boolean xoaSanPham(SanPham sanPham) {
+        if (sanPham == null) {
+            return false;
+        }
+        return danhSachSanPham.xoa1SanPham(sanPham);
     }
 
-    public void xoaBaoHanh(BaoHanh baoHanh) {
-        listBaoHanh.remove(baoHanh);
+    public boolean xoaBaoHanh(BaoHanh baoHanh) {
+        if (baoHanh == null) {
+            return false;
+        }
+        return listBaoHanh.remove(baoHanh);
     }
 
-    public void themMaGiamGiaDaDung(MaGiamGia maGiamGia) {
-        listMaGiamGiaDaDung.add(maGiamGia);
+    public boolean themMaGiamGiaDaDung(MaGiamGia maGiamGia) {
+        if (maGiamGia == null) {
+            return false;
+        }
+        return listMaGiamGiaDaDung.add(maGiamGia);
     }
 }

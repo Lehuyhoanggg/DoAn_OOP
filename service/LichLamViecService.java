@@ -6,7 +6,6 @@ import model.CaLam;
 import model.LichLamViec;
 import model.LichTrongNgay;
 import model.NhanVien;
-import model.NhanVienDiemDanh;
 import util.ThoiGian;
 
 public class LichLamViecService {
@@ -16,30 +15,18 @@ public class LichLamViecService {
         this.lichLamViec = lichLamViec;
     }
 
-    public LichLamViec getLichLamViec() {
-        return lichLamViec;
-    }
-
-    public boolean diemDanh(NhanVien nhanVien) {
-        LichTrongNgay lichTrongNgay = lichTrongNgayHomNay();
-        String gioHienTai = ThoiGian.layGioHienTai();
-        CaLam caLam = caLamHienTai(gioHienTai, lichTrongNgay);
-        if (lichTrongNgay == null || caLam == null) {
-            return false;
+    public LichTrongNgay lichTrongNgayHomNay() {
+        String ngayHomNay = ThoiGian.layNgayHienTaiStr();
+        ArrayList<LichTrongNgay> lichTuan = lichLamViec.getLichTuan();
+        if (lichTuan == null) {
+            return null;
         }
-        if (tonTaiNhanVienTrongCa(nhanVien, caLam)) {
-            caLam.diemDanh(nhanVien);
+        for (int i = 0; i < lichTuan.size(); i++) {
+            if (lichTuan.get(i).getNgay().equals(ngayHomNay)) {
+                return lichTuan.get(i);
+            }
         }
-        return true;
-    }
-
-    public boolean tonTaiNhanVienTrongCa(NhanVien nhanVien, CaLam caLam) {
-        NhanVienDiemDanh mapNhanVien = caLam.getListNhanVien();
-        if (mapNhanVien == null) {
-            return false;
-        }
-
-        return mapNhanVien.tonTaiNhanVien(nhanVien);
+        return null;
     }
 
     public CaLam caLamHienTai(String gio, LichTrongNgay lichTrongNgay) {
@@ -58,21 +45,27 @@ public class LichLamViecService {
         return null;
     }
 
-    public LichTrongNgay lichTrongNgayHomNay() {
-        String ngayHomNay = ThoiGian.layNgayHienTaiStr();
-        ArrayList<LichTrongNgay> lichTuan = lichLamViec.getLichTuan();
-        if (lichTuan == null) {
-            return null;
+    public boolean diemDanh(NhanVien nhanVien) {
+        LichTrongNgay lichTrongNgay = lichTrongNgayHomNay();
+        String gioHienTai = ThoiGian.layGioHienTai();
+        CaLam caLam = caLamHienTai(gioHienTai, lichTrongNgay);
+        if (lichTrongNgay == null || caLam == null) {
+            return false;
         }
-        for (int i = 0; i < lichTuan.size(); i++) {
-            if (lichTuan.get(i).getNgay().equals(ngayHomNay)) {
-                return lichTuan.get(i);
-            }
+        if (tonTaiNhanVienTrongCa(nhanVien, caLam)) {
+            return caLam.diemDanh(nhanVien);
         }
-        return null;
+        return false;
+    }
+
+    public boolean tonTaiNhanVienTrongCa(NhanVien nhanVien, CaLam caLam) {
+        return caLam.tonTaiNhanVien(nhanVien);
     }
 
     public CaLam timCaLam(int soCa, LichTrongNgay lichTrongNgay) {
+        if (lichTrongNgay == null) {
+            return null;
+        }
         ArrayList<CaLam> listCaLam = lichTrongNgay.getListCaLam();
         for (CaLam caLam : listCaLam) {
             if (caLam.getSo() == soCa) {

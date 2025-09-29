@@ -16,10 +16,16 @@ public class MaGiamGiaService {
     }
 
     public boolean themMaGiamGia(MaGiamGia ma) {
+        if (ma == null) {
+            return false;
+        }
         return listMaGiamGia.add(ma);
     }
 
     public boolean xoaMaGiamGia(MaGiamGia ma) {
+        if (ma == null) {
+            return false;
+        }
         return listMaGiamGia.remove(ma);
     }
 
@@ -66,21 +72,22 @@ public class MaGiamGiaService {
         long thanhTien = 0;
         ArrayList<Integer> listRemove = new ArrayList<>();
         Map<SanPham, Integer> mapSanPham = chiTietHoaDon.getDanhSachSanPham().getMapSanPham();
-        for (SanPham sanPham : mapSanPham.keySet()) {
-            for (int i = 0; i < mapSanPham.get(sanPham); i++) {
-                for (int j = 0; j < listMaGiamGia.size(); j++) {
-                    long giaSauAp = appDungMaGiamGia(sanPham, listMaGiamGia.get(i));
-                    if (giaSauAp != sanPham.getGia()) {
-                        listRemove.add(i);
-                    }
 
-                    thanhTien += giaSauAp;
+        for (SanPham sanPham : mapSanPham.keySet()) {
+            long giaSanPham = sanPham.getGia();
+            for (int i = 0; i < listMaGiamGia.size(); i++) {
+                long giaSauAp = appDungMaGiamGia(sanPham, listMaGiamGia.get(i));
+                if (giaSauAp != giaSanPham) {
+                    listRemove.add(i);
                 }
+                giaSanPham = Math.min(giaSauAp, giaSanPham);
             }
-        }
-        for (int i = listRemove.size() - 1; i >= 0; i--) {
-            chiTietHoaDon.themMaGiamGiaDaDung(listMaGiamGia.get(i));
-            listMaGiamGia.remove(listRemove.get(i).intValue());
+            for (int i = listRemove.size() - 1; i >= 0; i--) {
+                chiTietHoaDon.themMaGiamGiaDaDung(listMaGiamGia.get(i));
+                listMaGiamGia.remove(listRemove.get(i).intValue());
+                listRemove.remove(i);
+            }
+            thanhTien += giaSanPham;
         }
         chiTietHoaDon.setThanhTien(thanhTien);
     }

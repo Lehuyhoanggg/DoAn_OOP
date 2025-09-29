@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class LichTrongNgay {
     private int thu;
-    private ArrayList<CaLam> listCaLam;
+    private ArrayList<CaLam> listCaLam; // 1 ngay gom nhieu ca lam
     private String ngay;
 
     public LichTrongNgay(int thu, String ngay) {

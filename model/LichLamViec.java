@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class LichLamViec {
-    ArrayList<LichTrongNgay> lichTuan;
+    ArrayList<LichTrongNgay> lichTuan;// 7 phan tu
 
     public LichLamViec(ArrayList<LichTrongNgay> lichTuan) {
         this.lichTuan = lichTuan;

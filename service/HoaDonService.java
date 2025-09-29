@@ -2,7 +2,6 @@ package service;
 
 import java.util.ArrayList;
 import model.HoaDon;
-import ui.Nhap;
 import util.ThoiGian;
 
 public class HoaDonService {
@@ -16,11 +15,10 @@ public class HoaDonService {
     public HoaDon timHoaDon(String ma) {
         if (listHoaDon == null) {
             return null;
-        } else {
-            for (int i = 0; i < listHoaDon.size(); i++) {
-                if (listHoaDon.get(i).equals(ma)) {
-                    return listHoaDon.get(i);
-                }
+        }
+        for (int i = 0; i < listHoaDon.size(); i++) {
+            if (listHoaDon.get(i).getMa().equals(ma)) {
+                return listHoaDon.get(i);
             }
         }
         return null;
@@ -29,16 +27,17 @@ public class HoaDonService {
     // xoa hoa don
     public boolean xoaHoaDon(String ma) {
         HoaDon hoaDon = timHoaDon(ma);
-        ma = Nhap.nhapStr("nhap ma hoa don can xoa: ");
         if (hoaDon == null) {
             return false;
         }
-        xoaHoaDon(ma);
-        return true;
+        return listHoaDon.remove(hoaDon);
     }
 
     // them hoa don
     public boolean themHoaDon(HoaDon hd) {
+        if (hd == null) {
+            return false;
+        }
         return listHoaDon.add(hd);
     }
 

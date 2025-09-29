@@ -27,17 +27,16 @@ public class QuanLyService {
         if (quanLy == null) {
             return false;
         }
-        listQuanLy.add(quanLy);
-        return true;
+        return listQuanLy.add(quanLy);
     }
 
     // xoa quang ly
-    public boolean xoaQuanLy(QuanLy quangLy) {
-        if (quangLy == null) {
+    public boolean xoaQuanLy(String ma) {
+        QuanLy quanLy = timQuanLy(ma);
+        if (quanLy == null) {
             return false;
         }
-        listQuanLy.remove(quangLy);
-        return true;
+        return listQuanLy.remove(quanLy);
     }
     //
 }

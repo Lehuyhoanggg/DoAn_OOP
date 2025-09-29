@@ -18,8 +18,12 @@ public class DanhSachSanPham {
         this.mapSanPham = mapSanPham;
     }
 
-    public void themSanPham(SanPham sanPham) {
+    public boolean themSanPham(SanPham sanPham) {
+        if (sanPham == null) {
+            return false;
+        }
         mapSanPham.put(sanPham, mapSanPham.containsKey(sanPham) ? mapSanPham.get(sanPham) + 1 : 1);
+        return true;
     }
 
     public boolean xoa1SanPham(SanPham sanPham) {
@@ -32,5 +36,13 @@ public class DanhSachSanPham {
             return true;
         }
         return false;
+    }
+
+    public int getSoLuong(SanPham sanPham) {
+        return mapSanPham.getOrDefault(sanPham, 0);
+    }
+
+    public boolean tonTaiSanPham(SanPham sanPham) {
+        return mapSanPham.containsKey(sanPham);
     }
 }

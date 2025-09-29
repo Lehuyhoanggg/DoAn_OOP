@@ -27,6 +27,7 @@ public class KhachHang {
         this.listSanDaMua = new DanhSachSanPham();
         this.listPhieuBaoHanh = new ArrayList<>();
         this.listMaGiamGia = new ArrayList<>();
+        this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
     }
 
     public KhachHang(String maKh, String tenKh, String sdt, HangThanhVien hangThanhVien) {
@@ -38,6 +39,7 @@ public class KhachHang {
         this.listSanDaMua = new DanhSachSanPham();
         this.listPhieuBaoHanh = new ArrayList<>();
         this.listMaGiamGia = new ArrayList<>();
+        this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
     }
 
     public KhachHang(String maKh, String tenKh, String sdt) {
@@ -48,6 +50,7 @@ public class KhachHang {
         this.listSanDaMua = new DanhSachSanPham();
         this.listPhieuBaoHanh = new ArrayList<>();
         this.listMaGiamGia = new ArrayList<>();
+        this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
     }
 
     public void setHangThanhVien(HangThanhVien hangThanhVien) {
@@ -122,15 +125,24 @@ public class KhachHang {
         return tienDaChi;
     }
 
-    public void themBaoHanh(BaoHanh baoHanh) {
-        listBaoHanh.add(baoHanh);
+    public boolean themBaoHanh(BaoHanh baoHanh) {
+        if (baoHanh == null) {
+            return false;
+        }
+        return listBaoHanh.add(baoHanh);
     }
 
-    public void themPhieuBaoHanh(PhieuBaoHanh phieuBaoHanh) {
-        listPhieuBaoHanh.add(phieuBaoHanh);
+    public boolean themPhieuBaoHanh(PhieuBaoHanh phieuBaoHanh) {
+        if (phieuBaoHanh == null) {
+            return false;
+        }
+        return listPhieuBaoHanh.add(phieuBaoHanh);
     }
 
-    public void themMaGiamGia(MaGiamGia maGiamGia) {
-        listMaGiamGia.add(maGiamGia);
+    public boolean themMaGiamGia(MaGiamGia maGiamGia) {
+        if (maGiamGia == null) {
+            return false;
+        }
+        return listMaGiamGia.add(maGiamGia);
     }
 }

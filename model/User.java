@@ -117,22 +117,25 @@ public abstract class User {
         this.listTinNhan = listTinNhan;
     }
 
-    public void nhanTinNhan(TinNhan tinNhan) {
+    public boolean nhanTinNhan(TinNhan tinNhan) {
         if (tinNhan == null) {
-            return;
+            return false;
         }
-        listTinNhan.add(tinNhan);
+        return listTinNhan.add(tinNhan);
     }
 
-    public void capTaiKhoan(TaiKhoan tk) {
+    public boolean capTaiKhoan(TaiKhoan tk) {
         if (tk == null) {
-            return;
+            return false;
         }
         this.taiKhoan = tk;
         tk.setUser(this);
+        return true;
     }
 
     public void goTaiKhoan() {
         taiKhoan = null;
     }
+
+    public abstract String toString();
 }

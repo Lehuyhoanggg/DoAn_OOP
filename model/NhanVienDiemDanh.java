@@ -15,25 +15,35 @@ public class NhanVienDiemDanh {
     }
 
     public Boolean kiemTraDiemDanh(NhanVien nhanVien) {
-        if (mapNhanVien.get(nhanVien)) {
+        if (nhanVien == null) {
+            return false;
+        }
+        return mapNhanVien.get(nhanVien);
+    }
+
+    public boolean themNhanVien(NhanVien nhanVien) {
+        if (nhanVien == null) {
+            return false;
+        }
+        return mapNhanVien.put(nhanVien, false);
+    }
+
+    public boolean xoaNhanVien(NhanVien nhanVien) {
+        if (nhanVien == null) {
+            return false;
+        }
+        return mapNhanVien.remove(nhanVien);
+    }
+
+    public boolean diemDanhNhanVien(NhanVien nhanVien) {
+        if (nhanVien == null) {
+            return false;
+        }
+        if (mapNhanVien.containsKey(nhanVien)) {
+            mapNhanVien.put(nhanVien, true);
             return true;
         }
         return false;
-    }
-
-    public void themNhanVien(NhanVien nhanVien) {
-        mapNhanVien.put(nhanVien, false);
-    }
-
-    public void xoaNhanVien(NhanVien nhanVien) {
-        mapNhanVien.remove(nhanVien);
-    }
-
-    public void diemDanhNhanVien(NhanVien nhanVien) {
-        if (mapNhanVien.containsKey(nhanVien)) {
-            mapNhanVien.put(nhanVien, true);
-        }
-
     }
 
     public int soNhanVienDaXep() {

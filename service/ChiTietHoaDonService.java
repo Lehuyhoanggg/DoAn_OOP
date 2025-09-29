@@ -14,20 +14,18 @@ public class ChiTietHoaDonService {
         this.listChiTietHoaDon = listChiTietHoaDon;
     }
 
-    public ArrayList<ChiTietHoaDon> getListChiTietHoaDon() {
-        return listChiTietHoaDon;
+    public boolean themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
+        if (chiTietHoaDon == null) {
+            return false;
+        }
+        return listChiTietHoaDon.add(chiTietHoaDon);
     }
 
-    public void setListChiTietHoaDon(ArrayList<ChiTietHoaDon> listChiTietHoaDon) {
-        this.listChiTietHoaDon = listChiTietHoaDon;
-    }
-
-    public void themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
-        listChiTietHoaDon.add(chiTietHoaDon);
-    }
-
-    public void xoaChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
-        listChiTietHoaDon.remove(chiTietHoaDon);
+    public boolean xoaChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
+        if (chiTietHoaDon == null) {
+            return false;
+        }
+        return listChiTietHoaDon.remove(chiTietHoaDon);
     }
 
     public ChiTietHoaDon timChiTietHoaDon(String ma) {
@@ -44,7 +42,10 @@ public class ChiTietHoaDonService {
 
     public void xoaSanPhamThuHoiMa(SanPham sanPham, ChiTietHoaDon chiTietHoaDon, KhachHang khachHang) {
         chiTietHoaDon.xoaSanPham(sanPham);
-        thuHoiMaGiamGiaSauKhiXoa(sanPham, chiTietHoaDon, khachHang);
+        if (!chiTietHoaDon.getDanhSachSanPham().tonTaiSanPham(sanPham)) {
+            thuHoiMaGiamGiaSauKhiXoa(sanPham, chiTietHoaDon, khachHang); // gia sua neu da go san pham thi thu hoi , con
+                                                                         // so luong nhieu hon 1 thi thoi
+        }
     }
 
     public void thuHoiMaGiamGiaSauKhiXoa(SanPham sanPham, ChiTietHoaDon chiTietHoaDon, KhachHang khachHang) {

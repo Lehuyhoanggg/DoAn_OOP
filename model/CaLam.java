@@ -54,26 +54,30 @@ public class CaLam {
         this.listNhanVien = listNhanVien;
     }
 
-    public void diemDanh(NhanVien nhanVien) {
-        listNhanVien.diemDanhNhanVien(nhanVien);
+    public boolean diemDanh(NhanVien nhanVien) {
+        return listNhanVien.diemDanhNhanVien(nhanVien);
     }
 
     public int soNguoiTrongCa() {
         return this.listNhanVien.soNhanVienDaXep();
     }
 
-    public boolean caLamTrong() {
+    public boolean tonTaiNhanVien(NhanVien nhanVien) {
+        return listNhanVien.tonTaiNhanVien(nhanVien);
+    }
+
+    public boolean caLamChuaCoNguoi() {
         if (soNguoiTrongCa() == 0) {
             return true;
         }
         return false;
     }
 
-    public void themNhanVienVaoCa(NhanVien nhanVien) {
-        listNhanVien.themNhanVien(nhanVien);
+    public boolean themNhanVienVaoCa(NhanVien nhanVien) {
+        return listNhanVien.themNhanVien(nhanVien);
     }
 
-    public void xoaNhanVienKhoiCa(NhanVien nhanVien) {
-        listNhanVien.xoaNhanVien(nhanVien);
+    public boolean xoaNhanVienKhoiCa(NhanVien nhanVien) {
+        return listNhanVien.xoaNhanVien(nhanVien);
     }
 }

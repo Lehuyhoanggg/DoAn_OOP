@@ -12,6 +12,9 @@ public class KhacHangService {
     }
 
     public boolean themKhachHang(KhachHang khachHang) {
+        if (khachHang == null) {
+            return false;
+        }
         return listKhachHang.add(khachHang);
     }
 
@@ -41,6 +44,9 @@ public class KhacHangService {
 
     public boolean xoaKhachHang(String ma) {
         KhachHang khachHang = timKhachHang(ma);
+        if (khachHang == null) {
+            return false;
+        }
         return listKhachHang.remove(khachHang);
     }
 

@@ -10,15 +10,10 @@ public class SanPhamService {
         this.listSanPham = listSanPham;
     }
 
-    public ArrayList<SanPham> getListSanPham() {
-        return listSanPham;
-    }
-
-    public void setListSanPham(ArrayList<SanPham> listSanPham) {
-        this.listSanPham = listSanPham;
-    }
-
     public boolean themSanPham(SanPham sanPham) {
+        if (sanPham == null) {
+            return false;
+        }
         return listSanPham.add(sanPham);
     }
 

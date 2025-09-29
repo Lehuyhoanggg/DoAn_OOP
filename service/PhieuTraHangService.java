@@ -11,15 +11,10 @@ public class PhieuTraHangService {
         this.listPhieuTrahang = listPhieuTraHang;
     }
 
-    public ArrayList<PhieuTraHang> getListPhieuTrahang() {
-        return listPhieuTrahang;
-    }
-
-    public void setListPhieuTrahang(ArrayList<PhieuTraHang> listPhieuTrahang) {
-        this.listPhieuTrahang = listPhieuTrahang;
-    }
-
     public boolean themPhieuTraHang(PhieuTraHang phieuTraHang) {
+        if (phieuTraHang == null) {
+            return false;
+        }
         return listPhieuTrahang.add(phieuTraHang);
     }
 

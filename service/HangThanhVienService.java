@@ -24,8 +24,8 @@ public class HangThanhVienService {
     }
 
     public boolean themHangThanhVien(HangThanhVien hangThanhVien) {
-        if (timHangThanhVien(hangThanhVien.getTenHang()) != null) {
-            return false; // đã tồn tại
+        if (hangThanhVien == null || timHangThanhVien(hangThanhVien.getTenHang()) != null) {
+            return false; // đã tồn tại hoac truyen null vao
         }
         return listHangThanhVien.add(hangThanhVien);
     }

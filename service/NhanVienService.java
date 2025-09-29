@@ -12,12 +12,18 @@ public class NhanVienService {
     }
 
     // them nhan vien
-    public void themNhanVien(NhanVien nhanVien) {
-        listNhanVien.add(nhanVien);
+    public boolean themNhanVien(NhanVien nhanVien) {
+        if (nhanVien == null) {
+            return false;
+        }
+        return listNhanVien.add(nhanVien);
     }
 
     // tim nhan vien theo ma tra ve NhanVien
     public NhanVien timNhanVien(String ma) {
+        if (listNhanVien == null) {
+            return null;
+        }
         for (int i = 0; i < listNhanVien.size(); i++) {
             NhanVien nv = listNhanVien.get(i);
             if (nv.getMa().equals(ma))
@@ -27,8 +33,11 @@ public class NhanVienService {
     }
 
     // xoa nhan vien
-    public void xoaNhanVien(String ma) {
+    public boolean xoaNhanVien(String ma) {
         NhanVien nv = timNhanVien(ma);
-        listNhanVien.remove(nv);
+        if (nv == null) {
+            return false;
+        }
+        return listNhanVien.remove(nv);
     }
 }

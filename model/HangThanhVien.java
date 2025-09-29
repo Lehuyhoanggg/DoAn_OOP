@@ -37,7 +37,10 @@ public class HangThanhVien {
         return moTa;
     }
 
-    public void themMaGiamGia(MaGiamGia maGiamGia) {
-        listMaGiamGiaDQ.add(maGiamGia);
+    public boolean themMaGiamGia(MaGiamGia maGiamGia) {
+        if (maGiamGia == null) {
+            return false;
+        }
+        return listMaGiamGiaDQ.add(maGiamGia);
     }
 }

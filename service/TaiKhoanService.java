@@ -11,14 +11,6 @@ public class TaiKhoanService {
         this.listTaiKhoan = listTaiKhoan;
     }
 
-    public ArrayList<TaiKhoan> getListTaiKhoan() {
-        return listTaiKhoan;
-    }
-
-    public void setListTaiKhoan(ArrayList<TaiKhoan> listTaiKhoan) {
-        this.listTaiKhoan = listTaiKhoan;
-    }
-
     ////////////
 
     public User layUserBangTk(String tenDangNhap, String matKhau) {
@@ -33,18 +25,18 @@ public class TaiKhoanService {
         return null;
     }
 
-    public void themTaiKhoan(TaiKhoan tk) {
+    public boolean themTaiKhoan(TaiKhoan tk) {
         if (tk == null) {
-            return;
+            return false;
         }
-        listTaiKhoan.add(tk);
+        return listTaiKhoan.add(tk);
     }
 
-    public void xoaTaiKhoan(TaiKhoan tk) {
+    public boolean xoaTaiKhoan(TaiKhoan tk) {
         if (tk == null) {
-            return;
+            return false;
         }
         tk.getUser().goTaiKhoan();
-        listTaiKhoan.remove(tk);
+        return listTaiKhoan.remove(tk);
     }
 }

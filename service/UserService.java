@@ -23,11 +23,15 @@ public class UserService {
         return null;
     }
 
-    public void ganTaiKhoanChoUser(TaiKhoan taiKhoan) {
-        String ma = taiKhoan.getTenDangNhap();
-        User user = null;
-        if ((user = timUser(ma)) != null) {
-            user.capTaiKhoan(taiKhoan);
+    public boolean ganTaiKhoanChoUser(TaiKhoan taiKhoan) {
+        if (taiKhoan == null) {
+            return false;
         }
+        String ma = taiKhoan.getTenDangNhap();
+        User user = timUser(ma);
+        if (user == null) {
+            return false;
+        }
+        return user.capTaiKhoan(taiKhoan);
     }
 }
