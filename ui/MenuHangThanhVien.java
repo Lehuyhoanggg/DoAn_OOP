@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import database.Database;
 import model.HangThanhVien;
+import model.MaGiamGia;
 import service.HangThanhVienService;
+import service.MaGiamGiaService;
 import util.TaoDoiTuong;
 
 public class MenuHangThanhVien {
@@ -51,6 +53,8 @@ public class MenuHangThanhVien {
     private void xuatSuaHangThanhVien() {
         System.out.println("1. Sua ten hang thanh vien");
         System.out.println("2. Sua mo ta hang thanh vien");
+        System.out.println("3. Them ma giam gia cho hang thanh vien");
+        System.out.println("4. Xoa ma giam gia cho hang thanh vien");
         System.out.println("0. Thoat");
     }
 
@@ -63,6 +67,27 @@ public class MenuHangThanhVien {
             case 2:
                 hangThanhVien.setMoTa(Nhap.nhapStr("Nhap mo ta cua hang thanh vien : "));
                 System.out.println("Da sua mo ta cua hang thanh vien");
+                break;
+            case 3:
+                MaGiamGiaService maGiamGiaService = new MaGiamGiaService(db.getListMaGiamGia());
+                MaGiamGia maGiamGia = maGiamGiaService.timMaGiamGia("Nhap ma giam gia de them vao hang thanh vien : ");
+                if (maGiamGia == null) {
+                    System.out.println("Khong tim thay ma giam gia");
+                    return;
+                }
+                hangThanhVien.themMaGiamGia(maGiamGia);
+                System.out.println("Them ma giam gia thanh cong");
+                break;
+            case 4:
+                MaGiamGiaService maGiamGiaService1 = new MaGiamGiaService(db.getListMaGiamGia());
+                MaGiamGia maGiamGia1 = maGiamGiaService1
+                        .timMaGiamGia("Nhap ma giam gia de them vao hang thanh vien : ");
+                if (maGiamGia1 == null) {
+                    System.out.println("Khong tim thay ma giam gia");
+                    return;
+                }
+                hangThanhVien.xoaMaGiamGia(maGiamGia1);
+                System.out.println("Da xoa ma giam gia thanh cong");
                 break;
             case 0:
                 System.out.println("Thoat sua hang thanh vien");
@@ -147,5 +172,4 @@ public class MenuHangThanhVien {
             tiep = Nhap.nhapXacNhanThoat();
         }
     }
-
 }

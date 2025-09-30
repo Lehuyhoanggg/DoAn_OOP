@@ -43,4 +43,11 @@ public class HangThanhVien {
         }
         return listMaGiamGiaDQ.add(maGiamGia);
     }
+
+    public boolean xoaMaGiamGia(MaGiamGia maGiamGia) {
+        if (maGiamGia == null) {
+            return false;
+        }
+        return listMaGiamGiaDQ.remove(maGiamGia);
+    }
 }

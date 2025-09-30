@@ -15,16 +15,15 @@ public class MenuSanPham {
     }
 
     public void hienThiTatCaSanPham() {
-        SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
         System.out.println("Danh sach san pham:");
-        for (SanPham sp : sanPhamService.getListSanPham()) {
+        for (SanPham sp : db.getListSanPham()) {
             System.out.println(sp);
         }
     }
 
     public void themSanPham() {
         SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
-        SanPham sp = TaoDoiTuong.taoSanPham();
+        SanPham sp = TaoDoiTuong.taoSanPham(db);
         if (sanPhamService.themSanPham(sp)) {
             System.out.println("Them san pham thanh cong!");
         } else {

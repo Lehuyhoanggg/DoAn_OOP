@@ -30,6 +30,7 @@ public class Database {
     private ArrayList<PhieuTraHang> listPhieuTraHang;
     private ArrayList<KhachHang> listKhachHang;
     private ArrayList<MaGiamGia> listMaGiamGia;
+    private ArrayList<MaGiamGia> listMaGiamGiaDq;
     private ArrayList<HangThanhVien> listHangThanhVien;
     private ArrayList<TinNhan> listTinNhan;
     private LichLamViec lichTuan;
@@ -48,6 +49,11 @@ public class Database {
         listHangThanhVien = new ArrayList<>();
         listBaoHanh = new ArrayList<>();
         listPhieuTraHang = new ArrayList<>();
+        listMaGiamGiaDq = new ArrayList<>();
+    }
+
+    public ArrayList<MaGiamGia> getListMaGiamGiaDq() {
+        return listMaGiamGiaDq;
     }
 
     public ArrayList<HangThanhVien> getListHangThanhVien() {
@@ -116,6 +122,10 @@ public class Database {
 
     public void setListBaoHanh(ArrayList<BaoHanh> listBaoHanh) {
         this.listBaoHanh = listBaoHanh;
+    }
+
+    public void setListMaGiamGiaDq(ArrayList<MaGiamGia> listMaGiamGiaDq) {
+        this.listMaGiamGiaDq = listMaGiamGiaDq;
     }
 
     public void setListHoaDon(ArrayList<HoaDon> listHoaDon) {

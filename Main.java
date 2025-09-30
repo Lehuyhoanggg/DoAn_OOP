@@ -50,6 +50,7 @@ public class Main {
                 }
 
             } while (user == null);
+            dieuHuongMenu();
             dem = 0;
             xacNhan = Nhap.nhapInt("(1)Tiep tuc dang nhap (khac)Thoat");
         } while (xacNhan == 1);

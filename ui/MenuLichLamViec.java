@@ -109,7 +109,7 @@ public class MenuLichLamViec {
                 CaLam caLam = listCaLam.get(i);
                 System.out.println(caLam.getGioBatDau() + " " + caLam.getGioKetThuc() + ": Ca " + caLam.getSo()
                         + " " + caLam.soNguoiTrongCa() + "/" + caLam.getSoLuongCan());
-                if (!caLam.caLamTrong()) {
+                if (!caLam.caLamChuaCoNguoi()) {
                     System.out.println("      gom :");
                     for (NhanVien nhanVien : caLam.getListNhanVien().getMapNhanVien().keySet()) {
                         System.out.println("        " + nhanVien.getMa() + " " + nhanVien.getTen());

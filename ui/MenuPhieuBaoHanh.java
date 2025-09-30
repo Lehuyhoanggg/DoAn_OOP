@@ -3,9 +3,11 @@ package ui;
 import java.util.ArrayList;
 
 import database.Database;
+import model.BaoHanh;
 import model.KhachHang;
 import model.PhieuBaoHanh;
 import model.SanPham;
+import service.BaoHanhService;
 import service.KhacHangService;
 import service.PhieuBaoHanhService;
 import service.SanPhamService;
@@ -20,7 +22,14 @@ public class MenuPhieuBaoHanh {
 
     public void taoPhieuBaoHanh() {
         PhieuBaoHanhService phieuBaoHanhService = new PhieuBaoHanhService(db.getListPhieuBaoHanh());
-        PhieuBaoHanh phieuBaoHanh = TaoDoiTuong.taoPhieuBaoHanh(db);
+        BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
+
+        BaoHanh baoHanh = baoHanhService.timBaoHanh("Nhap ma bao hanh de tao phieu bao hanh");
+        if (baoHanh == null) {
+            System.out.println("Khong tim thay bao hanh de tao phieu");
+            return;
+        }
+        PhieuBaoHanh phieuBaoHanh = TaoDoiTuong.taoPhieuBaoHanh(baoHanh, db);
         phieuBaoHanhService.themPhieuBaoHanh(phieuBaoHanh);
         System.out.println("Da tao phieu bao hanh thanh cong.");
     }

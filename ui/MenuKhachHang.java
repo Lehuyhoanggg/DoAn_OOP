@@ -42,7 +42,7 @@ public class MenuKhachHang {
         }
 
         if (timThay) {
-            int luaChon = Nhap.nhapInt("lua chon san pham de hien thi : ");
+            int luaChon = Nhap.nhapInt("lua chon khach hang de hien thi : ");
             if (listKhachHang.size() > luaChon && 0 < luaChon) {
                 System.out.println(listKhachHang.get(luaChon));
             } else {
@@ -62,7 +62,7 @@ public class MenuKhachHang {
         }
 
         if (!timThay) {
-            System.out.println("khong tim thay san pham");
+            System.out.println("khong tim thay khach hang");
         }
     }
 

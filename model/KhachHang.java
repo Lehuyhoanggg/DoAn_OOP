@@ -7,11 +7,12 @@ public class KhachHang {
     private String tenKh;
     private String sdt;
     private HangThanhVien hangThanhVien;
-    private DanhSachSanPham listSanDaMua;
     private long tienDaChi;
     private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
     private ArrayList<BaoHanh> listBaoHanh;
     private ArrayList<MaGiamGia> listMaGiamGia;
+    private ArrayList<HoaDon> listHoaDon;
+    private ArrayList<PhieuTraHang> listPhieuTraHang;
 
     public KhachHang() {
 
@@ -24,10 +25,11 @@ public class KhachHang {
         this.hangThanhVien = hangThanhVien;
         this.tienDaChi = tienDaChi;
         this.listBaoHanh = new ArrayList<>();
-        this.listSanDaMua = new DanhSachSanPham();
         this.listPhieuBaoHanh = new ArrayList<>();
         this.listMaGiamGia = new ArrayList<>();
         this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
+        this.listHoaDon = new ArrayList<>();
+        this.listPhieuTraHang = new ArrayList<>();
     }
 
     public KhachHang(String maKh, String tenKh, String sdt, HangThanhVien hangThanhVien) {
@@ -36,10 +38,11 @@ public class KhachHang {
         this.sdt = sdt;
         this.hangThanhVien = hangThanhVien;
         this.listBaoHanh = new ArrayList<>();
-        this.listSanDaMua = new DanhSachSanPham();
         this.listPhieuBaoHanh = new ArrayList<>();
         this.listMaGiamGia = new ArrayList<>();
         this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
+        this.listHoaDon = new ArrayList<>();
+        this.listPhieuTraHang = new ArrayList<>();
     }
 
     public KhachHang(String maKh, String tenKh, String sdt) {
@@ -47,10 +50,11 @@ public class KhachHang {
         this.tenKh = tenKh;
         this.sdt = sdt;
         this.listBaoHanh = new ArrayList<>();
-        this.listSanDaMua = new DanhSachSanPham();
         this.listPhieuBaoHanh = new ArrayList<>();
         this.listMaGiamGia = new ArrayList<>();
         this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
+        this.listHoaDon = new ArrayList<>();
+        this.listPhieuTraHang = new ArrayList<>();
     }
 
     public void setHangThanhVien(HangThanhVien hangThanhVien) {
@@ -67,10 +71,6 @@ public class KhachHang {
 
     public void setListPhieuBaoHanh(ArrayList<PhieuBaoHanh> listPhieuBaoHanh) {
         this.listPhieuBaoHanh = listPhieuBaoHanh;
-    }
-
-    public void setListSanDaMua(DanhSachSanPham listSanDaMua) {
-        this.listSanDaMua = listSanDaMua;
     }
 
     public void setSdt(String sdt) {
@@ -103,10 +103,6 @@ public class KhachHang {
 
     public ArrayList<MaGiamGia> getListMaGiamGia() {
         return listMaGiamGia;
-    }
-
-    public DanhSachSanPham getListSanDaMua() {
-        return listSanDaMua;
     }
 
     public String getMaKh() {
@@ -144,5 +140,19 @@ public class KhachHang {
             return false;
         }
         return listMaGiamGia.add(maGiamGia);
+    }
+
+    public boolean themHoaDon(HoaDon hoaDon) {
+        if (hoaDon == null) {
+            return false;
+        }
+        return listHoaDon.add(hoaDon);
+    }
+
+    public boolean themPhieuTraHang(PhieuTraHang phieuTraHang) {
+        if (phieuTraHang == null) {
+            return false;
+        }
+        return listPhieuTraHang.add(phieuTraHang);
     }
 }

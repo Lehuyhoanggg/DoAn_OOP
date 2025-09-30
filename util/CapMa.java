@@ -69,7 +69,7 @@ public class CapMa {
         return "NV" + soNV;
     }
 
-    public static String capMaQuangly(Database db) {
+    public static String capMaQuanly(Database db) {
         String soQL = String.valueOf(db.getListQuanLy().size());
         while (soQL.length() < 3) {
             soQL = "0" + soQL;

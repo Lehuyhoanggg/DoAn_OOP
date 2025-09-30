@@ -25,7 +25,7 @@ public class MenuQuanLyQuanLy {
         }
     }
 
-    // them quang ly
+    // them quan ly
     public void themQuanLy() {
         QuanLy ql = TaoDoiTuong.TaoDoiTuongQuanLy(db);
         QuanLyService quanLyService = new QuanLyService(db.getListQuanLy());
@@ -36,15 +36,15 @@ public class MenuQuanLyQuanLy {
         }
     }
 
-    // xoa quang ly
-    public void xoaQuangLy() {
+    // xoa quan ly
+    public void xoaQuanLy() {
         QuanLyService quanLyService = new QuanLyService(db.getListQuanLy());
         String ma = Nhap.nhapStr("nhap ma quang ly can xoa: ");
         QuanLy ql = quanLyService.timQuanLy(ma);
         if (ql == null) {
             System.out.println("khong tim thay quang ly can xoa!");
         }
-        if (quanLyService.xoaQuanLy(ql)) {
+        if (quanLyService.xoaQuanLy(ma)) {
             System.out.println("xoa quan ly thanh cong");
         } else {
             System.out.println("xoa quan ly that bai!");
@@ -72,7 +72,7 @@ public class MenuQuanLyQuanLy {
         System.out.println("0. Thoat");
     }
 
-    public void NhapThongTinCanSua(QuanLy ql, int luaChon) {
+    public void thucHienChucNangSuaQuanLy(QuanLy ql, int luaChon) {
         switch (luaChon) {
             case 1 -> ql.setTen(Nhap.nhapStr("Nhap ten moi: "));
             case 2 -> ql.setSdt(Nhap.nhapStr("Nhap sdt moi: "));
@@ -96,7 +96,7 @@ public class MenuQuanLyQuanLy {
         while (tiep == 1) {
             xuatSuaQuanLy();
             int chon = Nhap.nhapInt("Chon muc: ");
-            NhapThongTinCanSua(ql, chon);
+            thucHienChucNangSuaQuanLy(ql, chon);
             tiep = Nhap.nhapInt("(1) Tiep tuc sua | (Khac) Thoat: ");
         }
         System.out.println("Da cap nhat thong tin quang ly.");

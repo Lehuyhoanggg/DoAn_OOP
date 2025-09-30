@@ -21,13 +21,14 @@ import service.SanPhamService;
 import ui.Nhap;
 
 public class TaoDoiTuong {
-    public static TinNhan taoTinNhan(String maNG, String tenNG) {
+    public static TinNhan taoTinNhan(String tenNG, Database db) {
+        String maNG = CapMa.capMaTinNhan(db);
         String noiDung = Nhap.nhapStr("Nhap noi dung : ");
         return new TinNhan(maNG, tenNG, noiDung, ThoiGian.layNgayHienTaiStr());
     }
 
-    public static NhanVien taoNhanVien() {
-        String ma = Nhap.nhapStr("Nhap ma nhan vien: ");
+    public static NhanVien taoNhanVien(Database db) {
+        String ma = CapMa.capMaNhanVien(db);
         String cccd = Nhap.nhapStr("Nhap cccd: ");
         String ten = Nhap.nhapStr("Nhap ten: ");
         String ngaySinh = Nhap.nhapStr("Nhap ngay sinh (dd/MM/yyyy): ");
@@ -36,8 +37,8 @@ public class TaoDoiTuong {
         return new NhanVien(ma, cccd, ten, ngaySinh, sdt, gioiTinh);
     }
 
-    public static SanPham taoSanPham() {
-        String ma = Nhap.nhapStr("Nhap ma san pham: ");
+    public static SanPham taoSanPham(Database db) {
+        String ma = CapMa.capMaSanPham(db);
         String ten = Nhap.nhapStr("Nhap ten san pham: ");
         String danhMuc = Nhap.nhapStr("Nhap danh muc: ");
         String thuongHieu = Nhap.nhapStr("Nhap thuong hieu: ");
@@ -48,15 +49,13 @@ public class TaoDoiTuong {
         return new SanPham(ma, ten, danhMuc, thuongHieu, gia, tonKho, moTa, trangThai);
     }
 
-    public static PhieuTraHang taoPhieuTraHang(Database db) {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
-        SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
+    public static PhieuTraHang taoPhieuTraHang(KhachHang khachHang, SanPham sanPham, Database db) {
         String maTraHang = CapMa.capMaBaoHanh(db);
-        KhachHang khachHang = khacHangService.timKhachHang(Nhap.nhapStr("Nhap ma khach hang can them : "));
-        SanPham sanPham = sanPhamService.timSanPham(Nhap.nhapStr("Nhap ma san pham can them : "));
-        String ngayTra = Nhap.nhapStr("Nhap ngay tra : ");
+        String ngayTra = ThoiGian.layNgayHienTaiStr();
         String lyDoTra = Nhap.nhapStr("Nhap ly do tra : ");
-        return new PhieuTraHang(maTraHang, khachHang, sanPham, ngayTra, lyDoTra);
+        PhieuTraHang phieuTraHang = new PhieuTraHang(maTraHang, khachHang, sanPham, ngayTra, lyDoTra);
+        khachHang.themPhieuTraHang(phieuTraHang);
+        return phieuTraHang;
     }
 
     public static HangThanhVien taoHangThanhVien(Database db) {
@@ -67,12 +66,12 @@ public class TaoDoiTuong {
 
     public static MaGiamGia taoMaGiamGia(Database db) {
         String ma = CapMa.capMaMaGiamGia(db);
-        String tenMa = Nhap.nhapStr("Nhập tên mã: ");
-        String loaiDoanhMuc = Nhap.nhapStr("Nhập loại danh mục (để trống nếu không muốn): ");
-        String loaiThuongHieu = Nhap.nhapStr("Nhập loại thương hiệu (để trống nếu không muốn): ");
+        String tenMa = Nhap.nhapStr("Nhap ten ma: ");
+        String loaiDoanhMuc = Nhap.nhapStr("Nhap loai danh muc (de trong neu khong muon): ");
+        String loaiThuongHieu = Nhap.nhapStr("Nhap loai thuong hieu (de trong neu khong muon): ");
         String soTienGiam = Nhap.nhapStr("Nhap so tien giam(x) hoac % giam(x%) : ");
-        String ngayBatDau = Nhap.nhapStr("Nhập ngày bắt đầu (yyyy-MM-dd): ");
-        String ngayKetThuc = Nhap.nhapStr("Nhập ngày kết thúc (yyyy-MM-dd): ");
+        String ngayBatDau = Nhap.nhapStr("Nhap ngay bat dau (yyyy-MM-dd): ");
+        String ngayKetThuc = Nhap.nhapStr("Nhap ngay ket thuc (yyyy-MM-dd): ");
 
         return new MaGiamGia(ma, tenMa, loaiDoanhMuc, loaiThuongHieu, soTienGiam, ngayBatDau, ngayKetThuc);
     }
@@ -81,22 +80,18 @@ public class TaoDoiTuong {
         String maKh = CapMa.capMaKhachHang(db);
         String tenKh = Nhap.nhapStr("Nhap ten khach hang: ");
         String sdt = Nhap.nhapStr("Nhap so dien thoai: ");
-        return new KhachHang(maKh, tenKh, sdt);
+        KhachHang khachHang = new KhachHang(maKh, tenKh, sdt);
+        khachHang.getListMaGiamGia().addAll(db.getListMaGiamGia());
+        return khachHang;
     }
 
-    public static PhieuBaoHanh taoPhieuBaoHanh(Database db) {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
-        SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
+    public static PhieuBaoHanh taoPhieuBaoHanh(BaoHanh baoHanh, Database db) {
         System.out.println("Tao phieu bao hanh");
         String maPhieuBaoHanh = CapMa.capMaPhieuBaoHanh(db);
-        String maKhachHang = Nhap.nhapStr("Nhap ma khach hang: ");
-        KhachHang khachHang = khacHangService.timKhachHang(maKhachHang);
-
-        String maSanPham = Nhap.nhapStr("Nhap ma san pham : ");
-        SanPham sanPham = sanPhamService.timSanPham(maSanPham);
-
-        String ngayBaoHanh = Nhap.nhapStr("Nhap ngay bao hanh (dd/MM/yyyy): ");
-        String chiTietLoi = Nhap.nhapStr("Nhap chi tiet loi");
+        KhachHang khachHang = baoHanh.getKhachHang();
+        SanPham sanPham = baoHanh.getSanPham();
+        String ngayBaoHanh = ThoiGian.layNgayHienTaiStr();
+        String chiTietLoi = Nhap.nhapStr("Nhap chi tiet loi : ");
         PhieuBaoHanh phieuBaoHanh = new PhieuBaoHanh(maPhieuBaoHanh, khachHang, sanPham, ngayBaoHanh, chiTietLoi);
         khachHang.themPhieuBaoHanh(phieuBaoHanh);
         return phieuBaoHanh;
@@ -152,6 +147,8 @@ public class TaoDoiTuong {
                 continue;
             }
             chiTietHoaDon.themBaoHanh(baoHanh);
+            khachHang.themBaoHanh(baoHanh);
+
             System.out.println("Them thanh cong");
         }
         return chiTietHoaDon;
@@ -170,17 +167,9 @@ public class TaoDoiTuong {
         ChiTietHoaDon chiTietHoaDon = taoChiTietHoaDon(db, khachHang);
         String ngayTaoHoaDon = ThoiGian.layNgayHienTaiStr();
         String ghiChu = Nhap.nhapStr("Nhap ghi chu neu co : ");
-        return new HoaDon(ma, khachHang, chiTietHoaDon, ngayTaoHoaDon, ghiChu);
-    }
-
-    public static NhanVien taoNhanVien(Database db) {
-        String ma = CapMa.capMaNhanVien(db);
-        String cccd = Nhap.nhapStr("Nhap cccd: ");
-        String ten = Nhap.nhapStr("Nhap ten: ");
-        String ngaySinh = Nhap.nhapStr("Nhap ngay sinh (yyyy-MM-dd): ");
-        String sdt = Nhap.nhapStr("Nhap so dien thoai: ");
-        String gioiTinh = Nhap.nhapStr("Nhap gioi tinh: ");
-        return new NhanVien(ma, cccd, ten, ngaySinh, sdt, gioiTinh);
+        HoaDon hoaDon = new HoaDon(ma, khachHang, chiTietHoaDon, ngayTaoHoaDon, ghiChu);
+        khachHang.themHoaDon(hoaDon);
+        return hoaDon;
     }
 
     public static TaiKhoan taoTaiKhoan() {
@@ -190,7 +179,7 @@ public class TaoDoiTuong {
     }
 
     public static QuanLy TaoDoiTuongQuanLy(Database db) {
-        String ma = Nhap.nhapStr("Nhap ma nhan vien: ");
+        String ma = CapMa.capMaQuanly(db);
         String cccd = Nhap.nhapStr("Nhap cccd: ");
         String ten = Nhap.nhapStr("Nhap ten: ");
         String ngaySinh = Nhap.nhapStr("Nhap ngay sinh (dd/MM/yyyy): ");

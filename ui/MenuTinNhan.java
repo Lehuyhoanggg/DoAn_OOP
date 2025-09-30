@@ -11,15 +11,17 @@ import util.ThoiGian;
 
 public class MenuTinNhan {
     private ArrayList<User> listUser;
+    private Database db;
 
     public MenuTinNhan(Database db) {
         this.listUser = db.getListUser();
+        this.db = db;
     }
 
     public void guiTinNhan(User nguoiGui) {
         UserService userService = new UserService(listUser);
         User nguoiNhan = userService.timUser(Nhap.nhapStr("Nhap ma nhan : "));
-        TinNhan tinNhan = TaoDoiTuong.taoTinNhan(nguoiGui.getMa(), nguoiGui.getTen());
+        TinNhan tinNhan = TaoDoiTuong.taoTinNhan(nguoiGui.getTen(), db);
         nguoiNhan.nhanTinNhan(tinNhan);
         System.out.println("Da gui tin nhan thanh cong");
     }

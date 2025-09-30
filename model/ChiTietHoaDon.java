@@ -21,6 +21,7 @@ public class ChiTietHoaDon {
         this.ma = ma;
         listBaoHanh = new ArrayList<>();
         danhSachSanPham = new DanhSachSanPham();
+        listMaGiamGiaDaDung = new ArrayList<>();
     }
 
     public String getMa() {

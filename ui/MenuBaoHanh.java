@@ -21,14 +21,14 @@ public class MenuBaoHanh {
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
         BaoHanh baoHanh = TaoDoiTuong.taoBaoHanh(db);
         if (baoHanh == null) {
-            System.out.println("Tao that bai , ma san pham hoac ma khach khong ton tai");
+            System.out.println("Tao bao hanh that bai");
             return;
         }
         baoHanhService.themBaoHanh(baoHanh);
         System.out.println("Da tao bao hanh thanh cong.");
     }
 
-    public void xoaPhieuBaoHanh() {
+    public void xoaBaoHanh() {
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
         String ma = Nhap.nhapStr("Nhap ma bao hanh can xoa: ");
         BaoHanh baoHanh = baoHanhService.timBaoHanh(ma);
@@ -36,7 +36,7 @@ public class MenuBaoHanh {
             System.out.println("Khong tim thay bao hanh");
             return;
         }
-        if (baoHanh.getKhachHang().getListBaoHanh().remove(baoHanh)) {
+        if (baoHanhService.xoaBaoHanh(ma)) {
             System.out.println("Da xoa bao hanh (neu ton tai).");
         } else {
             System.out.println("Xoa khong thanh cong");
@@ -119,17 +119,13 @@ public class MenuBaoHanh {
 
     public void traCuuBaoHanh() {
         String ma = Nhap.nhapStr("Nhap ma bao hanh can tra cuu : ");
-        ArrayList<BaoHanh> listBaoHanh = db.getListBaoHanh();
-        if (listBaoHanh == null || listBaoHanh.size() == 0) {
+        BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
+        BaoHanh baoHanh = baoHanhService.timBaoHanh(ma);
+        if (baoHanh == null) {
             System.out.println("khong tim thay bao hanh");
             return;
         }
-        for (int i = 0; i < listBaoHanh.size(); i++) {
-            if (listBaoHanh.get(i).getMaBh().equals(ma)) {
-                System.out.println(listBaoHanh.get(i));
-                return;
-            }
-        }
+        System.out.println(baoHanh);
     }
 
     public void xuatMenu() {
@@ -153,7 +149,7 @@ public class MenuBaoHanh {
                 }
                 case 1 -> taoBaoHanh();
                 case 2 -> suaBaoHanh();
-                case 3 -> xoaPhieuBaoHanh();
+                case 3 -> xoaBaoHanh();
                 case 4 -> traCuuBaoHanh();
                 case 5 -> xemTatCaBaoHanh();
                 default -> System.out.println("Lua chon khong hop le!");

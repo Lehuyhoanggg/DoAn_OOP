@@ -3,7 +3,10 @@ package ui;
 import java.util.ArrayList;
 
 import database.Database;
+import model.HoaDon;
 import model.PhieuTraHang;
+import model.SanPham;
+import service.HoaDonService;
 import service.KhacHangService;
 import service.PhieuTraHangService;
 import service.SanPhamService;
@@ -31,10 +34,25 @@ public class MenuPhieuTraHang {
     }
 
     public void taoPhieuTraHang() {
-        PhieuTraHangService service = new PhieuTraHangService(db.getListPhieuTraHang());
-        PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(db);
-        if (service.themPhieuTraHang(pth)) {
+        PhieuTraHangService phieuTraHangService = new PhieuTraHangService(db.getListPhieuTraHang());
+        HoaDonService hoaDonService = new HoaDonService(db.getListHoaDon());
+        String maHoaDon = Nhap.nhapStr("Nhap phieu hoa don de tra hang");
+        HoaDon hoaDon = hoaDonService.timHoaDon(maHoaDon);
+        System.out.println("Danh sach san pham trong hoa don");
+        for (SanPham sanPham : hoaDon.getChiTietHoaDon().getDanhSachSanPham().getMapSanPham().keySet()) {
+            System.out.println(sanPham.getMa() + " " + sanPham.getTen());
+        }
+        String maSp = Nhap.nhapStr("Nhap ma san pham trong hoa don : ");
+        SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
+        SanPham sanPham = sanPhamService.timSanPham(maSp);
+        if (!hoaDon.getChiTietHoaDon().getDanhSachSanPham().tonTaiSanPham(sanPham)) {
+            System.out.println("Khong ton tai san pham nay trong hoa don");
+        }
+        PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(hoaDon.getKhachHang(), sanPham, db);
+        if (phieuTraHangService.themPhieuTraHang(pth)) {
             System.out.println("Tao phieu tra hang thanh cong!");
+            hoaDonService.xoaHoaDon(maHoaDon);
+            System.out.println("Da xoa hoa don");
         } else {
             System.out.println("Tao phieu tra hang that bai!");
         }
