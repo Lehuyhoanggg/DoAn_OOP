@@ -14,7 +14,7 @@ public class DocFile implements Xuli_File_Datakhoidau {
         this.db = db;
     }
 
-    //////////////////////////////////  doc file tu datakhoidau
+    //////////////////////////////////  doc file tu datas
     public void doc_NhanVientxt(String path) {
         NhanVienService nvService = new NhanVienService(db.getListNhanVien());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -69,9 +69,31 @@ public class DocFile implements Xuli_File_Datakhoidau {
                 long gia = Long.parseLong(thanhPhan[4]);
                 int tonKho = Integer.parseInt(thanhPhan[5]);
                 String moTa = thanhPhan[6];
-                int trangThai = Integer.parseInt(thanhPhan[7]);
+                String trangThai = thanhPhan[7];
                 SanPham newSp = new SanPham(ma, ten, danhMuc, thuongHieu, gia, tonKho, moTa, trangThai);
                 spService.themSanPham(newSp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void doc_MaGiamGiatxt(String path) {
+        MaGiamGiaService maGgService = new MaGiamGiaService(db.getListMaGiamGia());
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] thanhPhan = line.split("\\s+");
+                String ma = thanhPhan[0];
+                String tenMa = thanhPhan[1];
+                String loaiDoanhMuc = thanhPhan[2];
+                String loaiThuongHieu = thanhPhan[3];
+                String tienGiam = thanhPhan[4];
+                String ngayBatDau = thanhPhan[5];
+                String ngayKetThuc = thanhPhan[6];
+                MaGiamGia maGiamGia = new MaGiamGia(ma, tenMa, loaiDoanhMuc, loaiThuongHieu, tienGiam, ngayBatDau,
+                        ngayKetThuc);
+                maGgService.themMaGiamGia(maGiamGia);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,28 +115,6 @@ public class DocFile implements Xuli_File_Datakhoidau {
                 KhachHang khachHang = new KhachHang(maKh, tenKh, sdt, htvService.timHangThanhVien(hangThanhVien),
                         tienDaChi);
                 khService.themKhachHang(khachHang);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void doc_MaGiamGiatxt(String path) {
-        MaGiamGiaService maGgService = new MaGiamGiaService(db.getListMaGiamGia());
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] thanhPhan = line.split("\\s+");
-                String ma = thanhPhan[0];
-                String tenMa = thanhPhan[1];
-                String loaiDoanhMuc = thanhPhan[2];
-                String loaiThuongHieu = thanhPhan[3];
-                long soTienGiam = Long.parseLong(thanhPhan[4]);
-                String ngayBatDau = thanhPhan[5];
-                String ngayKetThuc = thanhPhan[6];
-                MaGiamGia maGiamGia = new MaGiamGia(ma, tenMa, loaiDoanhMuc, loaiThuongHieu, soTienGiam, ngayBatDau,
-                        ngayKetThuc);
-                maGgService.themMaGiamGia(maGiamGia);
             }
         } catch (Exception e) {
             e.printStackTrace();

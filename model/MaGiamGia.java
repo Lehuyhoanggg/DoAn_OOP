@@ -15,10 +15,20 @@ public class MaGiamGia {
         this.ma = ma;
         this.tenMa = tenMa;
         this.loaiDoanhMuc = loaiDoanhMuc;
-        this.loaiThuongHieu = loaiDoanhMuc;
+        this.loaiThuongHieu = loaiThuongHieu;
         this.tienGiam = tienGiam;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
+    }
+
+    public MaGiamGia(MaGiamGia maGiamGia) {
+        this.ma = maGiamGia.getMa();
+        this.tenMa = maGiamGia.getTenMa();
+        this.loaiDoanhMuc = maGiamGia.getLoaiDoanhMuc();
+        this.loaiThuongHieu = maGiamGia.getLoaiThuongHieu();
+        this.tienGiam = maGiamGia.getTienGiam();
+        this.ngayBatDau = maGiamGia.getNgayBatDau();
+        this.ngayKetThuc = maGiamGia.getNgayKetThuc();
     }
 
     public String getLoaiDoanhMuc() {
