@@ -13,6 +13,7 @@ public class CaLam {
         this.gioKetThuc = gioKetThuc;
         listNhanVien = new NhanVienDiemDanh();
     }
+    public Calam(){}
 
     public String getGioBatDau() {
         return gioBatDau;
