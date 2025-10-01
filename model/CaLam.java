@@ -80,4 +80,12 @@ public class CaLam {
     public boolean xoaNhanVienKhoiCa(NhanVien nhanVien) {
         return listNhanVien.xoaNhanVien(nhanVien);
     }
+    @Overrive
+    public String toString(){
+        return "Gio bat dau: " + getGioBatDau() + '\'' +
+                "Gio ket thuc: " + getGioKetThuc() + '\'' +
+                "So: " + getSo() + '\'' +
+                "So luong can: " + getSoLuongCan() + '\'' +
+                "Nhan vien: " + getListNhanVien() + '\'';
+    }
 }
