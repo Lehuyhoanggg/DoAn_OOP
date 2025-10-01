@@ -66,4 +66,9 @@ public class TaiKhoan {
     public void doiMatKhau(String matKhau) {
         setMatKhau(matKhau);
     }
+    @Override
+    public String toString(){
+        return "Ten Dang Nhap:" + tenDangNhap + "\n" +
+                "Mat khau: " + matKhau ;
+    }
 }
