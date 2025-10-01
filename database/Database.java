@@ -1,7 +1,9 @@
 package database;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import file.DocFile;
 import model.BaoHanh;
 import model.CaLam;
 import model.ChiTietHoaDon;
@@ -57,6 +59,8 @@ public class Database {
         listCaLam = new ArrayList<>();
         listLichTrongNgay = new ArrayList<>();
         lichTuan = new LichLamViec();
+        DocFile docFile = new DocFile(this);
+        docFile.doc_DatasVaoDatabase();
     }
 
     public ArrayList<CaLam> getListCaLam() {
@@ -201,4 +205,175 @@ public class Database {
         listUser.addAll(listQuanLy);
         return listUser;
     }
+
+    public void xuatListNhanVien() {
+        if (listNhanVien != null) {
+            for (NhanVien nv : listNhanVien) {
+                System.out.print(nv); // toString() của NhanVien đã in \n cuối
+            }
+        }
+    }
+
+    public void xuatListQuanLy() {
+        if (listQuanLy != null) {
+            for (QuanLy ql : listQuanLy) {
+                System.out.print(ql);
+            }
+        }
+    }
+
+    public void xuatListHoaDon() {
+        if (listHoaDon != null) {
+            for (HoaDon hd : listHoaDon) {
+                System.out.print(hd);
+            }
+        }
+    }
+
+    public void xuatListTaiKhoan() {
+        if (listTaiKhoan != null) {
+            for (TaiKhoan tk : listTaiKhoan) {
+                System.out.print(tk);
+            }
+        }
+    }
+
+    public void xuatListSanPham() {
+        if (listSanPham != null) {
+            for (SanPham sp : listSanPham) {
+                System.out.print(sp);
+            }
+        }
+    }
+
+    public void xuatListChiTietHoaDon() {
+        if (listChiTietHoaDon != null) {
+            for (ChiTietHoaDon cthd : listChiTietHoaDon) {
+                System.out.print(cthd);
+                xuatList(cthd.getListMaGiamGiaDaDung());
+            }
+            System.out.println("---------------------------------------------------");
+        }
+    }
+
+    public void xuatListBaoHanh() {
+        if (listBaoHanh != null) {
+            for (BaoHanh bh : listBaoHanh) {
+                System.out.print(bh);
+            }
+        }
+    }
+
+    public void xuatListPhieuBaoHanh() {
+        if (listPhieuBaoHanh != null) {
+            for (PhieuBaoHanh pbh : listPhieuBaoHanh) {
+                System.out.print(pbh);
+            }
+        }
+    }
+
+    public void xuatListPhieuTraHang() {
+        if (listPhieuTraHang != null) {
+            for (PhieuTraHang pth : listPhieuTraHang) {
+                System.out.print(pth);
+            }
+        }
+    }
+
+    public void xuatListKhachHang() {
+        if (listKhachHang != null) {
+            for (KhachHang kh : listKhachHang) {
+                System.out.print(kh);
+            }
+        }
+    }
+
+    public void xuatListMaGiamGia() {
+        if (listMaGiamGia != null) {
+            for (MaGiamGia mg : listMaGiamGia) {
+                System.out.print(mg);
+            }
+        }
+    }
+
+    public void xuatListMaGiamGiaDq() {
+        if (listMaGiamGiaDq != null) {
+            for (MaGiamGia mg : listMaGiamGiaDq) {
+                System.out.print(mg);
+            }
+        }
+    }
+
+    public void xuatListHangThanhVien() {
+        if (listHangThanhVien != null) {
+            for (HangThanhVien htv : listHangThanhVien) {
+                System.out.print(htv);
+            }
+        }
+    }
+
+    public void xuatListTinNhan() {
+        if (listTinNhan != null) {
+            for (TinNhan tn : listTinNhan) {
+                System.out.print(tn);
+            }
+        }
+    }
+
+    public void xuatListCaLam() {
+        if (listCaLam != null) {
+            for (CaLam cl : listCaLam) {
+                System.out.print(cl);
+            }
+        }
+    }
+
+    public void xuatListLichTrongNgay() {
+        if (listLichTrongNgay != null) {
+            for (LichTrongNgay ltn : listLichTrongNgay) {
+                System.out.print(ltn);
+            }
+        }
+    }
+
+    public void xuatLichTuan() {
+        if (lichTuan != null) {
+            System.out.print(lichTuan);
+        }
+    }
+
+    public static void xuatList(List<?> list) {
+        if (list == null || list.isEmpty()) {
+            System.out.println("Danh sách rỗng\n");
+            return;
+        }
+        for (Object obj : list) {
+            System.out.println(obj);
+        }
+        System.out.println(); // thêm \n ở cuối
+    }
+
+    public static void main(String[] args) {
+        Database db = new Database();
+        DocFile docFile = new DocFile(db);
+        docFile.doc_NhanVientxt("datas/NhanVien.txt");
+        docFile.doc_QuanLytxt("datas/QuanLy.txt");
+
+        docFile.doc_SanPhamtxt("datas/SanPham.txt");
+        docFile.doc_HangThanhVientxt("datas/HangThanhVien.txt");
+        docFile.doc_MaGiamGiatxt("datas/MaGiamGia.txt");
+
+        docFile.doc_KhachHangtxt("datas/KhachHang.txt");
+        docFile.doc_BaoHanhtxt("datas/BaoHanh.txt");
+        docFile.doc_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
+        docFile.doc_PhieuBaoHanhtxt("datas/KhachHang_PhieuBaoHanh.txt");
+        docFile.doc_PhieuTraHangtxt("datas/KhachHang_PhieuTraHang.txt");
+        docFile.doc_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
+        docFile.doc_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");
+        docFile.doc_ChiTietHoaDon_BaoHanhtxt("datas/ChiTietHoaDon_BaoHanh.txt");
+        docFile.doc_ChiTietHoaDon_MaGiamGiatxt("datas/ChiTietHoaDon_MaGiamGia.txt");
+        docFile.doc_HoaDontxt("datas/HoaDon.txt");
+        db.xuatListHoaDon();
+    }
+
 }

@@ -88,17 +88,16 @@ public class SanPham {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
+
     @Override
-    public String toString(){
-        return "San Pham{" +
-                ", MaSP="+ma+'\''+
-                ", TenSP="+ten+'\''+
-                ", Danh Muc="+danhMuc+'\''+
-                ", Thuong hieu="+thuongHieu+'\'' +
-                ", Gia="+ gia + '\'' +
-                ", Ton kho=" + tonKho + '\'' +
-                ", Mo ta=" + moTa + '\'' +
-                "Trang thai=" + trangThai +'\'' +
-                '}';
+    public String toString() {
+        return "ma : " + ma + "\n" +
+                "ten : " + ten + "\n" +
+                "danhMuc : " + danhMuc + "\n" +
+                "thuongHieu : " + thuongHieu + "\n" +
+                "gia : " + gia + "\n" +
+                "tonKho : " + tonKho + "\n" +
+                "moTa : " + moTa + "\n" +
+                "trangThai : " + trangThai + "\n" + "------------------------------------" + "\n";
     }
 }

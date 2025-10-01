@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
@@ -108,5 +109,15 @@ public class ThoiGian {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate firstDay = LocalDate.now().withDayOfMonth(1);
         return firstDay.format(fmt);
+    }
+
+    public static LocalDate chuyenNgayStrThanhLocalData(String ngay) {
+        return LocalDate.parse(ngay);
+    }
+
+    public static long khoangCachNgay(String ngayBd, String ngayKt) {
+        LocalDate ngayBdLocal = chuyenNgayStrThanhLocalData(ngayBd);
+        LocalDate ngayKtLocal = chuyenNgayStrThanhLocalData(ngayKt);
+        return ChronoUnit.DAYS.between(ngayBdLocal, ngayKtLocal);
     }
 }

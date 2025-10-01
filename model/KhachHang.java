@@ -23,7 +23,9 @@ public class KhachHang {
         this.listBaoHanh = new ArrayList<>();
         this.listPhieuBaoHanh = new ArrayList<>();
         this.listMaGiamGia = new ArrayList<>();
-        this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
+        if (hangThanhVien != null) {
+            this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
+        }
         this.listHoaDon = new ArrayList<>();
         this.listPhieuTraHang = new ArrayList<>();
     }
@@ -35,7 +37,9 @@ public class KhachHang {
         this.listBaoHanh = new ArrayList<>();
         this.listPhieuBaoHanh = new ArrayList<>();
         this.listMaGiamGia = new ArrayList<>();
-        this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
+        if (hangThanhVien != null) {
+            this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
+        }
         this.listHoaDon = new ArrayList<>();
         this.listPhieuTraHang = new ArrayList<>();
     }
@@ -64,6 +68,14 @@ public class KhachHang {
         return sdt;
     }
 
+    public ArrayList<HoaDon> getListHoaDon() {
+        return listHoaDon;
+    }
+
+    public ArrayList<PhieuTraHang> getListPhieuTraHang() {
+        return listPhieuTraHang;
+    }
+
     public String getTenKh() {
         return tenKh;
     }
@@ -90,6 +102,14 @@ public class KhachHang {
 
     public void setSdt(String sdt) {
         this.sdt = sdt;
+    }
+
+    public void setListHoaDon(ArrayList<HoaDon> listHoaDon) {
+        this.listHoaDon = listHoaDon;
+    }
+
+    public void setListPhieuTraHang(ArrayList<PhieuTraHang> listPhieuTraHang) {
+        this.listPhieuTraHang = listPhieuTraHang;
     }
 
     public void setListMaGiamGia(ArrayList<MaGiamGia> listMaGiamGia) {
@@ -141,17 +161,10 @@ public class KhachHang {
 
     @Override
     public String toString() {
-        return "Khach hang{" +
-                "maKh='" + maKh + '\'' +
-                ", tenKh='" + tenKh + '\'' +
-                ", sdt='" + sdt + '\'' +
-                ", hangThanhVien=" + hangThanhVien +
-                ", tienDaChi=" + tienDaChi +
-                ", listPhieuBaoHanh=" + listPhieuBaoHanh +
-                ", listBaoHanh=" + listBaoHanh +
-                ", MaGiamGia=" + listMaGiamGia +
-                ", HoaDon=" + listHoaDon +
-                ", PhieuTraHang=" + listPhieuTraHang +
-                '}';
+        return "maKh : " + maKh + "\n" +
+                "tenKh : " + tenKh + "\n" +
+                "sdt : " + sdt + "\n" +
+                "hangThanhVienMa : " + (hangThanhVien != null ? hangThanhVien.getTenHang() : "null") + "\n" +
+                "tienDaChi : " + tienDaChi + "\n" + "------------------------------------" + "\n";
     }
 }

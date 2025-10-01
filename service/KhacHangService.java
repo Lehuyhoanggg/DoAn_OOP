@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 
+import model.HoaDon;
 import model.KhachHang;
 
 public class KhacHangService {
@@ -50,4 +51,18 @@ public class KhacHangService {
         return listKhachHang.remove(khachHang);
     }
 
+    public void setTienDaChi(KhachHang khachHang) {
+        long tong = 0;
+        ArrayList<HoaDon> listHoaDon = khachHang.getListHoaDon();
+        for (int i = 0; i < listHoaDon.size(); i++) {
+            tong += listHoaDon.get(i).getThanhTien();
+        }
+        khachHang.setTienDaChi(tong);
+    }
+
+    public void setTienDaChi() {
+        for (int i = 0; i < listKhachHang.size(); i++) {
+            setTienDaChi(listKhachHang.get(i));
+        }
+    }
 }

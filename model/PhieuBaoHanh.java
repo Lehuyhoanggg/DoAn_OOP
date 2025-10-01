@@ -54,12 +54,13 @@ public class PhieuBaoHanh {
     public void setSanPham(SanPham sanPham) {
         this.sanPham = sanPham;
     }
+
     @Override
     public String toString() {
-        return "PhieuBaoHanh {ChiTietLoi=" + ChiTietLoi
-                + ", khachHang=" + khachHang 
-                + ", maBaoHanh=" + maBaoHanh
-                + ", ngayBaoHanh=" + ngayBaoHanh 
-                + ", sanPham=" + sanPham + "}";
+        return "maBaoHanh : " + maBaoHanh + "\n" +
+                "khachHangMa : " + (khachHang != null ? khachHang.getMaKh() : "null") + "\n" +
+                "sanPhamMa : " + (sanPham != null ? sanPham.getMa() : "null") + "\n" +
+                "ngayBaoHanh : " + ngayBaoHanh + "\n" +
+                "ChiTietLoi : " + ChiTietLoi + "\n" + "------------------------------------" + "\n";
     }
 }

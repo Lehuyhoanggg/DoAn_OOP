@@ -13,8 +13,9 @@ public abstract class User {
     private TaiKhoan taiKhoan;
     private ArrayList<TinNhan> listTinNhan;
 
-    public User() {}
-    
+    public User() {
+    }
+
     public User(String ma, String cccd, String ten,
             String ngaySinh, String sdt, String gioiTinh) {
         this.ma = ma;
@@ -122,16 +123,5 @@ public abstract class User {
         taiKhoan = null;
     }
 
-     @Override
-    public String toString(){
-        return "User{" +
-                "ma="+ma+'\''+
-                "cccd="+cccd+'\''+
-                "ten="+ten+'\''+
-                "Ngay sinh="+ngaySinh+'\''+
-                "Gioi tinh="+gioiTinh+'\''+
-                "SDT="+sdt+'\''+
-                "Tai khoan="+taiKhoan+'\''+
-                '}';
-    }
+    public abstract String toString();
 }

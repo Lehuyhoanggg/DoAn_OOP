@@ -87,12 +87,12 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "Chi tiet hoa don: " + getChiTietHoaDon() + "\n"
-                + "Khach hang: " + getKhachHang() + "\n"
+        return "Chi tiet hoa don: " + chiTietHoaDon.getMa() + "\n"
+                + "Khach hang: " + khachHang.getMaKh() + "\n"
                 + "ma: " + getMa() + "\n"
                 + "Ghi chu: " + getGhiChu() + "\n"
                 + "Nguoi tao don: " + getMaNgTaoHoaDon() + "\n"
                 + "Ngay tao don: " + getNgayTaoHoaDon() + "\n"
-                + "----------------------------\n";
+                + "------------------------------------" + "\n";
     }
 }

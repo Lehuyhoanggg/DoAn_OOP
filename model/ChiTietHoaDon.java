@@ -102,9 +102,6 @@ public class ChiTietHoaDon {
     @Override
     public String toString() {
         return "Ma: " + getMa() + "\n"
-                + "Thanh tien: " + getThanhTien() + "\n"
-                + "San Pham: " + getDanhSachSanPham() + "\n"
-                + "Voucher: " + getListBaoHanh() + "\n"
-                + "--------------------------------\n";
+                + "Thanh tien: " + getThanhTien() + "\n";
     }
 }

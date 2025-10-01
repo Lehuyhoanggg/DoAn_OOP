@@ -11,6 +11,7 @@ import service.KhacHangService;
 import service.PhieuTraHangService;
 import service.SanPhamService;
 import util.TaoDoiTuong;
+import util.ThoiGian;
 
 public class MenuPhieuTraHang {
     private Database db;
@@ -36,8 +37,16 @@ public class MenuPhieuTraHang {
     public void taoPhieuTraHang() {
         PhieuTraHangService phieuTraHangService = new PhieuTraHangService(db.getListPhieuTraHang());
         HoaDonService hoaDonService = new HoaDonService(db.getListHoaDon());
-        String maHoaDon = Nhap.nhapStr("Nhap phieu hoa don de tra hang");
+        String maHoaDon = Nhap.nhapStr("Nhap hoa don de tra hang");
         HoaDon hoaDon = hoaDonService.timHoaDon(maHoaDon);
+        if (hoaDon == null) {
+            System.out.println("Khong tim thay hoa don");
+            return;
+        }
+        if (ThoiGian.khoangCachNgay(hoaDon.getNgayTaoHoaDon(), ThoiGian.layNgayHienTaiStr()) >= 7) {
+            System.out.println("Da qua thoi gian tra hang , chi duoc tra hang trong 7 ngay tu khi mua hang");
+            return;
+        }
         System.out.println("Danh sach san pham trong hoa don");
         for (SanPham sanPham : hoaDon.getChiTietHoaDon().getDanhSachSanPham().getMapSanPham().keySet()) {
             System.out.println(sanPham.getMa() + " " + sanPham.getTen());

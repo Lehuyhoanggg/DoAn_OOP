@@ -99,4 +99,18 @@ public class MaGiamGiaService {
         }
         maGiamGia.setSanPhamDaDung(sanPham);
     }
+
+    private boolean maDocQuyen(String ma) {
+        String maDong = "MGGDONG";
+        String maBac = "MGGBAC";
+        String maVang = "MGGVANG";
+        return ma.startsWith(maDong) || ma.startsWith(maBac) || ma.startsWith(maVang);
+    }
+
+    public boolean laMaGiamGiaDocQuyen(MaGiamGia maGiamGia) {
+        if (maDocQuyen(maGiamGia.getMa())) {
+            return true;
+        }
+        return false;
+    }
 }

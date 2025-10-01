@@ -50,4 +50,10 @@ public class HangThanhVien {
         }
         return listMaGiamGiaDQ.remove(maGiamGia);
     }
+
+    @Override
+    public String toString() {
+        return "Ten hang : " + tenHang + "\n" +
+                "Mo ta : " + moTa + "\n" + "------------------------------------" + "\n";
+    }
 }

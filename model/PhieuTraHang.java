@@ -61,12 +61,10 @@ public class PhieuTraHang {
 
     @Override
     public String toString() {
-        return "PhieuTraHang{" +
-                "maTraHang='" + maTraHang + '\'' +
-                ", khachHang=" + khachHang +
-                ", sanPham=" + sanPham +
-                ", ngayTra='" + ngayTra + '\'' +
-                ", lyDoTra='" + lyDoTra + '\'' +
-                '}';
+        return "maTraHang : " + maTraHang + "\n" +
+                "khachHangMa : " + (khachHang != null ? khachHang.getMaKh() : "null") + "\n" +
+                "sanPhamMa : " + (sanPham != null ? sanPham.getMa() : "null") + "\n" +
+                "ngayTra : " + ngayTra + "\n" +
+                "lyDoTra : " + lyDoTra + "\n" + "------------------------------------" + "\n";
     }
 }

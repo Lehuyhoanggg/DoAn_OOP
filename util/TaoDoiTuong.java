@@ -78,7 +78,7 @@ public class TaoDoiTuong {
 
     public static KhachHang taoKhachHang(Database db) {
         String maKh = CapMa.capMaKhachHang(db);
-        String tenKh = Nhap.nhapStr("Nhap ten khach hang: ");
+        String tenKh = Nhap.nhapStr("Nhap ten khach hang: ");///
         String sdt = Nhap.nhapStr("Nhap so dien thoai: ");
         KhachHang khachHang = new KhachHang(maKh, tenKh, sdt);
         khachHang.getListMaGiamGia().addAll(db.getListMaGiamGia());

@@ -1,23 +1,27 @@
 package interfaces;
 
 public interface DocFile_Datas {
-    void doc_NhanVientxt(String path);
+    void doc_NhanVientxt(String path); //
 
-    void doc_QuanLytxt(String path);
+    void doc_QuanLytxt(String path); //
 
-    void doc_SanPhantxt(String path);
+    void doc_SanPhamtxt(String path); //
 
-    void doc_MaGiamGiatxt(String path);
+    void doc_MaGiamGiatxt(String path); //
 
-    void doc_HangThanhVientxt(String path);
+    void doc_HangThanhVientxt(String path); //
 
-    void doc_KhachHangtxt(String path);
+    void doc_KhachHangtxt(String path); //
 
-    void doc_BaoHanhtxt(String path);
+    void doc_BaoHanhtxt(String path); //
 
     void doc_PhieuBaoHanhtxt(String path);
 
+    ///x
+
     void doc_PhieuTraHangtxt(String path);
+
+    ///x
 
     void doc_ChiTietHoaDontxt(String path);
 
@@ -28,6 +32,8 @@ public interface DocFile_Datas {
     void doc_ChiTietHoaDon_MaGiamGiatxt(String path);
 
     void doc_HoaDontxt(String path);
+
+    ///////////* */
 
     void doc_KhachHang_PhieuBaoHanhtxt(String path);
 

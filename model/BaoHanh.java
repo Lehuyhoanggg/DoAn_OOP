@@ -71,13 +71,11 @@ public class BaoHanh {
 
     @Override
     public String toString() {
-        return "BaoHanh{" +
-                "maBh='" + maBh + '\'' +
-                ", tenBaoHanh='" + tenBaoHanh + '\'' +
-                ", khachHang=" + khachHang +
-                ", sanPham=" + sanPham +
-                ", ngayBatDau='" + ngayBatDau + '\'' +
-                ", ngayKetThuc='" + ngayKetThuc + '\'' +
-                '}';
+        return "maBh : " + maBh + "\n" +
+                "tenBaoHanh : " + tenBaoHanh + "\n" +
+                "khachHangMa : " + (khachHang != null ? khachHang.getMaKh() : "null") + "\n" +
+                "sanPhamMa : " + (sanPham != null ? sanPham.getMa() : "null") + "\n" +
+                "ngayBatDau : " + ngayBatDau + "\n" +
+                "ngayKetThuc : " + ngayKetThuc + "\n";
     }
 }

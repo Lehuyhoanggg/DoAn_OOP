@@ -20,6 +20,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 String maNV = thanhPhan[0];
                 String cmnd = thanhPhan[1];
@@ -41,6 +44,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 String maQL = thanhPhan[0];
                 String cmnd = thanhPhan[1];
@@ -56,11 +62,14 @@ public class DocFile implements DocFile_Datas {
         }
     }
 
-    public void doc_SanPhantxt(String path) {
+    public void doc_SanPhamtxt(String path) {
         SanPhamService spService = new SanPhamService(db.getListSanPham());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 String ma = thanhPhan[0];
                 String ten = thanhPhan[1];
@@ -79,10 +88,13 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_MaGiamGiatxt(String path) {
-        MaGiamGiaService maGgService = new MaGiamGiaService(db.getListMaGiamGia());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            MaGiamGiaService maGgService = new MaGiamGiaService(db.getListMaGiamGia());
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 String ma = thanhPhan[0];
                 String tenMa = thanhPhan[1];
@@ -93,6 +105,11 @@ public class DocFile implements DocFile_Datas {
                 String ngayKetThuc = thanhPhan[6];
                 MaGiamGia maGiamGia = new MaGiamGia(ma, tenMa, loaiDoanhMuc, loaiThuongHieu, tienGiam, ngayBatDau,
                         ngayKetThuc);
+                if (maGgService.laMaGiamGiaDocQuyen(maGiamGia)) {
+                    MaGiamGiaService maGiamGiaServiceDq = new MaGiamGiaService(db.getListMaGiamGiaDq());
+                    maGiamGiaServiceDq.themMaGiamGia(maGiamGia);
+                    continue;
+                }
                 maGgService.themMaGiamGia(maGiamGia);
             }
         } catch (Exception e) {
@@ -102,10 +119,13 @@ public class DocFile implements DocFile_Datas {
 
     public void doc_HangThanhVientxt(String path) {
         HangThanhVienService hangThanhVienService = new HangThanhVienService(db.getListHangThanhVien());
-        MaGiamGiaService maGiamGiaService = new MaGiamGiaService(db.getListMaGiamGia());
+        MaGiamGiaService maGiamGiaService = new MaGiamGiaService(db.getListMaGiamGiaDq());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 HangThanhVien hangThanhVien = new HangThanhVien(thanhPhan[0], thanhPhan[1]);
                 for (int i = 2; i < thanhPhan.length; i++) {
@@ -123,6 +143,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 String maKh = thanhPhan[0];
                 String tenKh = thanhPhan[1];
@@ -145,6 +168,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 baoHanhService
                         .themBaoHanh(new BaoHanh(thanhPhan[0], thanhPhan[1], khacHangService.timKhachHang(thanhPhan[2]),
@@ -162,6 +188,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 phieuBaoHanhservice
                         .themPhieuBaoHanh(new PhieuBaoHanh(thanhPhan[0], khacHangService.timKhachHang(thanhPhan[1]),
@@ -177,8 +206,12 @@ public class DocFile implements DocFile_Datas {
         SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
         KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 phieuTraHangService
                         .themPhieuTraHang(new PhieuTraHang(thanhPhan[0], khacHangService.timKhachHang(thanhPhan[1]),
@@ -194,6 +227,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 service.themChiTietHoaDon(new ChiTietHoaDon(thanhPhan[0], Long.parseLong(thanhPhan[1])));
             }
@@ -208,6 +244,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 ChiTietHoaDon chiTietHoaDon = chiTietHoaDonService.timChiTietHoaDon(thanhPhan[0]);
                 if (chiTietHoaDon == null) {
@@ -228,6 +267,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 ChiTietHoaDon chiTietHoaDon = hdService.timChiTietHoaDon(thanhPhan[0]);
                 if (chiTietHoaDon == null) {
@@ -249,6 +291,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 ChiTietHoaDon chiTietHoaDon = hdService.timChiTietHoaDon(thanhPhan[0]);
                 if (chiTietHoaDon == null) {
@@ -271,6 +316,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 String ma = thanhPhan[0];
                 KhachHang khachHang = khacHangService.timKhachHang(thanhPhan[1]);
@@ -292,6 +340,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 KhachHang khachHang = khacHangService.timKhachHang(thanhPhan[0]);
                 if (khachHang == null) {
@@ -313,6 +364,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 KhachHang khachHang = khacHangService.timKhachHang(thanhPhan[0]);
                 if (khachHang == null) {
@@ -334,6 +388,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 KhachHang khachHang = khacHangService.timKhachHang(thanhPhan[0]);
                 if (khachHang == null) {
@@ -354,6 +411,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
                 KhachHang khachHang = khacHangService.timKhachHang(thanhPhan[0]);
@@ -381,6 +441,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 KhachHang khachHang = khacHangService.timKhachHang(thanhPhan[0]);
                 if (khachHang == null) {
@@ -390,7 +453,7 @@ public class DocFile implements DocFile_Datas {
                     khachHang.themHoaDon(hoaDonService.timHoaDon(thanhPhan[i]));
                 }
             }
-
+            khacHangService.setTienDaChi();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -402,6 +465,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 KhachHang khachHang = khacHangService.timKhachHang(thanhPhan[0]);
                 if (khachHang == null) {
@@ -421,6 +487,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 String ma = thanhPhan[0];
                 int so = Integer.parseInt(thanhPhan[1]);
@@ -443,6 +512,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 String ma = thanhPhan[0];
                 int thu = Integer.parseInt(thanhPhan[1]);
@@ -463,6 +535,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 LichLamViec lichLamViec = db.getLichTuan();
                 for (int i = 0; i < thanhPhan.length; i++) {
@@ -480,6 +555,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 TaiKhoan taiKhoan = new TaiKhoan(thanhPhan[0], thanhPhan[1]);
                 userService.ganTaiKhoanChoUser(taiKhoan);
@@ -495,6 +573,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 String ma = thanhPhan[0];
                 String tenNgGui = thanhPhan[1];
@@ -513,6 +594,9 @@ public class DocFile implements DocFile_Datas {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
                 String[] thanhPhan = line.split("\\s+");
                 User user = userService.timUser(thanhPhan[0]);
                 for (int i = 1; i < thanhPhan.length; i++) {
@@ -528,33 +612,27 @@ public class DocFile implements DocFile_Datas {
     public void doc_DatasVaoDatabase() {
         doc_NhanVientxt("datas/NhanVien.txt");
         doc_QuanLytxt("datas/QuanLy.txt");
-
-        doc_SanPhantxt("datas/SanPham.txt");
-        doc_HangThanhVientxt("datas/HangThanhVien.txt");
+        doc_SanPhamtxt("datas/SanPham.txt");
         doc_MaGiamGiatxt("datas/MaGiamGia.txt");
-
+        doc_HangThanhVientxt("datas/HangThanhVien.txt");
         doc_KhachHangtxt("datas/KhachHang.txt");
-        doc_KhachHang_BaoHanhtxt("datas/KhachHang_BaoHanh.txt");
-        doc_KhachHang_PhieuBaoHanhtxt("datas/KhachHang_PhieuBaoHanh.txt");
-        doc_KhachHang_PhieuTraHangtxt("datas/KhachHang_PhieuTraHang.txt");
-        doc_KhachHang_MaGiamGiatxt("datas/KhachHang_MaGiamGia.txt");
-        doc_KhachHang_MaGiamGia_SanPhamtxt("datas/KhachHang_MaGiamGia_SanPham.txt");
-        doc_KhachHang_HoaDontxt("datas/KhachHang_HoaDon.txt");
-
-        doc_HoaDontxt("datas/HoaDon.txt");
+        doc_BaoHanhtxt("datas/BaoHanh.txt");
+        doc_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
+        doc_PhieuTraHangtxt("datas/PhieuTraHang.txt");
         doc_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
         doc_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");
         doc_ChiTietHoaDon_BaoHanhtxt("datas/ChiTietHoaDon_BaoHanh.txt");
         doc_ChiTietHoaDon_MaGiamGiatxt("datas/ChiTietHoaDon_MaGiamGia.txt");
-
-        doc_BaoHanhtxt("datas/BaoHanh.txt");
-        doc_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
-        doc_PhieuTraHangtxt("datas/PhieuTraHang.txt");
-
+        doc_HoaDontxt("datas/HoaDon.txt");
+        doc_KhachHang_PhieuBaoHanhtxt("datas/KhachHang_PhieuBaoHanh.txt");
+        doc_KhachHang_BaoHanhtxt("datas/KhachHang_BaoHanh.txt");
+        doc_KhachHang_MaGiamGiatxt("datas/KhachHang_MaGiamGia.txt");
+        doc_KhachHang_MaGiamGia_SanPhamtxt("datas/KhachHang_MaGiamGia_SanPham.txt");
+        doc_KhachHang_HoaDontxt("datas/KhachHang_HoaDon.txt");
+        doc_KhachHang_PhieuTraHangtxt("datas/KhachHang_PhieuTraHang.txt");
         doc_CaLamtxt("datas/CaLam.txt");
         doc_LichTrongNgaytxt("datas/LichTrongNgay.txt");
         doc_LichLamViectxt("datas/LichLamViec.txt");
-
         doc_TaiKhoantxt("datas/TaiKhoan.txt");
         doc_TinNhantxt("datas/TinNhan.txt");
         doc_User_TinNhantxt("datas/User_TinNhan.txt");
