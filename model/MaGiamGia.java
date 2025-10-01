@@ -94,4 +94,16 @@ public class MaGiamGia {
     public void setSanPhamDaDung(SanPham sanPhamDaDung) {
         this.sanPhamDaDung = sanPhamDaDung;
     }
+    @Override
+    public String toString(){
+        return "Ma giam gia{" +
+                "Ma: " + ma + '\'' +
+                ", Ten ma: " + tenMa + '\'' +
+                ", Loai doanh muc: " + loaiDoanhMuc + '\'' +
+                ", Loai thuong hieu: " + loaiThuongHieu + '\'' +
+                ", So tien giam: " + soTiengiam + '\'' +
+                ", Ngay bat dau: " + ngayBatDau + '\'' +
+                ", Ngay ket thuc: " + ngayKetThuc + '\'' +
+                '}';
+    }
 }
