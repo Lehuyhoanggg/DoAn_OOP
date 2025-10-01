@@ -82,10 +82,10 @@ public class CaLam {
     }
     @Overrive
     public String toString(){
-        return "Gio bat dau: " + getGioBatDau() + '\'' +
-                "Gio ket thuc: " + getGioKetThuc() + '\'' +
-                "So: " + getSo() + '\'' +
-                "So luong can: " + getSoLuongCan() + '\'' +
-                "Nhan vien: " + getListNhanVien() + '\'';
+        return "Gio bat dau: " + getGioBatDau() + "\n" +
+                "Gio ket thuc: " + getGioKetThuc() + "\n" +
+                "So: " + getSo() + "\n" +
+                "So luong can: " + getSoLuongCan() + '\n" +
+                "Nhan vien: " + getListNhanVien() + "\n";
     }
 }
