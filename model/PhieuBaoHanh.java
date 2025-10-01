@@ -54,4 +54,12 @@ public class PhieuBaoHanh {
     public void setSanPham(SanPham sanPham) {
         this.sanPham = sanPham;
     }
+    @Override
+    public String toString() {
+        return "PhieuBaoHanh {ChiTietLoi=" + ChiTietLoi
+                + ", khachHang=" + khachHang 
+                + ", maBaoHanh=" + maBaoHanh
+                + ", ngayBaoHanh=" + ngayBaoHanh 
+                + ", sanPham=" + sanPham + "}";
+    }
 }
