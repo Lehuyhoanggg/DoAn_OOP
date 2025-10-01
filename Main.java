@@ -15,7 +15,8 @@ public class Main {
 
     public Main() {
         user = null;
-        DocFile.docDataVaoDatabase();
+        DocFile docFile = new DocFile(db);
+        docFile.doc_DatasVaoDatabase();
     }
 
     public void dieuHuongMenu() {

@@ -3,13 +3,20 @@ package model;
 import java.util.ArrayList;
 
 public class LichTrongNgay {
+    private String ma;
     private int thu;
     private ArrayList<CaLam> listCaLam; // 1 ngay gom nhieu ca lam
     private String ngay;
 
-    public LichTrongNgay(int thu, String ngay) {
+    public LichTrongNgay(String ma, int thu, String ngay) {
+        this.ma = ma;
         this.thu = thu;
         this.ngay = ngay;
+        listCaLam = new ArrayList<>();
+    }
+
+    public void setMa(String ma) {
+        this.ma = ma;
     }
 
     public void setListCaLam(ArrayList<CaLam> listCaLam) {
@@ -32,7 +39,18 @@ public class LichTrongNgay {
         return ngay;
     }
 
+    public String getMa() {
+        return ma;
+    }
+
     public int getThu() {
         return thu;
+    }
+
+    public boolean themCaLam(CaLam caLam) {
+        if (caLam == null) {
+            return false;
+        }
+        return listCaLam.add(caLam);
     }
 }

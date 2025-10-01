@@ -1,19 +1,21 @@
 package model;
 
 public class CaLam {
+    private String ma;
     private int so;
     private String gioBatDau;
     private String gioKetThuc;
     private NhanVienDiemDanh listNhanVien;
     private int soLuongCan;
 
-    public CaLam(int so, String gioBatBau, String gioKetThuc) {
+    public CaLam(String ma, int so, String gioBatBau, String gioKetThuc, int soLuongCan) {
+        this.ma = ma;
         this.so = so;
         this.gioBatDau = gioBatBau;
         this.gioKetThuc = gioKetThuc;
         listNhanVien = new NhanVienDiemDanh();
+        this.soLuongCan = soLuongCan;
     }
-    public Calam(){}
 
     public String getGioBatDau() {
         return gioBatDau;
@@ -25,6 +27,10 @@ public class CaLam {
 
     public int getSo() {
         return so;
+    }
+
+    public String getMa() {
+        return ma;
     }
 
     public int getSoLuongCan() {
@@ -49,6 +55,10 @@ public class CaLam {
 
     public void setSoLuongCan(int soLuongCan) {
         this.soLuongCan = soLuongCan;
+    }
+
+    public void setMa(String ma) {
+        this.ma = ma;
     }
 
     public void setListNhanVien(NhanVienDiemDanh listNhanVien) {
@@ -81,12 +91,13 @@ public class CaLam {
     public boolean xoaNhanVienKhoiCa(NhanVien nhanVien) {
         return listNhanVien.xoaNhanVien(nhanVien);
     }
-    @Overrive
-    public String toString(){
+
+    @Override
+    public String toString() {
         return "Gio bat dau: " + getGioBatDau() + "\n" +
                 "Gio ket thuc: " + getGioKetThuc() + "\n" +
                 "So: " + getSo() + "\n" +
-                "So luong can: " + getSoLuongCan() + '\n" +
+                "So luong can: " + getSoLuongCan() + "\n" +
                 "Nhan vien: " + getListNhanVien() + "\n";
     }
 }

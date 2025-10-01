@@ -8,12 +8,12 @@ public class KhachHang {
     private String sdt;
     private HangThanhVien hangThanhVien;
     private long tienDaChi;
+
     private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
     private ArrayList<BaoHanh> listBaoHanh;
     private ArrayList<MaGiamGia> listMaGiamGia;
     private ArrayList<HoaDon> listHoaDon;
     private ArrayList<PhieuTraHang> listPhieuTraHang;
-
 
     public KhachHang(String maKh, String tenKh, String sdt, HangThanhVien hangThanhVien) {
         this.maKh = maKh;
@@ -28,7 +28,17 @@ public class KhachHang {
         this.listPhieuTraHang = new ArrayList<>();
     }
 
-    
+    public KhachHang(String maKh, String tenKh, String sdt) {
+        this.maKh = maKh;
+        this.tenKh = tenKh;
+        this.sdt = sdt;
+        this.listBaoHanh = new ArrayList<>();
+        this.listPhieuBaoHanh = new ArrayList<>();
+        this.listMaGiamGia = new ArrayList<>();
+        this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
+        this.listHoaDon = new ArrayList<>();
+        this.listPhieuTraHang = new ArrayList<>();
+    }
 
     public HangThanhVien getHangThanhVien() {
         return hangThanhVien;
@@ -93,6 +103,7 @@ public class KhachHang {
     public void setTienDaChi(long tienDaChi) {
         this.tienDaChi = tienDaChi;
     }
+
     public boolean themBaoHanh(BaoHanh baoHanh) {
         if (baoHanh == null) {
             return false;
@@ -127,8 +138,9 @@ public class KhachHang {
         }
         return listPhieuTraHang.add(phieuTraHang);
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Khach hang{" +
                 "maKh='" + maKh + '\'' +
                 ", tenKh='" + tenKh + '\'' +

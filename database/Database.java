@@ -3,11 +3,13 @@ package database;
 import java.util.ArrayList;
 
 import model.BaoHanh;
+import model.CaLam;
 import model.ChiTietHoaDon;
 import model.HangThanhVien;
 import model.HoaDon;
 import model.KhachHang;
 import model.LichLamViec;
+import model.LichTrongNgay;
 import model.MaGiamGia;
 import model.NhanVien;
 import model.PhieuBaoHanh;
@@ -33,6 +35,8 @@ public class Database {
     private ArrayList<MaGiamGia> listMaGiamGiaDq;
     private ArrayList<HangThanhVien> listHangThanhVien;
     private ArrayList<TinNhan> listTinNhan;
+    private ArrayList<CaLam> listCaLam;
+    private ArrayList<LichTrongNgay> listLichTrongNgay;
     private LichLamViec lichTuan;
 
     public Database() {
@@ -42,14 +46,25 @@ public class Database {
         listTaiKhoan = new ArrayList<>();
         listSanPham = new ArrayList<>();
         listChiTietHoaDon = new ArrayList<>();
+        listBaoHanh = new ArrayList<>();
         listPhieuBaoHanh = new ArrayList<>();
+        listPhieuTraHang = new ArrayList<>();
         listKhachHang = new ArrayList<>();
         listMaGiamGia = new ArrayList<>();
-        lichTuan = new LichLamViec();
-        listHangThanhVien = new ArrayList<>();
-        listBaoHanh = new ArrayList<>();
-        listPhieuTraHang = new ArrayList<>();
         listMaGiamGiaDq = new ArrayList<>();
+        listHangThanhVien = new ArrayList<>();
+        listTinNhan = new ArrayList<>();
+        listCaLam = new ArrayList<>();
+        listLichTrongNgay = new ArrayList<>();
+        lichTuan = new LichLamViec();
+    }
+
+    public ArrayList<CaLam> getListCaLam() {
+        return listCaLam;
+    }
+
+    public ArrayList<LichTrongNgay> getListLichTrongNgay() {
+        return listLichTrongNgay;
     }
 
     public ArrayList<MaGiamGia> getListMaGiamGiaDq() {
@@ -124,6 +139,10 @@ public class Database {
         this.listBaoHanh = listBaoHanh;
     }
 
+    public void setListCaLam(ArrayList<CaLam> listCaLam) {
+        this.listCaLam = listCaLam;
+    }
+
     public void setListMaGiamGiaDq(ArrayList<MaGiamGia> listMaGiamGiaDq) {
         this.listMaGiamGiaDq = listMaGiamGiaDq;
     }
@@ -170,6 +189,10 @@ public class Database {
 
     public void setListPhieuTraHang(ArrayList<PhieuTraHang> listPhieuTraHang) {
         this.listPhieuTraHang = listPhieuTraHang;
+    }
+
+    public void setListLichTrongNgay(ArrayList<LichTrongNgay> listLichTrongNgay) {
+        this.listLichTrongNgay = listLichTrongNgay;
     }
 
     public ArrayList<User> getListUser() {

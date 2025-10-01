@@ -98,7 +98,8 @@ public class ChiTietHoaDon {
         }
         return listMaGiamGiaDaDung.add(maGiamGia);
     }
-    @Overrive
+
+    @Override
     public String toString() {
         return "Ma: " + getMa() + "\n"
                 + "Thanh tien: " + getThanhTien() + "\n"

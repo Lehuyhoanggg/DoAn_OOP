@@ -93,4 +93,19 @@ public class CapMa {
         return "TN" + soTN;
     }
 
+    public static String capMaCaLam(Database db) {
+        String soCL = String.valueOf(db.getListCaLam());
+        while (soCL.length() < 3) {
+            soCL = "0" + soCL;
+        }
+        return "CA" + soCL;
+    }
+
+    public static String capMaLichTrongNgay(Database db) {
+        String soLTN = String.valueOf(db.getListLichTrongNgay().size());
+        while (soLTN.length() < 3) {
+            soLTN = "0" + soLTN;
+        }
+        return "LTN" + soLTN;
+    }
 }

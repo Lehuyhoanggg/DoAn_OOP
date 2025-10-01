@@ -91,4 +91,12 @@ public class MaGiamGiaService {
         }
         chiTietHoaDon.setThanhTien(thanhTien);
     }
+
+    public void ganSanPhamChoMaGiamGia(SanPham sanPham, String ma) {
+        MaGiamGia maGiamGia = timMaGiamGia(ma);
+        if (maGiamGia == null) {
+            return;
+        }
+        maGiamGia.setSanPhamDaDung(sanPham);
+    }
 }
