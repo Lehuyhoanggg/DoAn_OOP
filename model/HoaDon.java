@@ -4,7 +4,6 @@ public class HoaDon {
     private String ma;
     private KhachHang khachHang;
     private ChiTietHoaDon chiTietHoaDon;
-    private String maNgTaoHoaDon;
     private String ngayTaoHoaDon;
     private String ghiChu;
 
@@ -12,19 +11,7 @@ public class HoaDon {
 
     }
 
-    public HoaDon(String ma, KhachHang khachHang, ChiTietHoaDon chiTietHoaDon, String maNGTaoHoaDon,
-            String ngayTaoHoaDon,
-            String ghiChu) {
-        this.ma = ma;
-        this.khachHang = khachHang;
-        this.chiTietHoaDon = chiTietHoaDon;
-        this.maNgTaoHoaDon = maNGTaoHoaDon;
-        this.ngayTaoHoaDon = ngayTaoHoaDon;
-        this.ghiChu = ghiChu;
-    }
-
-    public HoaDon(String ma, KhachHang khachHang, ChiTietHoaDon chiTietHoaDon,
-            String ngayTaoHoaDon,
+    public HoaDon(String ma, KhachHang khachHang, ChiTietHoaDon chiTietHoaDon, String ngayTaoHoaDon,
             String ghiChu) {
         this.ma = ma;
         this.khachHang = khachHang;
@@ -49,10 +36,6 @@ public class HoaDon {
         return ma;
     }
 
-    public String getMaNgTaoHoaDon() {
-        return maNgTaoHoaDon;
-    }
-
     public String getNgayTaoHoaDon() {
         return ngayTaoHoaDon;
     }
@@ -73,10 +56,6 @@ public class HoaDon {
         this.ma = ma;
     }
 
-    public void setMaNgTaoHoaDon(String maNgTaoHoaDon) {
-        this.maNgTaoHoaDon = maNgTaoHoaDon;
-    }
-
     public void setNgayTaoHoaDon(String ngayTaoHoaDon) {
         this.ngayTaoHoaDon = ngayTaoHoaDon;
     }
@@ -91,7 +70,6 @@ public class HoaDon {
                 + "Khach hang: " + khachHang.getMaKh() + "\n"
                 + "ma: " + getMa() + "\n"
                 + "Ghi chu: " + getGhiChu() + "\n"
-                + "Nguoi tao don: " + getMaNgTaoHoaDon() + "\n"
                 + "Ngay tao don: " + getNgayTaoHoaDon() + "\n"
                 + "------------------------------------" + "\n";
     }

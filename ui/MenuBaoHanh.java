@@ -19,11 +19,18 @@ public class MenuBaoHanh {
 
     public void taoBaoHanh() {
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
+        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHang khachHang = khacHangService.timKhachHang(Nhap.nhapStr("Nhap ma khach hang de tao bao hanh"));
+        if (khachHang == null) {
+            System.out.println("Khong tim thay khach hang");
+            return;
+        }
         BaoHanh baoHanh = TaoDoiTuong.taoBaoHanh(db);
         if (baoHanh == null) {
             System.out.println("Tao bao hanh that bai");
             return;
         }
+        khachHang.themBaoHanh(baoHanh);
         baoHanhService.themBaoHanh(baoHanh);
         System.out.println("Da tao bao hanh thanh cong.");
     }
@@ -44,11 +51,10 @@ public class MenuBaoHanh {
     }
 
     private void xuatSuaBaoHanh() {
-        System.out.println("1. Sua khach hang");
-        System.out.println("2. Sua ten bao hanh");
-        System.out.println("3. Sua san pham");
-        System.out.println("4. Sua ngay bat dau");
-        System.out.println("5. Sua ngay ket thuc");
+        System.out.println("1. Sua so thang bao hanh");
+        System.out.println("2. Sua san pham");
+        System.out.println("3. Sua ngay bat dau");
+        System.out.println("4. Sua gia");
         System.out.println("0. Thoat");
     }
 
@@ -58,14 +64,9 @@ public class MenuBaoHanh {
                 System.out.println("Thoat sua bao hanh");
                 break;
             case 1:
-                KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
-                KhachHang khachHang = khacHangService.timKhachHang("Nhap ma khach hang can thay doi vao trong phieu");
-                if (khachHang == null) {
-                    System.out.println("Ma khach hang khong hop le");
-                } else {
-                    baoHanh.setKhachHang(khachHang);
-                    System.out.println("Da sua khach hang");
-                }
+                int soThang = Nhap.nhapInt("Nhap so thang bao hanh moi");
+                baoHanh.setLoaiBaoHanh(soThang);
+                System.out.println("Da sua loai bao hanh");
                 break;
             case 2:
                 SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
@@ -79,9 +80,10 @@ public class MenuBaoHanh {
                 break;
             case 3:
                 baoHanh.setNgayBatDau(Nhap.nhapStr("Nhap ngay bat dau bao hanh moi : "));
+                baoHanh.setNgayKetThuc();
                 break;
             case 4:
-                baoHanh.setNgayKetThuc(Nhap.nhapStr("Nhap ngay ket thuc bao hanh moi : "));
+                baoHanh.setGia(Nhap.nhapLong(Nhap.nhapStr("Nhap gia moi : ")));
                 break;
             default:
                 System.out.println("lua chon khong hop le");

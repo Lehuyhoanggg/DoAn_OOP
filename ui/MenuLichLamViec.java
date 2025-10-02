@@ -101,6 +101,10 @@ public class MenuLichLamViec {
     // xem tat ca lich lam viec
     public void xemLichLamViec() {
         ArrayList<LichTrongNgay> listLichTrongNgay = lichLamViec.getLichTuan();
+        if (listLichTrongNgay == null) {
+            System.out.println("Chua xep lich hom nao trong tuan");
+            return;
+        }
         for (int i = 0; i < listLichTrongNgay.size(); i++) {
             LichTrongNgay lichTrongNgay = listLichTrongNgay.get(i);
             System.out.println("Thu " + lichTrongNgay.getThu() + "      " + lichTrongNgay.getNgay());

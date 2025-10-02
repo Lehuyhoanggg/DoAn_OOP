@@ -3,6 +3,7 @@ package service;
 import java.util.ArrayList;
 
 import model.BaoHanh;
+import model.SanPham;
 
 public class BaoHanhService {
     private ArrayList<BaoHanh> listBaoHanh;
@@ -28,6 +29,20 @@ public class BaoHanhService {
             }
         }
         return null;
+    }
+
+    public ArrayList<BaoHanh> timBaoHanh(SanPham sanPham) {
+        if (listBaoHanh == null) {
+            System.out.println("Khong co gi ca");
+            return null;
+        }
+        ArrayList<BaoHanh> listBaoHanhs = new ArrayList<>();
+        for (int i = 0; i < listBaoHanh.size(); i++) {
+            if (listBaoHanh.get(i).getSanPham().equals(sanPham)) {
+                listBaoHanhs.add(listBaoHanh.get(i));
+            }
+        }
+        return listBaoHanhs;
     }
 
     public boolean xoaBaoHanh(String ma) {

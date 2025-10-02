@@ -22,15 +22,17 @@ public class MenuPhieuBaoHanh {
 
     public void taoPhieuBaoHanh() {
         PhieuBaoHanhService phieuBaoHanhService = new PhieuBaoHanhService(db.getListPhieuBaoHanh());
+        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
-
+        KhachHang khachHang = khacHangService.timKhachHang(Nhap.nhapStr("Nhap ma khach hang de bao hanh : "));
         BaoHanh baoHanh = baoHanhService.timBaoHanh("Nhap ma bao hanh de tao phieu bao hanh");
         if (baoHanh == null) {
             System.out.println("Khong tim thay bao hanh de tao phieu");
             return;
         }
-        PhieuBaoHanh phieuBaoHanh = TaoDoiTuong.taoPhieuBaoHanh(baoHanh, db);
+        PhieuBaoHanh phieuBaoHanh = TaoDoiTuong.taoPhieuBaoHanh(baoHanh, khachHang, db);
         phieuBaoHanhService.themPhieuBaoHanh(phieuBaoHanh);
+        khachHang.themPhieuBaoHanh(phieuBaoHanh);
         System.out.println("Da tao phieu bao hanh thanh cong.");
     }
 

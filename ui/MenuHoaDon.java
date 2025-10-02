@@ -105,9 +105,8 @@ public class MenuHoaDon {
     private void xuatSuaHoaDon() {
         System.out.println("1. Sua Khach hang");
         System.out.println("2. Sua bao hanh");
-        System.out.println("3. Sua nguoi tao hoa don");
-        System.out.println("4. Sua ngay tao hoa don");
-        System.out.println("5. Sua ghi chu");
+        System.out.println("3. Sua ngay tao hoa don");
+        System.out.println("4. Sua ghi chu");
         System.out.println("0. Thoat");
     }
 
@@ -127,9 +126,6 @@ public class MenuHoaDon {
                 suaHoaDon_ChiTietHoaDon(hoaDon.getChiTietHoaDon(), hoaDon.getKhachHang());
                 break;
             case 3:
-                hoaDon.setMaNgTaoHoaDon("Nhap ma nguoi sua hoa don moi : ");
-                break;
-            case 4:
                 hoaDon.setGhiChu(Nhap.nhapStr("Nhap ghi chu moi : "));
                 break;
             default:

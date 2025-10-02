@@ -120,4 +120,11 @@ public class ThoiGian {
         LocalDate ngayKtLocal = chuyenNgayStrThanhLocalData(ngayKt);
         return ChronoUnit.DAYS.between(ngayBdLocal, ngayKtLocal);
     }
+
+    public static String ngaySauNThang(String ngay, int n) {
+        LocalDate localDate = chuyenStrThanhDate(ngay);
+        localDate.plusMonths(n);
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return localDate.format(fmt);
+    }
 }

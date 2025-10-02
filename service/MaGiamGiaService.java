@@ -3,6 +3,7 @@ package service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import model.BaoHanh;
 import model.ChiTietHoaDon;
 import model.MaGiamGia;
 import model.SanPham;
@@ -88,6 +89,10 @@ public class MaGiamGiaService {
                 listRemove.remove(i);
             }
             thanhTien += giaSanPham;
+        }
+        ArrayList<BaoHanh> listBaoHanh = chiTietHoaDon.getListBaoHanh();
+        for (int i = 0; i < listBaoHanh.size(); i++) {
+            thanhTien += listBaoHanh.get(i).getGia();
         }
         chiTietHoaDon.setThanhTien(thanhTien);
     }

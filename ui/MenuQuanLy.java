@@ -63,6 +63,11 @@ public class MenuQuanLy implements QuanLiChung {
         menuLichLamViec.xemLichLamViec();
     }
 
+    public void xepLichDiLam() {
+        MenuLichLamViec menuLichLamViec = new MenuLichLamViec(db);
+        menuLichLamViec.xepLichLamViec();
+    }
+
     public void xuatMenu() {
         System.out.println("1. Hien thong tin");
         System.out.println("2. Quan ly nhan vien");
@@ -74,6 +79,7 @@ public class MenuQuanLy implements QuanLiChung {
         System.out.println("8. Hop Thu");
         System.out.println("9. Xem lich tuan");
         System.out.println("10. Doi mat khau");
+        System.out.println("11. Xep lich di lam viec");
         System.out.println("0. Thoat");
         System.out.println("--------------------------------");
     }
@@ -95,6 +101,7 @@ public class MenuQuanLy implements QuanLiChung {
             case 8 -> xemTatCaTinNhan();
             case 9 -> xemLichTuan();
             case 10 -> doiMatKhau();
+            case 11 -> xepLichDiLam();
             default -> System.out.println("da thoat");
         }
     }
