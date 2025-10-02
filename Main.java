@@ -1,5 +1,4 @@
 import database.Database;
-import file.DocFile;
 import file.GhiFile;
 import model.NhanVien;
 import model.QuanLy;
@@ -15,8 +14,6 @@ public class Main {
 
     public Main() {
         user = null;
-        DocFile docFile = new DocFile(db);
-        docFile.doc_DatasVaoDatabase();
     }
 
     public void dieuHuongMenu() {

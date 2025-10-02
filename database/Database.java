@@ -356,24 +356,7 @@ public class Database {
     public static void main(String[] args) {
         Database db = new Database();
         DocFile docFile = new DocFile(db);
-        docFile.doc_NhanVientxt("datas/NhanVien.txt");
-        docFile.doc_QuanLytxt("datas/QuanLy.txt");
-
-        docFile.doc_SanPhamtxt("datas/SanPham.txt");
-        docFile.doc_HangThanhVientxt("datas/HangThanhVien.txt");
-        docFile.doc_MaGiamGiatxt("datas/MaGiamGia.txt");
-
-        docFile.doc_KhachHangtxt("datas/KhachHang.txt");
-        docFile.doc_BaoHanhtxt("datas/BaoHanh.txt");
-        docFile.doc_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
-        docFile.doc_PhieuBaoHanhtxt("datas/KhachHang_PhieuBaoHanh.txt");
-        docFile.doc_PhieuTraHangtxt("datas/KhachHang_PhieuTraHang.txt");
-        docFile.doc_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
-        docFile.doc_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");
-        docFile.doc_ChiTietHoaDon_BaoHanhtxt("datas/ChiTietHoaDon_BaoHanh.txt");
-        docFile.doc_ChiTietHoaDon_MaGiamGiatxt("datas/ChiTietHoaDon_MaGiamGia.txt");
-        docFile.doc_HoaDontxt("datas/HoaDon.txt");
-        db.xuatListHoaDon();
+        db.xuatListNhanVien();
     }
 
 }

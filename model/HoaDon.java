@@ -71,6 +71,6 @@ public class HoaDon {
                 + "ma: " + getMa() + "\n"
                 + "Ghi chu: " + getGhiChu() + "\n"
                 + "Ngay tao don: " + getNgayTaoHoaDon() + "\n"
-                + "------------------------------------" + "\n";
+                + "Thanh Tien : " + getThanhTien() + "\n";
     }
 }

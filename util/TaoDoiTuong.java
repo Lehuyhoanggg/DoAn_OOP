@@ -87,6 +87,14 @@ public class TaoDoiTuong {
         return khachHang;
     }
 
+    public static KhachHang taoKhachHang(Database db, String sdt) {
+        String maKh = CapMa.capMaKhachHang(db);
+        String tenKh = Nhap.nhapStr("Nhap ten khach hang: ");////
+        KhachHang khachHang = new KhachHang(maKh, tenKh, sdt);
+        khachHang.getListMaGiamGia().addAll(db.getListMaGiamGia());
+        return khachHang;
+    }
+
     public static PhieuBaoHanh taoPhieuBaoHanh(BaoHanh baoHanh, KhachHang khachHang, Database db) {
         System.out.println("Tao phieu bao hanh");
         String maPhieuBaoHanh = CapMa.capMaPhieuBaoHanh(db);
@@ -152,7 +160,7 @@ public class TaoDoiTuong {
             if (luaChon < 0 || luaChon >= listBaoHanh.size()) {
                 System.out.println("Lua chon khong hop le");
             } else {
-                BaoHanh baoHanh = new BaoHanh(listBaoHanh.get(i));
+                BaoHanh baoHanh = new BaoHanh(listBaoHanh.get(luaChon));
                 baoHanh.setNgayBatDau(ThoiGian.layNgayHienTaiStr());
                 baoHanh.setNgayKetThuc();
                 chiTietHoaDon.themBaoHanh(baoHanh);
@@ -167,11 +175,12 @@ public class TaoDoiTuong {
     public static HoaDon taoHoaDon(Database db) {
         String ma = CapMa.capMaHoaDon(db);
         KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
-        KhachHang khachHang = khacHangService.timKhachHangTheoSdt(Nhap.nhapStr("Nhap so dien thoai khach hang : "));
+        String sdt = Nhap.nhapStr("Nhap so dien thoai khach hang : ");
+        KhachHang khachHang = khacHangService.timKhachHangTheoSdt(sdt);
         if (khachHang == null) {
             System.out.println("Khach hang khong ton tai");
             System.out.println("Tao moi khach hang");
-            khachHang = taoKhachHang(db);
+            khachHang = taoKhachHang(db, sdt);
         }
 
         ChiTietHoaDon chiTietHoaDon = taoChiTietHoaDon(db, khachHang);

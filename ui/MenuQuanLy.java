@@ -3,6 +3,7 @@ package ui;
 import database.Database;
 import interfaces.QuanLiChung;
 import model.QuanLy;
+import util.XoaManHinh;
 
 public class MenuQuanLy implements QuanLiChung {
     private Database db;
@@ -109,6 +110,7 @@ public class MenuQuanLy implements QuanLiChung {
     public void menu() {
         int xacNhan = 1;
         while (xacNhan == 1) {
+            XoaManHinh.xoa();
             xuatMenu();
             int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
             thucHienChucNang(luaChon);
