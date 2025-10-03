@@ -2,6 +2,10 @@ package util;
 
 import java.util.ArrayList;
 
+import danhsach.DanhSachBaoHanh;
+import danhsach.DanhSachKhachHang;
+import danhsach.DanhSachMaGiamGia;
+import danhsach.DanhSachSanPham;
 import database.Database;
 import model.BaoHanh;
 import model.ChiTietHoaDon;
@@ -16,10 +20,6 @@ import model.QuanLy;
 import model.SanPham;
 import model.TaiKhoan;
 import model.TinNhan;
-import service.BaoHanhService;
-import service.KhachHangService;
-import service.MaGiamGiaService;
-import service.SanPhamService;
 import ui.Nhap;
 
 public class TaoDoiTuong {
@@ -107,7 +107,7 @@ public class TaoDoiTuong {
     }
 
     public static BaoHanh taoBaoHanh(Database db) {
-        SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
+        DanhSachSanPham sanPhamService = new DanhSachSanPham(db.getListSanPham());
         String maBaoHanh = CapMa.capMaBaoHanh(db);
         String loaiBaoHanh = Nhap.nhapStr("Nhap so thang bao hanh : ");
         loaiBaoHanh = "BaoHanh" + loaiBaoHanh + "T";
@@ -124,9 +124,9 @@ public class TaoDoiTuong {
 
     public static ChiTietHoaDon taoChiTietHoaDon(Database db, KhachHang khachHang) {
         String ma = CapMa.capMaChiTietHoaDon(db);
-        BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
-        SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
-        MaGiamGiaService maGiamGiaService = new MaGiamGiaService(khachHang.getListMaGiamGia());
+        DanhSachBaoHanh baoHanhService = new DanhSachBaoHanh(db.getListBaoHanh());
+        DanhSachSanPham sanPhamService = new DanhSachSanPham(db.getListSanPham());
+        DanhSachMaGiamGia maGiamGiaService = new DanhSachMaGiamGia(khachHang.getListMaGiamGia());
         ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(ma);
         int soSp = Nhap.nhapInt("Nhap so san pham can them : ");
 
@@ -176,7 +176,7 @@ public class TaoDoiTuong {
 
     public static HoaDon taoHoaDon(Database db) {
         String ma = CapMa.capMaHoaDon(db);
-        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
+        DanhSachKhachHang khacHangService = new DanhSachKhachHang(db.getListKhachHang());
         String sdt = Nhap.nhapStr("Nhap so dien thoai khach hang : ");
         KhachHang khachHang = khacHangService.timKhachHangTheoSdt(sdt);
         if (khachHang == null) {

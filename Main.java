@@ -1,10 +1,10 @@
+import danhsach.DanhSachTaiKhoan;
 import database.Database;
 import model.NhanVien;
 import model.QuanLy;
 import model.User;
-import service.TaiKhoanService;
-import ui.MenuNhanVien;
-import ui.MenuQuanLy;
+import ui.NhanVienQuanLy;
+import ui.QuanLyQuanLyTatCa;
 import ui.Nhap;
 
 public class Main {
@@ -17,10 +17,10 @@ public class Main {
 
     public void dieuHuongMenu() {
         if (user.getQuyenHang() == "NhanVien") {
-            MenuNhanVien menuNhanVien = new MenuNhanVien(db, (NhanVien) user);
+            NhanVienQuanLy menuNhanVien = new NhanVienQuanLy(db, (NhanVien) user);
             menuNhanVien.menu();
         } else if (user.getQuyenHang() == "QuanLy") {
-            MenuQuanLy menuQuanLy = new MenuQuanLy(db, (QuanLy) user);
+            QuanLyQuanLyTatCa menuQuanLy = new QuanLyQuanLyTatCa(db, (QuanLy) user);
             menuQuanLy.menu();
         } else {
             System.out.println("Tai Khoan chua duoc cap quyen");
@@ -31,7 +31,7 @@ public class Main {
         int xacNhan = 1;
         do {
             int dem = 0;
-            TaiKhoanService taiKhoanService = new TaiKhoanService(db.getListTaiKhoan());
+            DanhSachTaiKhoan taiKhoanService = new DanhSachTaiKhoan(db.getListTaiKhoan());
             String tenTaiKhoan;
             String matKhau;
             do {
@@ -57,6 +57,5 @@ public class Main {
     public static void main(String[] args) {
         Main cellPhoneX = new Main();
         cellPhoneX.dangNhap();
-
     }
 }

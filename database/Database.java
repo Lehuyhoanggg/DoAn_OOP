@@ -209,7 +209,7 @@ public class Database {
     public void xuatListNhanVien() {
         if (listNhanVien != null) {
             for (NhanVien nv : listNhanVien) {
-                System.out.print(nv); // toString() của NhanVien đã in \n cuối
+                System.out.print(nv);
             }
         }
     }
@@ -350,7 +350,7 @@ public class Database {
         for (Object obj : list) {
             System.out.println(obj);
         }
-        System.out.println(); // thêm \n ở cuối
+        System.out.println();
     }
 
     public static void main(String[] args) {

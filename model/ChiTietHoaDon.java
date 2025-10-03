@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ChiTietHoaDon {
     private String ma;
-    private DanhSachSanPham danhSachSanPham;
+    private LuuTruSanPham danhSachSanPham;
     private ArrayList<BaoHanh> listBaoHanh;
     private long thanhTien;
     private ArrayList<MaGiamGia> listMaGiamGiaDaDung;
@@ -13,14 +13,14 @@ public class ChiTietHoaDon {
         this.ma = ma;
         this.thanhTien = thanhTien;
         listBaoHanh = new ArrayList<>();
-        danhSachSanPham = new DanhSachSanPham();
+        danhSachSanPham = new LuuTruSanPham();
         listMaGiamGiaDaDung = new ArrayList<>();
     }
 
     public ChiTietHoaDon(String ma) {
         this.ma = ma;
         listBaoHanh = new ArrayList<>();
-        danhSachSanPham = new DanhSachSanPham();
+        danhSachSanPham = new LuuTruSanPham();
         listMaGiamGiaDaDung = new ArrayList<>();
     }
 
@@ -40,7 +40,7 @@ public class ChiTietHoaDon {
         return listBaoHanh;
     }
 
-    public DanhSachSanPham getDanhSachSanPham() {
+    public LuuTruSanPham getDanhSachSanPham() {
         return danhSachSanPham;
     }
 
@@ -60,7 +60,7 @@ public class ChiTietHoaDon {
         this.listBaoHanh = listBaoHanh;
     }
 
-    public void setDanhSachSanPham(DanhSachSanPham danhSachSanPham) {
+    public void setDanhSachSanPham(LuuTruSanPham danhSachSanPham) {
         this.danhSachSanPham = danhSachSanPham;
     }
 
