@@ -8,7 +8,7 @@ import model.KhachHang;
 import model.PhieuBaoHanh;
 import model.SanPham;
 import service.BaoHanhService;
-import service.KhacHangService;
+import service.KhachHangService;
 import service.PhieuBaoHanhService;
 import service.SanPhamService;
 import util.TaoDoiTuong;
@@ -22,10 +22,10 @@ public class MenuPhieuBaoHanh {
 
     public void taoPhieuBaoHanh() {
         PhieuBaoHanhService phieuBaoHanhService = new PhieuBaoHanhService(db.getListPhieuBaoHanh());
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
-        KhachHang khachHang = khacHangService.timKhachHang(Nhap.nhapStr("Nhap ma khach hang de bao hanh : "));
-        BaoHanh baoHanh = baoHanhService.timBaoHanh("Nhap ma bao hanh de tao phieu bao hanh");
+        KhachHang khachHang = khacHangService.timKhachHangTheoSdt(Nhap.nhapStr("Nhap sdt khach hang de bao hanh : "));
+        BaoHanh baoHanh = baoHanhService.timBaoHanh(Nhap.nhapStr("Nhap ma bao hanh de tao phieu bao hanh"));
         if (baoHanh == null) {
             System.out.println("Khong tim thay bao hanh de tao phieu");
             return;
@@ -50,7 +50,7 @@ public class MenuPhieuBaoHanh {
                 System.out.println("Thoat sua khach hang");
                 break;
             case 1:
-                KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+                KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
                 KhachHang khachHang = khacHangService.timKhachHang("Nhap ma khach hang can thay doi vao trong phieu");
                 if (khachHang == null) {
                     System.out.println("Ma khach hang khong hop le");

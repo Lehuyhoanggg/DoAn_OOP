@@ -66,11 +66,11 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "Chi tiet hoa don: " + chiTietHoaDon.getMa() + "\n"
-                + "Khach hang: " + khachHang.getMaKh() + "\n"
-                + "ma: " + getMa() + "\n"
-                + "Ghi chu: " + getGhiChu() + "\n"
-                + "Ngay tao don: " + getNgayTaoHoaDon() + "\n"
-                + "Thanh Tien : " + getThanhTien() + "\n";
+        return chiTietHoaDon.getMa() + " " +
+                khachHang.getMaKh() + " " +
+                getMa() + " " +
+                getGhiChu() + " " +
+                getNgayTaoHoaDon() + " " +
+                getThanhTien();
     }
 }

@@ -3,7 +3,7 @@ package ui;
 import java.util.ArrayList;
 import database.Database;
 import service.BaoHanhService;
-import service.KhacHangService;
+import service.KhachHangService;
 import service.SanPhamService;
 import util.TaoDoiTuong;
 import model.BaoHanh;
@@ -19,7 +19,7 @@ public class MenuBaoHanh {
 
     public void taoBaoHanh() {
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         KhachHang khachHang = khacHangService.timKhachHang(Nhap.nhapStr("Nhap ma khach hang de tao bao hanh"));
         if (khachHang == null) {
             System.out.println("Khong tim thay khach hang");

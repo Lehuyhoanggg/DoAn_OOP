@@ -89,6 +89,13 @@ public class SanPham {
         this.trangThai = trangThai;
     }
 
+    public void giamTonKho() {
+        if (tonKho == 0) {
+            return;
+        }
+        this.tonKho--;
+    }
+
     @Override
     public String toString() {
         return "ma : " + ma + "\n" +
@@ -98,6 +105,6 @@ public class SanPham {
                 "gia : " + gia + "\n" +
                 "tonKho : " + tonKho + "\n" +
                 "moTa : " + moTa + "\n" +
-                "trangThai : " + trangThai + "\n" + "------------------------------------" + "\n";
+                "trangThai : " + trangThai + "\n";
     }
 }

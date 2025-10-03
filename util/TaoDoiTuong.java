@@ -17,7 +17,7 @@ import model.SanPham;
 import model.TaiKhoan;
 import model.TinNhan;
 import service.BaoHanhService;
-import service.KhacHangService;
+import service.KhachHangService;
 import service.MaGiamGiaService;
 import service.SanPhamService;
 import ui.Nhap;
@@ -143,6 +143,8 @@ public class TaoDoiTuong {
                 continue;
             }
             chiTietHoaDon.themSanPham(sanPham);
+            sanPham.giamTonKho();
+            ;
             System.out.println("Them san pham thanh cong");
             ArrayList<BaoHanh> listBaoHanh = baoHanhService.timBaoHanh(sanPham);
             if (listBaoHanh.size() == 0) {
@@ -163,31 +165,40 @@ public class TaoDoiTuong {
                 BaoHanh baoHanh = new BaoHanh(listBaoHanh.get(luaChon));
                 baoHanh.setNgayBatDau(ThoiGian.layNgayHienTaiStr());
                 baoHanh.setNgayKetThuc();
+                khachHang.themBaoHanh(baoHanh);
                 chiTietHoaDon.themBaoHanh(baoHanh);
             }
 
         }
         maGiamGiaService.setThanhTienDaApMaGG(chiTietHoaDon);
-
         return chiTietHoaDon;
     }
 
     public static HoaDon taoHoaDon(Database db) {
         String ma = CapMa.capMaHoaDon(db);
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         String sdt = Nhap.nhapStr("Nhap so dien thoai khach hang : ");
         KhachHang khachHang = khacHangService.timKhachHangTheoSdt(sdt);
         if (khachHang == null) {
             System.out.println("Khach hang khong ton tai");
             System.out.println("Tao moi khach hang");
             khachHang = taoKhachHang(db, sdt);
+            khacHangService.themKhachHang(khachHang);
         }
 
         ChiTietHoaDon chiTietHoaDon = taoChiTietHoaDon(db, khachHang);
         String ngayTaoHoaDon = ThoiGian.layNgayHienTaiStr();
         String ghiChu = Nhap.nhapStr("Nhap ghi chu neu co : ");
         HoaDon hoaDon = new HoaDon(ma, khachHang, chiTietHoaDon, ngayTaoHoaDon, ghiChu);
+        ArrayList<MaGiamGia> listMaGiamGia = chiTietHoaDon.getListMaGiamGiaDaDung();
+        if (listMaGiamGia.size() > 0) {
+            System.out.println("Danh sach ma giam gia da dung :");
+            for (int i = 0; i < listMaGiamGia.size(); i++) {
+                System.out.println(listMaGiamGia.get(i));
+            }
+        }
         khachHang.themHoaDon(hoaDon);
+        khachHang.tangTienDaChi(hoaDon.getThanhTien());
         return hoaDon;
     }
 

@@ -159,6 +159,10 @@ public class KhachHang {
         return listPhieuTraHang.add(phieuTraHang);
     }
 
+    public void tangTienDaChi(long so) {
+        this.tienDaChi += so;
+    }
+
     @Override
     public String toString() {
         return "maKh : " + maKh + "\n" +

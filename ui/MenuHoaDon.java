@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import database.Database;
 import model.BaoHanh;
 import model.ChiTietHoaDon;
+import model.DanhSachSanPham;
 import model.HoaDon;
 import model.KhachHang;
 import model.SanPham;
 import service.BaoHanhService;
 import service.ChiTietHoaDonService;
 import service.HoaDonService;
-import service.KhacHangService;
+import service.KhachHangService;
 import service.SanPhamService;
 import util.TaoDoiTuong;
 import util.ThoiGian;
@@ -113,7 +114,7 @@ public class MenuHoaDon {
     private void suaThanhPhanHoaDon(HoaDon hoaDon, int luaChon) {
         switch (luaChon) {
             case 1:
-                KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+                KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
                 KhachHang khachHang = khacHangService.timKhachHang(Nhap.nhapStr("Nhap ma khach hang moi : "));
                 if (khachHang == null) {
                     System.out.println("Khong tim thay khach hang");
@@ -224,6 +225,20 @@ public class MenuHoaDon {
             return;
         } else {
             System.out.println(hoaDon);
+            DanhSachSanPham danhSachSanPham = hoaDon.getChiTietHoaDon().getDanhSachSanPham();
+            if (danhSachSanPham.getMapSanPham().size() > 0) {
+                System.out.println("Danh sach san pham gom :");
+            }
+            for (SanPham sanPham : danhSachSanPham.getMapSanPham().keySet()) {
+                System.out.println(sanPham);
+            }
+            ArrayList<BaoHanh> listBaoHanh = hoaDon.getChiTietHoaDon().getListBaoHanh();
+            if (listBaoHanh.size() > 0) {
+                System.out.println("Danh sach bao hanh bao gom :");
+            }
+            for (BaoHanh baoHanh : listBaoHanh) {
+                System.out.println(baoHanh);
+            }
         }
     }
 
@@ -236,6 +251,7 @@ public class MenuHoaDon {
         for (int i = 0; i < listHoaDon.size(); i++) {
             System.out.println(listHoaDon.get(i));
         }
+
     }
 
     private void xuatMenu() {
@@ -251,6 +267,9 @@ public class MenuHoaDon {
 
     private void thucHienChucNang(int luaChon) {
         switch (luaChon) {
+            case 0:
+                System.out.println("da thoat");
+                break;
             case 1:
                 taoHoaDon();
                 break;
@@ -281,7 +300,7 @@ public class MenuHoaDon {
             xuatMenu();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             thucHienChucNang(luaChon);
-            xacNhan = Nhap.nhapXacNhanThoat();
+            xacNhan = Nhap.nhapInt("(1)Tiep tuc menu hoa don (khac)Thoat :");
         }
     }
 }

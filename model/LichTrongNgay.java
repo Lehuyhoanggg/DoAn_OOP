@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class LichTrongNgay {
     private String ma;
     private int thu;
-    private ArrayList<CaLam> listCaLam; // 1 ngay gom nhieu ca lam
     private String ngay;
+    private ArrayList<CaLam> listCaLam; // 1 ngay gom nhieu ca lam
 
     public LichTrongNgay(String ma, int thu, String ngay) {
         this.ma = ma;

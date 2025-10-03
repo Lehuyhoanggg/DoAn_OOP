@@ -139,7 +139,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHangtxt(String path) {
-        KhacHangService khService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khService = new KhachHangService(db.getListKhachHang());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -183,7 +183,7 @@ public class DocFile implements DocFile_Datas {
     public void doc_PhieuBaoHanhtxt(String path) {
         PhieuBaoHanhService phieuBaoHanhservice = new PhieuBaoHanhService(db.getListPhieuBaoHanh());
         SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -203,7 +203,7 @@ public class DocFile implements DocFile_Datas {
     public void doc_PhieuTraHangtxt(String path) {
         PhieuTraHangService phieuTraHangService = new PhieuTraHangService(db.getListPhieuTraHang());
         SanPhamService sanPhamService = new SanPhamService(db.getListSanPham());
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
             String line;
@@ -310,7 +310,7 @@ public class DocFile implements DocFile_Datas {
 
     public void doc_HoaDontxt(String path) {
         HoaDonService hoaDonService = new HoaDonService(db.getListHoaDon());
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         ChiTietHoaDonService chiTietHoaDonService = new ChiTietHoaDonService(db.getListChiTietHoaDon());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
@@ -333,7 +333,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_PhieuBaoHanhtxt(String path) {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         PhieuBaoHanhService phieuBaoHanhService = new PhieuBaoHanhService(db.getListPhieuBaoHanh());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
@@ -357,7 +357,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_BaoHanhtxt(String path) {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         BaoHanhService baoHanhService = new BaoHanhService(db.getListBaoHanh());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
@@ -384,7 +384,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_MaGiamGiatxt(String path) {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         MaGiamGiaService maGiamGiaService = new MaGiamGiaService(db.getListMaGiamGia());
         MaGiamGiaService maGiamGiaServiceDq = new MaGiamGiaService(db.getListMaGiamGiaDq());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -418,7 +418,7 @@ public class DocFile implements DocFile_Datas {
                     continue;
                 }
                 String[] thanhPhan = line.split("\\s+");
-                KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+                KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
                 KhachHang khachHang = khacHangService.timKhachHang(thanhPhan[0]);
                 if (khachHang == null) {
                     continue;
@@ -439,7 +439,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_HoaDontxt(String path) {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         HoaDonService hoaDonService = new HoaDonService(db.getListHoaDon());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
@@ -463,7 +463,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_PhieuTraHangtxt(String path) {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         PhieuTraHangService phieuTraHangService = new PhieuTraHangService(db.getListPhieuTraHang());
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;

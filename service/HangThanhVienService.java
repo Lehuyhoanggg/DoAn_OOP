@@ -3,6 +3,7 @@ package service;
 import java.util.ArrayList;
 
 import model.HangThanhVien;
+import model.KhachHang;
 
 public class HangThanhVienService {
     private ArrayList<HangThanhVien> listHangThanhVien;
@@ -36,5 +37,9 @@ public class HangThanhVienService {
             return listHangThanhVien.remove(htv);
         }
         return false;
+    }
+
+    public void setHangThanhVienChoKhachHang(KhachHang khachHang) {
+
     }
 }

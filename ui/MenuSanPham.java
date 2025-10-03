@@ -182,7 +182,10 @@ public class MenuSanPham {
             xuatMenu();
             int choice = Nhap.nhapInt("Nhap lua chon: ");
             thucHienChucNang(choice);
-            thoat = Nhap.nhapXacNhanThoat();
+            if (choice == 0) {
+                break;
+            }
+            thoat = Nhap.nhapInt("(1)Tiep tuc menu san pham (khac)Thoat");
         }
     }
 }

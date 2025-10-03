@@ -51,5 +51,7 @@ public interface GhiFile_Datas {
 
     void ghi_TinNhantxt(String path);
 
+    void ghi_User_TinNhantxt(String path);
+
     void ghi_DatasVaoDatabase();
 }

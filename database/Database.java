@@ -352,11 +352,4 @@ public class Database {
         }
         System.out.println(); // thêm \n ở cuối
     }
-
-    public static void main(String[] args) {
-        Database db = new Database();
-        DocFile docFile = new DocFile(db);
-        db.xuatListNhanVien();
-    }
-
 }

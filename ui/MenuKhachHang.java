@@ -3,24 +3,74 @@ package ui;
 import java.util.ArrayList;
 
 import database.Database;
+import model.BaoHanh;
 import model.HangThanhVien;
+import model.HoaDon;
 import model.KhachHang;
+import model.MaGiamGia;
+import model.PhieuBaoHanh;
+import model.PhieuTraHang;
 import service.HangThanhVienService;
-import service.KhacHangService;
+import service.KhachHangService;
 import util.TaoDoiTuong;
 
 public class MenuKhachHang {
     private Database db;
+    ArrayList<KhachHang> listKhachHang;
 
     public MenuKhachHang(Database db) {
         this.db = db;
+        this.listKhachHang = db.getListKhachHang();
     }
 
     public void taoKhachHang() {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         KhachHang khachHang = TaoDoiTuong.taoKhachHang(db);
         khacHangService.themKhachHang(khachHang);
         System.out.println("Da tao khach hang thanh cong");
+    }
+
+    private void xuatListTrongKhachHang(KhachHang khachHang) {
+        ArrayList<BaoHanh> listBaoHanh = khachHang.getListBaoHanh();
+        ArrayList<PhieuBaoHanh> listPhieuBaoHanh = khachHang.getListPhieuBaoHanh();
+        ArrayList<MaGiamGia> listMaGiamGia = khachHang.getListMaGiamGia();
+        ArrayList<HoaDon> listHoaDon = khachHang.getListHoaDon();
+        ArrayList<PhieuTraHang> listPhieuTraHang = khachHang.getListPhieuTraHang();
+
+        if (!listBaoHanh.isEmpty()) {
+            System.out.println("Danh sach Bao Hanh:");
+            for (BaoHanh bh : listBaoHanh) {
+                System.out.println(bh);
+            }
+        }
+
+        if (!listPhieuBaoHanh.isEmpty()) {
+            System.out.println("Danh sach Phieu Bao Hanh:");
+            for (PhieuBaoHanh pbh : listPhieuBaoHanh) {
+                System.out.println(pbh);
+            }
+        }
+
+        if (!listMaGiamGia.isEmpty()) {
+            System.out.println("Danh sach Ma Giam Gia:");
+            for (MaGiamGia mg : listMaGiamGia) {
+                System.out.println(mg);
+            }
+        }
+
+        if (!listHoaDon.isEmpty()) {
+            System.out.println("Danh sach Hoa Don:");
+            for (HoaDon hd : listHoaDon) {
+                System.out.println(hd);
+            }
+        }
+
+        if (!listPhieuTraHang.isEmpty()) {
+            System.out.println("Danh sach Phieu Tra Hang:");
+            for (PhieuTraHang pth : listPhieuTraHang) {
+                System.out.println(pth);
+            }
+        }
     }
 
     public void traCuuThongTinKhachHang() {
@@ -43,8 +93,9 @@ public class MenuKhachHang {
 
         if (timThay) {
             int luaChon = Nhap.nhapInt("lua chon khach hang de hien thi : ");
-            if (listKhachHang.size() > luaChon && 0 < luaChon) {
+            if (listKhachHang.size() > luaChon || 0 < luaChon) {
                 System.out.println(listKhachHang.get(luaChon));
+                xuatListTrongKhachHang(listKhachHang.get(luaChon));
             } else {
                 System.out.println("lua chon khong hop le");
             }
@@ -54,6 +105,14 @@ public class MenuKhachHang {
                 if (listKhachHang.get(i).getMaKh().equals(tuKhoa)) {
                     System.out.println(i + " " + listKhachHang.get(i).getMaKh() + " " + listKhachHang.get(i).getTenKh()
                             + " " + listKhachHang.get(i).getSdt());
+                    int luaChon = Nhap.nhapInt("lua chon khach hang de hien thi : ");
+
+                    if (listKhachHang.size() > luaChon || 0 < luaChon) {
+                        System.out.println(listKhachHang.get(luaChon));
+                        xuatListTrongKhachHang(listKhachHang.get(luaChon));
+                    } else {
+                        System.out.println("lua chon khong hop le");
+                    }
                     timThay = true;
                     break;
                 }
@@ -68,7 +127,7 @@ public class MenuKhachHang {
 
     public void xoaKhachHang() {
         ArrayList<KhachHang> listKhachHang = db.getListKhachHang();
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         String ma = Nhap.nhapStr("Nhap ma khach hang can xoa : ");
         if (listKhachHang == null || listKhachHang.size() == 0) {
             System.out.println("Khong co khach hang de xoa");
@@ -110,6 +169,12 @@ public class MenuKhachHang {
         }
     }
 
+    public void xemTatCaKhachHang() {
+        for (int i = 0; i < listKhachHang.size(); i++) {
+            System.out.println(listKhachHang.get(i));
+        }
+    }
+
     private void xuatSuaKhachHang() {
         System.out.println("1. Sua ten khach hang");
         System.out.println("2. Sua so dien thoai");
@@ -118,7 +183,7 @@ public class MenuKhachHang {
     }
 
     public void suaThongTinKhachHang() {
-        KhacHangService khacHangService = new KhacHangService(db.getListKhachHang());
+        KhachHangService khacHangService = new KhachHangService(db.getListKhachHang());
         KhachHang khachHang = khacHangService.timKhachHang(Nhap.nhapStr("Nhap ma khach hang can sau : "));
         if (khachHang == null) {
             System.out.println("Khong tim thay khach hang");
@@ -138,6 +203,7 @@ public class MenuKhachHang {
         System.out.println("2. Tra cuu thong tin khach hang");
         System.out.println("3. Xoa khach hang");
         System.out.println("4. Sua thong tin khach hang");
+        System.out.println("5. Xem tat ca khach hang");
         System.out.println("0. Thoat");
     }
 
@@ -157,6 +223,9 @@ public class MenuKhachHang {
                 break;
             case 4:
                 suaThongTinKhachHang();
+                break;
+            case 5:
+                xemTatCaKhachHang();
                 break;
             default:
                 break;

@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import model.HoaDon;
 import model.KhachHang;
 
-public class KhacHangService {
+public class KhachHangService {
     private ArrayList<KhachHang> listKhachHang;
 
-    public KhacHangService(ArrayList<KhachHang> listKhachHang) {
+    public KhachHangService(ArrayList<KhachHang> listKhachHang) {
         this.listKhachHang = listKhachHang;
     }
 

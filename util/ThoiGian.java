@@ -111,8 +111,9 @@ public class ThoiGian {
         return firstDay.format(fmt);
     }
 
-    public static LocalDate chuyenNgayStrThanhLocalData(String ngay) {
-        return LocalDate.parse(ngay);
+    public static LocalDate chuyenNgayStrThanhLocalData(String ngayStr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(ngayStr, formatter);
     }
 
     public static long khoangCachNgay(String ngayBd, String ngayKt) {
