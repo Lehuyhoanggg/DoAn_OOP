@@ -352,4 +352,8 @@ public class Database {
         }
         System.out.println(); // thêm \n ở cuối
     }
+
+    public static void main(String[] args) {
+        System.out.println("hello");
+    }
 }
