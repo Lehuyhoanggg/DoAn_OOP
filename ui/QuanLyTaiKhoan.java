@@ -26,7 +26,7 @@ public class QuanLyTaiKhoan {
 
     public void taoTaiKhoan() {
         TaiKhoan taiKhoan = TaoDoiTuong.taoTaiKhoan();
-        DanhSachUser danhSachUser = new DanhSachUser(db.getListUser());
+        DanhSachUser danhSachUser = db.getDanhSachUser();
         danhSachUser.ganTaiKhoanChoUser(taiKhoan);
         listTaiKhoan.add(taiKhoan);
     }

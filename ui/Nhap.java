@@ -25,15 +25,6 @@ public class Nhap {
         }
     }
 
-    private static boolean laSoLong(String so) {
-        try {
-            Long.parseLong(so);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     public static int nhapInt(String tuKhoa) {
         String luaChon;
         do {
@@ -65,10 +56,10 @@ public class Nhap {
         do {
             System.out.print(tuKhoa);
             luaChon = sc.nextLine();
-            if (!laSoLong(luaChon)) {
+            if (!laSo(luaChon)) {
                 System.out.println("Chi duoc nhap so nguyen");
             }
-        } while (!laSoLong(luaChon));
+        } while (!laSo(luaChon));
 
         return Long.parseLong(luaChon);
     }

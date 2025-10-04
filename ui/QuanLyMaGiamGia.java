@@ -3,8 +3,10 @@ package ui;
 import java.util.ArrayList;
 
 import danhsach.DanhSachMaGiamGia;
+import danhsach.DanhSachSanPham;
 import database.Database;
 import model.MaGiamGia;
+import model.SanPham;
 import util.TaoDoiTuong;
 
 public class QuanLyMaGiamGia {
@@ -17,7 +19,7 @@ public class QuanLyMaGiamGia {
 
     // tim kiem ma giam gia
     public void timKiemMaGiamGia() {
-        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(db.getListMaGiamGia());
+        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can tim: ");
         MaGiamGia mGG = danhSachMaGiamGia.timMaGiamGia(ma);
         if (mGG == null) {
@@ -31,17 +33,24 @@ public class QuanLyMaGiamGia {
     public void xemTatCaMaGiamGia() {
         System.out.println("====Tat ca ma giam gia====");
         ArrayList<MaGiamGia> listMaGiamGia = db.getListMaGiamGia();
-        if (listMaGiamGia.size() == 0 || listMaGiamGia == null) {
-            System.out.println("khong tim thay ma giam gia nao");
+        if (!(listMaGiamGia == null || listMaGiamGia.size() == 0)) {
+            System.out.println("Danh sach ma giam gia thuong : ");
+            for (int i = 0; i < listMaGiamGia.size(); i++) {
+                System.out.println(listMaGiamGia.get(i));
+            }
         }
-        for (int i = 0; i < listMaGiamGia.size(); i++) {
-            System.out.println(listMaGiamGia.get(i));
+        ArrayList<MaGiamGia> listMaGiamGiaDq = db.getListMaGiamGiaDq();
+        if (!(listMaGiamGiaDq == null || listMaGiamGiaDq.size() == 0)) {
+            System.out.println("Danh sach ma giam gia doc quyen : ");
+            for (int i = 0; i < listMaGiamGiaDq.size(); i++) {
+                System.out.println(listMaGiamGiaDq.get(i));
+            }
         }
     }
 
     // them ma giam gia
     public void themMaGiamGia() {
-        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(db.getListMaGiamGia());
+        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         MaGiamGia mGG = TaoDoiTuong.taoMaGiamGia(db);
         if (danhSachMaGiamGia.themMaGiamGia(mGG)) {
             System.out.println("them ma giam gia thanh cong!");
@@ -52,7 +61,7 @@ public class QuanLyMaGiamGia {
 
     // xoa ma giam gia
     public void xoaMaGiamGia() {
-        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(db.getListMaGiamGia());
+        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can xoa: ");
         MaGiamGia mGG = danhSachMaGiamGia.timMaGiamGia(ma);
         if (mGG == null) {
@@ -78,7 +87,7 @@ public class QuanLyMaGiamGia {
         System.out.println("0. thoat");
     }
 
-    private void thucHienChucNang(MaGiamGia mGG, int choice) {
+    private void thucHienChucNangSua(MaGiamGia mGG, int choice) {
         switch (choice) {
             case 1:
                 mGG.setTenMa(Nhap.nhapStr("nhap ten moi: "));
@@ -112,17 +121,70 @@ public class QuanLyMaGiamGia {
     }
 
     public void suaMaGiamGia() {
-        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(db.getListMaGiamGia());
+        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can xoa: ");
         MaGiamGia mGG = danhSachMaGiamGia.timMaGiamGia(ma);
         int xacNhan = 1;
         while (xacNhan == 1) {
             xuatMenuSuaMaGiamGia();
             int choice = Nhap.nhapInt("nhap lua chon: ");
-            thucHienChucNang(mGG, choice);
-            xacNhan = Nhap.nhapInt("(1)Tiep tuc menu ma giam gia (khac)Thoat");
-            ;
+            thucHienChucNangSua(mGG, choice);
+            xacNhan = Nhap.nhapInt("(1)Tiep tuc sua ma giam gia (khac)Thoat");
         }
     }
 
+    public void maGiamGiaApDungChoSp() {
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+        SanPham sanPham = danhSachSanPham.timSanPham(Nhap.nhapStr("Nhap ma san pham de xem : "));
+        if (sanPham == null) {
+            System.out.println("Khong tim thay san pham");
+            return;
+        }
+        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
+        ArrayList<MaGiamGia> listMaGiamGia = danhSachMaGiamGia.listMaGiamGiaChoSp(sanPham);
+        if (listMaGiamGia.size() == 0) {
+            System.out.println("Khong co ma giam gia thoa man");
+            return;
+        }
+
+        for (int i = 0; i < listMaGiamGia.size(); i++) {
+            System.out.println(listMaGiamGia.get(i));
+        }
+    }
+
+    private void xuatMenu() {
+        System.out.println("1. Them ma giam gia");
+        System.out.println("2. Xoa ma giam gia");
+        System.out.println("3. Tra cuu ma giam gia");
+        System.out.println("4. Xem ma giam gia ap dung cho san pham");
+        System.out.println("5. Sua ma giam gia");
+        System.out.println("6. Xem tat ca ma giam gia");
+        System.out.println("0. Thoat");
+    }
+
+    private void thucHienChucNang(int luaChon) {
+        switch (luaChon) {
+            case 1 -> themMaGiamGia();
+            case 2 -> xoaMaGiamGia();
+            case 3 -> timKiemMaGiamGia();
+            case 4 -> maGiamGiaApDungChoSp();
+            case 5 -> suaMaGiamGia();
+            case 6 -> xemTatCaMaGiamGia();
+            default -> System.out.println("Lua chon khong hop le");
+        }
+    }
+
+    public void menu() {
+        int xacNhan = 1;
+        while (xacNhan == 1) {
+            xuatMenu();
+            int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            if (luaChon == 0) {
+                System.out.println("Da thoat");
+                break;
+            }
+            thucHienChucNang(luaChon);
+            xacNhan = Nhap.nhapInt("(1)Tiep tuc menu ma giam gia (khac)Thoat");
+        }
+    }
 }

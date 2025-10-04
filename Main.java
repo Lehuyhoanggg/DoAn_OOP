@@ -16,10 +16,10 @@ public class Main {
     }
 
     public void dieuHuongMenu() {
-        if (user.getQuyenHang() == "NhanVien") {
+        if (user.getQuyenHang().equals("NhanVien")) {
             NhanVienQuanLy menuNhanVien = new NhanVienQuanLy(db, (NhanVien) user);
             menuNhanVien.menu();
-        } else if (user.getQuyenHang() == "QuanLy") {
+        } else if (user.getQuyenHang().equals("QuanLy")) {
             QuanLyQuanLyTatCa menuQuanLy = new QuanLyQuanLyTatCa(db, (QuanLy) user);
             menuQuanLy.menu();
         } else {

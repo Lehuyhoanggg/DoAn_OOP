@@ -25,7 +25,7 @@ public class QuanLyHoaDon {
     }
 
     public void taoHoaDon() {
-        DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon(db.getListHoaDon());
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         HoaDon hoaDon = TaoDoiTuong.taoHoaDon(db);
         if (danhSachHoaDon.themHoaDon(hoaDon)) {
             System.out.println("Tao hoa don thanh cong");
@@ -36,7 +36,7 @@ public class QuanLyHoaDon {
 
     // 2. xoa hao don mua hang
     public void xoaHoaDon() {
-        DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon(db.getListHoaDon());
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         String ma = Nhap.nhapStr("nhap ma hoa don can xoa: ");
         if (danhSachHoaDon.xoaHoaDon(ma)) {
             System.out.println("xoa hoa don thanh cong!");
@@ -55,9 +55,9 @@ public class QuanLyHoaDon {
     }
 
     private void suaThanhPhanChiTietHoaDon(ChiTietHoaDon chiTietHoaDon, KhachHang khachHang, int luaChon) {
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
-        DanhSachBaoHanh danhSachBaoHanh = new DanhSachBaoHanh(db.getListBaoHanh());
-        DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(db.getListChiTietHoaDon());
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+        DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         switch (luaChon) {
             case 0:
                 System.out.println("Da Thoat");
@@ -115,7 +115,7 @@ public class QuanLyHoaDon {
     private void suaThanhPhanHoaDon(HoaDon hoaDon, int luaChon) {
         switch (luaChon) {
             case 1:
-                DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
+                DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
                 KhachHang khachHang = danhSachKhachHang.timKhachHang(Nhap.nhapStr("Nhap ma khach hang moi : "));
                 if (khachHang == null) {
                     System.out.println("Khong tim thay khach hang");
@@ -146,7 +146,7 @@ public class QuanLyHoaDon {
     }
 
     public void suaHoaDon() {
-        DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon(db.getListHoaDon());
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         HoaDon hoaDon = danhSachHoaDon.timHoaDon(Nhap.nhapStr("Nhap hoa don can sua : "));
         if (hoaDon == null) {
             System.out.println("khong tim thay hoa don");
@@ -170,14 +170,14 @@ public class QuanLyHoaDon {
     }
 
     private void xemDoanhthuHomNay() {
-        DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon(db.getListHoaDon());
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         String ngayHomNay = ThoiGian.layNgayHienTaiStr();
         long tong = danhSachHoaDon.tinhDoanhThuTrongNgay(ngayHomNay);
         System.out.println("doanh thu ngay hom nay: " + tong);
     }
 
     private void xemDoanhThuTuan() {
-        DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon(db.getListHoaDon());
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         String ngayDauTuan = ThoiGian.layNgayDauTuanStr();
         String ngayCuoiTuan = ThoiGian.layNgayCuoiTuanStr();
         long tongTien = danhSachHoaDon.tinhDoanhThuTrongKhoan(ngayDauTuan, ngayCuoiTuan);
@@ -185,7 +185,7 @@ public class QuanLyHoaDon {
     }
 
     public void xemDoanhThuThang() {
-        DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon(db.getListHoaDon());
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         String ngayDauThang = ThoiGian.layNgayDauThangStr();
         String ngayCuoiThang = ThoiGian.layNgayCuoiThangStr();
         long tongTien = danhSachHoaDon.tinhDoanhThuTrongKhoan(ngayDauThang, ngayCuoiThang);
@@ -219,7 +219,7 @@ public class QuanLyHoaDon {
     // 6.tra cuu hoa don mua hang
     public void traCuuHoaDonMuaHang() {
         String ma = Nhap.nhapStr("nhap ma hoa don muon tra cuu: ");
-        DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon(db.getListHoaDon());
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         HoaDon hoaDon = danhSachHoaDon.timHoaDon(ma);
         if (hoaDon == null) {
             System.out.println("khong tim thay hoa don muon tra cuu!");

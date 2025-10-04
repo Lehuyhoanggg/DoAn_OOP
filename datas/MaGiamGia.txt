@@ -4,6 +4,7 @@ MGG003 Giam_15_Tai_nghe Tai_nghe Tat_Ca 15% 10/08/2025 15/09/2025
 MGG004 Giam_5_Ban_phim Ban_phim Razer 5% 15/08/2025 19/09/2025
 MGG005 Giam_10_Chuot Chuot Logitech 10000 20/08/2025 20/10/2025
 MGG006 Giam_30_Apple Laptop Apple 30% 25/08/2025 25/10/2025
+MGG007 Giam_30_TatCa Tat_Ca Tat_Ca 30% Vinh_Vien Vinh_Vien
 
 MGGDONG1 Giam_Hang_Dong Tat_Ca Tat_Ca 4% Vinh_Vien Vinh_Vien
 MGGBAC1 Giam_Hang_Bac Tat_Ca Tat_Ca 6% Vinh_Vien Vinh_Vien

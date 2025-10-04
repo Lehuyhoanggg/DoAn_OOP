@@ -107,12 +107,12 @@ public class TaoDoiTuong {
     }
 
     public static BaoHanh taoBaoHanh(Database db) {
-        DanhSachSanPham sanPhamService = new DanhSachSanPham(db.getListSanPham());
+        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
         String maBaoHanh = CapMa.capMaBaoHanh(db);
         String loaiBaoHanh = Nhap.nhapStr("Nhap so thang bao hanh : ");
         loaiBaoHanh = "BaoHanh" + loaiBaoHanh + "T";
         String maSanPham = Nhap.nhapStr("Nhap ma san pham : ");
-        SanPham sanPham = sanPhamService.timSanPham(maSanPham);
+        SanPham sanPham = danhSachSanPham.timSanPham(maSanPham);
 
         String ngayBatDau = ThoiGian.layNgayHienTaiStr();
         String ngayKetThuc = ThoiGian.ngaySauNThang(ngayBatDau, Integer.parseInt(loaiBaoHanh.replace("\\D+", "")));
@@ -124,15 +124,17 @@ public class TaoDoiTuong {
 
     public static ChiTietHoaDon taoChiTietHoaDon(Database db, KhachHang khachHang) {
         String ma = CapMa.capMaChiTietHoaDon(db);
-        DanhSachBaoHanh baoHanhService = new DanhSachBaoHanh(db.getListBaoHanh());
-        DanhSachSanPham sanPhamService = new DanhSachSanPham(db.getListSanPham());
-        DanhSachMaGiamGia maGiamGiaService = new DanhSachMaGiamGia(khachHang.getListMaGiamGia());
+        DanhSachBaoHanh danhSachBaoHanh = new DanhSachBaoHanh(db.getListBaoHanh());
+        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
+        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(khachHang.getListMaGiamGia());/// lay ma giam gia
+                                                                                                  /// cua doi tuong
+                                                                                                  /// khach hang
         ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(ma);
         int soSp = Nhap.nhapInt("Nhap so san pham can them : ");
 
         for (int i = 0; i < soSp; i++) {
             String maSp = Nhap.nhapStr("Nhap ma san Pham " + (i + 1) + " : ");
-            SanPham sanPham = sanPhamService.timSanPham(maSp);
+            SanPham sanPham = danhSachSanPham.timSanPham(maSp);
             if (sanPham == null) {
                 System.out.println("Ko tim thay san pham cua ma " + maSp);
                 continue;
@@ -146,7 +148,7 @@ public class TaoDoiTuong {
             sanPham.giamTonKho();
             ;
             System.out.println("Them san pham thanh cong");
-            ArrayList<BaoHanh> listBaoHanh = baoHanhService.timBaoHanh(sanPham);
+            ArrayList<BaoHanh> listBaoHanh = danhSachBaoHanh.timBaoHanh(sanPham);
             if (listBaoHanh.size() == 0) {
                 continue;
             }
@@ -170,20 +172,20 @@ public class TaoDoiTuong {
             }
 
         }
-        maGiamGiaService.setThanhTienDaApMaGG(chiTietHoaDon);
+        danhSachMaGiamGia.setThanhTienDaApMaGG(chiTietHoaDon);
         return chiTietHoaDon;
     }
 
     public static HoaDon taoHoaDon(Database db) {
         String ma = CapMa.capMaHoaDon(db);
-        DanhSachKhachHang khacHangService = new DanhSachKhachHang(db.getListKhachHang());
+        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
         String sdt = Nhap.nhapStr("Nhap so dien thoai khach hang : ");
-        KhachHang khachHang = khacHangService.timKhachHangTheoSdt(sdt);
+        KhachHang khachHang = danhSachKhachHang.timKhachHangTheoSdt(sdt);
         if (khachHang == null) {
             System.out.println("Khach hang khong ton tai");
             System.out.println("Tao moi khach hang");
             khachHang = taoKhachHang(db, sdt);
-            khacHangService.themKhachHang(khachHang);
+            danhSachKhachHang.themKhachHang(khachHang);
         }
 
         ChiTietHoaDon chiTietHoaDon = taoChiTietHoaDon(db, khachHang);

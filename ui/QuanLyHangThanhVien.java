@@ -29,7 +29,7 @@ public class QuanLyHangThanhVien {
     }
 
     public void taoHangThanhVien() {
-        DanhSachHangThanhVien service = new DanhSachHangThanhVien(db.getListHangThanhVien());
+        DanhSachHangThanhVien service = db.getDanhSachHangThanhVien();
         HangThanhVien htv = TaoDoiTuong.taoHangThanhVien(db);
         if (service.themHangThanhVien(htv)) {
             System.out.println("Tao hang thanh vien thanh cong!");
@@ -39,7 +39,7 @@ public class QuanLyHangThanhVien {
     }
 
     public void xoaHangThanhVien() {
-        DanhSachHangThanhVien service = new DanhSachHangThanhVien(db.getListHangThanhVien());
+        DanhSachHangThanhVien service = db.getDanhSachHangThanhVien();
         String ten = Nhap.nhapStr("Nhap ten hang thanh vien can xoa: ");
         if (service.xoaHangThanhVien(ten)) {
             System.out.println("Xoa hang thanh vien thanh cong!");
@@ -69,7 +69,7 @@ public class QuanLyHangThanhVien {
                 System.out.println("Da sua mo ta cua hang thanh vien");
                 break;
             case 3:
-                DanhSachMaGiamGia maGiamGiaService = new DanhSachMaGiamGia(db.getListMaGiamGia());
+                DanhSachMaGiamGia maGiamGiaService = db.getDanhSachMaGiamGia();
                 MaGiamGia maGiamGia = maGiamGiaService.timMaGiamGia("Nhap ma giam gia de them vao hang thanh vien : ");
                 if (maGiamGia == null) {
                     System.out.println("Khong tim thay ma giam gia");
@@ -79,7 +79,7 @@ public class QuanLyHangThanhVien {
                 System.out.println("Them ma giam gia thanh cong");
                 break;
             case 4:
-                DanhSachMaGiamGia maGiamGiaService1 = new DanhSachMaGiamGia(db.getListMaGiamGia());
+                DanhSachMaGiamGia maGiamGiaService1 = db.getDanhSachMaGiamGia();
                 MaGiamGia maGiamGia1 = maGiamGiaService1
                         .timMaGiamGia("Nhap ma giam gia de them vao hang thanh vien : ");
                 if (maGiamGia1 == null) {
@@ -100,7 +100,7 @@ public class QuanLyHangThanhVien {
     }
 
     public void suaHangThanhVien() {
-        DanhSachHangThanhVien hangThanhVienService = new DanhSachHangThanhVien(db.getListHangThanhVien());
+        DanhSachHangThanhVien hangThanhVienService = db.getDanhSachHangThanhVien();
         HangThanhVien hangThanhVien = hangThanhVienService.timHangThanhVien("Nhap ten hang thanh vien can sua : ");
         if (hangThanhVien == null) {
             System.out.println("Khong tim thay hang thanh vien");
@@ -118,7 +118,7 @@ public class QuanLyHangThanhVien {
     /////
     public void traCuuHangThanhVien() {
         String ten = Nhap.nhapStr("Nhap ten hang thanh vien can tra cuu: ");
-        DanhSachHangThanhVien service = new DanhSachHangThanhVien(db.getListHangThanhVien());
+        DanhSachHangThanhVien service = db.getDanhSachHangThanhVien();
         HangThanhVien htv = service.timHangThanhVien(ten);
         if (htv == null) {
             System.out.println("Khong tim thay hang thanh vien!");

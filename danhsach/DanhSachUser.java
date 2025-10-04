@@ -11,6 +11,10 @@ public class DanhSachUser {
         this.listUser = listUser;
     }
 
+    public ArrayList<User> getListUser() {
+        return listUser;
+    }
+
     public User timUser(String ma) {
         if (listUser == null) {
             return null;

@@ -22,7 +22,7 @@ public class QuanLySanPham {
     }
 
     public void themSanPham() {
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         SanPham sp = TaoDoiTuong.taoSanPham(db);
         if (danhSachSanPham.themSanPham(sp)) {
             System.out.println("Them san pham thanh cong!");
@@ -33,7 +33,7 @@ public class QuanLySanPham {
     }
 
     public void xoaSanPham() {
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         String ma = Nhap.nhapStr("Nhap ma san pham can xoa: ");
         if (danhSachSanPham.xoaSanPham(ma)) {
             System.out.println("Xoa san pham thanh cong!");
@@ -95,7 +95,7 @@ public class QuanLySanPham {
     }
 
     public void suaSanPham() {
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         SanPham sp = danhSachSanPham.timSanPham(Nhap.nhapStr("Nhap ma san pham can sua"));
         if (sp == null) {
             System.out.println("khong tim thay ma san pham");

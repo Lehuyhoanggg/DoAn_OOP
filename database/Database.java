@@ -1,8 +1,24 @@
 package database;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import danhsach.DanhSachBaoHanh;
+import danhsach.DanhSachCaLam;
+import danhsach.DanhSachChiTietHoaDon;
+import danhsach.DanhSachHangThanhVien;
+import danhsach.DanhSachHoaDon;
+import danhsach.DanhSachKhachHang;
+import danhsach.DanhSachLichLamViec;
+import danhsach.DanhSachLichTrongNgay;
+import danhsach.DanhSachMaGiamGia;
+import danhsach.DanhSachNhanVien;
+import danhsach.DanhSachPhieuBaoHanh;
+import danhsach.DanhSachPhieuTraHang;
+import danhsach.DanhSachQuanLy;
+import danhsach.DanhSachSanPham;
+import danhsach.DanhSachTaiKhoan;
+import danhsach.DanhSachTinNhan;
+import danhsach.DanhSachUser;
 import file.DocFile;
 import model.BaoHanh;
 import model.CaLam;
@@ -23,337 +39,339 @@ import model.TinNhan;
 import model.User;
 
 public class Database {
-    private ArrayList<NhanVien> listNhanVien;
-    private ArrayList<QuanLy> listQuanLy;
-    private ArrayList<HoaDon> listHoaDon;
-    private ArrayList<TaiKhoan> listTaiKhoan;
-    private ArrayList<SanPham> listSanPham;
-    private ArrayList<ChiTietHoaDon> listChiTietHoaDon;
-    private ArrayList<BaoHanh> listBaoHanh;
-    private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
-    private ArrayList<PhieuTraHang> listPhieuTraHang;
-    private ArrayList<KhachHang> listKhachHang;
-    private ArrayList<MaGiamGia> listMaGiamGia;
-    private ArrayList<MaGiamGia> listMaGiamGiaDq;
-    private ArrayList<HangThanhVien> listHangThanhVien;
-    private ArrayList<TinNhan> listTinNhan;
-    private ArrayList<CaLam> listCaLam;
-    private ArrayList<LichTrongNgay> listLichTrongNgay;
+    // danh sach
+    private DanhSachNhanVien danhSachNhanVien;
     private LichLamViec lichTuan;
+    private DanhSachQuanLy danhSachQuanLy;
+    private DanhSachHoaDon danhSachHoaDon;
+    private DanhSachTaiKhoan danhSachTaiKhoan;
+    private DanhSachSanPham danhSachSanPham;
+    private DanhSachChiTietHoaDon danhSachChiTietHoaDon;
+    private DanhSachBaoHanh danhSachBaoHanh;
+    private DanhSachPhieuBaoHanh danhSachPhieuBaoHanh;
+    private DanhSachPhieuTraHang danhSachPhieuTraHang;
+    private DanhSachKhachHang danhSachKhachHang;
+    private DanhSachMaGiamGia danhSachMaGiamGia;
+    private DanhSachMaGiamGia danhSachMaGiamGiaDq;
+    private DanhSachHangThanhVien danhSachHangThanhVien;
+    private DanhSachTinNhan danhSachTinNhan;
+    private DanhSachCaLam danhSachCaLam;
+    private DanhSachLichTrongNgay danhSachLichTrongNgay;
+    private DanhSachLichLamViec danhSachLichLamViec;
+    private DanhSachUser danhSachUser;
 
     public Database() {
-        listNhanVien = new ArrayList<>();
-        listQuanLy = new ArrayList<>();
-        listHoaDon = new ArrayList<>();
-        listTaiKhoan = new ArrayList<>();
-        listSanPham = new ArrayList<>();
-        listChiTietHoaDon = new ArrayList<>();
-        listBaoHanh = new ArrayList<>();
-        listPhieuBaoHanh = new ArrayList<>();
-        listPhieuTraHang = new ArrayList<>();
-        listKhachHang = new ArrayList<>();
-        listMaGiamGia = new ArrayList<>();
-        listMaGiamGiaDq = new ArrayList<>();
-        listHangThanhVien = new ArrayList<>();
-        listTinNhan = new ArrayList<>();
-        listCaLam = new ArrayList<>();
-        listLichTrongNgay = new ArrayList<>();
-        lichTuan = new LichLamViec();
         DocFile docFile = new DocFile(this);
+        danhSachNhanVien = new DanhSachNhanVien(new ArrayList<NhanVien>());
+        danhSachQuanLy = new DanhSachQuanLy(new ArrayList<QuanLy>());
+        danhSachHoaDon = new DanhSachHoaDon(new ArrayList<HoaDon>());
+        danhSachTaiKhoan = new DanhSachTaiKhoan(new ArrayList<TaiKhoan>());
+        danhSachSanPham = new DanhSachSanPham(new ArrayList<SanPham>());
+        danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(new ArrayList<ChiTietHoaDon>());
+        danhSachBaoHanh = new DanhSachBaoHanh(new ArrayList<BaoHanh>());
+        danhSachPhieuBaoHanh = new DanhSachPhieuBaoHanh(new ArrayList<PhieuBaoHanh>());
+        danhSachPhieuTraHang = new DanhSachPhieuTraHang(new ArrayList<PhieuTraHang>());
+        danhSachKhachHang = new DanhSachKhachHang(new ArrayList<KhachHang>());
+        danhSachMaGiamGia = new DanhSachMaGiamGia(new ArrayList<MaGiamGia>());
+        danhSachMaGiamGiaDq = new DanhSachMaGiamGia(new ArrayList<MaGiamGia>());
+        danhSachHangThanhVien = new DanhSachHangThanhVien(new ArrayList<HangThanhVien>());
+        danhSachTinNhan = new DanhSachTinNhan(new ArrayList<TinNhan>());
+        danhSachCaLam = new DanhSachCaLam(new ArrayList<CaLam>());
+        danhSachLichTrongNgay = new DanhSachLichTrongNgay(new ArrayList<LichTrongNgay>());
+        danhSachLichLamViec = new DanhSachLichLamViec(lichTuan);
         docFile.doc_DatasVaoDatabase();
+        lichTuan = new LichLamViec();
     }
 
-    public ArrayList<CaLam> getListCaLam() {
-        return listCaLam;
+    public void taoDanhSachUser() {
+        danhSachUser = new DanhSachUser(getListUser());
     }
 
-    public ArrayList<LichTrongNgay> getListLichTrongNgay() {
-        return listLichTrongNgay;
+    // ===== GET =====
+    public ArrayList<NhanVien> getListNhanVien() {
+        return danhSachNhanVien.getListNhanVien();
+    }
+
+    public ArrayList<QuanLy> getListQuanLy() {
+        return danhSachQuanLy.getListQuanLy();
+    }
+
+    public ArrayList<HoaDon> getListHoaDon() {
+        return danhSachHoaDon.getListHoaDon();
+    }
+
+    public ArrayList<TaiKhoan> getListTaiKhoan() {
+        return danhSachTaiKhoan.getListTaiKhoan();
+    }
+
+    public ArrayList<SanPham> getListSanPham() {
+        return danhSachSanPham.getListSanPham();
+    }
+
+    public ArrayList<ChiTietHoaDon> getListChiTietHoaDon() {
+        return danhSachChiTietHoaDon.getListChiTietHoaDon();
+    }
+
+    public ArrayList<BaoHanh> getListBaoHanh() {
+        return danhSachBaoHanh.getListBaoHanh();
+    }
+
+    public ArrayList<PhieuBaoHanh> getListPhieuBaoHanh() {
+        return danhSachPhieuBaoHanh.getListPhieuBaoHanh();
+    }
+
+    public ArrayList<PhieuTraHang> getListPhieuTraHang() {
+        return danhSachPhieuTraHang.getListPhieuTraHang();
+    }
+
+    public ArrayList<KhachHang> getListKhachHang() {
+        return danhSachKhachHang.getListKhachHang();
+    }
+
+    public ArrayList<MaGiamGia> getListMaGiamGia() {
+        return danhSachMaGiamGia.getListMaGiamGia();
     }
 
     public ArrayList<MaGiamGia> getListMaGiamGiaDq() {
-        return listMaGiamGiaDq;
+        return danhSachMaGiamGiaDq.getListMaGiamGia();
     }
 
     public ArrayList<HangThanhVien> getListHangThanhVien() {
-        return listHangThanhVien;
+        return danhSachHangThanhVien.getListHangThanhVien();
+    }
+
+    public ArrayList<TinNhan> getListTinNhan() {
+        return danhSachTinNhan.getListTinNhan();
+    }
+
+    public ArrayList<CaLam> getListCaLam() {
+        return danhSachCaLam.getListCaLam();
+    }
+
+    public ArrayList<LichTrongNgay> getListLichTrongNgay() {
+        return danhSachLichTrongNgay.getListLichTrongNgay();
     }
 
     public LichLamViec getLichTuan() {
         return lichTuan;
     }
 
-    public ArrayList<TinNhan> getListTinNhan() {
-        return listTinNhan;
+    // ===== SET =====
+    public void setListNhanVien(ArrayList<NhanVien> listNhanVien) {
+        danhSachNhanVien.setListNhanVien(listNhanVien);
     }
 
-    public ArrayList<BaoHanh> getListBaoHanh() {
-        return listBaoHanh;
+    public void setListQuanLy(ArrayList<QuanLy> listQuanLy) {
+        danhSachQuanLy.setListQuanLy(listQuanLy);
     }
 
-    public ArrayList<PhieuTraHang> getListPhieuTraHang() {
-        return listPhieuTraHang;
+    public void setListHoaDon(ArrayList<HoaDon> listHoaDon) {
+        danhSachHoaDon.setListHoaDon(listHoaDon);
     }
 
-    public ArrayList<ChiTietHoaDon> getListChiTietHoaDon() {
-        return listChiTietHoaDon;
+    public void setListTaiKhoan(ArrayList<TaiKhoan> listTaiKhoan) {
+        danhSachTaiKhoan.setListTaiKhoan(listTaiKhoan);
     }
 
-    public ArrayList<HoaDon> getListHoaDon() {
-        return listHoaDon;
+    public void setListSanPham(ArrayList<SanPham> listSanPham) {
+        danhSachSanPham.setListSanPham(listSanPham);
     }
 
-    public ArrayList<KhachHang> getListKhachHang() {
-        return listKhachHang;
+    public void setListChiTietHoaDon(ArrayList<ChiTietHoaDon> listChiTietHoaDon) {
+        danhSachChiTietHoaDon.setListChiTietHoaDon(listChiTietHoaDon);
     }
 
-    public ArrayList<MaGiamGia> getListMaGiamGia() {
-        return listMaGiamGia;
+    public void setListBaoHanh(ArrayList<BaoHanh> listBaoHanh) {
+        danhSachBaoHanh.setListBaoHanh(listBaoHanh);
     }
 
-    public ArrayList<NhanVien> getListNhanVien() {
-        return listNhanVien;
+    public void setListPhieuBaoHanh(ArrayList<PhieuBaoHanh> listPhieuBaoHanh) {
+        danhSachPhieuBaoHanh.setListPhieuBaoHanh(listPhieuBaoHanh);
     }
 
-    public ArrayList<PhieuBaoHanh> getListPhieuBaoHanh() {
-        return listPhieuBaoHanh;
+    public void setListPhieuTraHang(ArrayList<PhieuTraHang> listPhieuTraHang) {
+        danhSachPhieuTraHang.setListPhieuTraHang(listPhieuTraHang);
     }
 
-    public ArrayList<QuanLy> getListQuanLy() {
-        return listQuanLy;
+    public void setListKhachHang(ArrayList<KhachHang> listKhachHang) {
+        danhSachKhachHang.setListKhachHang(listKhachHang);
     }
 
-    public ArrayList<SanPham> getListSanPham() {
-        return listSanPham;
+    public void setListMaGiamGia(ArrayList<MaGiamGia> listMaGiamGia) {
+        danhSachMaGiamGia.setListMaGiamGia(listMaGiamGia);
     }
 
-    public ArrayList<TaiKhoan> getListTaiKhoan() {
-        return listTaiKhoan;
+    public void setListMaGiamGiaDq(ArrayList<MaGiamGia> listMaGiamGiaDq) {
+        danhSachMaGiamGiaDq.setListMaGiamGia(listMaGiamGiaDq);
+    }
+
+    public void setListHangThanhVien(ArrayList<HangThanhVien> listHangThanhVien) {
+        danhSachHangThanhVien.setListHangThanhVien(listHangThanhVien);
+    }
+
+    public void setListTinNhan(ArrayList<TinNhan> listTinNhan) {
+        danhSachTinNhan.setListTinNhan(listTinNhan);
+    }
+
+    public void setListCaLam(ArrayList<CaLam> listCaLam) {
+        danhSachCaLam.setListCaLam(listCaLam);
+    }
+
+    public void setListLichTrongNgay(ArrayList<LichTrongNgay> listLichTrongNgay) {
+        danhSachLichTrongNgay.setListLichTrongNgay(listLichTrongNgay);
     }
 
     public void setLichTuan(LichLamViec lichTuan) {
         this.lichTuan = lichTuan;
     }
 
-    public void setListChiTietHoaDon(ArrayList<ChiTietHoaDon> listChiTietHoaDon) {
-        this.listChiTietHoaDon = listChiTietHoaDon;
+    /// get set danh sach
+
+    // ===== GET: các đối tượng DanhSach =====
+    public DanhSachNhanVien getDanhSachNhanVien() {
+        return danhSachNhanVien;
     }
 
-    public void setListBaoHanh(ArrayList<BaoHanh> listBaoHanh) {
-        this.listBaoHanh = listBaoHanh;
+    public DanhSachUser getDanhSachUser() {
+        return danhSachUser;
     }
 
-    public void setListCaLam(ArrayList<CaLam> listCaLam) {
-        this.listCaLam = listCaLam;
+    public DanhSachQuanLy getDanhSachQuanLy() {
+        return danhSachQuanLy;
     }
 
-    public void setListMaGiamGiaDq(ArrayList<MaGiamGia> listMaGiamGiaDq) {
-        this.listMaGiamGiaDq = listMaGiamGiaDq;
+    public DanhSachHoaDon getDanhSachHoaDon() {
+        return danhSachHoaDon;
     }
 
-    public void setListHoaDon(ArrayList<HoaDon> listHoaDon) {
-        this.listHoaDon = listHoaDon;
+    public DanhSachTaiKhoan getDanhSachTaiKhoan() {
+        return danhSachTaiKhoan;
     }
 
-    public void setListTinNhan(ArrayList<TinNhan> listTinNhan) {
-        this.listTinNhan = listTinNhan;
+    public DanhSachSanPham getDanhSachSanPham() {
+        return danhSachSanPham;
     }
 
-    public void setListKhachHang(ArrayList<KhachHang> listKhachHang) {
-        this.listKhachHang = listKhachHang;
+    public DanhSachChiTietHoaDon getDanhSachChiTietHoaDon() {
+        return danhSachChiTietHoaDon;
     }
 
-    public void setListMaGiamGia(ArrayList<MaGiamGia> listMaGiamGia) {
-        this.listMaGiamGia = listMaGiamGia;
+    public DanhSachBaoHanh getDanhSachBaoHanh() {
+        return danhSachBaoHanh;
     }
 
-    public void setListNhanVien(ArrayList<NhanVien> listNhanVien) {
-        this.listNhanVien = listNhanVien;
+    public DanhSachPhieuBaoHanh getDanhSachPhieuBaoHanh() {
+        return danhSachPhieuBaoHanh;
     }
 
-    public void setListPhieuBaoHanh(ArrayList<PhieuBaoHanh> listPhieuBaoHanh) {
-        this.listPhieuBaoHanh = listPhieuBaoHanh;
+    public DanhSachPhieuTraHang getDanhSachPhieuTraHang() {
+        return danhSachPhieuTraHang;
     }
 
-    public void setListHangThanhVien(ArrayList<HangThanhVien> listHangThanhVien) {
-        this.listHangThanhVien = listHangThanhVien;
+    public DanhSachKhachHang getDanhSachKhachHang() {
+        return danhSachKhachHang;
     }
 
-    public void setListQuanLy(ArrayList<QuanLy> listQuanLy) {
-        this.listQuanLy = listQuanLy;
+    public DanhSachMaGiamGia getDanhSachMaGiamGia() {
+        return danhSachMaGiamGia;
     }
 
-    public void setListSanPham(ArrayList<SanPham> listSanPham) {
-        this.listSanPham = listSanPham;
+    public DanhSachMaGiamGia getDanhSachMaGiamGiaDq() {
+        return danhSachMaGiamGiaDq;
     }
 
-    public void setListTaiKhoan(ArrayList<TaiKhoan> listTaiKhoan) {
-        this.listTaiKhoan = listTaiKhoan;
+    public DanhSachHangThanhVien getDanhSachHangThanhVien() {
+        return danhSachHangThanhVien;
     }
 
-    public void setListPhieuTraHang(ArrayList<PhieuTraHang> listPhieuTraHang) {
-        this.listPhieuTraHang = listPhieuTraHang;
+    public DanhSachTinNhan getDanhSachTinNhan() {
+        return danhSachTinNhan;
     }
 
-    public void setListLichTrongNgay(ArrayList<LichTrongNgay> listLichTrongNgay) {
-        this.listLichTrongNgay = listLichTrongNgay;
+    public DanhSachLichLamViec getDanhSachLichLamViec() {
+        return danhSachLichLamViec;
+    }
+
+    public DanhSachCaLam getDanhSachCaLam() {
+        return danhSachCaLam;
+    }
+
+    public DanhSachLichTrongNgay getDanhSachLichTrongNgay() {
+        return danhSachLichTrongNgay;
+    }
+
+    public void setDanhSachNhanVien(DanhSachNhanVien danhSachNhanVien) {
+        this.danhSachNhanVien = danhSachNhanVien;
+    }
+
+    public void setDanhSachQuanLy(DanhSachQuanLy danhSachQuanLy) {
+        this.danhSachQuanLy = danhSachQuanLy;
+    }
+
+    public void setDanhSachHoaDon(DanhSachHoaDon danhSachHoaDon) {
+        this.danhSachHoaDon = danhSachHoaDon;
+    }
+
+    public void setDanhSachTaiKhoan(DanhSachTaiKhoan danhSachTaiKhoan) {
+        this.danhSachTaiKhoan = danhSachTaiKhoan;
+    }
+
+    public void setDanhSachSanPham(DanhSachSanPham danhSachSanPham) {
+        this.danhSachSanPham = danhSachSanPham;
+    }
+
+    public void setDanhSachChiTietHoaDon(DanhSachChiTietHoaDon danhSachChiTietHoaDon) {
+        this.danhSachChiTietHoaDon = danhSachChiTietHoaDon;
+    }
+
+    public void setDanhSachBaoHanh(DanhSachBaoHanh danhSachBaoHanh) {
+        this.danhSachBaoHanh = danhSachBaoHanh;
+    }
+
+    public void setDanhSachPhieuBaoHanh(DanhSachPhieuBaoHanh danhSachPhieuBaoHanh) {
+        this.danhSachPhieuBaoHanh = danhSachPhieuBaoHanh;
+    }
+
+    public void setDanhSachPhieuTraHang(DanhSachPhieuTraHang danhSachPhieuTraHang) {
+        this.danhSachPhieuTraHang = danhSachPhieuTraHang;
+    }
+
+    public void setDanhSachKhachHang(DanhSachKhachHang danhSachKhachHang) {
+        this.danhSachKhachHang = danhSachKhachHang;
+    }
+
+    public void setDanhSachMaGiamGia(DanhSachMaGiamGia danhSachMaGiamGia) {
+        this.danhSachMaGiamGia = danhSachMaGiamGia;
+    }
+
+    public void setDanhSachMaGiamGiaDq(DanhSachMaGiamGia danhSachMaGiamGiaDq) {
+        this.danhSachMaGiamGiaDq = danhSachMaGiamGiaDq;
+    }
+
+    public void setDanhSachHangThanhVien(DanhSachHangThanhVien danhSachHangThanhVien) {
+        this.danhSachHangThanhVien = danhSachHangThanhVien;
+    }
+
+    public void setDanhSachTinNhan(DanhSachTinNhan danhSachTinNhan) {
+        this.danhSachTinNhan = danhSachTinNhan;
+    }
+
+    public void setDanhSachCaLam(DanhSachCaLam danhSachCaLam) {
+        this.danhSachCaLam = danhSachCaLam;
+    }
+
+    public void setDanhSachLichTrongNgay(DanhSachLichTrongNgay danhSachLichTrongNgay) {
+        this.danhSachLichTrongNgay = danhSachLichTrongNgay;
+    }
+
+    public void setDanhSachLichLamViec(DanhSachLichLamViec danhSachLichLamViec) {
+        this.danhSachLichLamViec = danhSachLichLamViec;
     }
 
     public ArrayList<User> getListUser() {
         ArrayList<User> listUser = new ArrayList<>();
-        listUser.addAll(listNhanVien);
-        listUser.addAll(listQuanLy);
+        listUser.addAll(getListNhanVien());
+        listUser.addAll(getListQuanLy());
         return listUser;
-    }
-
-    public void xuatListNhanVien() {
-        if (listNhanVien != null) {
-            for (NhanVien nv : listNhanVien) {
-                System.out.print(nv);
-            }
-        }
-    }
-
-    public void xuatListQuanLy() {
-        if (listQuanLy != null) {
-            for (QuanLy ql : listQuanLy) {
-                System.out.print(ql);
-            }
-        }
-    }
-
-    public void xuatListHoaDon() {
-        if (listHoaDon != null) {
-            for (HoaDon hd : listHoaDon) {
-                System.out.print(hd);
-            }
-        }
-    }
-
-    public void xuatListTaiKhoan() {
-        if (listTaiKhoan != null) {
-            for (TaiKhoan tk : listTaiKhoan) {
-                System.out.print(tk);
-            }
-        }
-    }
-
-    public void xuatListSanPham() {
-        if (listSanPham != null) {
-            for (SanPham sp : listSanPham) {
-                System.out.print(sp);
-            }
-        }
-    }
-
-    public void xuatListChiTietHoaDon() {
-        if (listChiTietHoaDon != null) {
-            for (ChiTietHoaDon cthd : listChiTietHoaDon) {
-                System.out.print(cthd);
-                xuatList(cthd.getListMaGiamGiaDaDung());
-            }
-            System.out.println("---------------------------------------------------");
-        }
-    }
-
-    public void xuatListBaoHanh() {
-        if (listBaoHanh != null) {
-            for (BaoHanh bh : listBaoHanh) {
-                System.out.print(bh);
-            }
-        }
-    }
-
-    public void xuatListPhieuBaoHanh() {
-        if (listPhieuBaoHanh != null) {
-            for (PhieuBaoHanh pbh : listPhieuBaoHanh) {
-                System.out.print(pbh);
-            }
-        }
-    }
-
-    public void xuatListPhieuTraHang() {
-        if (listPhieuTraHang != null) {
-            for (PhieuTraHang pth : listPhieuTraHang) {
-                System.out.print(pth);
-            }
-        }
-    }
-
-    public void xuatListKhachHang() {
-        if (listKhachHang != null) {
-            for (KhachHang kh : listKhachHang) {
-                System.out.print(kh);
-            }
-        }
-    }
-
-    public void xuatListMaGiamGia() {
-        if (listMaGiamGia != null) {
-            for (MaGiamGia mg : listMaGiamGia) {
-                System.out.print(mg);
-            }
-        }
-    }
-
-    public void xuatListMaGiamGiaDq() {
-        if (listMaGiamGiaDq != null) {
-            for (MaGiamGia mg : listMaGiamGiaDq) {
-                System.out.print(mg);
-            }
-        }
-    }
-
-    public void xuatListHangThanhVien() {
-        if (listHangThanhVien != null) {
-            for (HangThanhVien htv : listHangThanhVien) {
-                System.out.print(htv);
-            }
-        }
-    }
-
-    public void xuatListTinNhan() {
-        if (listTinNhan != null) {
-            for (TinNhan tn : listTinNhan) {
-                System.out.print(tn);
-            }
-        }
-    }
-
-    public void xuatListCaLam() {
-        if (listCaLam != null) {
-            for (CaLam cl : listCaLam) {
-                System.out.print(cl);
-            }
-        }
-    }
-
-    public void xuatListLichTrongNgay() {
-        if (listLichTrongNgay != null) {
-            for (LichTrongNgay ltn : listLichTrongNgay) {
-                System.out.print(ltn);
-            }
-        }
-    }
-
-    public void xuatLichTuan() {
-        if (lichTuan != null) {
-            System.out.print(lichTuan);
-        }
-    }
-
-    public static void xuatList(List<?> list) {
-        if (list == null || list.isEmpty()) {
-            System.out.println("Danh sách rỗng\n");
-            return;
-        }
-        for (Object obj : list) {
-            System.out.println(obj);
-        }
-        System.out.println();
-    }
-
-    public static void main(String[] args) {
-        System.out.println("hello");
     }
 }

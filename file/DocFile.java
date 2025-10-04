@@ -18,7 +18,7 @@ public class DocFile implements DocFile_Datas {
 
     ////////////////////////////////// doc file tu datas
     public void doc_NhanVientxt(String path) {
-        DanhSachNhanVien danhSachNhanVien = new DanhSachNhanVien(db.getListNhanVien());
+        DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -42,7 +42,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_QuanLytxt(String path) {
-        DanhSachQuanLy danhSachQuanLy = new DanhSachQuanLy(db.getListQuanLy());
+        DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -65,7 +65,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_SanPhamtxt(String path) {
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -91,7 +91,7 @@ public class DocFile implements DocFile_Datas {
 
     public void doc_MaGiamGiatxt(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(db.getListMaGiamGia());
+            DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.replaceAll("\\s+", "").length() == 0) {
@@ -108,7 +108,7 @@ public class DocFile implements DocFile_Datas {
                 MaGiamGia maGiamGia = new MaGiamGia(ma, tenMa, loaiDoanhMuc, loaiThuongHieu, tienGiam, ngayBatDau,
                         ngayKetThuc);
                 if (danhSachMaGiamGia.laMaGiamGiaDocQuyen(maGiamGia)) {
-                    DanhSachMaGiamGia danhSachMaGiamGiaDq = new DanhSachMaGiamGia(db.getListMaGiamGiaDq());
+                    DanhSachMaGiamGia danhSachMaGiamGiaDq = db.getDanhSachMaGiamGia();
                     danhSachMaGiamGiaDq.themMaGiamGia(maGiamGia);
                     continue;
                 }
@@ -120,8 +120,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_HangThanhVientxt(String path) {
-        DanhSachHangThanhVien danhSachHangThanhVien = new DanhSachHangThanhVien(db.getListHangThanhVien());
-        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(db.getListMaGiamGiaDq());
+        DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
+        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -141,8 +141,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHangtxt(String path) {
-        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
-        DanhSachHangThanhVien danhSachHangThanhVien = new DanhSachHangThanhVien(db.getListHangThanhVien());
+        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
+        DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -164,8 +164,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_BaoHanhtxt(String path) {
-        DanhSachBaoHanh danhSachBaoHanh = new DanhSachBaoHanh(db.getListBaoHanh());
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
+        DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
@@ -183,9 +183,9 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_PhieuBaoHanhtxt(String path) {
-        DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = new DanhSachPhieuBaoHanh(db.getListPhieuBaoHanh());
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
-        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
+        DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = db.getDanhSachPhieuBaoHanh();
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -203,9 +203,9 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_PhieuTraHangtxt(String path) {
-        DanhSachPhieuTraHang danhSachPhieuTraHang = new DanhSachPhieuTraHang(db.getListPhieuTraHang());
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
-        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
+        DanhSachPhieuTraHang danhSachPhieuTraHang = db.getDanhSachPhieuTraHang();
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -223,7 +223,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_ChiTietHoaDontxt(String path) {
-        DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(db.getListChiTietHoaDon());
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -239,8 +239,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_ChiTietHoaDon_SanPhamtxt(String path) {
-        DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(db.getListChiTietHoaDon());
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -262,8 +262,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_ChiTietHoaDon_BaoHanhtxt(String path) {
-        DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(db.getListChiTietHoaDon());
-        DanhSachBaoHanh danhSachBaoHanh = new DanhSachBaoHanh(db.getListBaoHanh());
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
+        DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -286,8 +286,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_ChiTietHoaDon_MaGiamGiatxt(String path) {
-        DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(db.getListChiTietHoaDon());
-        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(db.getListMaGiamGia());
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
+        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -310,9 +310,9 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_HoaDontxt(String path) {
-        DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon(db.getListHoaDon());
-        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
-        DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(db.getListChiTietHoaDon());
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
+        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -333,8 +333,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_PhieuBaoHanhtxt(String path) {
-        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
-        DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = new DanhSachPhieuBaoHanh(db.getListPhieuBaoHanh());
+        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
+        DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = db.getDanhSachPhieuBaoHanh();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -356,8 +356,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_BaoHanhtxt(String path) {
-        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
-        DanhSachBaoHanh danhSachBaoHanh = new DanhSachBaoHanh(db.getListBaoHanh());
+        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
+        DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -382,9 +382,9 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_MaGiamGiatxt(String path) {
-        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
-        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(db.getListMaGiamGia());
-        DanhSachMaGiamGia danhSachMaGiamGiaDq = new DanhSachMaGiamGia(db.getListMaGiamGiaDq());
+        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
+        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
+        DanhSachMaGiamGia danhSachMaGiamGiaDq = db.getDanhSachMaGiamGia();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -413,8 +413,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_MaGiamGia_SanPhamtxt(String path) {
-        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
-        DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
+        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -426,7 +426,7 @@ public class DocFile implements DocFile_Datas {
                 if (khachHang == null) {
                     continue;
                 }
-                DanhSachMaGiamGia danhSachMaGiamGiaKH = new DanhSachMaGiamGia(khachHang.getListMaGiamGia());
+                DanhSachMaGiamGia danhSachMaGiamGiaKH = db.getDanhSachMaGiamGia();
                 MaGiamGia maGiamGia = danhSachMaGiamGiaKH.timMaGiamGia(thanhPhan[1]);
                 if (maGiamGia == null) {
                     continue;
@@ -440,8 +440,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_HoaDontxt(String path) {
-        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
-        DanhSachHoaDon danhSachHoaDon = new DanhSachHoaDon(db.getListHoaDon());
+        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -464,8 +464,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_KhachHang_PhieuTraHangtxt(String path) {
-        DanhSachKhachHang danhSachKhachHang = new DanhSachKhachHang(db.getListKhachHang());
-        DanhSachPhieuTraHang danhSachPhieuTraHang = new DanhSachPhieuTraHang(db.getListPhieuTraHang());
+        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
+        DanhSachPhieuTraHang danhSachPhieuTraHang = db.getDanhSachPhieuTraHang();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -487,8 +487,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_CaLamtxt(String path) {
-        DanhSachNhanVien danhSachNhanVien = new DanhSachNhanVien(db.getListNhanVien());
-        DanhSachCaLam danhSachCaLam = new DanhSachCaLam(db.getListCaLam());
+        DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
+        DanhSachCaLam danhSachCaLam = db.getDanhSachCaLam();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -513,8 +513,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_LichTrongNgaytxt(String path) {
-        DanhSachCaLam danhSachCaLam = new DanhSachCaLam(db.getListCaLam());
-        DanhSachLichTrongNgay danhSachLichTrongNgay = new DanhSachLichTrongNgay(db.getListLichTrongNgay());
+        DanhSachCaLam danhSachCaLam = db.getDanhSachCaLam();
+        DanhSachLichTrongNgay danhSachLichTrongNgay = db.getDanhSachLichTrongNgay();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -537,7 +537,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_LichLamViectxt(String path) {
-        DanhSachLichTrongNgay danhSachLichTrongNgay = new DanhSachLichTrongNgay(db.getListLichTrongNgay());
+        DanhSachLichTrongNgay danhSachLichTrongNgay = db.getDanhSachLichTrongNgay();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -556,8 +556,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_TaiKhoantxt(String path) {
-        DanhSachTaiKhoan danhSachTaiKhoan = new DanhSachTaiKhoan(db.getListTaiKhoan());
-        DanhSachUser danhSachUser = new DanhSachUser(db.getListUser());
+        DanhSachTaiKhoan danhSachTaiKhoan = db.getDanhSachTaiKhoan();
+        DanhSachUser danhSachUser = db.getDanhSachUser();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -575,7 +575,7 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_TinNhantxt(String path) {
-        DanhSachTinNhan danhSachTinNhan = new DanhSachTinNhan(db.getListTinNhan());
+        DanhSachTinNhan danhSachTinNhan = db.getDanhSachTinNhan();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -595,8 +595,8 @@ public class DocFile implements DocFile_Datas {
     }
 
     public void doc_User_TinNhantxt(String path) {
-        DanhSachTinNhan danhSachTinNhan = new DanhSachTinNhan(db.getListTinNhan());
-        DanhSachUser danhSachUser = new DanhSachUser(db.getListUser());
+        DanhSachTinNhan danhSachTinNhan = db.getDanhSachTinNhan();
+        DanhSachUser danhSachUser = db.getDanhSachUser();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -639,6 +639,7 @@ public class DocFile implements DocFile_Datas {
         doc_CaLamtxt("datas/CaLam.txt");
         doc_LichTrongNgaytxt("datas/LichTrongNgay.txt");
         doc_LichLamViectxt("datas/LichLamViec.txt");
+        db.taoDanhSachUser();
         doc_TaiKhoantxt("datas/TaiKhoan.txt");
         doc_TinNhantxt("datas/TinNhan.txt");
         doc_User_TinNhantxt("datas/User_TinNhan.txt");

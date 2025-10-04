@@ -15,7 +15,7 @@ public class DanhSachPhieuTraHang {
     public DanhSachPhieuTraHang() {
     }
 
-    public ArrayList<PhieuTraHang> getListPhieuTrahang() {
+    public ArrayList<PhieuTraHang> getListPhieuTraHang() {
         return listPhieuTrahang;
     }
 
@@ -23,7 +23,7 @@ public class DanhSachPhieuTraHang {
         return soLuong;
     }
 
-    public void setListPhieuTrahang(ArrayList<PhieuTraHang> listPhieuTrahang) {
+    public void setListPhieuTraHang(ArrayList<PhieuTraHang> listPhieuTrahang) {
         this.listPhieuTrahang = listPhieuTrahang;
     }
 

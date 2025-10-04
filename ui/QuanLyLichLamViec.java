@@ -22,7 +22,7 @@ public class QuanLyLichLamViec {
 
     // diem danh khi da co doi tuong nhan vien
     public void diemDanh(NhanVien nhanVien) {
-        DanhSachLichLamViec danhSachLichLamViec = new DanhSachLichLamViec(db.getLichTuan());
+        DanhSachLichLamViec danhSachLichLamViec = db.getDanhSachLichLamViec();
         if (danhSachLichLamViec.diemDanh(nhanVien)) {
             System.out.println("Diem danh thanh cong");
         } else {
@@ -32,7 +32,7 @@ public class QuanLyLichLamViec {
 
     // diem danh qua ma nhan vien
     public void diemDanh() {
-        DanhSachNhanVien danhSachNhanVien = new DanhSachNhanVien(db.getListNhanVien());
+        DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         NhanVien nv = danhSachNhanVien.timNhanVien(Nhap.nhapStr("Nhap ma nhan vien de diem danh: "));
         if (nv == null) {
             System.out.println("Khong tim thay nhan vien");
@@ -42,7 +42,7 @@ public class QuanLyLichLamViec {
     }
 
     private void xoaNhanVienKhoiCa(CaLam caLam) {
-        DanhSachNhanVien danhSachNhanVien = new DanhSachNhanVien(db.getListNhanVien());
+        DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         NhanVien nhanVien = danhSachNhanVien.timNhanVien(Nhap.nhapStr("Nhap ma nhan vien xoa khoi ca lam"));
         if (nhanVien == null) {
             System.out.println("Khong tim thay nhan vien");
@@ -53,7 +53,7 @@ public class QuanLyLichLamViec {
     }
 
     private void themNhanVienVaoCa(CaLam caLam) {
-        DanhSachNhanVien danhSachNhanVien = new DanhSachNhanVien(db.getListNhanVien());
+        DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         NhanVien nhanVien = danhSachNhanVien.timNhanVien(Nhap.nhapStr("Nhap ma nhan vien de them vao ca lam"));
         if (nhanVien == null) {
             System.out.println("Khong tim thay nhan vien");
@@ -86,7 +86,7 @@ public class QuanLyLichLamViec {
             int index = Nhap.nhapInt("Chon thu can them nhan vien : ") - 2;
             LichTrongNgay lichTrongNgay = lichLamViec.getLichTuan().get(index);
             int soCa = Nhap.nhapInt("Nhap so ca can them nhan vien : ");
-            DanhSachLichLamViec danhSachLichLamViec = new DanhSachLichLamViec(lichLamViec);
+            DanhSachLichLamViec danhSachLichLamViec = db.getDanhSachLichLamViec();
             CaLam caLam = danhSachLichLamViec.timCaLam(soCa, lichTrongNgay);
             if (caLam == null) {
                 System.out.println("Khong tim thay ca lam");

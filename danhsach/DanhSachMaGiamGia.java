@@ -69,8 +69,9 @@ public class DanhSachMaGiamGia {
         if ((maGiamGia.getLoaiDoanhMuc().equals(sanPham.getDanhMuc()) || maGiamGia.getLoaiDoanhMuc().equals("Tat_Ca"))
                 && (maGiamGia.getLoaiThuongHieu().equals(sanPham.getThuongHieu())
                         || maGiamGia.getLoaiThuongHieu().equals("Tat_Ca"))
-                && ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(), maGiamGia.getNgayBatDau(),
-                        maGiamGia.getNgayKetThuc())) {
+                && (maGiamGia.getNgayBatDau().equals("Vinh_Vien") || maGiamGia.getNgayKetThuc().equals("Vinh_Vien") ||
+                        ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(), maGiamGia.getNgayBatDau(),
+                                maGiamGia.getNgayKetThuc()))) {
             return true;
         }
         return false;
@@ -126,6 +127,16 @@ public class DanhSachMaGiamGia {
             return;
         }
         maGiamGia.setSanPhamDaDung(sanPham);
+    }
+
+    public ArrayList<MaGiamGia> listMaGiamGiaChoSp(SanPham sanPham) {
+        ArrayList<MaGiamGia> listMaGiamGiaTM = new ArrayList<>();
+        for (int i = 0; i < listMaGiamGia.size(); i++) {
+            if (maGiamGiaThoaMan(sanPham, listMaGiamGia.get(i))) {
+                listMaGiamGiaTM.add(listMaGiamGia.get(i));
+            }
+        }
+        return listMaGiamGiaTM;
     }
 
     private boolean maDocQuyen(String ma) {

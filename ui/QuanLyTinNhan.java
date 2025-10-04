@@ -10,16 +10,14 @@ import util.TaoDoiTuong;
 import util.ThoiGian;
 
 public class QuanLyTinNhan {
-    private ArrayList<User> listUser;
     private Database db;
 
     public QuanLyTinNhan(Database db) {
-        this.listUser = db.getListUser();
         this.db = db;
     }
 
     public void guiTinNhan(User nguoiGui) {
-        DanhSachUser danhSachUser = new DanhSachUser(listUser);
+        DanhSachUser danhSachUser = db.getDanhSachUser();
         User nguoiNhan = danhSachUser.timUser(Nhap.nhapStr("Nhap ma nhan : "));
         TinNhan tinNhan = TaoDoiTuong.taoTinNhan(nguoiGui.getTen(), db);
         nguoiNhan.nhanTinNhan(tinNhan);

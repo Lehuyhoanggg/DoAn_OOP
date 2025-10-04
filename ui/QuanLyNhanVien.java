@@ -15,7 +15,7 @@ public class QuanLyNhanVien {
     }
 
     private void taoNhanVien() {
-        DanhSachNhanVien danhSachNhanVien = new DanhSachNhanVien(db.getListNhanVien());
+        DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         // Tao nhan vien moi bang ham ho tro
         NhanVien nv = TaoDoiTuong.taoNhanVien(db);
         danhSachNhanVien.themNhanVien(nv);
@@ -46,7 +46,7 @@ public class QuanLyNhanVien {
     }
 
     private void suaNhanVien() {
-        DanhSachNhanVien danhSachNhanVien = new DanhSachNhanVien(db.getListNhanVien());
+        DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         String ma = Nhap.nhapStr("Nhap ma nhan vien can sua: ");
         NhanVien nv = danhSachNhanVien.timNhanVien(ma);
         if (nv == null) {
@@ -64,14 +64,14 @@ public class QuanLyNhanVien {
     }
 
     private void xoaNhanVien() {
-        DanhSachNhanVien danhSachNhanVien = new DanhSachNhanVien(db.getListNhanVien());
+        DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         String ma = Nhap.nhapStr("Nhap ma nhan vien can xoa: ");
         danhSachNhanVien.xoaNhanVien(ma);
         System.out.println("Da xoa nhan vien");
     }
 
     private void traCuuNhanVien() {
-        DanhSachNhanVien danhSachNhanVien = new DanhSachNhanVien(db.getListNhanVien());
+        DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         String ma = Nhap.nhapStr("Nhap ma nhan vien: ");
         NhanVien nv = danhSachNhanVien.timNhanVien(ma);
         if (nv == null)
