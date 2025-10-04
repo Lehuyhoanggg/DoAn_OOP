@@ -27,6 +27,8 @@ public interface DocFile_Datas {
 
     void doc_ChiTietHoaDon_MaGiamGiatxt(String path);
 
+    void doc_ChiTietHoaDon_MaGiamGia_SanPhamtxt(String path);
+
     void doc_HoaDontxt(String path);
 
     void doc_KhachHang_PhieuBaoHanhtxt(String path);
@@ -34,8 +36,6 @@ public interface DocFile_Datas {
     void doc_KhachHang_BaoHanhtxt(String path);
 
     void doc_KhachHang_MaGiamGiatxt(String path);
-
-    // void doc_KhachHang_MaGiamGia_SanPhamtxt(String path);
 
     void doc_KhachHang_HoaDontxt(String path);
 

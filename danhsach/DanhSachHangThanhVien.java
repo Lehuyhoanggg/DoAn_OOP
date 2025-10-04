@@ -59,6 +59,14 @@ public class DanhSachHangThanhVien {
     }
 
     public void setHangThanhVienChoKhachHang(KhachHang khachHang) {
-        ////////////////////////////////////////
+        long tienDaChi = khachHang.getTienDaChi();
+        if (tienDaChi >= HangThanhVien.mucDong && tienDaChi < HangThanhVien.mucBac
+                && tienDaChi < HangThanhVien.mucVang) {
+            khachHang.setHangThanhVien(timHangThanhVien("Dong"));
+        } else if (tienDaChi >= HangThanhVien.mucBac && tienDaChi < HangThanhVien.mucVang) {
+            khachHang.setHangThanhVien(timHangThanhVien("Bac"));
+        } else {
+            khachHang.setHangThanhVien(timHangThanhVien("Vang"));
+        }
     }
 }

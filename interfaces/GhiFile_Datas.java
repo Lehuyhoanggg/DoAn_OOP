@@ -27,6 +27,8 @@ public interface GhiFile_Datas {
 
     void ghi_ChiTietHoaDon_MaGiamGiatxt(String path);
 
+    void ghi_ChiTietHoaDon_MaGiamGia_SanPhamtxt(String path);
+
     void ghi_HoaDontxt(String path);
 
     void ghi_KhachHang_PhieuBaoHanhtxt(String path);
@@ -34,8 +36,6 @@ public interface GhiFile_Datas {
     void ghi_KhachHang_BaoHanhtxt(String path);
 
     void ghi_KhachHang_MaGiamGiatxt(String path);
-
-    // void ghi_KhachHang_MaGiamGia_SanPhamtxt(String path);
 
     void ghi_KhachHang_HoaDontxt(String path);
 

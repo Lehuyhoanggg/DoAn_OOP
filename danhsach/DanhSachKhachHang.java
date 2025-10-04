@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import model.HoaDon;
 import model.KhachHang;
-import model.MaGiamGia;
 
 public class DanhSachKhachHang {
     private ArrayList<KhachHang> listKhachHang;

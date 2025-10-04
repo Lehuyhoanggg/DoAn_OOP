@@ -5,7 +5,6 @@ import java.util.Map;
 
 import model.BaoHanh;
 import model.ChiTietHoaDon;
-import model.KhachHang;
 import model.MaGiamGia;
 import model.SanPham;
 import util.ThoiGian;

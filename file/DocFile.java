@@ -221,7 +221,8 @@ public class DocFile implements DocFile_Datas {
                 String[] thanhPhan = line.split("\\s+");
                 danhSachPhieuTraHang.themPhieuTraHang(new PhieuTraHang(thanhPhan[0],
                         danhSachKhachHang.timKhachHang(thanhPhan[1]),
-                        danhSachSanPham.timSanPham(thanhPhan[2]), thanhPhan[3], thanhPhan[4]));
+                        danhSachSanPham.timSanPham(thanhPhan[2]), thanhPhan[3],
+                        XulyString.chuyenLaiDangStrMacDinh(thanhPhan[4])));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -309,6 +310,33 @@ public class DocFile implements DocFile_Datas {
                     MaGiamGia maGiamGia = danhSachMaGiamGia.timMaGiamGia(thanhPhan[i]);
                     chiTietHoaDon.themMaGiamGiaDaDung(maGiamGia);
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void doc_ChiTietHoaDon_MaGiamGia_SanPhamtxt(String path) {
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.replaceAll("\\s+", "").length() == 0) {
+                    continue;
+                }
+                String[] thanhPhan = line.split("\\s+");
+                ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.timChiTietHoaDon(thanhPhan[0]);
+                if (chiTietHoaDon == null) {
+                    continue;
+                }
+                DanhSachMaGiamGia danhSachMaGiamGiaKH = new DanhSachMaGiamGia(chiTietHoaDon.getListMaGiamGiaDaDung());
+                MaGiamGia maGiamGia = danhSachMaGiamGiaKH.timMaGiamGia(thanhPhan[1]);
+                if (maGiamGia == null) {
+                    continue;
+                }
+                SanPham sanPham = danhSachSanPham.timSanPham(thanhPhan[2]);
+                maGiamGia.setSanPhamDaDung(sanPham);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -419,34 +447,6 @@ public class DocFile implements DocFile_Datas {
             e.printStackTrace();
         }
     }
-
-    // public void doc_KhachHang_MaGiamGia_SanPhamtxt(String path) {
-    // DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
-    // DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-    // try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-    // String line;
-    // while ((line = br.readLine()) != null) {
-    // if (line.replaceAll("\\s+", "").length() == 0) {
-    // continue;
-    // }
-    // String[] thanhPhan = line.split("\\s+");
-    // KhachHang khachHang = danhSachKhachHang.timKhachHang(thanhPhan[0]);
-    // if (khachHang == null) {
-    // continue;
-    // }
-    // DanhSachMaGiamGia danhSachMaGiamGiaKH = new
-    // DanhSachMaGiamGia(khachHang.getListMaGiamGia());
-    // MaGiamGia maGiamGia = danhSachMaGiamGiaKH.timMaGiamGia(thanhPhan[1]);
-    // if (maGiamGia == null) {
-    // continue;
-    // }
-    // SanPham sanPham = danhSachSanPham.timSanPham(thanhPhan[2]);
-    // maGiamGia.setSanPhamDaDung(sanPham);
-    // }
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
 
     public void doc_KhachHang_HoaDontxt(String path) {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
@@ -640,11 +640,11 @@ public class DocFile implements DocFile_Datas {
         doc_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");
         doc_ChiTietHoaDon_BaoHanhtxt("datas/ChiTietHoaDon_BaoHanh.txt");
         doc_ChiTietHoaDon_MaGiamGiatxt("datas/ChiTietHoaDon_MaGiamGia.txt");
+        doc_ChiTietHoaDon_MaGiamGia_SanPhamtxt("datas/ChiTietHoaDon_MaGiamGia_SanPham.txt");
         doc_HoaDontxt("datas/HoaDon.txt");
         doc_KhachHang_PhieuBaoHanhtxt("datas/KhachHang_PhieuBaoHanh.txt");
         doc_KhachHang_BaoHanhtxt("datas/KhachHang_BaoHanh.txt");
         doc_KhachHang_MaGiamGiatxt("datas/KhachHang_MaGiamGia.txt");
-        // doc_KhachHang_MaGiamGia_SanPhamtxt("datas/KhachHang_MaGiamGia_SanPham.txt");
         doc_KhachHang_HoaDontxt("datas/KhachHang_HoaDon.txt");
         doc_KhachHang_PhieuTraHangtxt("datas/KhachHang_PhieuTraHang.txt");
         doc_CaLamtxt("datas/CaLam.txt");

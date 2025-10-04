@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import danhsach.DanhSachBaoHanh;
 import danhsach.DanhSachChiTietHoaDon;
+import danhsach.DanhSachHangThanhVien;
 import danhsach.DanhSachKhachHang;
 import danhsach.DanhSachMaGiamGia;
 import danhsach.DanhSachSanPham;
@@ -204,6 +205,8 @@ public class TaoDoiTuong {
         }
         khachHang.themHoaDon(hoaDon);
         khachHang.tangTienDaChi(hoaDon.getThanhTien());
+        DanhSachHangThanhVien danhSachHangThanhVien = new DanhSachHangThanhVien(db.getListHangThanhVien());
+        danhSachHangThanhVien.setHangThanhVienChoKhachHang(khachHang);
         return hoaDon;
     }
 
