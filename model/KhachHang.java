@@ -37,9 +37,6 @@ public class KhachHang {
         this.listBaoHanh = new ArrayList<>();
         this.listPhieuBaoHanh = new ArrayList<>();
         this.listMaGiamGia = new ArrayList<>();
-        if (hangThanhVien != null) {
-            this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
-        }
         this.listHoaDon = new ArrayList<>();
         this.listPhieuTraHang = new ArrayList<>();
     }
@@ -86,6 +83,9 @@ public class KhachHang {
 
     public void setHangThanhVien(HangThanhVien hangThanhVien) {
         this.hangThanhVien = hangThanhVien;
+        if (hangThanhVien != null) {
+            this.listMaGiamGia.addAll(hangThanhVien.getListMaGiamGiaDQ());
+        }
     }
 
     public void setMaKh(String maKh) {

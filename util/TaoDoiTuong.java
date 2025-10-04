@@ -3,6 +3,7 @@ package util;
 import java.util.ArrayList;
 
 import danhsach.DanhSachBaoHanh;
+import danhsach.DanhSachChiTietHoaDon;
 import danhsach.DanhSachKhachHang;
 import danhsach.DanhSachMaGiamGia;
 import danhsach.DanhSachSanPham;
@@ -189,6 +190,8 @@ public class TaoDoiTuong {
         }
 
         ChiTietHoaDon chiTietHoaDon = taoChiTietHoaDon(db, khachHang);
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
+        danhSachChiTietHoaDon.themChiTietHoaDon(chiTietHoaDon);
         String ngayTaoHoaDon = ThoiGian.layNgayHienTaiStr();
         String ghiChu = Nhap.nhapStr("Nhap ghi chu neu co : ");
         HoaDon hoaDon = new HoaDon(ma, khachHang, chiTietHoaDon, ngayTaoHoaDon, ghiChu);

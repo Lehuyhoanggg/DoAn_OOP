@@ -1,5 +1,6 @@
 import danhsach.DanhSachTaiKhoan;
 import database.Database;
+import file.GhiFile;
 import model.NhanVien;
 import model.QuanLy;
 import model.User;
@@ -50,6 +51,8 @@ public class Main {
             dieuHuongMenu();
             dem = 0;
             xacNhan = Nhap.nhapInt("(1)Tiep tuc dang nhap (khac)Thoat");
+            GhiFile ghiFile = new GhiFile(db);
+            ghiFile.ghi_DatasVaoDatabase();
         } while (xacNhan == 1);
         System.out.println("Da thoat khoi chuong trinh");
     }

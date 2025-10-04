@@ -147,6 +147,9 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
             XoaManHinh.xoa();
             xuatMenu();
             int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
+            if (luaChon == 0) {
+                return;
+            }
             thucHienChucNang(luaChon);
         }
     }

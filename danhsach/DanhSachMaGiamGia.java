@@ -5,6 +5,7 @@ import java.util.Map;
 
 import model.BaoHanh;
 import model.ChiTietHoaDon;
+import model.KhachHang;
 import model.MaGiamGia;
 import model.SanPham;
 import util.ThoiGian;
@@ -37,12 +38,15 @@ public class DanhSachMaGiamGia {
         this.soLuong = soLuong;
     }
 
-    public boolean themMaGiamGia(MaGiamGia ma) {
-        if (ma == null) {
+    public boolean themMaGiamGia(MaGiamGia maGiamGia) {
+        if (maGiamGia == null) {
+            return false;
+        }
+        if (timMaGiamGia(maGiamGia.getMa()) != null) {
             return false;
         }
         soLuong++;
-        return listMaGiamGia.add(ma);
+        return listMaGiamGia.add(maGiamGia);
     }
 
     public boolean xoaMaGiamGia(MaGiamGia ma) {
@@ -65,52 +69,61 @@ public class DanhSachMaGiamGia {
         return null;
     }
 
+    private boolean trungDanhMuc(MaGiamGia maGiamGia, SanPham sanPham) {
+        return maGiamGia.getLoaiDoanhMuc().equals(sanPham.getDanhMuc());
+    }
+
+    private boolean trungThuongHieu(MaGiamGia maGiamGia, SanPham sanPham) {
+        return maGiamGia.getLoaiThuongHieu().equals(sanPham.getThuongHieu());
+    }
+
     public boolean maGiamGiaThoaMan(SanPham sanPham, MaGiamGia maGiamGia) {
-        if ((maGiamGia.getLoaiDoanhMuc().equals(sanPham.getDanhMuc()) || maGiamGia.getLoaiDoanhMuc().equals("Tat_Ca"))
-                && (maGiamGia.getLoaiThuongHieu().equals(sanPham.getThuongHieu())
+        if ((trungDanhMuc(maGiamGia, sanPham) || maGiamGia.getLoaiDoanhMuc().equals("Tat_Ca"))
+                && (trungThuongHieu(maGiamGia, sanPham)
                         || maGiamGia.getLoaiThuongHieu().equals("Tat_Ca"))
-                && (maGiamGia.getNgayBatDau().equals("Vinh_Vien") || maGiamGia.getNgayKetThuc().equals("Vinh_Vien") ||
+                && ((maGiamGia.getNgayBatDau().equals("Vinh_Vien") || maGiamGia.getNgayKetThuc().equals("Vinh_Vien") ||
                         ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(), maGiamGia.getNgayBatDau(),
-                                maGiamGia.getNgayKetThuc()))) {
+                                maGiamGia.getNgayKetThuc())))) {
             return true;
         }
         return false;
     }
 
-    private long appDungMaGiamGia(SanPham sanPham, MaGiamGia maGiamGia) {
+    private long appDungMaGiamGia(SanPham sanPham, MaGiamGia maGiamGia, long giaDangXuLi) {
         if (maGiamGiaThoaMan(sanPham, maGiamGia)) {
             String tienGiam = maGiamGia.getTienGiam();
             if (tienGiam != null && tienGiam.length() >= 2 && tienGiam.charAt(tienGiam.length() - 1) == '%') {
                 Long phanTram = Long.parseLong(tienGiam.substring(0, tienGiam.length() - 1));
                 maGiamGia.setSanPhamDaDung(sanPham);
-                return sanPham.getGia() - (sanPham.getGia() * phanTram) / 100;
+                return giaDangXuLi - (sanPham.getGia() * phanTram) / 100;
             } else {
                 maGiamGia.setSanPhamDaDung(sanPham);
-                return sanPham.getGia() - Long.parseLong(tienGiam);
+                return giaDangXuLi - Long.parseLong(tienGiam);
             }
 
         }
-        return sanPham.getGia();
+        return giaDangXuLi;
     }
 
     public void setThanhTienDaApMaGG(ChiTietHoaDon chiTietHoaDon) {
         long thanhTien = 0;
-        ArrayList<Integer> listRemove = new ArrayList<>();
         Map<SanPham, Integer> mapSanPham = chiTietHoaDon.getDanhSachSanPham().getMapSanPham();
 
         for (SanPham sanPham : mapSanPham.keySet()) {
+            ArrayList<MaGiamGia> listRemove = new ArrayList<>();
             long giaSanPham = sanPham.getGia();
-            for (int i = 0; i < listMaGiamGia.size(); i++) {
-                long giaSauAp = appDungMaGiamGia(sanPham, listMaGiamGia.get(i));
-                if (giaSauAp != giaSanPham) {
-                    listRemove.add(i);
+            ArrayList<MaGiamGia> maGiamGiaSp = listMaGiamGiaChoSp(sanPham);
+            for (int i = 0; i < maGiamGiaSp.size(); i++) {
+                giaSanPham = appDungMaGiamGia(sanPham, maGiamGiaSp.get(i), giaSanPham);
+                chiTietHoaDon.themMaGiamGiaDaDung(maGiamGiaSp.get(i));
+                listRemove.add(maGiamGiaSp.get(i));
+                if (giaSanPham <= 0) {
+                    giaSanPham = 0;
+                    break;
                 }
-                giaSanPham = Math.min(giaSauAp, giaSanPham);
             }
             for (int i = listRemove.size() - 1; i >= 0; i--) {
-                chiTietHoaDon.themMaGiamGiaDaDung(listMaGiamGia.get(i));
-                listMaGiamGia.remove(listRemove.get(i).intValue());
-                listRemove.remove(i);
+                listMaGiamGia.remove(listRemove.get(i));
             }
             thanhTien += giaSanPham;
         }
