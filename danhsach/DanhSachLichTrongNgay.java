@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import database.Database;
 import model.LichTrongNgay;
-import model.LichTrongTuan;
 import util.CapMa;
 import util.ThoiGian;
 
