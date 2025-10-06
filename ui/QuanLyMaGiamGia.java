@@ -8,6 +8,7 @@ import database.Database;
 import model.MaGiamGia;
 import model.SanPham;
 import util.TaoDoiTuong;
+import util.XoaManHinh;
 
 public class QuanLyMaGiamGia {
     private Database db;
@@ -177,14 +178,14 @@ public class QuanLyMaGiamGia {
     public void menu() {
         int xacNhan = 1;
         while (xacNhan == 1) {
+            XoaManHinh.xoa();
             xuatMenu();
-            int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
             if (luaChon == 0) {
-                System.out.println("Da thoat");
-                break;
+                return;
             }
             thucHienChucNang(luaChon);
-            xacNhan = Nhap.nhapInt("(1)Tiep tuc menu ma giam gia (khac)Thoat");
+            Nhap.pause();
         }
     }
 }

@@ -8,6 +8,7 @@ import database.Database;
 import model.HangThanhVien;
 import model.MaGiamGia;
 import util.TaoDoiTuong;
+import util.XoaManHinh;
 
 public class QuanLyHangThanhVien {
     private Database db;
@@ -164,12 +165,16 @@ public class QuanLyHangThanhVien {
     }
 
     public void menu() {
-        int tiep = 1;
-        while (tiep == 1) {
+        int xacNhan = 1;
+        while (xacNhan == 1) {
+            XoaManHinh.xoa();
             xuatMenu();
-            int chon = Nhap.nhapInt("Nhap lua chon: ");
-            thucHienChucNang(chon);
-            tiep = Nhap.nhapInt("(1)Tiep tuc menu hang thanh vien (khac)Thoat");
+            int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
+            if (luaChon == 0) {
+                return;
+            }
+            thucHienChucNang(luaChon);
+            Nhap.pause();
         }
     }
 }

@@ -8,7 +8,6 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class ThoiGian {
     public static String layNgayHienTaiStr() {
@@ -17,15 +16,10 @@ public class ThoiGian {
         return today.format(fmt);
     }
 
-    public static LocalDate layNgayHienTai() {
-        LocalDate today = LocalDate.now();
-        return today;
-    }
-
     public static String layGioHienTai() {
-        LocalTime now = LocalTime.now(); // Lấy giờ hiện tại của hệ thống
+        LocalTime now = LocalTime.now();
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm");
-        return now.format(fmt); // Trả về chuỗi "HH:mm"
+        return now.format(fmt);
     }
 
     public static boolean gioTrongKhoan(String gio, String gioBatDau, String gioKetThuc) {
@@ -47,7 +41,6 @@ public class ThoiGian {
         LocalDate batDau = LocalDate.parse(ngayBatDau, fmt);
         LocalDate ketThuc = LocalDate.parse(ngayKetThuc, fmt);
 
-        // nằm trong hoặc bằng hai đầu mút
         return (!g.isBefore(batDau)) && (!g.isAfter(ketThuc));
     }
 
@@ -56,11 +49,16 @@ public class ThoiGian {
         return LocalDate.parse(ngay, fmt);
     }
 
+    public static String chuyenDateThanhStr(LocalDate ngay) {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return ngay.format(fmt);
+    }
+
     public static ArrayList<String> layTuanHienTaiStr() {
         ArrayList<String> listNgay = new ArrayList<>();
 
         LocalDate today = LocalDate.now();
-        TemporalField dayOfWeekField = WeekFields.of(Locale.getDefault()).dayOfWeek();
+        TemporalField dayOfWeekField = WeekFields.ISO.dayOfWeek();
         LocalDate batDau = today.with(dayOfWeekField, 1);
         LocalDate ketThuc = today.with(dayOfWeekField, 7);
 
@@ -73,7 +71,6 @@ public class ThoiGian {
         }
 
         return listNgay;
-
     }
 
     public static String layThangHienTai() {
@@ -84,15 +81,30 @@ public class ThoiGian {
 
     public static String layNgayDauTuanStr() {
         LocalDate today = LocalDate.now();
-        TemporalField dayOfWeekField = WeekFields.of(Locale.getDefault()).dayOfWeek();
+        TemporalField dayOfWeekField = WeekFields.ISO.dayOfWeek();
         LocalDate batDau = today.with(dayOfWeekField, 1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return batDau.format(formatter);
     }
 
+    public static String layNgayDauTuanStr(int soTuan) {
+        LocalDate today = LocalDate.now();
+        int nam = today.getYear();
+
+        WeekFields wf = WeekFields.ISO;
+
+        LocalDate ngayDauTuan = LocalDate
+                .ofYearDay(nam, 1)
+                .with(wf.weekOfYear(), soTuan)
+                .with(wf.dayOfWeek(), 1);
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return ngayDauTuan.format(fmt);
+    }
+
     public static String layNgayCuoiTuanStr() {
         LocalDate today = LocalDate.now();
-        TemporalField dayOfWeekField = WeekFields.of(Locale.getDefault()).dayOfWeek();
+        TemporalField dayOfWeekField = WeekFields.ISO.dayOfWeek();
         LocalDate batDau = today.with(dayOfWeekField, 7);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return batDau.format(formatter);
@@ -100,8 +112,8 @@ public class ThoiGian {
 
     public static String layNgayCuoiThangStr() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        YearMonth ym = YearMonth.now(); // lấy năm-tháng hiện tại
-        LocalDate lastDay = ym.atEndOfMonth(); // ngày cuối của tháng đó
+        YearMonth ym = YearMonth.now();
+        LocalDate lastDay = ym.atEndOfMonth();
         return lastDay.format(fmt);
     }
 
@@ -111,21 +123,34 @@ public class ThoiGian {
         return firstDay.format(fmt);
     }
 
-    public static LocalDate chuyenNgayStrThanhLocalData(String ngayStr) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return LocalDate.parse(ngayStr, formatter);
-    }
-
     public static long khoangCachNgay(String ngayBd, String ngayKt) {
-        LocalDate ngayBdLocal = chuyenNgayStrThanhLocalData(ngayBd);
-        LocalDate ngayKtLocal = chuyenNgayStrThanhLocalData(ngayKt);
+        LocalDate ngayBdLocal = chuyenStrThanhDate(ngayBd);
+        LocalDate ngayKtLocal = chuyenStrThanhDate(ngayKt);
         return ChronoUnit.DAYS.between(ngayBdLocal, ngayKtLocal);
     }
 
     public static String ngaySauNThang(String ngay, int n) {
         LocalDate localDate = chuyenStrThanhDate(ngay);
-        localDate.plusMonths(n);
+        localDate = localDate.plusMonths(n);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return localDate.format(fmt);
+    }
+
+    public static String ngayTiepTheo(String ngay) {
+        LocalDate ngayLCD = chuyenStrThanhDate(ngay);
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return ngayLCD.plusDays(1).format(fmt);
+    }
+
+    public static String nNgayTiepTheo(String ngay, int n) {
+        LocalDate ngayLCD = chuyenStrThanhDate(ngay);
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return ngayLCD.plusDays(n).format(fmt);
+    }
+
+    public static int soTuanHienTai() {
+        LocalDate today = LocalDate.now();
+        WeekFields weekFields = WeekFields.ISO;
+        return today.get(weekFields.weekOfYear());
     }
 }

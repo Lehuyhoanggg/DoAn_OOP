@@ -2,46 +2,13 @@ package database;
 
 import java.util.ArrayList;
 
-import danhsach.DanhSachBaoHanh;
-import danhsach.DanhSachCaLam;
-import danhsach.DanhSachChiTietHoaDon;
-import danhsach.DanhSachHangThanhVien;
-import danhsach.DanhSachHoaDon;
-import danhsach.DanhSachKhachHang;
-import danhsach.DanhSachLichLamViec;
-import danhsach.DanhSachLichTrongNgay;
-import danhsach.DanhSachMaGiamGia;
-import danhsach.DanhSachNhanVien;
-import danhsach.DanhSachPhieuBaoHanh;
-import danhsach.DanhSachPhieuTraHang;
-import danhsach.DanhSachQuanLy;
-import danhsach.DanhSachSanPham;
-import danhsach.DanhSachTaiKhoan;
-import danhsach.DanhSachTinNhan;
-import danhsach.DanhSachUser;
 import file.DocFile;
-import model.BaoHanh;
-import model.CaLam;
-import model.ChiTietHoaDon;
-import model.HangThanhVien;
-import model.HoaDon;
-import model.KhachHang;
-import model.LichLamViec;
-import model.LichTrongNgay;
-import model.MaGiamGia;
-import model.NhanVien;
-import model.PhieuBaoHanh;
-import model.PhieuTraHang;
-import model.QuanLy;
-import model.SanPham;
-import model.TaiKhoan;
-import model.TinNhan;
-import model.User;
+import danhsach.*;
+import model.*;
 
 public class Database {
     // danh sach
     private DanhSachNhanVien danhSachNhanVien;
-    private LichLamViec lichTuan;
     private DanhSachQuanLy danhSachQuanLy;
     private DanhSachHoaDon danhSachHoaDon;
     private DanhSachTaiKhoan danhSachTaiKhoan;
@@ -57,7 +24,7 @@ public class Database {
     private DanhSachTinNhan danhSachTinNhan;
     private DanhSachCaLam danhSachCaLam;
     private DanhSachLichTrongNgay danhSachLichTrongNgay;
-    private DanhSachLichLamViec danhSachLichLamViec;
+    private DanhSachLichTrongTuan danhSachLichTrongTuan;
     private DanhSachUser danhSachUser;
 
     public Database() {
@@ -78,9 +45,8 @@ public class Database {
         danhSachTinNhan = new DanhSachTinNhan(new ArrayList<TinNhan>());
         danhSachCaLam = new DanhSachCaLam(new ArrayList<CaLam>());
         danhSachLichTrongNgay = new DanhSachLichTrongNgay(new ArrayList<LichTrongNgay>());
-        danhSachLichLamViec = new DanhSachLichLamViec(lichTuan);
+        danhSachLichTrongTuan = new DanhSachLichTrongTuan(new ArrayList<LichTrongTuan>());
         docFile.doc_DatasVaoDatabase();
-        lichTuan = new LichLamViec();
     }
 
     public void taoDanhSachUser() {
@@ -152,8 +118,8 @@ public class Database {
         return danhSachLichTrongNgay.getListLichTrongNgay();
     }
 
-    public LichLamViec getLichTuan() {
-        return lichTuan;
+    public ArrayList<LichTrongTuan> getListLichTrongTuan() {
+        return danhSachLichTrongTuan.getListLichTrongTuan();
     }
 
     // ===== SET =====
@@ -221,13 +187,6 @@ public class Database {
         danhSachLichTrongNgay.setListLichTrongNgay(listLichTrongNgay);
     }
 
-    public void setLichTuan(LichLamViec lichTuan) {
-        this.lichTuan = lichTuan;
-    }
-
-    /// get set danh sach
-
-    // ===== GET: các đối tượng DanhSach =====
     public DanhSachNhanVien getDanhSachNhanVien() {
         return danhSachNhanVien;
     }
@@ -288,8 +247,8 @@ public class Database {
         return danhSachTinNhan;
     }
 
-    public DanhSachLichLamViec getDanhSachLichLamViec() {
-        return danhSachLichLamViec;
+    public DanhSachLichTrongTuan getDanhSachLichTrongTuan() {
+        return danhSachLichTrongTuan;
     }
 
     public DanhSachCaLam getDanhSachCaLam() {
@@ -364,8 +323,8 @@ public class Database {
         this.danhSachLichTrongNgay = danhSachLichTrongNgay;
     }
 
-    public void setDanhSachLichLamViec(DanhSachLichLamViec danhSachLichLamViec) {
-        this.danhSachLichLamViec = danhSachLichLamViec;
+    public void setDanhSachLichTrongTuan(DanhSachLichTrongTuan danhSachLichTrongTuan) {
+        this.danhSachLichTrongTuan = danhSachLichTrongTuan;
     }
 
     public ArrayList<User> getListUser() {

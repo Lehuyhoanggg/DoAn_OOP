@@ -25,7 +25,8 @@ public class NhanVienDiemDanh {
         if (nhanVien == null) {
             return false;
         }
-        return mapNhanVien.put(nhanVien, false);
+        mapNhanVien.put(nhanVien, false);
+        return true;
     }
 
     public boolean xoaNhanVien(NhanVien nhanVien) {
@@ -46,7 +47,7 @@ public class NhanVienDiemDanh {
         return false;
     }
 
-    public int soNhanVienDaXep() {
+    public int soNhanVien() {
         return mapNhanVien.size();
     }
 

@@ -1,6 +1,9 @@
 package ui;
 
+import model.LichTrongTuan;
 import model.NhanVien;
+import util.XoaManHinh;
+import danhsach.DanhSachLichTrongTuan;
 import database.Database;
 import interfaces.GiaoTiep;
 import interfaces.LamViec;
@@ -15,13 +18,21 @@ public class NhanVienQuanLy implements LamViec, GiaoTiep {
     }
 
     public void diemDanhCaLam() {
-        QuanLyLichLamViec quanLyLichLamViec = new QuanLyLichLamViec(db);
-        quanLyLichLamViec.diemDanh(nv);
+        DanhSachLichTrongTuan danhSachLichTrongTuan = db.getDanhSachLichTrongTuan();
+        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.lichTrongTuanNay();
+        QuanLyLichTrongTuan quanLyLichTrongTuan = new QuanLyLichTrongTuan(db, lichTrongTuan);
+        if (quanLyLichTrongTuan.diemDanh(nv)) {
+            System.out.println("Diem danh thanh cong");
+        } else {
+            System.out.println("Diem danh that bai , hien khong co ca lam");
+        }
     }
 
-    public void xemLichLamViec() {
-        QuanLyLichLamViec quanLyLichLamViec = new QuanLyLichLamViec(db);
-        quanLyLichLamViec.xemLichLamViec();
+    public void xemLichLamViecTrongTuanNay() {
+        DanhSachLichTrongTuan danhSachLichTrongTuan = db.getDanhSachLichTrongTuan();
+        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.lichTrongTuanNay();
+        QuanLyLichTrongTuan quanLyLichTrongTuan = new QuanLyLichTrongTuan(db, lichTrongTuan);
+        quanLyLichTrongTuan.xemLichLamViec();
     }
 
     public void traCuuThongTinKhachHang() {
@@ -118,7 +129,7 @@ public class NhanVienQuanLy implements LamViec, GiaoTiep {
             case 5 -> doiTraHang();
             case 6 -> traCuuSanPham();
             case 7 -> xemTatCaMaGiamGia();
-            case 8 -> xemLichLamViec();
+            case 8 -> xemLichLamViecTrongTuanNay();
             case 9 -> doiMatKhau();
             case 10 -> TraCuuBaoHanh();
             case 11 -> taoBaoHanh();
@@ -128,13 +139,16 @@ public class NhanVienQuanLy implements LamViec, GiaoTiep {
 
     // nhap lua chon thuc hien chuc nang
     public void menu() {
-        int thoat = 1;
-        while (thoat == 1) {
+        int xacNhan = 1;
+        while (xacNhan == 1) {
+            XoaManHinh.xoa();
             xuatMenu();
-            int choice = Nhap.nhapInt("Nhap lua chon");
-            thucHienChucNang(choice);
-            thoat = Nhap.nhapInt("(1)Tiep tuc menu nhan vien (khac)Thoat");
-            ;
+            int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
+            if (luaChon == 0) {
+                return;
+            }
+            thucHienChucNang(luaChon);
+            Nhap.pause();
         }
     }
 }

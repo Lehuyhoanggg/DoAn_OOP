@@ -2,7 +2,9 @@ package ui;
 
 import java.util.ArrayList;
 
+import danhsach.DanhSachHangThanhVien;
 import danhsach.DanhSachKhachHang;
+import danhsach.DanhSachMaGiamGia;
 import danhsach.DanhSachPhieuTraHang;
 import danhsach.DanhSachSanPham;
 import database.Database;
@@ -12,6 +14,7 @@ import model.PhieuTraHang;
 import model.SanPham;
 import util.TaoDoiTuong;
 import util.ThoiGian;
+import util.XoaManHinh;
 
 public class QuanLyPhieuTraHang {
     private Database db;
@@ -73,6 +76,18 @@ public class QuanLyPhieuTraHang {
             return;
         }
         PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(hoaDon.getKhachHang(), sanPham, db);
+        long tienTraLai = 0;
+        if (hoaDon.getChiTietHoaDon().getDanhSachSanPham().getMapSanPham().get(sanPham) == 1) {
+            DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(
+                    hoaDon.getChiTietHoaDon().getListMaGiamGiaDaDung());
+            tienTraLai = danhSachMaGiamGia.giaSanPhamSauKhiApDungTatCa(sanPham);
+        } else {
+            tienTraLai = sanPham.getGia();
+        }
+        System.out.println("So tien hoan lai cho khach hang : " + tienTraLai);
+        khachHang.giamTienDaChi(tienTraLai);
+        DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
+        danhSachHangThanhVien.setHangThanhVienChoKhachHang(khachHang);
         if (danhSachPhieuTraHang.themPhieuTraHang(pth)) {
             System.out.println("Tao phieu tra hang thanh cong!");
             hoaDon.getKhachHang().themPhieuTraHang(pth);
@@ -187,13 +202,16 @@ public class QuanLyPhieuTraHang {
     }
 
     public void menu() {
-        int tiep = 1;
-        while (tiep == 1) {
+        int xacNhan = 1;
+        while (xacNhan == 1) {
+            XoaManHinh.xoa();
             xuatMenu();
-            int chon = Nhap.nhapInt("Nhap lua chon: ");
-            thucHienChucNang(chon);
-            tiep = Nhap.nhapInt("(1)Tiep tuc menu phieu tra hang (khac)Thoat");
-            ;
+            int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
+            if (luaChon == 0) {
+                return;
+            }
+            thucHienChucNang(luaChon);
+            Nhap.pause();
         }
     }
 }

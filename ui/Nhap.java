@@ -81,4 +81,10 @@ public class Nhap {
 
         return luaChon.charAt(0);
     }
+
+    public static void pause() {
+        System.out.println();
+        System.out.println("----------------------");
+        Nhap.nhapStr("Nhan enter de tiep tuc");
+    }
 }

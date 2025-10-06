@@ -7,7 +7,7 @@ public class LichTrongNgay {
     private int thu;
     private String ngay;
     private ArrayList<CaLam> listCaLam; // 1 ngay gom nhieu ca lam
-
+    
     public LichTrongNgay(String ma, int thu, String ngay) {
         this.ma = ma;
         this.thu = thu;

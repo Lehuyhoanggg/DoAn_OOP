@@ -108,4 +108,12 @@ public class CapMa {
         }
         return "LTN" + soLTN;
     }
+
+    public static String capMaLichTrongTuan(Database db) {
+        String soLTT = String.valueOf(db.getListLichTrongTuan().size() + 1);
+        while (soLTT.length() < 3) {
+            soLTT = "0" + soLTT;
+        }
+        return "LTT" + soLTT;
+    }
 }

@@ -6,6 +6,7 @@ import danhsach.DanhSachBaoHanh;
 import danhsach.DanhSachChiTietHoaDon;
 import danhsach.DanhSachHoaDon;
 import danhsach.DanhSachKhachHang;
+import danhsach.DanhSachMaGiamGia;
 import database.Database;
 import model.BaoHanh;
 import model.ChiTietHoaDon;
@@ -13,9 +14,11 @@ import danhsach.DanhSachSanPham;
 import model.HoaDon;
 import model.KhachHang;
 import model.LuuTruSanPham;
+import model.MaGiamGia;
 import model.SanPham;
 import util.TaoDoiTuong;
 import util.ThoiGian;
+import util.XoaManHinh;
 
 public class QuanLyHoaDon {
     private Database db;
@@ -72,12 +75,25 @@ public class QuanLyHoaDon {
                 System.out.println("Them thanh cong");
                 break;
             case 2:
-                SanPham sanPham1 = danhSachSanPham.timSanPham(Nhap.nhapStr("Nhap ma san pham can them : "));
+                SanPham sanPham1 = danhSachSanPham.timSanPham(Nhap.nhapStr("Nhap ma san pham can xoa : "));
                 if (sanPham1 == null) {
                     System.out.println("Khong tim thay san pham");
                     return;
                 }
-                danhSachChiTietHoaDon.xoaSanPhamThuHoiMa(sanPham1, chiTietHoaDon, khachHang);
+                ArrayList<MaGiamGia> listThuHoi = danhSachChiTietHoaDon.xoaSanPhamThuHoiMa(sanPham1, chiTietHoaDon,
+                        khachHang);
+                if (listThuHoi.size() > 0) {
+                    System.out.println("Ma giam gia da duoc thu hoi cho khanh hang " + khachHang.getSdt() + " "
+                            + khachHang.getTenKh());
+                    for (MaGiamGia maGiamGia : listThuHoi) {
+                        System.out.println(maGiamGia);
+                    }
+                }
+                DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(chiTietHoaDon.getListMaGiamGiaDaDung());
+                long thanhTienTruoc = chiTietHoaDon.getThanhTien();
+                danhSachMaGiamGia.setThanhTienDaApMaGG(chiTietHoaDon);
+                System.out.println("Thanh tien truoc : " + thanhTienTruoc);
+                System.out.println("Thanh tien sau : " + chiTietHoaDon.getThanhTien());
                 System.out.println("xoa thanh cong");
                 break;
             case 3:
@@ -109,6 +125,7 @@ public class QuanLyHoaDon {
         System.out.println("2. Sua bao hanh");
         System.out.println("3. Sua ngay tao hoa don");
         System.out.println("4. Sua ghi chu");
+        System.out.println("5. Sua chi tiet tiet hoa don");
         System.out.println("0. Thoat");
     }
 
@@ -128,7 +145,13 @@ public class QuanLyHoaDon {
                 suaHoaDon_ChiTietHoaDon(hoaDon.getChiTietHoaDon(), hoaDon.getKhachHang());
                 break;
             case 3:
+                hoaDon.setNgayTaoHoaDon(Nhap.nhapStr("Nhap ngay tao hoa don moi : "));
+                break;
+            case 4:
                 hoaDon.setGhiChu(Nhap.nhapStr("Nhap ghi chu moi : "));
+                break;
+            case 5:
+                suaHoaDon_ChiTietHoaDon(hoaDon.getChiTietHoaDon(), hoaDon.getKhachHang());
                 break;
             default:
                 break;
@@ -298,10 +321,14 @@ public class QuanLyHoaDon {
     public void menu() {
         int xacNhan = 1;
         while (xacNhan == 1) {
+            XoaManHinh.xoa();
             xuatMenu();
-            int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
+            if (luaChon == 0) {
+                return;
+            }
             thucHienChucNang(luaChon);
-            xacNhan = Nhap.nhapInt("(1)Tiep tuc menu hoa don (khac)Thoat :");
+            Nhap.pause();
         }
     }
 }

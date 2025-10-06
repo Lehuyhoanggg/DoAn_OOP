@@ -7,6 +7,7 @@ import danhsach.DanhSachKhachHang;
 import danhsach.DanhSachSanPham;
 import database.Database;
 import util.TaoDoiTuong;
+import util.XoaManHinh;
 import model.BaoHanh;
 import model.KhachHang;
 import model.SanPham;
@@ -21,7 +22,7 @@ public class QuanLyBaoHanh {
     public void taoBaoHanh() {
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
-        KhachHang khachHang = danhSachKhachHang.timKhachHang(Nhap.nhapStr("Nhap ma khach hang de tao bao hanh"));
+        KhachHang khachHang = danhSachKhachHang.timKhachHang(Nhap.nhapStr("Nhap ma khach hang de tao bao hanh : "));
         if (khachHang == null) {
             System.out.println("Khong tim thay khach hang");
             return;
@@ -65,13 +66,13 @@ public class QuanLyBaoHanh {
                 System.out.println("Thoat sua bao hanh");
                 break;
             case 1:
-                int soThang = Nhap.nhapInt("Nhap so thang bao hanh moi");
+                int soThang = Nhap.nhapInt("Nhap so thang bao hanh moi : ");
                 baoHanh.setLoaiBaoHanh(soThang);
                 System.out.println("Da sua loai bao hanh");
                 break;
             case 2:
                 DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
-                SanPham sanPham = danhSachSanPham.timSanPham("Nhap ma san pham moi trong phieu");
+                SanPham sanPham = danhSachSanPham.timSanPham("Nhap ma san pham moi trong phieu : ");
                 if (sanPham == null) {
                     System.out.println("Ma san pham khong hop le");
                 } else {
@@ -104,8 +105,10 @@ public class QuanLyBaoHanh {
         while (xacNhan == 1) {
             xuatSuaBaoHanh();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            if (luaChon == 0){
+                return;
+            }
             suaThanhPhanBaoHanh(baoHanh, luaChon);
-            xacNhan = Nhap.nhapInt("(1) Tiep tuc sua (Khac) Thoat");
         }
         System.out.println("Da cap nhat bao hanh.");
     }
@@ -141,22 +144,32 @@ public class QuanLyBaoHanh {
         System.out.println("0. Thoat");
     }
 
-    public void menu() {
-        while (true) {
-            xuatMenu();
-            int luaChon = Nhap.nhapInt("Chon chuc nang: ");
-            switch (luaChon) {
-                case 0 -> {
-                    System.out.println("Thoat menu phieu bao hanh");
-                    return;
-                }
-                case 1 -> taoBaoHanh();
-                case 2 -> suaBaoHanh();
-                case 3 -> xoaBaoHanh();
-                case 4 -> traCuuBaoHanh();
-                case 5 -> xemTatCaBaoHanh();
-                default -> System.out.println("Lua chon khong hop le!");
+    public void thucHienChucNang(int luaChon) {
+        switch (luaChon) {
+            case 0 -> {
+                System.out.println("Thoat menu phieu bao hanh");
+                return;
             }
+            case 1 -> taoBaoHanh();
+            case 2 -> suaBaoHanh();
+            case 3 -> xoaBaoHanh();
+            case 4 -> traCuuBaoHanh();
+            case 5 -> xemTatCaBaoHanh();
+            default -> System.out.println("Lua chon khong hop le!");
+        }
+    }
+
+    public void menu() {
+        int xacNhan = 1;
+        while (xacNhan == 1) {
+            XoaManHinh.xoa();
+            xuatMenu();
+            int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
+            if (luaChon == 0) {
+                return;
+            }
+            thucHienChucNang(luaChon);
+            Nhap.pause();
         }
     }
 }

@@ -6,6 +6,7 @@ import danhsach.DanhSachSanPham;
 import database.Database;
 import model.SanPham;
 import util.TaoDoiTuong;
+import util.XoaManHinh;
 
 public class QuanLySanPham {
     private Database db;
@@ -177,15 +178,16 @@ public class QuanLySanPham {
     }
 
     public void menu() {
-        int thoat = 1;
-        while (thoat == 1) {
+        int xacNhan = 1;
+        while (xacNhan == 1) {
+            XoaManHinh.xoa();
             xuatMenu();
-            int choice = Nhap.nhapInt("Nhap lua chon: ");
-            thucHienChucNang(choice);
-            if (choice == 0) {
-                break;
+            int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
+            if (luaChon == 0) {
+                return;
             }
-            thoat = Nhap.nhapInt("(1)Tiep tuc menu san pham (khac)Thoat");
+            thucHienChucNang(luaChon);
+            Nhap.pause();
         }
     }
 }

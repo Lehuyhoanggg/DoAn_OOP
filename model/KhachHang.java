@@ -163,6 +163,10 @@ public class KhachHang {
         this.tienDaChi += so;
     }
 
+    public void giamTienDaChi(long so) {
+        this.tienDaChi -= so;
+    }
+
     @Override
     public String toString() {
         return "maKh : " + maKh + "\n" +

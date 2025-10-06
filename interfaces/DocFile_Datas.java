@@ -45,7 +45,7 @@ public interface DocFile_Datas {
 
     void doc_LichTrongNgaytxt(String path);
 
-    void doc_LichLamViectxt(String path);
+    void doc_LichTrongTuantxt(String path);
 
     void doc_TaiKhoantxt(String path);
 
@@ -54,4 +54,6 @@ public interface DocFile_Datas {
     void doc_User_TinNhantxt(String path);
 
     void doc_DatasVaoDatabase();
+
+    void doc_CaLam_NhanVienDiemDanh(String path);
 }

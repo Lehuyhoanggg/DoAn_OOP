@@ -5,7 +5,7 @@ public interface LamViec {
 
     public void diemDanhCaLam();
 
-    public void xemLichLamViec();
+    public void xemLichLamViecTrongTuanNay();
 
     public void traCuuThongTinKhachHang();
 

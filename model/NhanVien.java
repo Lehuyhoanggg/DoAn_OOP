@@ -23,6 +23,10 @@ public class NhanVien extends User {
         return luong;
     }
 
+    public String get_ten() {
+        return getTen().split("\\s+")[getTen().split("\\s+").length - 1];
+    }
+
     public void setLuong(long luong) {
         this.luong = luong;
     }

@@ -5,8 +5,8 @@ public class CaLam {
     private int so;
     private String gioBatDau;
     private String gioKetThuc;
-    private NhanVienDiemDanh listNhanVien;
     private int soLuongCan;
+    private NhanVienDiemDanh listNhanVien;
 
     public CaLam(String ma, int so, String gioBatBau, String gioKetThuc, int soLuongCan) {
         this.ma = ma;
@@ -70,7 +70,7 @@ public class CaLam {
     }
 
     public int soNguoiTrongCa() {
-        return this.listNhanVien.soNhanVienDaXep();
+        return this.listNhanVien.soNhanVien();
     }
 
     public boolean tonTaiNhanVien(NhanVien nhanVien) {
@@ -79,6 +79,13 @@ public class CaLam {
 
     public boolean caLamChuaCoNguoi() {
         if (soNguoiTrongCa() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean caLamDuNguoi() {
+        if (soLuongCan == listNhanVien.soNhanVien()) {
             return true;
         }
         return false;

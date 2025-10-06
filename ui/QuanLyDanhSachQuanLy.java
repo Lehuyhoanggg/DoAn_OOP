@@ -7,7 +7,7 @@ import database.Database;
 import model.QuanLy;
 import util.TaoDoiTuong;
 
-public class QuanLyQuanLy {
+public class QuanLyDanhSachQuanLy {
     Database db;
     QuanLy ql;
 

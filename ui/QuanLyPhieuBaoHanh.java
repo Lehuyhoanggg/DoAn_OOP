@@ -12,6 +12,7 @@ import model.KhachHang;
 import model.PhieuBaoHanh;
 import model.SanPham;
 import util.TaoDoiTuong;
+import util.XoaManHinh;
 
 public class QuanLyPhieuBaoHanh {
     private Database db;
@@ -147,25 +148,33 @@ public class QuanLyPhieuBaoHanh {
         System.out.println("0. Thoat");
     }
 
-    public void menu() {
-        int luaChon = 1;
-        while (luaChon == 1) {
-            xuatMenu();
-            luaChon = Nhap.nhapInt("Chon chuc nang: ");
-            switch (luaChon) {
-                case 0 -> {
-                    System.out.println("Thoat menu phieu bao hanh");
-                    return;
-                }
-                case 1 -> taoPhieuBaoHanh();
-                case 2 -> suaPhieuBaoHanh();
-                case 3 -> xoaPhieuBaoHanh();
-                case 4 -> traCuuPhieuBaoHanh();
-                case 5 -> xemTatCaPhieu();
-
-                default -> System.out.println("Lua chon khong hop le!");
+    public void thucHienChucNang(int luaChon) {
+        switch (luaChon) {
+            case 0 -> {
+                System.out.println("Thoat menu phieu bao hanh");
+                return;
             }
-            luaChon = Nhap.nhapInt("(1)Tiep tuc menu phieu bao hanh (khac)Thoat");
+            case 1 -> taoPhieuBaoHanh();
+            case 2 -> suaPhieuBaoHanh();
+            case 3 -> xoaPhieuBaoHanh();
+            case 4 -> traCuuPhieuBaoHanh();
+            case 5 -> xemTatCaPhieu();
+
+            default -> System.out.println("Lua chon khong hop le!");
+        }
+    }
+
+    public void menu() {
+        int xacNhan = 1;
+        while (xacNhan == 1) {
+            XoaManHinh.xoa();
+            xuatMenu();
+            int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
+            if (luaChon == 0) {
+                return;
+            }
+            thucHienChucNang(luaChon);
+            Nhap.pause();
         }
     }
 }

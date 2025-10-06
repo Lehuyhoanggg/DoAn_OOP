@@ -13,6 +13,7 @@ import model.MaGiamGia;
 import model.PhieuBaoHanh;
 import model.PhieuTraHang;
 import util.TaoDoiTuong;
+import util.XoaManHinh;
 
 public class QuanLyKhachHang {
     private Database db;
@@ -235,10 +236,14 @@ public class QuanLyKhachHang {
     public void menu() {
         int xacNhan = 1;
         while (xacNhan == 1) {
+            XoaManHinh.xoa();
             xuatMenu();
-            int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
+            if (luaChon == 0) {
+                return;
+            }
             thucHienChucNang(luaChon);
-            xacNhan = Nhap.nhapInt("(1)Tiep tuc menu khach hang (khac)Thoat");
+            Nhap.pause();
         }
     }
 }

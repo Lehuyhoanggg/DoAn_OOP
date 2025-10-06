@@ -42,13 +42,11 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
     public void guiTinNhan() {
         QuanLyTinNhan quanLyTinNhan = new QuanLyTinNhan(db);
         quanLyTinNhan.guiTinNhan(ql);
-        Nhap.nhapStr("Nhan bat ki de tiep tuc");
     }
 
     public void xemTatCaTinNhan() {
         QuanLyTinNhan quanLyTinNhan = new QuanLyTinNhan(db);
         quanLyTinNhan.xemTatCaTinNhan(ql);
-        Nhap.nhapStr("Nhan bat ki de tiep tuc");
     }
 
     public void xemTinNhanGanDay() {
@@ -59,19 +57,16 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
     public void xemDoanhThu() {
         QuanLyHoaDon quanLyHoaDon = new QuanLyHoaDon(db);
         quanLyHoaDon.xemDoanhThu();
-        Nhap.nhapStr("Nhan bat ki de tiep tuc");
     }
 
-    public void xemLichTuan() {
-        QuanLyLichLamViec quanLyLichLamViec = new QuanLyLichLamViec(db);
-        quanLyLichLamViec.xemLichLamViec();
-        Nhap.nhapStr("Nhan bat ki de tiep tuc");
+    public void xemLichLamViecTrongTuan() {
+        QuanLyDanhSachLichTrongTuan danhSachLichTrongTuan = new QuanLyDanhSachLichTrongTuan(db);
+        danhSachLichTrongTuan.xemLichLamViecTrongTuanNay();
     }
 
-    public void xepLichDiLam() {
-        QuanLyLichLamViec quanLyLichLamViec = new QuanLyLichLamViec(db);
-        quanLyLichLamViec.xepLichLamViec();
-        Nhap.nhapStr("Nhan bat ki de tiep tuc");
+    public void quanLyDanhSachLichLamViec() {
+        QuanLyDanhSachLichTrongTuan quanLyDanhSachLichTrongTuan = new QuanLyDanhSachLichTrongTuan(db);
+        quanLyDanhSachLichTrongTuan.menu();
     }
 
     public void quanLyPhieuBaoHanh() {
@@ -96,7 +91,6 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
 
     public void hienThiThongTin() {
         System.out.println(ql);
-        Nhap.nhapStr("Nhan bat ki de tiep tuc");
     }
 
     public void xuatMenu() {
@@ -113,8 +107,8 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
         System.out.println("11. Gui Tin Nhan");
         System.out.println("12. Hop Thu");
         System.out.println("13. Xem lich tuan");
-        System.out.println("14. Doi mat khau");
-        System.out.println("15. Xep lich di lam viec");
+        System.out.println("14. Quan ly danh sach lich lam viec trong tuan");
+        System.out.println("15. Doi mat khau");
         System.out.println("0. Thoat");
         System.out.println("--------------------------------");
     }
@@ -133,9 +127,9 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
             case 10 -> xemDoanhThu();
             case 11 -> guiTinNhan();
             case 12 -> xemTatCaTinNhan();
-            case 13 -> xemLichTuan();
-            case 14 -> doiMatKhau();
-            case 15 -> xepLichDiLam();
+            case 13 -> xemLichLamViecTrongTuan();
+            case 14 -> quanLyDanhSachLichLamViec();
+            case 15 -> doiMatKhau();
             case 0 -> System.out.println("Da thoat!");
             default -> System.out.println("Lua chon khong hop le!");
         }
@@ -151,6 +145,7 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
                 return;
             }
             thucHienChucNang(luaChon);
+            Nhap.pause();
         }
     }
 

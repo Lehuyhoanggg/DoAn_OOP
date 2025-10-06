@@ -437,7 +437,25 @@ public class GhiFile implements GhiFile_Datas {
             e.printStackTrace();
         }
     }
+    public void ghi_CaLam_NhanVienDiemDanh(String path){
+        ArrayList<CaLam> listCaLam = db.getListCaLam();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+            String line;
+            for (int i = 0; i < listCaLam.size(); i++) {
+                line = listCaLam.get(i).getMa();
 
+                for (NhanVien nhanVien : listCaLam.get(i).getListNhanVien().getMapNhanVien().keySet()) {
+                    if (listCaLam.get(i).getListNhanVien().kiemTraDiemDanh(nhanVien)){
+                        line = line + " " + nhanVien.getMa();
+                    }
+                }
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     // ghi lich trong ngay
     public void ghi_LichTrongNgaytxt(String path) {
         ArrayList<LichTrongNgay> listLichTrongNgay = db.getListLichTrongNgay();
@@ -459,18 +477,17 @@ public class GhiFile implements GhiFile_Datas {
     }
 
     // ghi lich lam viec
-    public void ghi_LichLamViectxt(String path) {
-        LichLamViec lichLamViec = db.getLichTuan();
+    public void ghi_LichTrongTuantxt(String path) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-            String line = "";
-            for (int i = 0; i < lichLamViec.getLichTuan().size(); i++) {
-                if (i > 0) {
-                    line = line + " ";
+            String line;
+            for (LichTrongTuan lichTrongTuan : db.getListLichTrongTuan()) {
+                line = lichTrongTuan.getMa() + " " + lichTrongTuan.getNgayThu2() + " " + lichTrongTuan.getNgayCn();
+                for (LichTrongNgay lichTrongNgay : lichTrongTuan.getListLichTrongNgay()) {
+                    line += " " + lichTrongNgay.getMa();
                 }
-                line = line + lichLamViec.getLichTuan().get(i).getMa();
+                bw.write(line);
+                bw.newLine();
             }
-            bw.write(line);
-            bw.newLine();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -552,7 +569,7 @@ public class GhiFile implements GhiFile_Datas {
         ghi_KhachHang_PhieuTraHangtxt("datas/KhachHang_PhieuTraHang.txt");
         ghi_CaLamtxt("datas/CaLam.txt");
         ghi_LichTrongNgaytxt("datas/LichTrongNgay.txt");
-        ghi_LichLamViectxt("datas/LichLamViec.txt");
+        ghi_LichTrongTuantxt("datas/LichTrongTuan.txt");
         ghi_TaiKhoantxt("datas/TaiKhoan.txt");
         ghi_TinNhantxt("datas/TinNhan.txt");
         ghi_User_TinNhantxt("datas/User_TinNhan.txt");

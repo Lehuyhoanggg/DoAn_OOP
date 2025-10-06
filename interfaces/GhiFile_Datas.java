@@ -45,7 +45,7 @@ public interface GhiFile_Datas {
 
     void ghi_LichTrongNgaytxt(String path);
 
-    void ghi_LichLamViectxt(String path);
+    void ghi_LichTrongTuantxt(String path);
 
     void ghi_TaiKhoantxt(String path);
 
@@ -54,4 +54,6 @@ public interface GhiFile_Datas {
     void ghi_User_TinNhantxt(String path);
 
     void ghi_DatasVaoDatabase();
+
+    void ghi_CaLam_NhanVienDiemDanh(String path);
 }

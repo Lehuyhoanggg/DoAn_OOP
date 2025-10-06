@@ -164,4 +164,13 @@ public class DanhSachMaGiamGia {
         }
         return false;
     }
+
+    public long giaSanPhamSauKhiApDungTatCa(SanPham sanPham) {
+        long gia = sanPham.getGia();
+        for (MaGiamGia maGiamGia : listMaGiamGia) {
+            gia = appDungMaGiamGia(sanPham, maGiamGia, gia);
+        }
+        return gia;
+    }
+
 }

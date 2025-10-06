@@ -6,6 +6,7 @@ import model.ChiTietHoaDon;
 import model.KhachHang;
 import model.MaGiamGia;
 import model.SanPham;
+import util.ThoiGian;
 
 public class DanhSachChiTietHoaDon {
     private ArrayList<ChiTietHoaDon> listChiTietHoaDon;
@@ -62,24 +63,32 @@ public class DanhSachChiTietHoaDon {
         return null;
     }
 
-    public void xoaSanPhamThuHoiMa(SanPham sanPham, ChiTietHoaDon chiTietHoaDon, KhachHang khachHang) {
+    public ArrayList<MaGiamGia> xoaSanPhamThuHoiMa(SanPham sanPham, ChiTietHoaDon chiTietHoaDon, KhachHang khachHang) {
         chiTietHoaDon.xoaSanPham(sanPham);
         if (!chiTietHoaDon.getDanhSachSanPham().tonTaiSanPham(sanPham)) {
-            thuHoiMaGiamGiaSauKhiXoa(sanPham, chiTietHoaDon, khachHang); // gia sua neu da go san pham thi thu hoi , con
-                                                                         // so luong nhieu hon 1 thi thoi
+            return thuHoiMaGiamGiaSauKhiXoa(sanPham, chiTietHoaDon, khachHang); // gia sua neu da go san pham thi thu
+                                                                                // hoi , con // so luong nhieu hon 1 thi
+                                                                                // thoi
         }
+        return null;
     }
 
-    public void thuHoiMaGiamGiaSauKhiXoa(SanPham sanPham, ChiTietHoaDon chiTietHoaDon, KhachHang khachHang) {
+    public ArrayList<MaGiamGia> thuHoiMaGiamGiaSauKhiXoa(SanPham sanPham, ChiTietHoaDon chiTietHoaDon,
+            KhachHang khachHang) {
+        ArrayList<MaGiamGia> listMaThuHoi = new ArrayList<>();
         ArrayList<MaGiamGia> listMaGiamGia = chiTietHoaDon.getListMaGiamGiaDaDung();
         if (listMaGiamGia == null) {
-            return;
+            return null;
         }
         for (int i = listMaGiamGia.size() - 1; i >= 0; i--) {
-            if (listMaGiamGia.get(i).getSanPhamDaDung().equals(sanPham)) {
+            if (listMaGiamGia.get(i).getSanPhamDaDung().equals(sanPham)
+                    && ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(), listMaGiamGia.get(i).getNgayBatDau(),
+                            listMaGiamGia.get(i).getNgayKetThuc())) {
                 khachHang.themMaGiamGia(listMaGiamGia.get(i));
                 listMaGiamGia.remove(i);
+                listMaThuHoi.add(listMaGiamGia.get(i));
             }
         }
+        return listMaThuHoi;
     }
 }

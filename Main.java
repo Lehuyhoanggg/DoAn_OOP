@@ -50,7 +50,7 @@ public class Main {
             } while (user == null);
             dieuHuongMenu();
             dem = 0;
-            xacNhan = Nhap.nhapInt("(1)Tiep tuc dang nhap (khac)Thoat");
+            xacNhan = Nhap.nhapInt("(1)Tiep tuc dang nhap (khac)Thoat : ");
             GhiFile ghiFile = new GhiFile(db);
             ghiFile.ghi_DatasVaoDatabase();
         } while (xacNhan == 1);

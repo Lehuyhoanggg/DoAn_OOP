@@ -2,7 +2,11 @@ package danhsach;
 
 import java.util.ArrayList;
 
+import database.Database;
 import model.LichTrongNgay;
+import model.LichTrongTuan;
+import util.CapMa;
+import util.ThoiGian;
 
 public class DanhSachLichTrongNgay {
     private ArrayList<LichTrongNgay> listLichTrongNgay;
@@ -44,6 +48,15 @@ public class DanhSachLichTrongNgay {
         return null;
     }
 
+    public LichTrongNgay lichTrongNgayHomNay() {
+        for (LichTrongNgay lichTrongNgay : listLichTrongNgay) {
+            if (lichTrongNgay.getNgay().equals(ThoiGian.layNgayHienTaiStr())) {
+                return lichTrongNgay;
+            }
+        }
+        return null;
+    }
+
     public boolean themLichTrongNgay(LichTrongNgay lichTrongNgay) {
         if (lichTrongNgay == null) {
             return false;
@@ -76,5 +89,18 @@ public class DanhSachLichTrongNgay {
         }
         soLuong--;
         return listLichTrongNgay.remove(lichTrongNgay);
+    }
+
+    public ArrayList<LichTrongNgay> taoListLichTrongNgay(Database db, String ngay) {
+        ArrayList<LichTrongNgay> listLichTrongNgayMau = new ArrayList<>();
+        for (int thu = 2; thu <= 8; thu++) {
+            String ma = CapMa.capMaLichTrongNgay(db);
+            LichTrongNgay lichTrongNgay = new LichTrongNgay(ma, thu, ngay);
+            lichTrongNgay.setListCaLam(db.getDanhSachCaLam().taoListCaLamTrongTrongNgay(db));
+            listLichTrongNgayMau.add(lichTrongNgay);
+            db.getDanhSachLichTrongNgay().themLichTrongNgay(lichTrongNgay);
+            ngay = ThoiGian.ngayTiepTheo(ngay);
+        }
+        return listLichTrongNgayMau;
     }
 }

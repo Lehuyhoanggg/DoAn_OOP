@@ -6,6 +6,7 @@ import danhsach.DanhSachNhanVien;
 import database.Database;
 import model.NhanVien;
 import util.TaoDoiTuong;
+import util.XoaManHinh;
 
 public class QuanLyNhanVien {
     private Database db;
@@ -102,22 +103,32 @@ public class QuanLyNhanVien {
         System.out.println("0. Thoat");
     }
 
-    public void menu() {
-        while (true) {
-            xuatMenu();
-            int chon = Nhap.nhapInt("Chon chuc nang: ");
-            switch (chon) {
-                case 0 -> {
-                    System.out.println("Thoat menu quan ly nhan vien");
-                    return;
-                }
-                case 1 -> taoNhanVien();
-                case 2 -> suaNhanVien();
-                case 3 -> xoaNhanVien();
-                case 4 -> traCuuNhanVien();
-                case 5 -> xemTatCaNhanVien();
-                default -> System.out.println("Lua chon khong hop le!");
+    public void thucHienChucNang(int chon) {
+        switch (chon) {
+            case 0 -> {
+                System.out.println("Thoat menu quan ly nhan vien");
+                return;
             }
+            case 1 -> taoNhanVien();
+            case 2 -> suaNhanVien();
+            case 3 -> xoaNhanVien();
+            case 4 -> traCuuNhanVien();
+            case 5 -> xemTatCaNhanVien();
+            default -> System.out.println("Lua chon khong hop le!");
+        }
+    }
+
+    public void menu() {
+        int xacNhan = 1;
+        while (xacNhan == 1) {
+            XoaManHinh.xoa();
+            xuatMenu();
+            int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
+            if (luaChon == 0) {
+                return;
+            }
+            thucHienChucNang(luaChon);
+            Nhap.pause();
         }
     }
 }
