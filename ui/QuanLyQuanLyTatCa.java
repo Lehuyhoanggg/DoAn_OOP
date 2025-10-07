@@ -94,7 +94,13 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
     }
 
     public void hienThiThongTin() {
+        System.out.println();
         System.out.println(ql);
+    }
+
+    public void capTaiKhoanChoUser() {
+        QuanLyTaiKhoan quanLyTaiKhoan = new QuanLyTaiKhoan(db);
+        quanLyTaiKhoan.capTaiKhoanChoUser();
     }
 
     public void xuatMenu() {
@@ -113,6 +119,7 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
         System.out.println("13. Hop thu");
         System.out.println("14. Xem lich trong tuan nay");
         System.out.println("15. Doi mat khau");
+        System.out.println("16. Cap tai khoan cho user");
         System.out.println("0. Thoat");
         System.out.println("-------------------------------------------------");
     }
@@ -134,6 +141,7 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
             case 13 -> xemTatCaTinNhan(); // Hop thu
             case 14 -> xemLichLamViecTrongTuan(); // Xem lich trong tuan nay
             case 15 -> doiMatKhau();
+            case 16 -> capTaiKhoanChoUser();
             case 0 -> System.out.println("Da thoat!");
             default -> System.out.println("Lua chon khong hop le!");
         }

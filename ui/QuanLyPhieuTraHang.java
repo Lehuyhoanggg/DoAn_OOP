@@ -133,7 +133,7 @@ public class QuanLyPhieuTraHang {
                 System.out.println("da thay doi san pham");
                 break;
             case 3:
-                pth.setNgayTra(Nhap.nhapStr("Nhap ngay tra moi (yyyy-MM-dd): "));
+                pth.setNgayTra(Nhap.nhapNgay("Nhap ngay tra moi (yyyy-MM-dd): "));
                 System.out.println("Da thay doi ngay tra");
                 break;
             case 4:

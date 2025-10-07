@@ -77,7 +77,7 @@ public class QuanLyDanhSachQuanLy {
             case 1 -> ql.setTen(Nhap.nhapStr("Nhap ten moi: "));
             case 2 -> ql.setSdt(Nhap.nhapStr("Nhap sdt moi: "));
             case 3 -> ql.setGioiTinh(Nhap.nhapStr("Nhap gioi tinh moi: "));
-            case 4 -> ql.setNgaySinh(Nhap.nhapStr("Nhap ngay sinh moi: "));
+            case 4 -> ql.setNgaySinh(Nhap.nhapNgay("Nhap ngay sinh moi: "));
             case 5 -> ql.setCccd(Nhap.nhapStr("Nhap cccd moi: "));
             case 0 -> System.out.println("Thoat sua");
             default -> System.out.println("Lua chon khong hop le");

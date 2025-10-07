@@ -38,7 +38,7 @@ public class QuanLyNhanVien {
             case 1 -> nv.setTen(Nhap.nhapStr("Nhap ten moi: "));
             case 2 -> nv.setSdt(Nhap.nhapStr("Nhap sdt moi: "));
             case 3 -> nv.setGioiTinh(Nhap.nhapStr("Nhap gioi tinh moi: "));
-            case 4 -> nv.setNgaySinh(Nhap.nhapStr("Nhap ngay sinh moi: "));
+            case 4 -> nv.setNgaySinh(Nhap.nhapNgay("Nhap ngay sinh moi: "));
             case 5 -> nv.setCccd(Nhap.nhapStr("Nhap cccd moi: "));
             case 6 -> nv.setLuong(Nhap.nhapLong("Nhap luong moi: "));
             case 0 -> System.out.println("Thoat sua");

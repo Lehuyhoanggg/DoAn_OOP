@@ -82,7 +82,7 @@ public class QuanLyBaoHanh {
                 }
                 break;
             case 3:
-                baoHanh.setNgayBatDau(Nhap.nhapStr("Nhap ngay bat dau bao hanh moi : "));
+                baoHanh.setNgayBatDau(Nhap.nhapNgay("Nhap ngay bat dau bao hanh moi : "));
                 baoHanh.setNgayKetThuc();
                 break;
             case 4:

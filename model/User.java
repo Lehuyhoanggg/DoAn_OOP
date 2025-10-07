@@ -10,7 +10,7 @@ public abstract class User {
     private String ngaySinh;
     private String sdt;
     private String gioiTinh;
-    private TaiKhoan taiKhoan;
+    private TaiKhoan taiKhoan = null;
     private ArrayList<TinNhan> listTinNhan;
 
     public User() {

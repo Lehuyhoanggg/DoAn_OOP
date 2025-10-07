@@ -72,7 +72,7 @@ public class QuanLyPhieuBaoHanh {
                 }
                 break;
             case 3:
-                phieuBaoHanh.setNgayBaoHanh(Nhap.nhapStr("Nhap ngay bao hanh moi : "));
+                phieuBaoHanh.setNgayBaoHanh(Nhap.nhapNgay("Nhap ngay bao hanh moi : "));
                 break;
             case 4:
                 phieuBaoHanh.setChiTietLoi(Nhap.nhapStr("Nhap chi tiet loi moi : "));

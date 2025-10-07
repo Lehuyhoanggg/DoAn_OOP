@@ -110,11 +110,11 @@ public class QuanLyMaGiamGia {
                 System.out.println("da thay doi so tien giam thanh cong!");
                 break;
             case 5:
-                mGG.setNgayBatDau("nhap ngay bat dau moi (yyyy-mm-dd): ");
+                mGG.setNgayBatDau(Nhap.nhapNgay("nhap ngay bat dau moi (yyyy-mm-dd): "));
                 System.out.println("thay doi ngay batg dau moi thanh cong!");
                 break;
             case 6:
-                mGG.setNgayKetThuc(Nhap.nhapStr("nhap ngay ket thuc moi (yyyy-mm-dd): "));
+                mGG.setNgayKetThuc(Nhap.nhapNgay("nhap ngay ket thuc moi (yyyy-mm-dd): "));
                 System.out.println("thay doi ngay ket thuc thanh cong!");
                 break;
             case 0:

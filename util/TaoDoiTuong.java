@@ -35,7 +35,7 @@ public class TaoDoiTuong {
         String ma = CapMa.capMaNhanVien(db);
         String cccd = Nhap.nhapStr("Nhap cccd: ");
         String ten = Nhap.nhapStr("Nhap ten: ");
-        String ngaySinh = Nhap.nhapStr("Nhap ngay sinh (dd/MM/yyyy): ");
+        String ngaySinh = Nhap.nhapNgay("Nhap ngay sinh (dd/MM/yyyy): ");
         String sdt = Nhap.nhapStr("Nhap so dien thoai: ");
         String gioiTinh = Nhap.nhapStr("Nhap gioi tinh: ");
         return new NhanVien(ma, cccd, ten, ngaySinh, sdt, gioiTinh);
@@ -74,8 +74,8 @@ public class TaoDoiTuong {
         String loaiDoanhMuc = Nhap.nhapStr("Nhap loai danh muc (de trong neu khong muon): ");
         String loaiThuongHieu = Nhap.nhapStr("Nhap loai thuong hieu (de trong neu khong muon): ");
         String soTienGiam = Nhap.nhapStr("Nhap so tien giam(x) hoac % giam(x%) : ");
-        String ngayBatDau = Nhap.nhapStr("Nhap ngay bat dau (yyyy-MM-dd): ");
-        String ngayKetThuc = Nhap.nhapStr("Nhap ngay ket thuc (yyyy-MM-dd): ");
+        String ngayBatDau = Nhap.nhapNgay("Nhap ngay bat dau (yyyy-MM-dd): ");
+        String ngayKetThuc = Nhap.nhapNgay("Nhap ngay ket thuc (yyyy-MM-dd): ");
 
         return new MaGiamGia(ma, tenMa, loaiDoanhMuc, loaiThuongHieu, soTienGiam, ngayBatDau, ngayKetThuc);
     }
@@ -220,7 +220,7 @@ public class TaoDoiTuong {
         String ma = CapMa.capMaQuanly(db);
         String cccd = Nhap.nhapStr("Nhap cccd: ");
         String ten = Nhap.nhapStr("Nhap ten: ");
-        String ngaySinh = Nhap.nhapStr("Nhap ngay sinh (dd/MM/yyyy): ");
+        String ngaySinh = Nhap.nhapNgay("Nhap ngay sinh (dd/MM/yyyy): ");
         String sdt = Nhap.nhapStr("Nhap so dien thoai: ");
         String gioiTinh = Nhap.nhapStr("Nhap gioi tinh: ");
         return new QuanLy(ma, cccd, ten, ngaySinh, sdt, gioiTinh);

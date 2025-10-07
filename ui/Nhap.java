@@ -87,4 +87,46 @@ public class Nhap {
         System.out.println("----------------------");
         Nhap.nhapStr("Nhan enter de tiep tuc");
     }
+
+    private static boolean ngayHopLe(String ngay) {
+        if (ngay == null) {
+            return false;
+        }
+        String[] thanhPhan = ngay.split("/");
+        if (thanhPhan.length != 3) {
+            return false;
+        }
+        if (thanhPhan[0].length() > 2 || !laSo(thanhPhan[0]) || thanhPhan[1].length() > 2 || !laSo(thanhPhan[1])
+                || thanhPhan[2].length() > 4 || !laSo(thanhPhan[2])) {
+            return false;
+        }
+        return true;
+    }
+
+    public static String nhapNgay(String tuKhoa) {
+        String ngay;
+        do {
+            System.out.print(tuKhoa);
+            ngay = sc.nextLine();
+            ngay = ngay.trim();
+            if (!ngayHopLe(ngay)) {
+                System.out.println("vui long nhap theo ngay theo dinh dang dd/mm/yyyy");
+            }
+        } while (!ngayHopLe(ngay));
+        String[] thanhPhan = ngay.split("/");
+        while (thanhPhan[0].length() < 2) {
+            thanhPhan[0] = "0" + thanhPhan[0];
+        }
+        while (thanhPhan[1].length() < 2) {
+            thanhPhan[1] = "0" + thanhPhan[1];
+        }
+        while (thanhPhan[2].length() < 4) {
+            thanhPhan[2] = "0" + thanhPhan[2];
+        }
+        return thanhPhan[0] + "/" + thanhPhan[1] + "/" + thanhPhan[2];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Nhap.nhapNgay("Nhap ngay : "));
+    }
 }

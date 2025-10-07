@@ -147,7 +147,7 @@ public class QuanLyHoaDon {
                 suaHoaDon_ChiTietHoaDon(hoaDon.getChiTietHoaDon(), hoaDon.getKhachHang());
                 break;
             case 3:
-                hoaDon.setNgayTaoHoaDon(Nhap.nhapStr("Nhap ngay tao hoa don moi : "));
+                hoaDon.setNgayTaoHoaDon(Nhap.nhapNgay("Nhap ngay tao hoa don moi : "));
                 break;
             case 4:
                 hoaDon.setGhiChu(Nhap.nhapStr("Nhap ghi chu moi : "));
