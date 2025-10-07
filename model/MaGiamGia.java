@@ -97,12 +97,13 @@ public class MaGiamGia {
 
     @Override
     public String toString() {
-        return ma + " " +
-                tenMa + " " +
-                loaiDoanhMuc + " " +
-                loaiThuongHieu + " " +
-                tienGiam + " " +
-                ngayBatDau + " " +
-                ngayKetThuc;
+        return "Ma : " + ma + "\n" +
+                "TenMa : " + tenMa + "\n" +
+                "LoaiDoanhMuc : " + loaiDoanhMuc + "\n" +
+                "LoaiThuongHieu : " + loaiThuongHieu + "\n" +
+                "TienGiam : " + tienGiam + "\n" +
+                "NgayBatDau : " + ngayBatDau + "\n" +
+                "NgayKetThuc : " + ngayKetThuc + "\n";
     }
+
 }

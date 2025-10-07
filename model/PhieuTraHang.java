@@ -65,6 +65,6 @@ public class PhieuTraHang {
                 "khachHangMa : " + (khachHang != null ? khachHang.getMaKh() : "null") + "\n" +
                 "sanPhamMa : " + (sanPham != null ? sanPham.getMa() : "null") + "\n" +
                 "ngayTra : " + ngayTra + "\n" +
-                "lyDoTra : " + lyDoTra + "\n" + "------------------------------------" + "\n";
+                "lyDoTra : " + lyDoTra + "\n";
     }
 }

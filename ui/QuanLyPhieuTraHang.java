@@ -33,6 +33,7 @@ public class QuanLyPhieuTraHang {
         }
 
         for (int i = 0; i < listPhieuTraHang.size(); i++) {
+            System.out.println("---------------------------");
             System.out.println(listPhieuTraHang.get(i));
         }
     }
@@ -115,6 +116,7 @@ public class QuanLyPhieuTraHang {
         System.out.println("3. Sua ngay tra");
         System.out.println("4. Sua ly do tra");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void suaThanhPhanPhieuTraHang(PhieuTraHang pth, int chon) {
@@ -174,7 +176,9 @@ public class QuanLyPhieuTraHang {
         if (phieuTraHang == null) {
             System.out.println("khong tim thay");
         } else {
+            System.out.println("---------------------------");
             System.out.println(phieuTraHang);
+            System.out.println("---------------------------");
         }
     }
 
@@ -187,6 +191,7 @@ public class QuanLyPhieuTraHang {
         System.out.println("4. Xoa phieu tra hang");
         System.out.println("5. Hien thi tat ca phieu tra hang");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void thucHienChucNang(int chon) {

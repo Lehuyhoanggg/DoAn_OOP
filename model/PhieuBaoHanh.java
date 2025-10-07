@@ -61,6 +61,6 @@ public class PhieuBaoHanh {
                 "khachHangMa : " + (khachHang != null ? khachHang.getMaKh() : "null") + "\n" +
                 "sanPhamMa : " + (sanPham != null ? sanPham.getMa() : "null") + "\n" +
                 "ngayBaoHanh : " + ngayBaoHanh + "\n" +
-                "ChiTietLoi : " + ChiTietLoi + "\n" + "------------------------------------" + "\n";
+                "ChiTietLoi : " + ChiTietLoi  + "\n";
     }
 }

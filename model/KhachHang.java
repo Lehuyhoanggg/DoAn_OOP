@@ -173,6 +173,6 @@ public class KhachHang {
                 "tenKh : " + tenKh + "\n" +
                 "sdt : " + sdt + "\n" +
                 "hangThanhVienMa : " + (hangThanhVien != null ? hangThanhVien.getTenHang() : "null") + "\n" +
-                "tienDaChi : " + tienDaChi + "\n" + "------------------------------------" + "\n";
+                "tienDaChi : " + tienDaChi + "\n";
     }
 }

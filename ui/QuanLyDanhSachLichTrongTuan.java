@@ -91,6 +91,7 @@ public class QuanLyDanhSachLichTrongTuan {
         System.out.println("2. Xep lich cho tuan sau");
         System.out.println("3. Lua chon tuan de xep");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     public void xepLichLamViec() {
@@ -143,6 +144,7 @@ public class QuanLyDanhSachLichTrongTuan {
         System.out.println("1. Xem lich lam viec tuan nay");
         System.out.println("2. Lua chon xem lich");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     public void xemLichLamViec() {
@@ -175,6 +177,7 @@ public class QuanLyDanhSachLichTrongTuan {
         System.out.println("2. Xep lich lam viec");
         System.out.println("3. Quan ly lich lam viec");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     public void menu() {

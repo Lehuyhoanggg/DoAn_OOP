@@ -23,8 +23,8 @@ public class QuanLyHangThanhVien {
             System.out.println("Khong tim thay hang thanh vien nao");
             return;
         }
-        System.out.println("DANH SACH HANG THANH VIEN");
         for (int i = 0; i < listHangThanhVien.size(); i++) {
+            System.out.println("---------------------------");
             System.out.println(listHangThanhVien.get(i));
         }
     }
@@ -57,6 +57,7 @@ public class QuanLyHangThanhVien {
         System.out.println("3. Them ma giam gia cho hang thanh vien");
         System.out.println("4. Xoa ma giam gia cho hang thanh vien");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void suaThanhPhanHangThanhVien(HangThanhVien hangThanhVien, int luachon) {
@@ -125,8 +126,14 @@ public class QuanLyHangThanhVien {
             System.out.println("Khong tim thay hang thanh vien!");
             return;
         }
-        System.out.println("Thong tin hang thanh vien: ");
         System.out.println(htv);
+        ArrayList<MaGiamGia> listMaGiamGia = htv.getListMaGiamGiaDQ();
+        if (listMaGiamGia != null && listMaGiamGia.size() > 0) {
+            System.out.println("Danh sach ma giam gia co trong hang thanh vien : ");
+            for (MaGiamGia maGiamGia : listMaGiamGia) {
+                System.out.println(maGiamGia);
+            }
+        }
     }
 
     private void xuatMenu() {
@@ -136,6 +143,7 @@ public class QuanLyHangThanhVien {
         System.out.println("4. Sua hang thanh vien");
         System.out.println("5. hien thi thong tin tat ca hang thanh vien");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void thucHienChucNang(int chon) {

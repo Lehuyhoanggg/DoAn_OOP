@@ -7,7 +7,7 @@ SP006 Laptop_MacBook_Pro Laptop Apple 35000000 10 San_pham_cao_cap Con
 SP007 Dien_thoai_iPhone_15 Dien_thoai Apple 25000000 13 Camera_chat_luong_cao Con
 SP008 Tai_nghe_in_ear_Sony Tai_nghe Sony 1800000 40 Chat_luong_am_thanh_tot Con
 SP009 Man_hinh_4K_Dell Man_hinh Dell 8000000 20 Hinh_anh_sac_sao Con
-SP010 Loa_Bluetooth_Xiaomi Loa Xiaomi 1500000 34 Am_thanh_vom_chan_thuc Con
+SP010 Loa_Bluetooth_Xiaomi Loa Xiaomi 1500000 33 Am_thanh_vom_chan_thuc Con
 SP011 Laptop_Van_phong_HP Laptop HP 16000000 30 Thiet_ke_nhe_nhang Con
 SP012 Dien_thoai_Redmi_Note Dien_thoai Xiaomi 6000000 25 Pin_lau_gia_tot Con
 SP013 Tai_nghe_gaming_HyperX Tai_nghe HyperX 2200000 30 Am_thanh_vom_3D Con

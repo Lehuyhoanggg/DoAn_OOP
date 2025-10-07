@@ -18,7 +18,7 @@ public class QuanLyTinNhan {
 
     public void guiTinNhan(User nguoiGui) {
         DanhSachUser danhSachUser = db.getDanhSachUser();
-        User nguoiNhan = danhSachUser.timUser(Nhap.nhapStr("Nhap ma nhan : "));
+        User nguoiNhan = danhSachUser.timUser(Nhap.nhapStr("Nhap ma nguoi nhan : "));
         TinNhan tinNhan = TaoDoiTuong.taoTinNhan(nguoiGui.getTen(), db);
         nguoiNhan.nhanTinNhan(tinNhan);
         System.out.println("Da gui tin nhan thanh cong");
@@ -34,6 +34,7 @@ public class QuanLyTinNhan {
         }
         for (TinNhan tinNhan : listTinNhan) {
             if (ThoiGian.ngayTrongKhoan(tinNhan.getNgayGui(), ngayDauTuan, ngayCuoiTuan)) {
+                System.out.println("---------------------------");
                 System.out.println(tinNhan);
             }
         }
@@ -46,6 +47,7 @@ public class QuanLyTinNhan {
             return;
         }
         for (TinNhan tinNhan : listTinNhan) {
+            System.out.println("---------------------------");
             System.out.println(tinNhan);
         }
     }

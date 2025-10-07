@@ -17,7 +17,6 @@ public class QuanLyNhanVien {
 
     private void taoNhanVien() {
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
-        // Tao nhan vien moi bang ham ho tro
         NhanVien nv = TaoDoiTuong.taoNhanVien(db);
         danhSachNhanVien.themNhanVien(nv);
         System.out.println("Da them nhan vien thanh cong.");
@@ -31,6 +30,7 @@ public class QuanLyNhanVien {
         System.out.println("5. Sua cccd");
         System.out.println("6. Sua luong");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void suaThanhPhan(NhanVien nv, int luaChon) {
@@ -77,8 +77,11 @@ public class QuanLyNhanVien {
         NhanVien nv = danhSachNhanVien.timNhanVien(ma);
         if (nv == null)
             System.out.println("Khong tim thay.");
-        else
+        else{
+            System.out.println("---------------------------");
             System.out.println(nv);
+            System.out.println("---------------------------");
+        }
     }
 
     private void xemTatCaNhanVien() {
@@ -89,6 +92,7 @@ public class QuanLyNhanVien {
         }
         System.out.println("Danh sach nhan vien:");
         for (NhanVien nv : list) {
+            System.out.println("---------------------------");
             System.out.println(nv);
         }
     }
@@ -101,6 +105,7 @@ public class QuanLyNhanVien {
         System.out.println("4. Tra cuu nhan vien");
         System.out.println("5. Xem tat ca nhan vien");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     public void thucHienChucNang(int chon) {

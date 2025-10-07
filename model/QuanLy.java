@@ -10,12 +10,11 @@ public class QuanLy extends User {
     @Override
     public String toString() {
         return "ma : " + getMa() + "\n"
-                + "ten : " + getTen().replace("_", " ") + "\n"
+                + "ten : " + getTen() + "\n"
                 + "cccd : " + getCccd() + "\n"
                 + "ngaySinh : " + getNgaySinh() + "\n"
                 + "sdt : " + getSdt() + "\n"
                 + "gioiTinh : " + getGioiTinh() + "\n"
-                + "quyenHang : " + getQuyenHang() + "\n"
-                + "------------------------------------" + "\n";
+                + "quyenHang : " + getQuyenHang() + "\n";
     }
 }

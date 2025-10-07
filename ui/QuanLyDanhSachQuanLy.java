@@ -18,9 +18,8 @@ public class QuanLyDanhSachQuanLy {
             System.out.println("chua co quang ly nao");
             return;
         }
-        System.out.println("====list quan ly====");
-        ;
         for (int i = 0; i < listQuanLy.size(); i++) {
+            System.out.println("---------------------------");
             System.out.println(listQuanLy.get(i));
         }
     }
@@ -70,6 +69,7 @@ public class QuanLyDanhSachQuanLy {
         System.out.println("4. Sua ngay sinh");
         System.out.println("5. Sua cccd");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     public void thucHienChucNangSuaQuanLy(QuanLy ql, int luaChon) {

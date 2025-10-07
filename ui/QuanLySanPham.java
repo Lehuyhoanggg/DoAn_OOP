@@ -131,7 +131,9 @@ public class QuanLySanPham {
         if (timThay) {
             int luaChon = Nhap.nhapInt("lua chon san pham de hien thi : ");
             if (listSanPham.size() > luaChon && 0 <= luaChon) {
+                System.out.println("---------------------------");
                 System.out.println(listSanPham.get(luaChon));
+                System.out.println("---------------------------");
             } else {
                 System.out.println("lua chon khong hop le");
             }
@@ -139,9 +141,10 @@ public class QuanLySanPham {
             // neu tim theo ten khong thay thi tim theo ma
             for (int i = 0; i < listSanPham.size(); i++) {
                 if (listSanPham.get(i).getMa().equals(tuKhoa)) {
+                    System.out.println("---------------------------");
                     System.out.println(i + ". " + listSanPham.get(i).getMa() + " " + listSanPham.get(i).getTen()
                             + " " + listSanPham.get(i).getGia() + " " + listSanPham.get(i).getThuongHieu());
-
+                    System.out.println("---------------------------");
                     timThay = true;
                     break;
                 }

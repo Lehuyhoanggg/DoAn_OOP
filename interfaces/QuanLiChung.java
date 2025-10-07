@@ -1,13 +1,21 @@
 package interfaces;
 
 public interface QuanLiChung {
-    public void quanLySanPham();
+    void quanLyNhanVien();
 
-    public void quanLyNhanVien();
+    void quanLySanPham();
 
-    public void quanLyHoaDon();
+    void quanLyHoaDon();
 
-    public void quanLyBaoHanh();
+    void quanLyBaoHanh();
 
-    public void QuanLyKhacHang();
+    void quanLyPhieuBaoHanh();
+
+    void quanLyPhieuTraHang();
+
+    void quanLyKhachHang();
+
+    void quanLyMaGiamGia();
+
+    void quanLyDanhSachLichLamViec();
 }

@@ -93,6 +93,8 @@ public class BaoHanh {
         return "maBh : " + maBh + "\n" +
                 "loaiBaoHanh : " + loaiBaoHanh + "\n" +
                 "sanPhamMa : " + (sanPham != null ? sanPham.getMa() : "null") + "\n"
+                + "Ngay bat dau Bao Hanh : " + ngayBatDau + "\n"
+                + "Ngay ket thuc bao hanh : " + ngayKetThuc + "\n"
                 + "Gia : " + gia + "\n";
     }
 }

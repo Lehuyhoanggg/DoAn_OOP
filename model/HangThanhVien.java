@@ -57,6 +57,6 @@ public class HangThanhVien {
     @Override
     public String toString() {
         return "Ten hang : " + tenHang + "\n" +
-                "Mo ta : " + moTa + "\n" + "------------------------------------" + "\n";
+                "Mo ta : " + moTa + "\n";
     }
 }

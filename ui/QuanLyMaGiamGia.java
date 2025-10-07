@@ -36,6 +36,7 @@ public class QuanLyMaGiamGia {
         ArrayList<MaGiamGia> listMaGiamGia = db.getListMaGiamGia();
         if (!(listMaGiamGia == null || listMaGiamGia.size() == 0)) {
             System.out.println("Danh sach ma giam gia thuong : ");
+            System.out.println();
             for (int i = 0; i < listMaGiamGia.size(); i++) {
                 System.out.println(listMaGiamGia.get(i));
             }
@@ -43,6 +44,7 @@ public class QuanLyMaGiamGia {
         ArrayList<MaGiamGia> listMaGiamGiaDq = db.getListMaGiamGiaDq();
         if (!(listMaGiamGiaDq == null || listMaGiamGiaDq.size() == 0)) {
             System.out.println("Danh sach ma giam gia doc quyen : ");
+            System.out.println();
             for (int i = 0; i < listMaGiamGiaDq.size(); i++) {
                 System.out.println(listMaGiamGiaDq.get(i));
             }
@@ -86,6 +88,7 @@ public class QuanLyMaGiamGia {
         System.out.println("5. sua ngay bat dau");
         System.out.println("6. sua ngay ket thuc");
         System.out.println("0. thoat");
+        System.out.println("---------------------------");
     }
 
     private void thucHienChucNangSua(MaGiamGia mGG, int choice) {
@@ -161,6 +164,7 @@ public class QuanLyMaGiamGia {
         System.out.println("5. Sua ma giam gia");
         System.out.println("6. Xem tat ca ma giam gia");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void thucHienChucNang(int luaChon) {

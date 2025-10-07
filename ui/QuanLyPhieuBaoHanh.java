@@ -43,6 +43,7 @@ public class QuanLyPhieuBaoHanh {
         System.out.println("3. Sua ngay bao hanh");
         System.out.println("4. Sua chi tiet loi");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void suaThanhPhanPhieu(PhieuBaoHanh phieuBaoHanh, int luaChon) {
@@ -122,6 +123,7 @@ public class QuanLyPhieuBaoHanh {
         }
         System.out.println("Danh sach tat ca phieu bao hanh:");
         for (int i = 0; i < listPhieuBaoHanh.size(); i++) {
+            System.out.println("---------------------------");
             System.out.println(listPhieuBaoHanh.get(i));
 
         }
@@ -135,7 +137,9 @@ public class QuanLyPhieuBaoHanh {
             System.out.println("khong tim thay phieu bao hanh");
             return;
         }
+        System.out.println("---------------------------");
         System.out.println(phieuBaoHanh);
+        System.out.println("---------------------------");
     }
 
     private void xuatMenu() {
@@ -146,6 +150,7 @@ public class QuanLyPhieuBaoHanh {
         System.out.println("4. Tra cuu phieu bao hanh");
         System.out.println("5. Xem phieu bao hanh");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     public void thucHienChucNang(int luaChon) {

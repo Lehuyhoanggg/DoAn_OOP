@@ -49,11 +49,21 @@ public class QuanLyLichTrongTuan {
         return diemDanh(nhanVien);
     }
 
-    private void xoaNhanVienKhoiCa(CaLam caLam) {
+    private void xoaNhanVienKhoiCa() {
+        xemLichLamViec();
+        int index = Nhap.nhapInt("Chon thu can chinh sua : ") - 2;
+        LichTrongNgay lichTrongNgay = lichTrongTuan.getLichTuan().get(index);
+        int soCa = Nhap.nhapInt("Nhap so CaLam can chinh sua : ");
+        CaLam caLam = db.getDanhSachCaLam().timCaLam(soCa, lichTrongNgay);
+        if (caLam == null) {
+            System.out.println("Khong tim thay ca lam");
+            return;
+        }
         if (caLam.soNguoiTrongCa() == 0) {
             System.out.println("Khong co nhan vien de xoa");
             return;
         }
+
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         NhanVien nhanVien = danhSachNhanVien.timNhanVien(Nhap.nhapStr("Nhap ma nhan vien xoa khoi ca lam : "));
         if (nhanVien == null) {
@@ -62,30 +72,53 @@ public class QuanLyLichTrongTuan {
         }
         caLam.xoaNhanVienKhoiCa(nhanVien);
         System.out.println("Da xoa nhan vien khoi ca lam");
+
     }
 
-    private void themNhanVienVaoCa(CaLam caLam) {
+    private void themNhanVienVaoCa() {
+        xemLichLamViec();
+        int index = Nhap.nhapInt("Chon thu can chinh sua : ") - 2;
+        LichTrongNgay lichTrongNgay = lichTrongTuan.getLichTuan().get(index);
+        int soCa = Nhap.nhapInt("Nhap so CaLam can chinh sua : ");
+        CaLam caLam = db.getDanhSachCaLam().timCaLam(soCa, lichTrongNgay);
+        if (caLam == null) {
+            System.out.println("Khong tim thay ca lam");
+            return;
+        }
         if (caLam.caLamDuNguoi()) {
             System.out.println("Ca lam da du nguoi");
             return;
         }
+
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
-        NhanVien nhanVien = danhSachNhanVien.timNhanVien(Nhap.nhapStr("Nhap ma nhan vien de them vao ca lam : "));
-        if (nhanVien == null) {
-            System.out.println("Khong tim thay nhan vien");
-            return;
+        int soCanThem;
+        do {
+            soCanThem = Nhap.nhapInt("Nhap so luong can them : ");
+            if (soCanThem > caLam.soNguoiThieu()) {
+                System.out.println("So luong them khong hop le");
+            }
+        } while (soCanThem > caLam.soNguoiThieu());
+        while (soCanThem-- > 0) {
+            NhanVien nhanVien = null;
+            do {
+                nhanVien = danhSachNhanVien.timNhanVien(Nhap.nhapStr("Nhap ma nhan vien de them vao ca lam : "));
+                if (nhanVien == null) {
+                    System.out.println("Khong tim thay nhan vien, vui long nhap lai : ");
+                }
+            } while (nhanVien == null);
+
+            caLam.themNhanVienVaoCa(nhanVien);
+            System.out.println("Da them nhan vien vao ca");
         }
-        caLam.themNhanVienVaoCa(nhanVien);
-        System.out.println("Da them nhan vien vao ca");
     }
 
-    private void thucHienChucNangXepLich(int luaChon, CaLam caLam) {
+    private void thucHienChucNangXepLich(int luaChon) {
         switch (luaChon) {
             case 1:
-                themNhanVienVaoCa(caLam);
+                themNhanVienVaoCa();
                 break;
             case 2:
-                xoaNhanVienKhoiCa(caLam);
+                xoaNhanVienKhoiCa();
                 break;
             default:
                 System.out.println("Lua chon khong hop le");
@@ -93,87 +126,51 @@ public class QuanLyLichTrongTuan {
         }
     }
 
-    // xep lich lam viec moi
-    public void xepLichLamViec() {
-        int xacNhan = 1;
-        while (xacNhan == 1) {
-            xemLichLamViec();
-            int index = Nhap.nhapInt("Chon thu can chinh sua : ") - 2;
-            LichTrongNgay lichTrongNgay = lichTrongTuan.getLichTuan().get(index);
-            int soCa = Nhap.nhapInt("Nhap so CaLam can chinh sua : ");
-            CaLam caLam = db.getDanhSachCaLam().timCaLam(soCa, lichTrongNgay);
-            if (caLam == null) {
-                System.out.println("Khong tim thay ca lam");
-            } else {
-                System.out.println("1. Them nhan vien vao ca");
-                System.out.println("2. Xoa nhan vien khoi ca");
-                System.out.println("0. Thoat");
-                int luaChon = Nhap.nhapInt("Nhap lua chon : ");
-                if (luaChon == 0) {
-                    break;
-                }
-                thucHienChucNangXepLich(luaChon, caLam);
-            }
-        }
-        xacNhan = Nhap.nhapInt("(1)Tiep tuc xep lich (khac)Thoat");
+    public void xuatMenuXepLich() {
+        System.out.println("1. Them nhan vien vao ca");
+        System.out.println("2. Xoa nhan vien khoi ca");
+        System.out.println("0. Thoat");
     }
 
-    // xem tat ca lich lam viec
+    public void xepLichLamViec() {
+        while (true) {
+            xuatMenuXepLich();
+            int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            if (luaChon == 0) {
+                return;
+            }
+            thucHienChucNangXepLich(luaChon);
+            Nhap.pause();
+        }
+    }
+
     public void xemLichLamViec() {
         ArrayList<LichTrongNgay> listLichTrongNgay = lichTrongTuan.getLichTuan();
         if (listLichTrongNgay == null || listLichTrongNgay.size() == 0) {
             System.out.println("Chua xep lich hom nao trong tuan");
             return;
         }
-        for (int i = 0; i < listLichTrongNgay.size(); i++) {
-            LichTrongNgay lichTrongNgay = listLichTrongNgay.get(i);
-            System.out.println("Thu " + lichTrongNgay.getThu() + "      " + lichTrongNgay.getNgay());
-            ArrayList<CaLam> listCaLam = lichTrongNgay.getListCaLam();
-            for (int j = 0; j < listCaLam.size(); j++) {
-                CaLam caLam = listCaLam.get(j);
-                System.out
-                        .println(
-                                "   Ca " + caLam.getSo() + "    " + caLam.getGioBatDau() + " " + caLam.getGioKetThuc() +
-                                        "   " + caLam.soNguoiTrongCa() + "/" + caLam.getSoLuongCan());
-
-                if (!caLam.caLamChuaCoNguoi()) {
-                    System.out.println("   " + "      gom :");
-                    for (NhanVien nhanVien : caLam.getListNhanVien().getMapNhanVien().keySet()) {
-                        System.out.println("   " + "        " + nhanVien.getMa() + " " + nhanVien.getTen());
-                    }
-                } else {
-                    System.out.println("   " + "Trong");
-                }
-            }
-        }
-    }
-
-    public void xemLichLamViecPro() {
-        ArrayList<LichTrongNgay> listLichTrongNgay = lichTrongTuan.getLichTuan();
-        if (listLichTrongNgay == null || listLichTrongNgay.size() == 0) {
-            System.out.println("Chua xep lich hom nao trong tuan");
-            return;
-        }
-        ArrayList<ArrayList<NhanVien>> ca1 = new ArrayList<>();
+        ArrayList<ArrayList<String>> ca1 = new ArrayList<>();
 
         for (int j = 0; j < 7; j++) {
             ca1.add(new ArrayList<>());
         }
-        ArrayList<ArrayList<NhanVien>> ca2 = new ArrayList<>();
+        ArrayList<ArrayList<String>> ca2 = new ArrayList<>();
         for (int j = 0; j < 7; j++) {
             ca2.add(new ArrayList<>());
         }
-        ArrayList<ArrayList<NhanVien>> ca3 = new ArrayList<>();
+        ArrayList<ArrayList<String>> ca3 = new ArrayList<>();
         for (int j = 0; j < 7; j++) {
             ca3.add(new ArrayList<>());
         }
+
         for (int i = 0; i < listLichTrongNgay.size(); i++) {
             LichTrongNgay lichTrongNgay = listLichTrongNgay.get(i);
             ArrayList<CaLam> listCaLam = lichTrongNgay.getListCaLam();
 
             for (int j = 0; j < listCaLam.size(); j++) {
                 CaLam caLam = listCaLam.get(j);
-                ArrayList<NhanVien> listNhanVien = null;
+                ArrayList<String> listNhanVien = null;
                 if (caLam.getSo() == 1) {
                     listNhanVien = ca1.get(i);
 
@@ -186,78 +183,79 @@ public class QuanLyLichTrongTuan {
                     listNhanVien = ca3.get(i);
                 }
                 for (NhanVien nhanVien : caLam.getListNhanVien().getMapNhanVien().keySet()) {
-                    listNhanVien.add(nhanVien);
+                    listNhanVien.add(String.format("%-14s", nhanVien.getMa() + " " + nhanVien.get_ten()) + "|");
+                }
+                for (int k = caLam.soNguoiTrongCa(); k < caLam.getSoLuongCan(); k++) {
+                    listNhanVien.add(String.format("%-14s", "Trong") + "|");
+                }
+                while (listNhanVien.size() < 3) {
+                    listNhanVien.add("              |");
                 }
             }
 
         }
-        System.out.println("Lich lam viec cua nhan vien");
-        System.out.println(lichTrongTuan.getNgayThu2() + " - " + lichTrongTuan.getNgayCn());
         System.out.println();
-        // 5 3 3
-        System.out.println("      " + "    Thu 2    " + "    Thu 3    " + "    Thu 4    " + "    Thu 5    "
-                + "   Thu 6    " + "    Thu 7    " + "   Chu Nhat   ");
-        for (int j = 0; j < 7; j++) {
-            if (j == 0) {
-                System.out.print("Ca 1  ");
+        System.out.println("                                        Lich lam viec cua nhan vien");
+        System.out.println("                                        " + lichTrongTuan.getNgayThu2() + " - "
+                + lichTrongTuan.getNgayCn());
+        System.out.println();
+        System.out.println(
+                "      ----------------------------------------------------------------------------------------------------------");
+        System.out.println(
+                "      |_____Thu 2____|____Thu 3_____|_____Thu 4____|_____Thu 5____|____Thu 6_____|____Thu 7_____|_______CN_____|");
+        for (int i = 0; i < 3; i++) {
+            if (i == 0) {
+                System.out.print("Ca 1  |");
             }
-            if (j == 1) {
-                System.out.print("06:00 ");
+            if (i == 1) {
+                System.out.print("06:00 |");
             }
-            if (j == 2) {
-                System.out.print("12:00 ");
+            if (i == 2) {
+                System.out.print("12:00 |");
             }
-            if (ca1.get(j).size() < 3) {
-                ca1.get(j).add(null);
+            for (int j = 0; j < 7; j++) {
+                System.out.print(ca1.get(j).get(i));
             }
-            if (ca1.get(j).get(0) == null) {
-                System.out.print("             ");
-            } else {
-                System.out.printf("%-13s", ca1.get(j).get(0).getMa() + " " + ca1.get(j).get(0).get_ten());
-            }
+            System.out.println();
         }
-        System.out.println();
-        System.out.println();
-        for (int j = 0; j < 7; j++) {
-            if (j == 0) {
-                System.out.print("Ca 2 ");
+        System.out.println(
+                "----------------------------------------------------------------------------------------------------------------");
+        for (int i = 0; i < 3; i++) {
+            if (i == 0) {
+                System.out.print("Ca 2  |");
             }
-            if (j == 1) {
-                System.out.print("12:00 ");
+            if (i == 1) {
+                System.out.print("12:00 |");
             }
-            if (j == 2) {
-                System.out.print("18:00 ");
+            if (i == 2) {
+                System.out.print("18:00 |");
             }
-            if (ca2.get(j).size() < 3) {
-                ca2.get(j).add(null);
+            for (int j = 0; j < 7; j++) {
+                System.out.print(ca2.get(j).get(i));
             }
-            if (ca2.get(j).get(1) == null) {
-                System.out.println("             ");
-            } else {
-                System.out.printf("%-13s", ca2.get(j).get(1).getMa() + " " + ca2.get(j).get(1).get_ten());
-            }
+            System.out.println();
         }
-        System.out.println();
-        System.out.println();
-        for (int j = 0; j < 7; j++) {
-            if (j == 0) {
-                System.out.print("Ca 3 ");
+        System.out.println(
+                "----------------------------------------------------------------------------------------------------------------");
+
+        for (int i = 0; i < 3; i++) {
+            if (i == 0) {
+                System.out.print("Ca 3  |");
             }
-            if (j == 1) {
-                System.out.print("18:00 ");
+            if (i == 1) {
+                System.out.print("18:00 |");
             }
-            if (j == 2) {
-                System.out.print("23:00 ");
+            if (i == 2) {
+                System.out.print("23:00 |");
             }
-            if (ca3.get(j).size() < 3) {
-                ca1.get(j).add(null);
+            for (int j = 0; j < 7; j++) {
+                System.out.print(ca3.get(j).get(i));
             }
-            if (ca3.get(j).get(2) == null) {
-                System.out.println("             ");
-            } else {
-                System.out.printf("%-13s", ca3.get(j).get(2).getMa() + " " + ca3.get(j).get(2).get_ten());
-            }
+            System.out.println();
         }
+        System.out.println(
+                "----------------------------------------------------------------------------------------------------------------");
+        System.out.println();
     }
 
     public void thongKeDiemDanhTrongTuan() {
@@ -281,6 +279,7 @@ public class QuanLyLichTrongTuan {
         System.out.println("2. Xep lich lam viec");
         System.out.println("3. Xem lich lam viec");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void thucHienChucNang(int luaChon) {
@@ -310,7 +309,8 @@ public class QuanLyLichTrongTuan {
     public static void main(String[] args) {
         Database db = new Database();
         DanhSachLichTrongTuan danhSachLichTrongTuan = db.getDanhSachLichTrongTuan();
-        QuanLyLichTrongTuan quanLyLichTrongTuan = new QuanLyLichTrongTuan(db, danhSachLichTrongTuan.lichTrongTuanNay());
-        quanLyLichTrongTuan.xemLichLamViecPro();
+        QuanLyLichTrongTuan quanLyLichTrongTuan = new QuanLyLichTrongTuan(db,
+                danhSachLichTrongTuan.lichTrongTuanNay());
+        quanLyLichTrongTuan.xemLichLamViec();
     }
 }

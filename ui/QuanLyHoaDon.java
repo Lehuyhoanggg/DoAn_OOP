@@ -55,6 +55,7 @@ public class QuanLyHoaDon {
         System.out.println("3. Them bao hanh");
         System.out.println("4. Xoa bao hanh");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void suaThanhPhanChiTietHoaDon(ChiTietHoaDon chiTietHoaDon, KhachHang khachHang, int luaChon) {
@@ -127,6 +128,7 @@ public class QuanLyHoaDon {
         System.out.println("4. Sua ghi chu");
         System.out.println("5. Sua chi tiet tiet hoa don");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void suaThanhPhanHoaDon(HoaDon hoaDon, int luaChon) {
@@ -190,6 +192,7 @@ public class QuanLyHoaDon {
         System.out.println("2. xem doanh thu tuan");
         System.out.println("3. xem doanh thu thang");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void xemDoanhthuHomNay() {
@@ -235,10 +238,6 @@ public class QuanLyHoaDon {
         }
     }
 
-    public void xemTinhTrangBanSp() {
-
-    }
-
     // 6.tra cuu hoa don mua hang
     public void traCuuHoaDonMuaHang() {
         String ma = Nhap.nhapStr("nhap ma hoa don muon tra cuu: ");
@@ -248,6 +247,7 @@ public class QuanLyHoaDon {
             System.out.println("khong tim thay hoa don muon tra cuu!");
             return;
         } else {
+            System.out.println("---------------------------");
             System.out.println(hoaDon);
             LuuTruSanPham mapListSanPham = hoaDon.getChiTietHoaDon().getDanhSachSanPham();
             if (mapListSanPham.getMapSanPham().size() > 0) {
@@ -263,6 +263,7 @@ public class QuanLyHoaDon {
             for (BaoHanh baoHanh : listBaoHanh) {
                 System.out.println(baoHanh);
             }
+            System.out.println("---------------------------");
         }
     }
 
@@ -273,9 +274,9 @@ public class QuanLyHoaDon {
             System.out.println("khong co hoa don de in!");
         }
         for (int i = 0; i < listHoaDon.size(); i++) {
+            System.out.println("---------------------------");
             System.out.println(listHoaDon.get(i));
         }
-
     }
 
     private void xuatMenu() {
@@ -286,7 +287,7 @@ public class QuanLyHoaDon {
         System.out.println("5. Tra cuu hoa don mua hang");
         System.out.println("6. Xem tat ca hoa don mua hang");
         System.out.println("0. Thoat");
-        System.out.println("---------------------------------------");
+        System.out.println("-----------------------------------");
     }
 
     private void thucHienChucNang(int luaChon) {

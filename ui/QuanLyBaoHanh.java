@@ -58,6 +58,7 @@ public class QuanLyBaoHanh {
         System.out.println("3. Sua ngay bat dau");
         System.out.println("4. Sua gia");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void suaThanhPhanBaoHanh(BaoHanh baoHanh, int luaChon) {
@@ -105,7 +106,7 @@ public class QuanLyBaoHanh {
         while (xacNhan == 1) {
             xuatSuaBaoHanh();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
-            if (luaChon == 0){
+            if (luaChon == 0) {
                 return;
             }
             suaThanhPhanBaoHanh(baoHanh, luaChon);
@@ -119,6 +120,7 @@ public class QuanLyBaoHanh {
             System.out.println("khong co bao hanh nao");
         }
         for (int i = 0; i < listBaoHanh.size(); i++) {
+            System.out.println("---------------------------");
             System.out.println(listBaoHanh.get(i));
         }
     }
@@ -131,7 +133,9 @@ public class QuanLyBaoHanh {
             System.out.println("khong tim thay bao hanh");
             return;
         }
+        System.out.println("---------------------------");
         System.out.println(baoHanh);
+        System.out.println("---------------------------");
     }
 
     public void xuatMenu() {
@@ -142,6 +146,7 @@ public class QuanLyBaoHanh {
         System.out.println("4. Tra cuu bao hanh");
         System.out.println("5. Xem tat ca bao hanh bao hanh");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     public void thucHienChucNang(int luaChon) {

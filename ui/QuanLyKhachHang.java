@@ -95,8 +95,10 @@ public class QuanLyKhachHang {
         if (timThay) {
             int luaChon = Nhap.nhapInt("lua chon khach hang de hien thi : ");
             if (listKhachHang.size() > luaChon || 0 < luaChon) {
+                System.out.println("---------------------------");
                 System.out.println(listKhachHang.get(luaChon));
                 xuatListTrongKhachHang(listKhachHang.get(luaChon));
+                System.out.println("---------------------------");
             } else {
                 System.out.println("lua chon khong hop le");
             }
@@ -109,8 +111,10 @@ public class QuanLyKhachHang {
                     int luaChon = Nhap.nhapInt("lua chon khach hang de hien thi : ");
 
                     if (listKhachHang.size() > luaChon || 0 < luaChon) {
+                        System.out.println("---------------------------");
                         System.out.println(listKhachHang.get(luaChon));
                         xuatListTrongKhachHang(listKhachHang.get(luaChon));
+                        System.out.println("---------------------------");
                     } else {
                         System.out.println("lua chon khong hop le");
                     }
@@ -181,6 +185,7 @@ public class QuanLyKhachHang {
         System.out.println("2. Sua so dien thoai");
         System.out.println("3. Sua hang thanh vien");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     public void suaThongTinKhachHang() {
@@ -206,6 +211,7 @@ public class QuanLyKhachHang {
         System.out.println("4. Sua thong tin khach hang");
         System.out.println("5. Xem tat ca khach hang");
         System.out.println("0. Thoat");
+        System.out.println("---------------------------");
     }
 
     private void thucHienChucNang(int luaChon) {

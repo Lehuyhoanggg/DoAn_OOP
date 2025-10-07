@@ -70,6 +70,6 @@ public class TaiKhoan {
     @Override
     public String toString() {
         return "Ten Dang Nhap:" + tenDangNhap + "\n" +
-                "Mat khau: " + matKhau + "------------------------------------" + "\n";
+                "Mat khau: " + matKhau +"\n";
     }
 }

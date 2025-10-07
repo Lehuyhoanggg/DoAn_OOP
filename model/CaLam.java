@@ -98,7 +98,9 @@ public class CaLam {
     public boolean xoaNhanVienKhoiCa(NhanVien nhanVien) {
         return listNhanVien.xoaNhanVien(nhanVien);
     }
-
+    public int soNguoiThieu(){
+        return soLuongCan - soNguoiTrongCa();
+    }
     @Override
     public String toString() {
         return "Gio bat dau: " + getGioBatDau() + "\n" +

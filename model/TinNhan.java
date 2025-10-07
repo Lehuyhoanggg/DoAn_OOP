@@ -47,13 +47,12 @@ public class TinNhan {
     public void setNgayGui(String ngayGui) {
         this.ngayGui = ngayGui;
     }
+
     @Override
-    public String toString(){
-        return "tin nhan{" + 
-                "ma="+ma+'\''+
-                "Noidung="+noiDung+'\''+
-                "Nguoi gui="+tenNgGui+'\''+
-                "Ngay gui="+ngayGui+'\''+
-                '}';
+    public String toString() {
+        return "  Ma         : " + ma + "\n" +
+                "  NoiDung    : " + noiDung + "\n" +
+                "  NguoiGui   : " + tenNgGui + "\n" +
+                "  NgayGui    : " + ngayGui + "\n";
     }
 }

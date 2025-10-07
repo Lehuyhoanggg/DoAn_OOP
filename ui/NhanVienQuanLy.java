@@ -116,7 +116,7 @@ public class NhanVienQuanLy implements LamViec, GiaoTiep {
         System.out.println("12. Gui Tin Nhan");
         System.out.println("13. Hop thu");
         System.out.println("0.  Thoat Menu");
-
+        System.out.println("---------------------------");
     }
 
     // thuc hien chuc nang

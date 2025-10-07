@@ -34,13 +34,12 @@ public class NhanVien extends User {
     @Override
     public String toString() {
         return "ma : " + getMa() + "\n"
-                + "ten : " + getTen().replaceAll("_", " ") + "\n"
+                + "ten : " + getTen() + "\n"
                 + "cccd : " + getCccd() + "\n"
                 + "ngaySinh : " + getNgaySinh() + "\n"
                 + "sdt : " + getSdt() + "\n"
                 + "gioiTinh : " + getGioiTinh() + "\n"
                 + "quyenHang : " + getQuyenHang() + "\n"
-                + "luong : " + luong + "\n"
-                + "------------------------------------" + "\n";
+                + "luong : " + luong + "\n";
     }
 }
