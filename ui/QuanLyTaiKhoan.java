@@ -2,6 +2,7 @@ package ui;
 
 import java.util.ArrayList;
 
+import danhsach.DanhSachTaiKhoan;
 import danhsach.DanhSachUser;
 import database.Database;
 import model.TaiKhoan;
@@ -58,6 +59,8 @@ public class QuanLyTaiKhoan {
             return;
         }
         TaiKhoan taiKhoan = new TaiKhoan(ma, "123");
+        DanhSachTaiKhoan danhSachTaiKhoan = db.getDanhSachTaiKhoan();
+        danhSachTaiKhoan.themTaiKhoan(taiKhoan);
         user.capTaiKhoan(taiKhoan);
         System.out.println("Da cap tai khoan cho user");
         System.out.println(taiKhoan);
