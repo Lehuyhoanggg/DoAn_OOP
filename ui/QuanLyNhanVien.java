@@ -54,21 +54,27 @@ public class QuanLyNhanVien {
             System.out.println("Khong tim thay nhan vien.");
             return;
         }
-        int tiep = 1;
-        while (tiep == 1) {
+        while (true) {
             xuatSuaNhanVien();
             int chon = Nhap.nhapInt("Chon muc: ");
+            if (chon == 0) {
+                return;
+            }
             suaThanhPhan(nv, chon);
-            tiep = Nhap.nhapInt("(1) Tiep tuc sua | (Khac) Thoat: ");
+            Nhap.pause();
         }
-        System.out.println("Da cap nhat thong tin nhan vien.");
     }
 
     private void xoaNhanVien() {
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         String ma = Nhap.nhapStr("Nhap ma nhan vien can xoa: ");
-        danhSachNhanVien.xoaNhanVien(ma);
-        System.out.println("Da xoa nhan vien");
+        NhanVien nhanVien = danhSachNhanVien.timNhanVien(ma);
+        if (nhanVien != null) {
+            danhSachNhanVien.xoaNhanVien(ma);
+            System.out.println("Da xoa nhan vien");
+        } else {
+            System.out.println("Khong tim thay nhan vien de xoa");
+        }
     }
 
     private void traCuuNhanVien() {
@@ -77,7 +83,7 @@ public class QuanLyNhanVien {
         NhanVien nv = danhSachNhanVien.timNhanVien(ma);
         if (nv == null)
             System.out.println("Khong tim thay.");
-        else{
+        else {
             System.out.println("---------------------------");
             System.out.println(nv);
             System.out.println("---------------------------");

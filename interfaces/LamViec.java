@@ -17,7 +17,7 @@ public interface LamViec {
 
     public void TraCuuBaoHanh();
 
-    public void taoBaoHanh();
+    public void taoPhieuBaoHanh();
 
     public void xemTatCaMaGiamGia();
 

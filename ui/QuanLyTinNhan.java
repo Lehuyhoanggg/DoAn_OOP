@@ -21,6 +21,7 @@ public class QuanLyTinNhan {
         User nguoiNhan = danhSachUser.timUser(Nhap.nhapStr("Nhap ma nguoi nhan : "));
         TinNhan tinNhan = TaoDoiTuong.taoTinNhan(nguoiGui.getTen(), db);
         nguoiNhan.nhanTinNhan(tinNhan);
+        db.getDanhSachTinNhan().themTinNhan(tinNhan);
         System.out.println("Da gui tin nhan thanh cong");
     }
 

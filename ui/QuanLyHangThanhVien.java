@@ -108,12 +108,14 @@ public class QuanLyHangThanhVien {
             System.out.println("Khong tim thay hang thanh vien");
             return;
         }
-        int xacNhan = 1;
-        while (xacNhan == 1) {
+        while (true) {
             xuatSuaHangThanhVien();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            if (luaChon == 0) {
+                return;
+            }
             suaThanhPhanHangThanhVien(hangThanhVien, luaChon);
-            xacNhan = Nhap.nhapInt("(1)Tiep tuc sua (Khac)Thoat");
+            Nhap.pause();
         }
     }
 

@@ -147,6 +147,50 @@ public class QuanLyDanhSachLichTrongTuan {
         System.out.println("---------------------------");
     }
 
+    public void xuatMenuQlLich() {
+        System.out.println("1. Quan li lich tuan nay");
+        System.out.println("2. lich can quan li");
+        System.out.println("3. Thoat");
+    }
+
+    public void thucHienChucNangQuanLi(int luaChon) {
+        switch (luaChon) {
+            case 1:
+                LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.lichTrongTuanNay();
+                QuanLyLichTrongTuan quanLyLichTrongTuan = new QuanLyLichTrongTuan(db, lichTrongTuan);
+                quanLyLichTrongTuan.menu();
+                break;
+            case 2:
+                for (int i = 0; i < danhSachLichTrongTuan.getListLichTrongTuan().size(); i++) {
+                    LichTrongTuan lich = danhSachLichTrongTuan.getListLichTrongTuan().get(i);
+                    System.out.println(i + ". " + " so tuan " + ThoiGian.laySoTuanTrongNam(lich.getNgayThu2()) + "  "
+                            + lich.getNgayCn() + " " + lich.getNgayThu2());
+                }
+                int chon = Nhap.nhapInt("Nhap lua chon : ");
+                if (chon >= 0 && chon < danhSachLichTrongTuan.getListLichTrongTuan().size()) {
+                    QuanLyLichTrongTuan qlLich = new QuanLyLichTrongTuan(db,
+                            danhSachLichTrongTuan.getListLichTrongTuan().get(chon));
+                    qlLich.menu();
+                } else {
+                    System.out.println("Lua chon khong hop le");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void quanLyLichTrongTuan() {
+        while (true) {
+            xuatMenuQlLich();
+            int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            if (luaChon == 0) {
+                return;
+            }
+            thucHienChucNangQuanLi(luaChon);
+        }
+    }
+
     public void xemLichLamViec() {
         while (true) {
             xuatMenuXemLich();
@@ -166,6 +210,9 @@ public class QuanLyDanhSachLichTrongTuan {
                 break;
             case 2:
                 xepLichLamViec();
+                break;
+            case 3:
+                quanLyLichTrongTuan();
                 break;
             default:
                 break;
@@ -192,5 +239,4 @@ public class QuanLyDanhSachLichTrongTuan {
         }
     }
 
-    
 }

@@ -106,8 +106,11 @@ public class QuanLySanPham {
         while (xacNhan == 1) {
             xuatSuaSanPham();
             int chon = Nhap.nhapInt("Chon muc can sua: ");
+            if (chon==0){
+                return;
+            }
             suaThanhPhanSanPham(sp, chon);
-            xacNhan = Nhap.nhapInt("(1)Tiep tuc sua (Khac)Thoat");
+            Nhap.pause();
         }
     }
 

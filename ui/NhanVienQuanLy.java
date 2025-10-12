@@ -61,9 +61,9 @@ public class NhanVienQuanLy implements LamViec, GiaoTiep {
         quanLyBaoHanh.traCuuBaoHanh();
     }
 
-    public void taoBaoHanh() {
-        QuanLyBaoHanh quanLyBaoHanh = new QuanLyBaoHanh(db);
-        quanLyBaoHanh.taoBaoHanh();
+    public void taoPhieuBaoHanh() {
+        QuanLyPhieuBaoHanh quanLyPhieuBaoHanh = new QuanLyPhieuBaoHanh(db);
+        quanLyPhieuBaoHanh.taoPhieuBaoHanh();
     }
 
     public void xemTatCaMaGiamGia() {
@@ -132,7 +132,9 @@ public class NhanVienQuanLy implements LamViec, GiaoTiep {
             case 8 -> xemLichLamViecTrongTuanNay();
             case 9 -> doiMatKhau();
             case 10 -> TraCuuBaoHanh();
-            case 11 -> taoBaoHanh();
+            case 11 -> taoPhieuBaoHanh();
+            case 12 -> guiTinNhan();
+            case 13 -> xemTatCaTinNhan();
             default -> System.out.println("Da thoat Menu!");
         }
     }

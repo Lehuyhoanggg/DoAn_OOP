@@ -6,6 +6,9 @@ public class Nhap {
     static Scanner sc = new Scanner(System.in);
 
     private static boolean laSo(String so) {
+        if (so == "") {
+            return false;
+        }
         for (int i = 0; i < so.length(); i++) {
             if (i == 0 && so.length() > 1 && so.charAt(i) == '-')
                 continue;

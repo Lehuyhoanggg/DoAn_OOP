@@ -102,8 +102,7 @@ public class QuanLyBaoHanh {
             System.out.println("Khong tim thay bao hanh");
             return;
         }
-        int xacNhan = 1;
-        while (xacNhan == 1) {
+        while (true) {
             xuatSuaBaoHanh();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {
@@ -111,7 +110,6 @@ public class QuanLyBaoHanh {
             }
             suaThanhPhanBaoHanh(baoHanh, luaChon);
         }
-        System.out.println("Da cap nhat bao hanh.");
     }
 
     public void xemTatCaBaoHanh() {

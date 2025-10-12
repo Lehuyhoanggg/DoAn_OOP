@@ -5,6 +5,7 @@ import model.CaLam;
 import model.LichTrongTuan;
 import model.LichTrongNgay;
 import model.NhanVien;
+import util.ThoiGian;
 import util.XoaManHinh;
 
 import java.util.ArrayList;
@@ -259,6 +260,10 @@ public class QuanLyLichTrongTuan {
     }
 
     public void thongKeDiemDanhTrongTuan() {
+        System.out.println();
+        System.out
+                .println("Tinh trang diem danh trong tuan " + ThoiGian.laySoTuanTrongNam(lichTrongTuan.getNgayThu2()));
+        System.out.println("----------------------------------");
         for (LichTrongNgay lichTrongNgay : lichTrongTuan.getListLichTrongNgay()) {
             System.out.println(lichTrongNgay.getNgay());
             System.out.println("Thu " + lichTrongNgay.getThu());
@@ -266,9 +271,11 @@ public class QuanLyLichTrongTuan {
                 System.out.println("ca " + caLam.getSo() + ": ");
                 for (NhanVien nhanVien : caLam.getListNhanVien().getMapNhanVien().keySet()) {
                     System.out.println("Nhan Vien : " + nhanVien.getMa() + " " + nhanVien.getTen()
-                            + (caLam.getListNhanVien().kiemTraDiemDanh(nhanVien) ? "Da diem danh " : "Chua diem danh"));
+                            + (caLam.getListNhanVien().kiemTraDiemDanh(nhanVien) ? " Da diem danh "
+                                    : " Chua diem danh"));
                 }
             }
+            System.out.println();
         }
     }
 

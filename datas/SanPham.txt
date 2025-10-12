@@ -1,4 +1,4 @@
-SP001 Laptop_Gaming_Asus Laptop Asus 28000000 100 Hieu_suat_manh_me Con
+SP001 Laptop_Gaming_Asus Laptop Asus 28000000 99 Hieu_suat_manh_me Con
 SP002 Dien_thoai_Galaxy_S24 Dien_thoai Samsung 22000000 17 Man_hinh_sac_net Con
 SP003 Tai_nghe_Bluetooth_JBL Tai_nghe JBL 2500000 48 Am_thanh_trong_tre Con
 SP004 Ban_phim_co_Razer Ban_phim Razer 2700000 25 Den_RGB_dep_mat Con

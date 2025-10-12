@@ -199,8 +199,11 @@ public class QuanLyKhachHang {
         while (xacNhan == 1) {
             xuatSuaKhachHang();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            if (luaChon==0){
+                return;
+            }
             suaThanhPhanKhachHang(khachHang, luaChon);
-            xacNhan = Nhap.nhapInt("(1)Tiep tuc sua (Khac)Thoat");
+            Nhap.pause();
         }
     }
 

@@ -95,8 +95,11 @@ public class QuanLyPhieuBaoHanh {
         while (xacNhan == 1) {
             xuatSuaPhieuBaoHanh();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            if (luaChon==0){
+                return;
+            }
             suaThanhPhanPhieu(phieuBaoHanh, luaChon);
-            xacNhan = Nhap.nhapInt("(1) Tiep tuc sua (Khac) Thoat");
+            Nhap.pause();
         }
         System.out.println("Da cap nhat phieu bao hanh.");
     }

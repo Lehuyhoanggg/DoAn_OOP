@@ -153,4 +153,13 @@ public class ThoiGian {
         WeekFields weekFields = WeekFields.ISO;
         return today.get(weekFields.weekOfYear());
     }
+
+    public static int laySoTuanTrongNam(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(dateString, formatter);
+        WeekFields weekFields = WeekFields.ISO;
+        int weekOfYear = date.get(weekFields.weekOfWeekBasedYear());
+        
+        return weekOfYear;
+    }
 }

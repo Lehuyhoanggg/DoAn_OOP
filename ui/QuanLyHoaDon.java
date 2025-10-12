@@ -31,6 +31,7 @@ public class QuanLyHoaDon {
         DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         HoaDon hoaDon = TaoDoiTuong.taoHoaDon(db);
         if (danhSachHoaDon.themHoaDon(hoaDon)) {
+            System.out.println(hoaDon);
             System.out.println("Tao hoa don thanh cong");
         } else {
             System.out.println("Tao hoa don that bai");
@@ -123,10 +124,9 @@ public class QuanLyHoaDon {
 
     private void xuatSuaHoaDon() {
         System.out.println("1. Sua Khach hang");
-        System.out.println("2. Sua bao hanh");
-        System.out.println("3. Sua ngay tao hoa don");
-        System.out.println("4. Sua ghi chu");
-        System.out.println("5. Sua chi tiet tiet hoa don");
+        System.out.println("2. Sua ngay tao hoa don");
+        System.out.println("3. Sua ghi chu");
+        System.out.println("4. Sua chi tiet tiet hoa don");
         System.out.println("0. Thoat");
         System.out.println("---------------------------");
     }
@@ -144,15 +144,12 @@ public class QuanLyHoaDon {
                 System.out.println("Da thay doi khach hang");
                 break;
             case 2:
-                suaHoaDon_ChiTietHoaDon(hoaDon.getChiTietHoaDon(), hoaDon.getKhachHang());
-                break;
-            case 3:
                 hoaDon.setNgayTaoHoaDon(Nhap.nhapNgay("Nhap ngay tao hoa don moi : "));
                 break;
-            case 4:
+            case 3:
                 hoaDon.setGhiChu(Nhap.nhapStr("Nhap ghi chu moi : "));
                 break;
-            case 5:
+            case 4:
                 suaHoaDon_ChiTietHoaDon(hoaDon.getChiTietHoaDon(), hoaDon.getKhachHang());
                 break;
             default:
@@ -161,12 +158,14 @@ public class QuanLyHoaDon {
     }
 
     private void suaHoaDon_ChiTietHoaDon(ChiTietHoaDon chiTietHoaDon, KhachHang khachHang) {
-        int xacNhan = 1;
-        while (xacNhan == 1) {
+        while (true) {
             xuatSuaHoaDon_BaoHanh();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            if (luaChon == 0) {
+                return;
+            }
             suaThanhPhanChiTietHoaDon(chiTietHoaDon, khachHang, luaChon);
-            xacNhan = Nhap.nhapInt("(1) Tiep tuc sua (Khac)Thoat");
+            Nhap.pause();
         }
     }
 
@@ -181,8 +180,11 @@ public class QuanLyHoaDon {
         while (xacNhan == 1) {
             xuatSuaHoaDon();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
+            if (luaChon == 0) {
+                return;
+            }
             suaThanhPhanHoaDon(hoaDon, luaChon);
-            xacNhan = Nhap.nhapInt("(1) Tiep tuc sua (Khac)Thoat");
+            Nhap.pause();
         }
     }
 
@@ -199,7 +201,8 @@ public class QuanLyHoaDon {
         DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         String ngayHomNay = ThoiGian.layNgayHienTaiStr();
         long tong = danhSachHoaDon.tinhDoanhThuTrongNgay(ngayHomNay);
-        System.out.println("doanh thu ngay hom nay: " + tong);
+        System.out.println("Doanh thu ngay hom nay: " + tong);
+        System.out.println("So hoa don ban duoc : " + danhSachHoaDon.soHoaDonTrongNgay());
     }
 
     private void xemDoanhThuTuan() {
@@ -207,7 +210,8 @@ public class QuanLyHoaDon {
         String ngayDauTuan = ThoiGian.layNgayDauTuanStr();
         String ngayCuoiTuan = ThoiGian.layNgayCuoiTuanStr();
         long tongTien = danhSachHoaDon.tinhDoanhThuTrongKhoan(ngayDauTuan, ngayCuoiTuan);
-        System.out.println("doanh thu trong tuan: " + tongTien);
+        System.out.println("Doanh thu trong tuan: " + tongTien);
+        System.out.println("So hoa don ban duoc : " + danhSachHoaDon.soHoaDonTrongKhoan(ngayDauTuan, ngayCuoiTuan));
     }
 
     public void xemDoanhThuThang() {
@@ -215,7 +219,8 @@ public class QuanLyHoaDon {
         String ngayDauThang = ThoiGian.layNgayDauThangStr();
         String ngayCuoiThang = ThoiGian.layNgayCuoiThangStr();
         long tongTien = danhSachHoaDon.tinhDoanhThuTrongKhoan(ngayDauThang, ngayCuoiThang);
-        System.out.println("doanh thu trong thang : " + tongTien);
+        System.out.println("Doanh thu trong thang : " + tongTien);
+        System.out.println("So hoa don ban duoc : " + danhSachHoaDon.soHoaDonTrongKhoan(ngayDauThang, ngayCuoiThang));
     }
 
     private void thucHienChucNangDoanhThu(int choice) {
@@ -233,8 +238,11 @@ public class QuanLyHoaDon {
         while (xacNhan == 1) {
             xuatXemDoanhThu();
             int choice = Nhap.nhapInt("nhap lua chon: ");
+            if (choice == 0) {
+                return;
+            }
             thucHienChucNangDoanhThu(choice);
-            xacNhan = Nhap.nhapInt("nhan (1) de tiep tuc xem doanh thu (khac) de thoat: ");
+            Nhap.pause();
         }
     }
 
@@ -262,6 +270,13 @@ public class QuanLyHoaDon {
             }
             for (BaoHanh baoHanh : listBaoHanh) {
                 System.out.println(baoHanh);
+            }
+            ArrayList<MaGiamGia> listMaGiamGia = hoaDon.getChiTietHoaDon().getListMaGiamGiaDaDung();
+            if (listMaGiamGia.size() > 0) {
+                System.out.println("Danh sach ma giam gia da dung");
+                for (MaGiamGia maGiamGia : listMaGiamGia) {
+                    System.out.println(maGiamGia);
+                }
             }
             System.out.println("---------------------------");
         }

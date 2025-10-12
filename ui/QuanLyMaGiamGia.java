@@ -128,12 +128,14 @@ public class QuanLyMaGiamGia {
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can xoa: ");
         MaGiamGia mGG = danhSachMaGiamGia.timMaGiamGia(ma);
-        int xacNhan = 1;
-        while (xacNhan == 1) {
+        while (true) {
             xuatMenuSuaMaGiamGia();
             int choice = Nhap.nhapInt("nhap lua chon: ");
+            if (choice==0){
+                return;
+            }
             thucHienChucNangSua(mGG, choice);
-            xacNhan = Nhap.nhapInt("(1)Tiep tuc sua ma giam gia (khac)Thoat");
+            Nhap.pause();
         }
     }
 

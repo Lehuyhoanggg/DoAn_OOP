@@ -164,8 +164,11 @@ public class QuanLyPhieuTraHang {
         while (tiep == 1) {
             xuatSuaTraHang();
             int chon = Nhap.nhapInt("Chon muc can sua: ");
+            if (chon==0){
+                return;
+            }
             suaThanhPhanPhieuTraHang(pth, chon);
-            tiep = Nhap.nhapInt("(1) Tiep tuc sua (khac) Thoat: ");
+            Nhap.pause();
         }
     }
 

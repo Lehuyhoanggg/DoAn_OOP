@@ -83,4 +83,24 @@ public class DanhSachHoaDon {
         return tongTien;
     }
 
+    public int soHoaDonTrongNgay() {
+        int count = 0;
+        for (HoaDon hoaDon : listHoaDon) {
+            if (hoaDon.getNgayTaoHoaDon().equals(ThoiGian.layNgayHienTaiStr())) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int soHoaDonTrongKhoan(String ngayBd, String ngayKt) {
+        int count = 0;
+        for (HoaDon hoaDon : listHoaDon) {
+            if (ThoiGian.ngayTrongKhoan(hoaDon.getNgayTaoHoaDon(), ngayBd, ngayKt)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 }
