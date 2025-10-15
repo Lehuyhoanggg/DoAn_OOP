@@ -104,6 +104,10 @@ public class QuanLySanPham {
         }
         int xacNhan = 1;
         while (xacNhan == 1) {
+            System.out.println();
+            System.out.println("------------------------");
+            System.out.println(sp);
+            System.out.println("------------------------");
             xuatSuaSanPham();
             int chon = Nhap.nhapInt("Chon muc can sua: ");
             if (chon==0){

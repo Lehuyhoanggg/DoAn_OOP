@@ -55,6 +55,10 @@ public class QuanLyNhanVien {
             return;
         }
         while (true) {
+            System.out.println();
+            System.out.println("------------------------");
+            System.out.println(nv);
+            System.out.println("------------------------");
             xuatSuaNhanVien();
             int chon = Nhap.nhapInt("Chon muc: ");
             if (chon == 0) {

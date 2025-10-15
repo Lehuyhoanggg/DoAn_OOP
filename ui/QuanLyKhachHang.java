@@ -87,7 +87,7 @@ public class QuanLyKhachHang {
         for (int i = 0; i < listKhachHang.size(); i++) {
             if (listKhachHang.get(i).getSdt().contains(tuKhoa)) {
                 timThay = true;
-                System.out.println(i + " " + listKhachHang.get(i).getMaKh() + " " + listKhachHang.get(i).getTenKh()
+                System.out.println(i + ". " + listKhachHang.get(i).getMaKh() + " " + listKhachHang.get(i).getTenKh()
                         + " " + listKhachHang.get(i).getSdt());
             }
         }
@@ -106,10 +106,25 @@ public class QuanLyKhachHang {
             // neu tim theo ten khong thay thi tim theo ma
             for (int i = 0; i < listKhachHang.size(); i++) {
                 if (listKhachHang.get(i).getMaKh().equals(tuKhoa)) {
-                    System.out.println(i + " " + listKhachHang.get(i).getMaKh() + " " + listKhachHang.get(i).getTenKh()
-                            + " " + listKhachHang.get(i).getSdt());
+                    System.out.println("---------------------------");
+                    System.out.println(listKhachHang.get(i));
+                    xuatListTrongKhachHang(listKhachHang.get(i));
+                    System.out.println("---------------------------");
+                    timThay = true;
+                    break;
+                }
+            }
+            if (!timThay) {
+                for (int i = 0; i < listKhachHang.size(); i++) {
+                    if (listKhachHang.get(i).getTenKh().contains(tuKhoa)) {
+                        timThay = true;
+                        System.out.println(
+                                i + ". " + listKhachHang.get(i).getMaKh() + " " + listKhachHang.get(i).getTenKh()
+                                        + " " + listKhachHang.get(i).getSdt());
+                    }
+                }
+                if (timThay) {
                     int luaChon = Nhap.nhapInt("lua chon khach hang de hien thi : ");
-
                     if (listKhachHang.size() > luaChon || 0 < luaChon) {
                         System.out.println("---------------------------");
                         System.out.println(listKhachHang.get(luaChon));
@@ -118,8 +133,6 @@ public class QuanLyKhachHang {
                     } else {
                         System.out.println("lua chon khong hop le");
                     }
-                    timThay = true;
-                    break;
                 }
             }
 
@@ -197,9 +210,13 @@ public class QuanLyKhachHang {
         }
         int xacNhan = 1;
         while (xacNhan == 1) {
+            System.out.println();
+            System.out.println("------------------------");
+            System.out.println(khachHang);
+            System.out.println("------------------------");
             xuatSuaKhachHang();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
-            if (luaChon==0){
+            if (luaChon == 0) {
                 return;
             }
             suaThanhPhanKhachHang(khachHang, luaChon);

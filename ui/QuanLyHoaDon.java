@@ -178,6 +178,10 @@ public class QuanLyHoaDon {
         }
         int xacNhan = 1;
         while (xacNhan == 1) {
+            System.out.println();
+            System.out.println("------------------------");
+            System.out.println(hoaDon);
+            System.out.println("------------------------");
             xuatSuaHoaDon();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {

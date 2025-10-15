@@ -129,6 +129,10 @@ public class QuanLyMaGiamGia {
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can xoa: ");
         MaGiamGia mGG = danhSachMaGiamGia.timMaGiamGia(ma);
         while (true) {
+            System.out.println();
+            System.out.println("------------------------");
+            System.out.println(mGG);
+            System.out.println("------------------------");
             xuatMenuSuaMaGiamGia();
             int choice = Nhap.nhapInt("nhap lua chon: ");
             if (choice==0){

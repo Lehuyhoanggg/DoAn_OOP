@@ -94,6 +94,10 @@ public class QuanLyDanhSachQuanLy {
         }
         int tiep = 1;
         while (tiep == 1) {
+            System.out.println();
+            System.out.println("------------------------");
+            System.out.println(ql);
+            System.out.println("------------------------");
             xuatSuaQuanLy();
             int chon = Nhap.nhapInt("Chon muc: ");
             thucHienChucNangSuaQuanLy(ql, chon);

@@ -162,6 +162,10 @@ public class QuanLyPhieuTraHang {
 
         int tiep = 1;
         while (tiep == 1) {
+            System.out.println();
+            System.out.println("------------------------");
+            System.out.println(pth);
+            System.out.println("------------------------");
             xuatSuaTraHang();
             int chon = Nhap.nhapInt("Chon muc can sua: ");
             if (chon==0){

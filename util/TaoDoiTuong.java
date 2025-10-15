@@ -112,16 +112,18 @@ public class TaoDoiTuong {
         DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
         String maBaoHanh = CapMa.capMaBaoHanh(db);
         String loaiBaoHanh = Nhap.nhapStr("Nhap so thang bao hanh : ");
-        loaiBaoHanh = "BaoHanh" + loaiBaoHanh + "T";
+
         String maSanPham = Nhap.nhapStr("Nhap ma san pham : ");
         SanPham sanPham = danhSachSanPham.timSanPham(maSanPham);
 
         String ngayBatDau = ThoiGian.layNgayHienTaiStr();
         String ngayKetThuc = ThoiGian.ngaySauNThang(ngayBatDau, Integer.parseInt(loaiBaoHanh.replace("\\D+", "")));
+        long gia = Nhap.nhapLong("Nhap gia cua bao hanh : ");
+        loaiBaoHanh = "BaoHanh" + loaiBaoHanh + "T";
         if (sanPham == null) {
             return null;
         }
-        return new BaoHanh(maBaoHanh, loaiBaoHanh, sanPham, ngayBatDau, ngayKetThuc);
+        return new BaoHanh(maBaoHanh, loaiBaoHanh, sanPham, ngayBatDau, ngayKetThuc, gia);
     }
 
     public static ChiTietHoaDon taoChiTietHoaDon(Database db, KhachHang khachHang) {

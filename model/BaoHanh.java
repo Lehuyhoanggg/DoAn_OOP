@@ -14,12 +14,13 @@ public class BaoHanh {
     }
 
     public BaoHanh(String maBh, String loaiBaoHanh, SanPham sanPham, String ngayBatDau,
-            String ngayKetThuc) {
+            String ngayKetThuc, long gia) {
         this.maBh = maBh;
         this.loaiBaoHanh = loaiBaoHanh;
         this.sanPham = sanPham;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
+        this.gia = gia;
     }
 
     public BaoHanh(String maBh, String loaiBaoHanh, SanPham sanPham, Long gia) {
@@ -93,8 +94,6 @@ public class BaoHanh {
         return "maBh : " + maBh + "\n" +
                 "loaiBaoHanh : " + loaiBaoHanh + "\n" +
                 "sanPhamMa : " + (sanPham != null ? sanPham.getMa() : "null") + "\n"
-                + "Ngay bat dau Bao Hanh : " + ngayBatDau + "\n"
-                + "Ngay ket thuc bao hanh : " + ngayKetThuc + "\n"
                 + "Gia : " + gia + "\n";
     }
 }

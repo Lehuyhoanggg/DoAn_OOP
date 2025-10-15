@@ -109,6 +109,10 @@ public class QuanLyHangThanhVien {
             return;
         }
         while (true) {
+            System.out.println();
+            System.out.println("------------------------");
+            System.out.println(hangThanhVien);
+            System.out.println("------------------------");
             xuatSuaHangThanhVien();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {

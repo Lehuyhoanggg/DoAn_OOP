@@ -3,13 +3,11 @@ package ui;
 import java.util.ArrayList;
 
 import danhsach.DanhSachBaoHanh;
-import danhsach.DanhSachKhachHang;
 import danhsach.DanhSachSanPham;
 import database.Database;
 import util.TaoDoiTuong;
 import util.XoaManHinh;
 import model.BaoHanh;
-import model.KhachHang;
 import model.SanPham;
 
 public class QuanLyBaoHanh {
@@ -21,18 +19,11 @@ public class QuanLyBaoHanh {
 
     public void taoBaoHanh() {
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
-        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
-        KhachHang khachHang = danhSachKhachHang.timKhachHang(Nhap.nhapStr("Nhap ma khach hang de tao bao hanh : "));
-        if (khachHang == null) {
-            System.out.println("Khong tim thay khach hang");
-            return;
-        }
         BaoHanh baoHanh = TaoDoiTuong.taoBaoHanh(db);
         if (baoHanh == null) {
             System.out.println("Tao bao hanh that bai");
             return;
         }
-        khachHang.themBaoHanh(baoHanh);
         danhSachBaoHanh.themBaoHanh(baoHanh);
         System.out.println("Da tao bao hanh thanh cong.");
     }
@@ -86,7 +77,7 @@ public class QuanLyBaoHanh {
                 baoHanh.setNgayKetThuc();
                 break;
             case 4:
-                baoHanh.setGia(Nhap.nhapLong(Nhap.nhapStr("Nhap gia moi : ")));
+                baoHanh.setGia(Nhap.nhapLong("Hay nhap gia moi : "));
                 break;
             default:
                 System.out.println("lua chon khong hop le");
@@ -103,6 +94,10 @@ public class QuanLyBaoHanh {
             return;
         }
         while (true) {
+            System.out.println();
+            System.out.println("------------------------");
+            System.out.println(baoHanh);
+            System.out.println("------------------------");
             xuatSuaBaoHanh();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {

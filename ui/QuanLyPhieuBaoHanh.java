@@ -26,7 +26,7 @@ public class QuanLyPhieuBaoHanh {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         KhachHang khachHang = danhSachKhachHang.timKhachHangTheoSdt(Nhap.nhapStr("Nhap sdt khach hang de bao hanh : "));
-        BaoHanh baoHanh = danhSachBaoHanh.timBaoHanh(Nhap.nhapStr("Nhap ma bao hanh de tao phieu bao hanh"));
+        BaoHanh baoHanh = danhSachBaoHanh.timBaoHanh(Nhap.nhapStr("Nhap ma bao hanh de tao phieu bao hanh : "));
         if (baoHanh == null) {
             System.out.println("Khong tim thay bao hanh de tao phieu");
             return;
@@ -53,7 +53,8 @@ public class QuanLyPhieuBaoHanh {
                 break;
             case 1:
                 DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
-                KhachHang khachHang = danhSachKhachHang.timKhachHang("Nhap ma khach hang can thay doi vao trong phieu");
+                KhachHang khachHang = danhSachKhachHang
+                        .timKhachHang("Nhap ma khach hang can thay doi vao trong phieu : ");
                 if (khachHang == null) {
                     System.out.println("Ma khach hang khong hop le");
                 } else {
@@ -63,7 +64,7 @@ public class QuanLyPhieuBaoHanh {
                 break;
             case 2:
                 DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-                SanPham sanPham = danhSachSanPham.timSanPham("Nhap ma san pham moi trong phieu");
+                SanPham sanPham = danhSachSanPham.timSanPham("Nhap ma san pham moi trong phieu : ");
                 if (sanPham == null) {
                     System.out.println("Ma san pham khong hop le");
                 } else {
@@ -95,7 +96,7 @@ public class QuanLyPhieuBaoHanh {
         while (xacNhan == 1) {
             xuatSuaPhieuBaoHanh();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
-            if (luaChon==0){
+            if (luaChon == 0) {
                 return;
             }
             suaThanhPhanPhieu(phieuBaoHanh, luaChon);
