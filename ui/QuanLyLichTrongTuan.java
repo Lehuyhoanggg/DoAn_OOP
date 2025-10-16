@@ -46,7 +46,7 @@ public class QuanLyLichTrongTuan {
 
     // diem danh
     public boolean diemDanh() {
-        NhanVien nhanVien = db.getDanhSachNhanVien().timNhanVien(Nhap.nhapStr("Nhap ma nhan vien can diem danh : "));
+        NhanVien nhanVien = db.getDanhSachNhanVien().tim(Nhap.nhapStr("Nhap ma nhan vien can diem danh : "));
         return diemDanh(nhanVien);
     }
 
@@ -55,7 +55,7 @@ public class QuanLyLichTrongTuan {
         int index = Nhap.nhapInt("Chon thu can chinh sua : ") - 2;
         LichTrongNgay lichTrongNgay = lichTrongTuan.getLichTuan().get(index);
         int soCa = Nhap.nhapInt("Nhap so CaLam can chinh sua : ");
-        CaLam caLam = db.getDanhSachCaLam().timCaLam(soCa, lichTrongNgay);
+        CaLam caLam = db.getDanhSachCaLam().tim(soCa, lichTrongNgay);
         if (caLam == null) {
             System.out.println("Khong tim thay ca lam");
             return;
@@ -66,7 +66,7 @@ public class QuanLyLichTrongTuan {
         }
 
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
-        NhanVien nhanVien = danhSachNhanVien.timNhanVien(Nhap.nhapStr("Nhap ma nhan vien xoa khoi ca lam : "));
+        NhanVien nhanVien = danhSachNhanVien.tim(Nhap.nhapStr("Nhap ma nhan vien xoa khoi ca lam : "));
         if (nhanVien == null) {
             System.out.println("Khong tim thay nhan vien");
             return;
@@ -81,7 +81,7 @@ public class QuanLyLichTrongTuan {
         int index = Nhap.nhapInt("Chon thu can chinh sua : ") - 2;
         LichTrongNgay lichTrongNgay = lichTrongTuan.getLichTuan().get(index);
         int soCa = Nhap.nhapInt("Nhap so CaLam can chinh sua : ");
-        CaLam caLam = db.getDanhSachCaLam().timCaLam(soCa, lichTrongNgay);
+        CaLam caLam = db.getDanhSachCaLam().tim(soCa, lichTrongNgay);
         if (caLam == null) {
             System.out.println("Khong tim thay ca lam");
             return;
@@ -102,7 +102,7 @@ public class QuanLyLichTrongTuan {
         while (soCanThem-- > 0) {
             NhanVien nhanVien = null;
             do {
-                nhanVien = danhSachNhanVien.timNhanVien(Nhap.nhapStr("Nhap ma nhan vien de them vao ca lam : "));
+                nhanVien = danhSachNhanVien.tim(Nhap.nhapStr("Nhap ma nhan vien de them vao ca lam : "));
                 if (nhanVien == null) {
                     System.out.println("Khong tim thay nhan vien, vui long nhap lai : ");
                 }

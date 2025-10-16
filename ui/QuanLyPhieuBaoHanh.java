@@ -26,13 +26,13 @@ public class QuanLyPhieuBaoHanh {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         KhachHang khachHang = danhSachKhachHang.timKhachHangTheoSdt(Nhap.nhapStr("Nhap sdt khach hang de bao hanh : "));
-        BaoHanh baoHanh = danhSachBaoHanh.timBaoHanh(Nhap.nhapStr("Nhap ma bao hanh de tao phieu bao hanh : "));
+        BaoHanh baoHanh = danhSachBaoHanh.tim(Nhap.nhapStr("Nhap ma bao hanh de tao phieu bao hanh : "));
         if (baoHanh == null) {
             System.out.println("Khong tim thay bao hanh de tao phieu");
             return;
         }
         PhieuBaoHanh phieuBaoHanh = TaoDoiTuong.taoPhieuBaoHanh(baoHanh, khachHang, db);
-        danhSachPhieuBaoHanh.themPhieuBaoHanh(phieuBaoHanh);
+        danhSachPhieuBaoHanh.them(phieuBaoHanh);
         khachHang.themPhieuBaoHanh(phieuBaoHanh);
         System.out.println("Da tao phieu bao hanh thanh cong.");
     }
@@ -54,7 +54,7 @@ public class QuanLyPhieuBaoHanh {
             case 1:
                 DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
                 KhachHang khachHang = danhSachKhachHang
-                        .timKhachHang("Nhap ma khach hang can thay doi vao trong phieu : ");
+                        .tim("Nhap ma khach hang can thay doi vao trong phieu : ");
                 if (khachHang == null) {
                     System.out.println("Ma khach hang khong hop le");
                 } else {
@@ -64,7 +64,7 @@ public class QuanLyPhieuBaoHanh {
                 break;
             case 2:
                 DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-                SanPham sanPham = danhSachSanPham.timSanPham("Nhap ma san pham moi trong phieu : ");
+                SanPham sanPham = danhSachSanPham.tim("Nhap ma san pham moi trong phieu : ");
                 if (sanPham == null) {
                     System.out.println("Ma san pham khong hop le");
                 } else {
@@ -87,7 +87,7 @@ public class QuanLyPhieuBaoHanh {
     public void suaPhieuBaoHanh() {
         DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = db.getDanhSachPhieuBaoHanh();
         String maPhieu = Nhap.nhapStr("Nhap ma phieu bao hanh can sua: ");
-        PhieuBaoHanh phieuBaoHanh = danhSachPhieuBaoHanh.timPhieuBaoHanh(maPhieu);
+        PhieuBaoHanh phieuBaoHanh = danhSachPhieuBaoHanh.tim(maPhieu);
         if (phieuBaoHanh == null) {
             System.out.println("Khong tim thay phieu bao hanh");
             return;
@@ -108,14 +108,14 @@ public class QuanLyPhieuBaoHanh {
     public void xoaPhieuBaoHanh() {
         DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = db.getDanhSachPhieuBaoHanh();
         String ma = Nhap.nhapStr("Nhap ma phieu bao hanh can xoa: ");
-        PhieuBaoHanh phieuBaoHanh = danhSachPhieuBaoHanh.timPhieuBaoHanh(ma);
+        PhieuBaoHanh phieuBaoHanh = danhSachPhieuBaoHanh.tim(ma);
         if (phieuBaoHanh == null) {
             System.out.println("Khong tim thay phieu bao hanh");
             return;
         }
         KhachHang khachHang = phieuBaoHanh.getKhachHang();
         khachHang.getListPhieuBaoHanh().remove(phieuBaoHanh);
-        danhSachPhieuBaoHanh.xoaPhieuBaoHanh(ma);
+        danhSachPhieuBaoHanh.xoa(ma);
         System.out.println("Da xoa phieu bao hanh (neu ton tai).");
     }
 
@@ -136,7 +136,7 @@ public class QuanLyPhieuBaoHanh {
     public void traCuuPhieuBaoHanh() {
         DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = db.getDanhSachPhieuBaoHanh();
         PhieuBaoHanh phieuBaoHanh = danhSachPhieuBaoHanh
-                .timPhieuBaoHanh(Nhap.nhapStr("Nhap ma phieu bao hanh can tim : "));
+                .tim(Nhap.nhapStr("Nhap ma phieu bao hanh can tim : "));
         if (phieuBaoHanh == null) {
             System.out.println("khong tim thay phieu bao hanh");
             return;

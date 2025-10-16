@@ -6,9 +6,8 @@ import util.XoaManHinh;
 import danhsach.DanhSachLichTrongTuan;
 import database.Database;
 import interfaces.GiaoTiep;
-import interfaces.LamViec;
 
-public class NhanVienQuanLy implements LamViec, GiaoTiep {
+public class NhanVienQuanLy implements GiaoTiep {
     private Database db;
     private NhanVien nv;
 

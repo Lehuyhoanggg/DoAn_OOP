@@ -2,10 +2,11 @@ package danhsach;
 
 import java.util.ArrayList;
 
+import interfaces.QuanLyDanhSach;
 import model.HangThanhVien;
 import model.KhachHang;
 
-public class DanhSachHangThanhVien {
+public class DanhSachHangThanhVien implements QuanLyDanhSach<HangThanhVien> {
     private ArrayList<HangThanhVien> listHangThanhVien;
     private int soLuong = 0;
 
@@ -29,7 +30,7 @@ public class DanhSachHangThanhVien {
         this.soLuong = soLuong;
     }
 
-    public HangThanhVien timHangThanhVien(String ten) {
+    public HangThanhVien tim(String ten) {
         if (listHangThanhVien == null) {
             return null;
         }
@@ -41,16 +42,24 @@ public class DanhSachHangThanhVien {
         return null;
     }
 
-    public boolean themHangThanhVien(HangThanhVien hangThanhVien) {
-        if (hangThanhVien == null || timHangThanhVien(hangThanhVien.getTenHang()) != null) {
+    public boolean them(HangThanhVien hangThanhVien) {
+        if (hangThanhVien == null || tim(hangThanhVien.getTenHang()) != null) {
             return false; // đã tồn tại hoac truyen null vao
         }
         soLuong++;
         return listHangThanhVien.add(hangThanhVien);
     }
 
-    public boolean xoaHangThanhVien(String ten) {
-        HangThanhVien htv = timHangThanhVien(ten);
+    public boolean xoa(String ten) {
+        HangThanhVien htv = tim(ten);
+        if (htv != null) {
+            return listHangThanhVien.remove(htv);
+        }
+        soLuong--;
+        return false;
+    }
+
+    public boolean xoa(HangThanhVien htv) {
         if (htv != null) {
             return listHangThanhVien.remove(htv);
         }
@@ -62,11 +71,11 @@ public class DanhSachHangThanhVien {
         long tienDaChi = khachHang.getTienDaChi();
         if (tienDaChi >= HangThanhVien.mucDong && tienDaChi < HangThanhVien.mucBac
                 && tienDaChi < HangThanhVien.mucVang) {
-            khachHang.setHangThanhVien(timHangThanhVien("Dong"));
+            khachHang.setHangThanhVien(tim("Dong"));
         } else if (tienDaChi >= HangThanhVien.mucBac && tienDaChi < HangThanhVien.mucVang) {
-            khachHang.setHangThanhVien(timHangThanhVien("Bac"));
+            khachHang.setHangThanhVien(tim("Bac"));
         } else {
-            khachHang.setHangThanhVien(timHangThanhVien("Vang"));
+            khachHang.setHangThanhVien(tim("Vang"));
         }
     }
 }

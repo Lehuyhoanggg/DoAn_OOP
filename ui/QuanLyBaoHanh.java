@@ -24,19 +24,19 @@ public class QuanLyBaoHanh {
             System.out.println("Tao bao hanh that bai");
             return;
         }
-        danhSachBaoHanh.themBaoHanh(baoHanh);
+        danhSachBaoHanh.them(baoHanh);
         System.out.println("Da tao bao hanh thanh cong.");
     }
 
     public void xoaBaoHanh() {
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         String ma = Nhap.nhapStr("Nhap ma bao hanh can xoa: ");
-        BaoHanh baoHanh = danhSachBaoHanh.timBaoHanh(ma);
+        BaoHanh baoHanh = danhSachBaoHanh.tim(ma);
         if (baoHanh == null) {
             System.out.println("Khong tim thay bao hanh");
             return;
         }
-        if (danhSachBaoHanh.xoaBaoHanh(ma)) {
+        if (danhSachBaoHanh.xoa(ma)) {
             System.out.println("Da xoa bao hanh (neu ton tai).");
         } else {
             System.out.println("Xoa khong thanh cong");
@@ -64,7 +64,7 @@ public class QuanLyBaoHanh {
                 break;
             case 2:
                 DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
-                SanPham sanPham = danhSachSanPham.timSanPham("Nhap ma san pham moi trong phieu : ");
+                SanPham sanPham = danhSachSanPham.tim("Nhap ma san pham moi trong phieu : ");
                 if (sanPham == null) {
                     System.out.println("Ma san pham khong hop le");
                 } else {
@@ -88,7 +88,7 @@ public class QuanLyBaoHanh {
     public void suaBaoHanh() {
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         String maBaoHanh = Nhap.nhapStr("Nhap ma phieu bao hanh can sua: ");
-        BaoHanh baoHanh = danhSachBaoHanh.timBaoHanh(maBaoHanh);
+        BaoHanh baoHanh = danhSachBaoHanh.tim(maBaoHanh);
         if (baoHanh == null) {
             System.out.println("Khong tim thay bao hanh");
             return;
@@ -121,7 +121,7 @@ public class QuanLyBaoHanh {
     public void traCuuBaoHanh() {
         String ma = Nhap.nhapStr("Nhap ma bao hanh can tra cuu : ");
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
-        BaoHanh baoHanh = danhSachBaoHanh.timBaoHanh(ma);
+        BaoHanh baoHanh = danhSachBaoHanh.tim(ma);
         if (baoHanh == null) {
             System.out.println("khong tim thay bao hanh");
             return;

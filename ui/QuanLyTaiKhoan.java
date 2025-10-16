@@ -60,7 +60,7 @@ public class QuanLyTaiKhoan {
         }
         TaiKhoan taiKhoan = new TaiKhoan(ma, "123");
         DanhSachTaiKhoan danhSachTaiKhoan = db.getDanhSachTaiKhoan();
-        danhSachTaiKhoan.themTaiKhoan(taiKhoan);
+        danhSachTaiKhoan.them(taiKhoan);
         user.capTaiKhoan(taiKhoan);
         System.out.println("Da cap tai khoan cho user");
         System.out.println(taiKhoan);

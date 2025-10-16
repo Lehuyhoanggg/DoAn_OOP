@@ -25,7 +25,7 @@ public class QuanLySanPham {
     public void themSanPham() {
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         SanPham sp = TaoDoiTuong.taoSanPham(db);
-        if (danhSachSanPham.themSanPham(sp)) {
+        if (danhSachSanPham.them(sp)) {
             System.out.println("Them san pham thanh cong!");
         } else {
             System.out.println("Them san pham khong thanh cong!");
@@ -36,7 +36,7 @@ public class QuanLySanPham {
     public void xoaSanPham() {
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         String ma = Nhap.nhapStr("Nhap ma san pham can xoa: ");
-        if (danhSachSanPham.xoaSanPham(ma)) {
+        if (danhSachSanPham.xoa(ma)) {
             System.out.println("Xoa san pham thanh cong!");
         } else {
             System.out.println("Xoa san pham khong thanh cong!");
@@ -97,7 +97,7 @@ public class QuanLySanPham {
 
     public void suaSanPham() {
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-        SanPham sp = danhSachSanPham.timSanPham(Nhap.nhapStr("Nhap ma san pham can sua"));
+        SanPham sp = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma san pham can sua"));
         if (sp == null) {
             System.out.println("khong tim thay ma san pham");
             return;
@@ -110,7 +110,7 @@ public class QuanLySanPham {
             System.out.println("------------------------");
             xuatSuaSanPham();
             int chon = Nhap.nhapInt("Chon muc can sua: ");
-            if (chon==0){
+            if (chon == 0) {
                 return;
             }
             suaThanhPhanSanPham(sp, chon);

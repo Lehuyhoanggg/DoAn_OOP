@@ -26,6 +26,7 @@ public class Database {
     private DanhSachLichTrongNgay danhSachLichTrongNgay;
     private DanhSachLichTrongTuan danhSachLichTrongTuan;
     private DanhSachUser danhSachUser;
+    private DanhSachSanPhamDaBan danhSachSanPhamDaBan;
 
     public Database() {
         DocFile docFile = new DocFile(this);
@@ -45,6 +46,7 @@ public class Database {
         danhSachTinNhan = new DanhSachTinNhan(new ArrayList<TinNhan>());
         danhSachCaLam = new DanhSachCaLam(new ArrayList<CaLam>());
         danhSachLichTrongNgay = new DanhSachLichTrongNgay(new ArrayList<LichTrongNgay>());
+        danhSachSanPhamDaBan = new DanhSachSanPhamDaBan(new ArrayList<>());
         danhSachLichTrongTuan = new DanhSachLichTrongTuan(new ArrayList<LichTrongTuan>());
         docFile.doc_DatasVaoDatabase();
     }
@@ -235,6 +237,10 @@ public class Database {
         return danhSachMaGiamGia;
     }
 
+    public DanhSachSanPhamDaBan getDanhSachSanPhamDaBan() {
+        return danhSachSanPhamDaBan;
+    }
+
     public DanhSachMaGiamGia getDanhSachMaGiamGiaDq() {
         return danhSachMaGiamGiaDq;
     }
@@ -325,6 +331,10 @@ public class Database {
 
     public void setDanhSachLichTrongTuan(DanhSachLichTrongTuan danhSachLichTrongTuan) {
         this.danhSachLichTrongTuan = danhSachLichTrongTuan;
+    }
+
+    public void setDanhSachSanPhamDaBan(DanhSachSanPhamDaBan danhSachSanPhamDaBan) {
+        this.danhSachSanPhamDaBan = danhSachSanPhamDaBan;
     }
 
     public ArrayList<User> getListUser() {

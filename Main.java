@@ -12,10 +12,6 @@ public class Main {
     private User user;
     private Database db = new Database();
 
-    public Main() {
-        user = null;
-    }
-
     public void dieuHuongMenu() {
         if (user.getQuyenHang().equals("NhanVien")) {
             NhanVienQuanLy menuNhanVien = new NhanVienQuanLy(db, (NhanVien) user);

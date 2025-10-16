@@ -1,9 +1,11 @@
 package danhsach;
 
 import java.util.ArrayList;
+
+import interfaces.QuanLyDanhSach;
 import model.NhanVien;
 
-public class DanhSachNhanVien {
+public class DanhSachNhanVien implements QuanLyDanhSach<NhanVien> {
     private ArrayList<NhanVien> listNhanVien;
     private int soLuong = 0;
 
@@ -32,7 +34,7 @@ public class DanhSachNhanVien {
     }
 
     // them nhan vien
-    public boolean themNhanVien(NhanVien nhanVien) {
+    public boolean them(NhanVien nhanVien) {
         if (nhanVien == null) {
             return false;
         }
@@ -41,7 +43,7 @@ public class DanhSachNhanVien {
     }
 
     // tim nhan vien theo ma tra ve NhanVien
-    public NhanVien timNhanVien(String ma) {
+    public NhanVien tim(String ma) {
         if (listNhanVien == null) {
             return null;
         }
@@ -54,8 +56,16 @@ public class DanhSachNhanVien {
     }
 
     // xoa nhan vien
-    public boolean xoaNhanVien(String ma) {
-        NhanVien nv = timNhanVien(ma);
+    public boolean xoa(String ma) {
+        NhanVien nv = tim(ma);
+        if (nv == null) {
+            return false;
+        }
+        soLuong--;
+        return listNhanVien.remove(nv);
+    }
+
+    public boolean xoa(NhanVien nv) {
         if (nv == null) {
             return false;
         }

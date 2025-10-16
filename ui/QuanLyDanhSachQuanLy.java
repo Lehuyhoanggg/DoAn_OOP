@@ -28,7 +28,7 @@ public class QuanLyDanhSachQuanLy {
     public void themQuanLy() {
         QuanLy ql = TaoDoiTuong.TaoDoiTuongQuanLy(db);
         DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
-        if (danhSachQuanLy.themQuanLy(ql)) {
+        if (danhSachQuanLy.them(ql)) {
             System.out.println("them quan ly thanh cong!");
         } else {
             System.out.println("them quang ly that bai!");
@@ -39,11 +39,11 @@ public class QuanLyDanhSachQuanLy {
     public void xoaQuanLy() {
         DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
         String ma = Nhap.nhapStr("nhap ma quang ly can xoa: ");
-        QuanLy ql = danhSachQuanLy.timQuanLy(ma);
+        QuanLy ql = danhSachQuanLy.tim(ma);
         if (ql == null) {
             System.out.println("khong tim thay quang ly can xoa!");
         }
-        if (danhSachQuanLy.xoaQuanLy(ma)) {
+        if (danhSachQuanLy.xoa(ma)) {
             System.out.println("xoa quan ly thanh cong");
         } else {
             System.out.println("xoa quan ly that bai!");
@@ -54,7 +54,7 @@ public class QuanLyDanhSachQuanLy {
     public void traCuuQuangLy() {
         String ma = Nhap.nhapStr("nhap ma quang ly can tra cuu: ");
         DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
-        QuanLy ql = danhSachQuanLy.timQuanLy(ma);
+        QuanLy ql = danhSachQuanLy.tim(ma);
         if (ql == null) {
             System.out.println("khong tim thay quang ly can tra cuu!");
         }
@@ -87,7 +87,7 @@ public class QuanLyDanhSachQuanLy {
     public void SuaQuanLy() {
         DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
         String ma = Nhap.nhapStr("Nhap ma quan ly can sua: ");
-        QuanLy ql = danhSachQuanLy.timQuanLy(ma);
+        QuanLy ql = danhSachQuanLy.tim(ma);
         if (ql == null) {
             System.out.println("Khong tim thay quan ly can sua.");
             return;

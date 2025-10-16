@@ -2,9 +2,10 @@ package danhsach;
 
 import java.util.ArrayList;
 
+import interfaces.QuanLyDanhSach;
 import model.PhieuBaoHanh;
 
-public class DanhSachPhieuBaoHanh {
+public class DanhSachPhieuBaoHanh implements QuanLyDanhSach<PhieuBaoHanh> {
     private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
     private int soLuong = 0;
 
@@ -31,7 +32,7 @@ public class DanhSachPhieuBaoHanh {
         this.soLuong = soLuong;
     }
 
-    public boolean themPhieuBaoHanh(PhieuBaoHanh phieuBaoHanh) {
+    public boolean them(PhieuBaoHanh phieuBaoHanh) {
         if (phieuBaoHanh == null) {
             return false;
         }
@@ -39,7 +40,7 @@ public class DanhSachPhieuBaoHanh {
         return listPhieuBaoHanh.add(phieuBaoHanh);
     }
 
-    public PhieuBaoHanh timPhieuBaoHanh(String ma) {
+    public PhieuBaoHanh tim(String ma) {
         if (listPhieuBaoHanh == null) {
             return null;
         }
@@ -51,8 +52,16 @@ public class DanhSachPhieuBaoHanh {
         return null;
     }
 
-    public boolean xoaPhieuBaoHanh(String ma) {
-        PhieuBaoHanh phieuBaoHanh = timPhieuBaoHanh(ma);
+    public boolean xoa(String ma) {
+        PhieuBaoHanh phieuBaoHanh = tim(ma);
+        if (phieuBaoHanh != null) {
+            return listPhieuBaoHanh.remove(phieuBaoHanh);
+        }
+        soLuong--;
+        return false;
+    }
+
+    public boolean xoa(PhieuBaoHanh phieuBaoHanh) {
         if (phieuBaoHanh != null) {
             return listPhieuBaoHanh.remove(phieuBaoHanh);
         }

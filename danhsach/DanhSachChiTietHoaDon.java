@@ -2,13 +2,11 @@ package danhsach;
 
 import java.util.ArrayList;
 
+import interfaces.QuanLyDanhSach;
 import model.ChiTietHoaDon;
-import model.KhachHang;
-import model.MaGiamGia;
-import model.SanPham;
-import util.ThoiGian;
+import model.SanPhamDaBan;
 
-public class DanhSachChiTietHoaDon {
+public class DanhSachChiTietHoaDon implements QuanLyDanhSach<ChiTietHoaDon> {
     private ArrayList<ChiTietHoaDon> listChiTietHoaDon;
     private int soLuong = 0;
 
@@ -35,7 +33,7 @@ public class DanhSachChiTietHoaDon {
         return soLuong;
     }
 
-    public boolean themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
+    public boolean them(ChiTietHoaDon chiTietHoaDon) {
         if (chiTietHoaDon == null) {
             return false;
         }
@@ -43,7 +41,7 @@ public class DanhSachChiTietHoaDon {
         return listChiTietHoaDon.add(chiTietHoaDon);
     }
 
-    public boolean xoaChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
+    public boolean xoa(ChiTietHoaDon chiTietHoaDon) {
         if (chiTietHoaDon == null) {
             return false;
         }
@@ -51,7 +49,7 @@ public class DanhSachChiTietHoaDon {
         return listChiTietHoaDon.remove(chiTietHoaDon);
     }
 
-    public ChiTietHoaDon timChiTietHoaDon(String ma) {
+    public ChiTietHoaDon tim(String ma) {
         if (listChiTietHoaDon == null) {
             return null;
         }
@@ -63,32 +61,15 @@ public class DanhSachChiTietHoaDon {
         return null;
     }
 
-    public ArrayList<MaGiamGia> xoaSanPhamThuHoiMa(SanPham sanPham, ChiTietHoaDon chiTietHoaDon, KhachHang khachHang) {
-        chiTietHoaDon.xoaSanPham(sanPham);
-        if (!chiTietHoaDon.getDanhSachSanPham().tonTaiSanPham(sanPham)) {
-            return thuHoiMaGiamGiaSauKhiXoa(sanPham, chiTietHoaDon, khachHang); // gia sua neu da go san pham thi thu
-                                                                                // hoi , con // so luong nhieu hon 1 thi
-                                                                                // thoi
+    public ChiTietHoaDon tim(SanPhamDaBan sanPhamDaBan) {
+        for (ChiTietHoaDon chiTietHoaDon : listChiTietHoaDon) {
+            for (SanPhamDaBan spDaBan : chiTietHoaDon.getSanPhamDaBan()) {
+                if (spDaBan.equals(sanPhamDaBan)) {
+                    return chiTietHoaDon;
+                }
+            }
         }
         return null;
     }
 
-    public ArrayList<MaGiamGia> thuHoiMaGiamGiaSauKhiXoa(SanPham sanPham, ChiTietHoaDon chiTietHoaDon,
-            KhachHang khachHang) {
-        ArrayList<MaGiamGia> listMaThuHoi = new ArrayList<>();
-        ArrayList<MaGiamGia> listMaGiamGia = chiTietHoaDon.getListMaGiamGiaDaDung();
-        if (listMaGiamGia == null) {
-            return null;
-        }
-        for (int i = listMaGiamGia.size() - 1; i >= 0; i--) {
-            if (listMaGiamGia.get(i).getSanPhamDaDung().equals(sanPham)
-                    && ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(), listMaGiamGia.get(i).getNgayBatDau(),
-                            listMaGiamGia.get(i).getNgayKetThuc())) {
-                khachHang.themMaGiamGia(listMaGiamGia.get(i));
-                listMaGiamGia.remove(i);
-                listMaThuHoi.add(listMaGiamGia.get(i));
-            }
-        }
-        return listMaThuHoi;
-    }
 }

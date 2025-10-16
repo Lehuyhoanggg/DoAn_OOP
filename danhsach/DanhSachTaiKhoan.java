@@ -1,10 +1,11 @@
 package danhsach;
 
 import java.util.ArrayList;
+
 import model.TaiKhoan;
 import model.User;
 
-public class DanhSachTaiKhoan {
+public class DanhSachTaiKhoan{
     private ArrayList<TaiKhoan> listTaiKhoan;
     private int soLuong = 0;
 
@@ -45,7 +46,7 @@ public class DanhSachTaiKhoan {
         return null;
     }
 
-    public boolean themTaiKhoan(TaiKhoan tk) {
+    public boolean them(TaiKhoan tk) {
         if (tk == null) {
             return false;
         }
@@ -53,7 +54,7 @@ public class DanhSachTaiKhoan {
         return listTaiKhoan.add(tk);
     }
 
-    public boolean xoaTaiKhoan(TaiKhoan tk) {
+    public boolean xoa(TaiKhoan tk) {
         if (tk == null) {
             return false;
         }

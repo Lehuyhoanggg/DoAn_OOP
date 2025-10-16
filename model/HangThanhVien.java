@@ -6,6 +6,7 @@ public class HangThanhVien {
     public static long mucDong = 1000000;
     public static long mucBac = 5000000;
     public static long mucVang = 10000000;
+
     private String tenHang;
     private ArrayList<MaGiamGia> listMaGiamGiaDQ;
     private String moTa;

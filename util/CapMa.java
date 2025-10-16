@@ -116,4 +116,12 @@ public class CapMa {
         }
         return "LTT" + soLTT;
     }
+
+    public static String capMaSanPhamDaban(Database db) {
+        String soSPDB = String.valueOf(db.getDanhSachSanPhamDaBan().getListSanPhamDaBan().size() + 1);
+        while (soSPDB.length() < 3) {
+            soSPDB = "0" + soSPDB;
+        }
+        return "SPDB" + soSPDB;
+    }
 }

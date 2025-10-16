@@ -5,16 +5,19 @@ public class PhieuTraHang {
     private String maTraHang;
     private KhachHang khachHang;
     private SanPham sanPham;
+    private String serial;
     private String ngayTra;
     private String lyDoTra;
 
     public PhieuTraHang() {
     }
 
-    public PhieuTraHang(String maTraHang, KhachHang khachHang, SanPham sanPham, String ngayTra, String lyDoTra) {
+    public PhieuTraHang(String maTraHang, KhachHang khachHang, SanPham sanPham, String serial, String ngayTra,
+            String lyDoTra) {
         this.maTraHang = maTraHang;
         this.khachHang = khachHang;
         this.sanPham = sanPham;
+        this.serial = serial;
         this.ngayTra = ngayTra;
         this.lyDoTra = lyDoTra;
     }
@@ -39,6 +42,10 @@ public class PhieuTraHang {
         return sanPham;
     }
 
+    public String getSerial() {
+        return serial;
+    }
+
     public void setSanPham(SanPham sanPham) {
         this.sanPham = sanPham;
     }
@@ -57,6 +64,10 @@ public class PhieuTraHang {
 
     public void setLyDoTra(String lyDoTra) {
         this.lyDoTra = lyDoTra;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 
     @Override

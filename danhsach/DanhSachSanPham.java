@@ -1,9 +1,11 @@
 package danhsach;
 
 import java.util.ArrayList;
+
+import interfaces.QuanLyDanhSach;
 import model.SanPham;
 
-public class DanhSachSanPham {
+public class DanhSachSanPham implements QuanLyDanhSach<SanPham> {
     private ArrayList<SanPham> listSanPham;
     private int soLuong = 0;
 
@@ -30,7 +32,7 @@ public class DanhSachSanPham {
         this.soLuong = soLuong;
     }
 
-    public boolean themSanPham(SanPham sanPham) {
+    public boolean them(SanPham sanPham) {
         if (sanPham == null) {
             return false;
         }
@@ -38,11 +40,22 @@ public class DanhSachSanPham {
         return listSanPham.add(sanPham);
     }
 
-    public boolean xoaSanPham(String ma) {
+    public boolean xoa(String ma) {
         if (listSanPham == null) {
             return false;
         }
-        SanPham sanPham = timSanPham(ma);
+        SanPham sanPham = tim(ma);
+        if (sanPham == null) {
+            return false;
+        }
+        soLuong--;
+        return listSanPham.remove(sanPham);
+    }
+
+    public boolean xoa(SanPham sanPham) {
+        if (listSanPham == null) {
+            return false;
+        }
         if (sanPham == null) {
             return false;
         }
@@ -62,7 +75,7 @@ public class DanhSachSanPham {
         return null;
     }
 
-    public SanPham timSanPham(String ma) {
+    public SanPham tim(String ma) {
         if (listSanPham == null) {
             return null;
         }

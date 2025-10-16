@@ -3,11 +3,12 @@ package danhsach;
 import java.util.ArrayList;
 
 import database.Database;
+import interfaces.QuanLyDanhSach;
 import model.LichTrongNgay;
 import util.CapMa;
 import util.ThoiGian;
 
-public class DanhSachLichTrongNgay {
+public class DanhSachLichTrongNgay implements QuanLyDanhSach<LichTrongNgay> {
     private ArrayList<LichTrongNgay> listLichTrongNgay;
     private int soLuong = 0;
 
@@ -35,7 +36,7 @@ public class DanhSachLichTrongNgay {
         this.soLuong = soLuong;
     }
 
-    public LichTrongNgay timLichTrongNgay(String ma) {
+    public LichTrongNgay tim(String ma) {
         if (listLichTrongNgay == null) {
             return null;
         }
@@ -56,7 +57,7 @@ public class DanhSachLichTrongNgay {
         return null;
     }
 
-    public boolean themLichTrongNgay(LichTrongNgay lichTrongNgay) {
+    public boolean them(LichTrongNgay lichTrongNgay) {
         if (lichTrongNgay == null) {
             return false;
         }
@@ -64,8 +65,8 @@ public class DanhSachLichTrongNgay {
         return listLichTrongNgay.add(lichTrongNgay);
     }
 
-    public boolean themLichTrongNgay(String ma) {
-        LichTrongNgay lichTrongNgay = timLichTrongNgay(ma);
+    public boolean them(String ma) {
+        LichTrongNgay lichTrongNgay = tim(ma);
         if (lichTrongNgay == null) {
             return false;
         }
@@ -73,7 +74,7 @@ public class DanhSachLichTrongNgay {
         return listLichTrongNgay.add(lichTrongNgay);
     }
 
-    public boolean xoaLichTrongNgay(LichTrongNgay lichTrongNgay) {
+    public boolean xoa(LichTrongNgay lichTrongNgay) {
         if (lichTrongNgay == null) {
             return false;
         }
@@ -81,8 +82,8 @@ public class DanhSachLichTrongNgay {
         return listLichTrongNgay.remove(lichTrongNgay);
     }
 
-    public boolean xoaLichTrongNgay(String ma) {
-        LichTrongNgay lichTrongNgay = timLichTrongNgay(ma);
+    public boolean xoa(String ma) {
+        LichTrongNgay lichTrongNgay = tim(ma);
         if (lichTrongNgay == null) {
             return false;
         }
@@ -97,7 +98,7 @@ public class DanhSachLichTrongNgay {
             LichTrongNgay lichTrongNgay = new LichTrongNgay(ma, thu, ngay);
             lichTrongNgay.setListCaLam(db.getDanhSachCaLam().taoListCaLamTrongTrongNgay(db));
             listLichTrongNgayMau.add(lichTrongNgay);
-            db.getDanhSachLichTrongNgay().themLichTrongNgay(lichTrongNgay);
+            db.getDanhSachLichTrongNgay().them(lichTrongNgay);
             ngay = ThoiGian.ngayTiepTheo(ngay);
         }
         return listLichTrongNgayMau;

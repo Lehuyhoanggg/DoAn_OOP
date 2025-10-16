@@ -3,12 +3,13 @@ package danhsach;
 import java.util.ArrayList;
 
 import database.Database;
+import interfaces.QuanLyDanhSach;
 import model.CaLam;
 import model.LichTrongNgay;
 import util.CapMa;
 import util.ThoiGian;
 
-public class DanhSachCaLam {
+public class DanhSachCaLam implements QuanLyDanhSach<CaLam> {
     private ArrayList<CaLam> listCaLam;
     private int soLuong = 0;
 
@@ -35,7 +36,7 @@ public class DanhSachCaLam {
         this.soLuong = soLuong;
     }
 
-    public CaLam timCaLam(String ma) {
+    public CaLam tim(String ma) {
         if (listCaLam == null) {
             return null;
         }
@@ -47,7 +48,7 @@ public class DanhSachCaLam {
         return null;
     }
 
-    public boolean themCaLam(CaLam caLam) {
+    public boolean them(CaLam caLam) {
         if (caLam == null) {
             return false;
         }
@@ -55,7 +56,7 @@ public class DanhSachCaLam {
         return listCaLam.add(caLam);
     }
 
-    public boolean xoaCaLam(CaLam caLam) {
+    public boolean xoa(CaLam caLam) {
         if (caLam == null) {
             return false;
         }
@@ -64,7 +65,7 @@ public class DanhSachCaLam {
     }
 
     public boolean xoaCaLam(String ma) {
-        CaLam caLam = timCaLam(ma);
+        CaLam caLam = tim(ma);
         if (caLam == null) {
             return false;
         }
@@ -72,7 +73,7 @@ public class DanhSachCaLam {
         return listCaLam.remove(caLam);
     }
 
-    public CaLam timCaLam(int soCa, LichTrongNgay lichTrongNgay) {
+    public CaLam tim(int soCa, LichTrongNgay lichTrongNgay) {
         if (lichTrongNgay == null) {
             return null;
         }
@@ -101,23 +102,24 @@ public class DanhSachCaLam {
         }
         return null;
     }
-    public ArrayList <CaLam> taoListCaLamTrongTrongNgay(Database db){
-        ArrayList <CaLam> listCaLamMau = new ArrayList<>();
+
+    public ArrayList<CaLam> taoListCaLamTrongTrongNgay(Database db) {
+        ArrayList<CaLam> listCaLamMau = new ArrayList<>();
         DanhSachCaLam danhSachCaLam = db.getDanhSachCaLam();
         String gioBatDau1 = "06:00";
         String gioKetThuc1 = "12:00";
         CaLam ca1 = new CaLam(CapMa.capMaCaLam(db), 1, gioBatDau1, gioKetThuc1, 2);
-        danhSachCaLam.themCaLam(ca1);
+        danhSachCaLam.them(ca1);
         listCaLamMau.add(ca1);
         String gioBatDau2 = "12:00";
         String gioKetThuc2 = "18:00";
         CaLam ca2 = new CaLam(CapMa.capMaCaLam(db), 2, gioBatDau2, gioKetThuc2, 2);
         listCaLamMau.add(ca2);
-        danhSachCaLam.themCaLam(ca2);
+        danhSachCaLam.them(ca2);
         String gioBatDau3 = "18:00";
         String gioKetThuc3 = "23:00";
         CaLam ca3 = new CaLam(CapMa.capMaCaLam(db), 3, gioBatDau3, gioKetThuc3, 2);
-        danhSachCaLam.themCaLam(ca3);
+        danhSachCaLam.them(ca3);
         listCaLamMau.add(ca3);
         return listCaLamMau;
     }

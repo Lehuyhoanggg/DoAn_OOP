@@ -32,7 +32,7 @@ public class QuanLyHangThanhVien {
     public void taoHangThanhVien() {
         DanhSachHangThanhVien service = db.getDanhSachHangThanhVien();
         HangThanhVien htv = TaoDoiTuong.taoHangThanhVien(db);
-        if (service.themHangThanhVien(htv)) {
+        if (service.them(htv)) {
             System.out.println("Tao hang thanh vien thanh cong!");
         } else {
             System.out.println("Tao hang thanh vien that bai!");
@@ -42,7 +42,7 @@ public class QuanLyHangThanhVien {
     public void xoaHangThanhVien() {
         DanhSachHangThanhVien service = db.getDanhSachHangThanhVien();
         String ten = Nhap.nhapStr("Nhap ten hang thanh vien can xoa: ");
-        if (service.xoaHangThanhVien(ten)) {
+        if (service.xoa(ten)) {
             System.out.println("Xoa hang thanh vien thanh cong!");
         } else {
             System.out.println("Khong tim thay hang thanh vien hoac xoa that bai!");
@@ -72,7 +72,7 @@ public class QuanLyHangThanhVien {
                 break;
             case 3:
                 DanhSachMaGiamGia maGiamGiaService = db.getDanhSachMaGiamGia();
-                MaGiamGia maGiamGia = maGiamGiaService.timMaGiamGia("Nhap ma giam gia de them vao hang thanh vien : ");
+                MaGiamGia maGiamGia = maGiamGiaService.tim("Nhap ma giam gia de them vao hang thanh vien : ");
                 if (maGiamGia == null) {
                     System.out.println("Khong tim thay ma giam gia");
                     return;
@@ -83,7 +83,7 @@ public class QuanLyHangThanhVien {
             case 4:
                 DanhSachMaGiamGia maGiamGiaService1 = db.getDanhSachMaGiamGia();
                 MaGiamGia maGiamGia1 = maGiamGiaService1
-                        .timMaGiamGia("Nhap ma giam gia de them vao hang thanh vien : ");
+                        .tim("Nhap ma giam gia de them vao hang thanh vien : ");
                 if (maGiamGia1 == null) {
                     System.out.println("Khong tim thay ma giam gia");
                     return;
@@ -103,7 +103,7 @@ public class QuanLyHangThanhVien {
 
     public void suaHangThanhVien() {
         DanhSachHangThanhVien hangThanhVienService = db.getDanhSachHangThanhVien();
-        HangThanhVien hangThanhVien = hangThanhVienService.timHangThanhVien("Nhap ten hang thanh vien can sua : ");
+        HangThanhVien hangThanhVien = hangThanhVienService.tim("Nhap ten hang thanh vien can sua : ");
         if (hangThanhVien == null) {
             System.out.println("Khong tim thay hang thanh vien");
             return;
@@ -127,7 +127,7 @@ public class QuanLyHangThanhVien {
     public void traCuuHangThanhVien() {
         String ten = Nhap.nhapStr("Nhap ten hang thanh vien can tra cuu: ");
         DanhSachHangThanhVien service = db.getDanhSachHangThanhVien();
-        HangThanhVien htv = service.timHangThanhVien(ten);
+        HangThanhVien htv = service.tim(ten);
         if (htv == null) {
             System.out.println("Khong tim thay hang thanh vien!");
             return;

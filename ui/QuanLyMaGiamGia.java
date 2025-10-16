@@ -22,7 +22,7 @@ public class QuanLyMaGiamGia {
     public void timKiemMaGiamGia() {
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can tim: ");
-        MaGiamGia mGG = danhSachMaGiamGia.timMaGiamGia(ma);
+        MaGiamGia mGG = danhSachMaGiamGia.tim(ma);
         if (mGG == null) {
             System.out.println("khong tim thay ma giam gia!");
         } else {
@@ -55,7 +55,7 @@ public class QuanLyMaGiamGia {
     public void themMaGiamGia() {
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         MaGiamGia mGG = TaoDoiTuong.taoMaGiamGia(db);
-        if (danhSachMaGiamGia.themMaGiamGia(mGG)) {
+        if (danhSachMaGiamGia.them(mGG)) {
             System.out.println("them ma giam gia thanh cong!");
         } else {
             System.out.println("them ma giam gia that bai!");
@@ -66,11 +66,11 @@ public class QuanLyMaGiamGia {
     public void xoaMaGiamGia() {
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can xoa: ");
-        MaGiamGia mGG = danhSachMaGiamGia.timMaGiamGia(ma);
+        MaGiamGia mGG = danhSachMaGiamGia.tim(ma);
         if (mGG == null) {
             System.out.println("khong tim thay ma giam gia can xoa!");
         } else {
-            if (danhSachMaGiamGia.xoaMaGiamGia(mGG)) {
+            if (danhSachMaGiamGia.xoa(mGG)) {
                 System.out.println("xoa ma giam gia thanh cong!");
             } else {
                 System.out.println("xoa ma giam gia that bai!");
@@ -127,7 +127,7 @@ public class QuanLyMaGiamGia {
     public void suaMaGiamGia() {
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can xoa: ");
-        MaGiamGia mGG = danhSachMaGiamGia.timMaGiamGia(ma);
+        MaGiamGia mGG = danhSachMaGiamGia.tim(ma);
         while (true) {
             System.out.println();
             System.out.println("------------------------");
@@ -135,7 +135,7 @@ public class QuanLyMaGiamGia {
             System.out.println("------------------------");
             xuatMenuSuaMaGiamGia();
             int choice = Nhap.nhapInt("nhap lua chon: ");
-            if (choice==0){
+            if (choice == 0) {
                 return;
             }
             thucHienChucNangSua(mGG, choice);
@@ -145,7 +145,7 @@ public class QuanLyMaGiamGia {
 
     public void maGiamGiaApDungChoSp() {
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-        SanPham sanPham = danhSachSanPham.timSanPham(Nhap.nhapStr("Nhap ma san pham de xem : "));
+        SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma san pham de xem : "));
         if (sanPham == null) {
             System.out.println("Khong tim thay san pham");
             return;

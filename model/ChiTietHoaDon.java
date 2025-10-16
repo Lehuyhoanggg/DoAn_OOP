@@ -4,25 +4,33 @@ import java.util.ArrayList;
 
 public class ChiTietHoaDon {
     private String ma;
-    private LuuTruSanPham danhSachSanPham;
-    private ArrayList<BaoHanh> listBaoHanh;
+    private ArrayList<SanPhamDaBan> sanPhamDaBan; // chứa cùng 1 sanpham , nhưng khác bảo hành hoặc không có bảo hành
+    private int soSp;
+    private int soBh;
     private long thanhTien;
-    private ArrayList<MaGiamGia> listMaGiamGiaDaDung;
 
-    public ChiTietHoaDon(String ma, Long thanhTien) {
+    public ChiTietHoaDon(String ma, int soSp, int soBh, Long thanhTien) {
         this.ma = ma;
         this.thanhTien = thanhTien;
-        listBaoHanh = new ArrayList<>();
-        danhSachSanPham = new LuuTruSanPham();
-        listMaGiamGiaDaDung = new ArrayList<>();
+        this.soSp = soSp;
+        this.soBh = soBh;
+        sanPhamDaBan = new ArrayList<>();
     }
 
     public ChiTietHoaDon(String ma) {
         this.ma = ma;
-        listBaoHanh = new ArrayList<>();
-        danhSachSanPham = new LuuTruSanPham();
-        listMaGiamGiaDaDung = new ArrayList<>();
+        sanPhamDaBan = new ArrayList<>();
     }
+
+    public ChiTietHoaDon(String ma, SanPham sanPham, long thanhTien) {
+        this.ma = ma;
+        this.thanhTien = thanhTien;
+        sanPhamDaBan = new ArrayList<>();
+    }
+
+    public ChiTietHoaDon() {
+        sanPhamDaBan = new ArrayList<>();
+    };
 
     public String getMa() {
         return ma;
@@ -32,16 +40,16 @@ public class ChiTietHoaDon {
         return thanhTien;
     }
 
-    public ArrayList<MaGiamGia> getListMaGiamGiaDaDung() {
-        return listMaGiamGiaDaDung;
+    public ArrayList<SanPhamDaBan> getSanPhamDaBan() {
+        return sanPhamDaBan;
     }
 
-    public ArrayList<BaoHanh> getListBaoHanh() {
-        return listBaoHanh;
+    public int getSoBh() {
+        return soBh;
     }
 
-    public LuuTruSanPham getDanhSachSanPham() {
-        return danhSachSanPham;
+    public int getSoSp() {
+        return soSp;
     }
 
     public void setMa(String ma) {
@@ -49,54 +57,44 @@ public class ChiTietHoaDon {
     }
 
     public void setThanhTien(long thanhTien) {
+        if (thanhTien < 0)
+            thanhTien = 0;
         this.thanhTien = thanhTien;
     }
 
-    public void setListMaGiamGiaDaDung(ArrayList<MaGiamGia> listMaGiamGiaDaDung) {
-        this.listMaGiamGiaDaDung = listMaGiamGiaDaDung;
+    public void setSanPhamDaBan(ArrayList<SanPhamDaBan> sanPhamDaBan) {
+        this.sanPhamDaBan = sanPhamDaBan;
     }
 
-    public void setListBaoHanh(ArrayList<BaoHanh> listBaoHanh) {
-        this.listBaoHanh = listBaoHanh;
+    public void setSoBh(int soBh) {
+        this.soBh = soBh;
     }
 
-    public void setDanhSachSanPham(LuuTruSanPham danhSachSanPham) {
-        this.danhSachSanPham = danhSachSanPham;
+    public void setSoSp(int soSp) {
+        this.soSp = soSp;
     }
 
-    public boolean themBaoHanh(BaoHanh baoHanh) {
-        if (baoHanh == null) {
+    public boolean themSanPhamDaBan(SanPhamDaBan sanPham) {
+        if (sanPham == null)
             return false;
+        soSp++;
+        if (sanPham.getBaoHanh() != null) {
+            soBh++;
         }
-        return listBaoHanh.add(baoHanh);
+        return sanPhamDaBan.add(sanPham);
     }
 
-    public boolean themSanPham(SanPham sanPham) {
-        if (sanPham == null) {
-            return false;
+    public SanPhamDaBan timSanPhamDaBan(SanPham sanPham, String serial) {
+        for (SanPhamDaBan sanPhamDaBan : sanPhamDaBan) {
+            if (sanPhamDaBan.getSanPham().equals(sanPham) && sanPhamDaBan.getSerial().equals(serial)) {
+                return sanPhamDaBan;
+            }
         }
-        return danhSachSanPham.themSanPham(sanPham);
+        return null;
     }
 
-    public boolean xoaSanPham(SanPham sanPham) {
-        if (sanPham == null) {
-            return false;
-        }
-        return danhSachSanPham.xoa1SanPham(sanPham);
-    }
-
-    public boolean xoaBaoHanh(BaoHanh baoHanh) {
-        if (baoHanh == null) {
-            return false;
-        }
-        return listBaoHanh.remove(baoHanh);
-    }
-
-    public boolean themMaGiamGiaDaDung(MaGiamGia maGiamGia) {
-        if (maGiamGia == null) {
-            return false;
-        }
-        return listMaGiamGiaDaDung.add(maGiamGia);
+    public boolean xoaSanPhamDaBan(SanPhamDaBan spDaBan) {
+        return sanPhamDaBan.remove(spDaBan);
     }
 
     @Override

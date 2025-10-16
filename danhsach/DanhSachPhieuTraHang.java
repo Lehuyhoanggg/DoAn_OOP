@@ -2,9 +2,10 @@ package danhsach;
 
 import java.util.ArrayList;
 
+import interfaces.QuanLyDanhSach;
 import model.PhieuTraHang;
 
-public class DanhSachPhieuTraHang {
+public class DanhSachPhieuTraHang implements QuanLyDanhSach<PhieuTraHang> {
     private ArrayList<PhieuTraHang> listPhieuTrahang;
     private int soLuong = 0;
 
@@ -27,7 +28,7 @@ public class DanhSachPhieuTraHang {
         this.listPhieuTrahang = listPhieuTrahang;
     }
 
-    public boolean themPhieuTraHang(PhieuTraHang phieuTraHang) {
+    public boolean them(PhieuTraHang phieuTraHang) {
         if (phieuTraHang == null) {
             return false;
         }
@@ -35,7 +36,7 @@ public class DanhSachPhieuTraHang {
         return listPhieuTrahang.add(phieuTraHang);
     }
 
-    public PhieuTraHang timPhieuTraHang(String ma) {
+    public PhieuTraHang tim(String ma) {
         if (listPhieuTrahang == null) {
             return null;
         }
@@ -47,8 +48,16 @@ public class DanhSachPhieuTraHang {
         return null;
     }
 
-    public boolean xoaPhieuTraHang(String ma) {
-        PhieuTraHang phieuTraHang = timPhieuTraHang(ma);
+    public boolean xoa(String ma) {
+        PhieuTraHang phieuTraHang = tim(ma);
+        if (phieuTraHang == null) {
+            return false;
+        }
+        soLuong--;
+        return listPhieuTrahang.remove(phieuTraHang);
+    }
+
+    public boolean xoa(PhieuTraHang phieuTraHang) {
         if (phieuTraHang == null) {
             return false;
         }

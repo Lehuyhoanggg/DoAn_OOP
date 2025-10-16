@@ -1,31 +1,48 @@
 package model;
 
+import java.util.ArrayList;
+
 public class HoaDon {
     private String ma;
     private KhachHang khachHang;
-    private ChiTietHoaDon chiTietHoaDon;
+    private ArrayList<ChiTietHoaDon> listChiTietHoaDon;
     private String ngayTaoHoaDon;
     private String ghiChu;
+    private long thanhTien;
 
     public HoaDon() {
-
+        listChiTietHoaDon = new ArrayList<>();
     }
 
-    public HoaDon(String ma, KhachHang khachHang, ChiTietHoaDon chiTietHoaDon, String ngayTaoHoaDon,
+    public HoaDon(String ma, KhachHang khachHang, String ngayTaoHoaDon,
+            String ghiChu, long thanhTien) {
+        this.ma = ma;
+        this.khachHang = khachHang;
+        this.ngayTaoHoaDon = ngayTaoHoaDon;
+        this.ghiChu = ghiChu;
+        listChiTietHoaDon = new ArrayList<>();
+        this.thanhTien = thanhTien;
+    }
+
+    public HoaDon(String ma, KhachHang khachHang, String ngayTaoHoaDon,
             String ghiChu) {
         this.ma = ma;
         this.khachHang = khachHang;
-        this.chiTietHoaDon = chiTietHoaDon;
         this.ngayTaoHoaDon = ngayTaoHoaDon;
         this.ghiChu = ghiChu;
+        listChiTietHoaDon = new ArrayList<>();
     }
 
-    public ChiTietHoaDon getChiTietHoaDon() {
-        return chiTietHoaDon;
+    public ArrayList<ChiTietHoaDon> getListChiTietHoaDon() {
+        return listChiTietHoaDon;
     }
 
     public String getGhiChu() {
         return ghiChu;
+    }
+
+    public long getThanhTien() {
+        return thanhTien;
     }
 
     public KhachHang getKhachHang() {
@@ -40,8 +57,8 @@ public class HoaDon {
         return ngayTaoHoaDon;
     }
 
-    public void setChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
-        this.chiTietHoaDon = chiTietHoaDon;
+    public void setListChiTietHoaDon(ArrayList<ChiTietHoaDon> listChiTietHoaDon) {
+        this.listChiTietHoaDon = listChiTietHoaDon;
     }
 
     public void setGhiChu(String ghiChu) {
@@ -60,14 +77,36 @@ public class HoaDon {
         this.ngayTaoHoaDon = ngayTaoHoaDon;
     }
 
-    public long getThanhTien() {
-        return chiTietHoaDon.getThanhTien();
+    public void setThanhTien(long thanhTien) {
+        this.thanhTien = thanhTien;
+    }
+
+    public boolean themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
+        if (chiTietHoaDon == null) {
+            return false;
+        }
+        return listChiTietHoaDon.add(chiTietHoaDon);
+    }
+
+    public void tangThanhTien(long value) {
+        this.thanhTien += value;
+    }
+
+    public void giamThanhTien(Long value) {
+        this.thanhTien -= value;
+    }
+
+    public void tinhThanhTien() {
+        thanhTien = 0;
+        for (ChiTietHoaDon chiTietHoaDon : listChiTietHoaDon) {
+            thanhTien += chiTietHoaDon.getThanhTien();
+        }
+        setThanhTien(thanhTien);
     }
 
     @Override
     public String toString() {
         return "HoaDonMa : " + getMa() + "\n" +
-                "ChiTietHoaDonMa : " + (chiTietHoaDon != null ? chiTietHoaDon.getMa() : "null") + "\n" +
                 "KhachHangMa : " + (khachHang != null ? khachHang.getMaKh() : "null") + "\n" +
                 "GhiChu : " + getGhiChu() + "\n" +
                 "NgayTaoHoaDon : " + getNgayTaoHoaDon() + "\n" +

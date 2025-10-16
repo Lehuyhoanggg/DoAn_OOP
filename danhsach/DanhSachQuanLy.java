@@ -2,9 +2,10 @@ package danhsach;
 
 import java.util.ArrayList;
 
+import interfaces.QuanLyDanhSach;
 import model.QuanLy;
 
-public class DanhSachQuanLy {
+public class DanhSachQuanLy implements QuanLyDanhSach<QuanLy> {
     private ArrayList<QuanLy> listQuanLy;
     private int soLuong = 0;
 
@@ -31,7 +32,7 @@ public class DanhSachQuanLy {
         this.soLuong = soLuong;
     }
 
-    public QuanLy timQuanLy(String ma) {
+    public QuanLy tim(String ma) {
         if (listQuanLy == null) {
             return null;
         }
@@ -43,7 +44,7 @@ public class DanhSachQuanLy {
         return null;
     }
 
-    public boolean themQuanLy(QuanLy quanLy) {
+    public boolean them(QuanLy quanLy) {
         if (quanLy == null) {
             return false;
         }
@@ -52,13 +53,20 @@ public class DanhSachQuanLy {
     }
 
     // xoa quang ly
-    public boolean xoaQuanLy(String ma) {
-        QuanLy quanLy = timQuanLy(ma);
+    public boolean xoa(String ma) {
+        QuanLy quanLy = tim(ma);
         if (quanLy == null) {
             return false;
         }
         soLuong--;
         return listQuanLy.remove(quanLy);
     }
-    //
+    
+    public boolean xoa(QuanLy quanLy) {
+        if (quanLy == null) {
+            return false;
+        }
+        soLuong--;
+        return listQuanLy.remove(quanLy);
+    }
 }

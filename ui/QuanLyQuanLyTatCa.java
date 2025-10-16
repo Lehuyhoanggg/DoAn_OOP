@@ -2,12 +2,11 @@ package ui;
 
 import danhsach.DanhSachLichTrongTuan;
 import database.Database;
-import interfaces.QuanLiChung;
 import model.LichTrongTuan;
 import model.QuanLy;
 import util.XoaManHinh;
 
-public class QuanLyQuanLyTatCa implements QuanLiChung {
+public class QuanLyQuanLyTatCa {
     private Database db;
     private QuanLy ql;
 
@@ -64,6 +63,10 @@ public class QuanLyQuanLyTatCa implements QuanLiChung {
     public void xemLichLamViecTrongTuan() {
         DanhSachLichTrongTuan danhSachLichTrongTuan = db.getDanhSachLichTrongTuan();
         LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.lichTrongTuanNay();
+        if (lichTrongTuan == null) {
+            System.out.println("Tuan nay chua co lich");
+            return;
+        }
         QuanLyLichTrongTuan quanLyLichTrongTuan = new QuanLyLichTrongTuan(db, lichTrongTuan);
         quanLyLichTrongTuan.xemLichLamViec();
     }

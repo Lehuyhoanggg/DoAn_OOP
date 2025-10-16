@@ -1,10 +1,12 @@
 package danhsach;
 
 import java.util.ArrayList;
+
+import interfaces.QuanLyDanhSach;
 import model.HoaDon;
 import util.ThoiGian;
 
-public class DanhSachHoaDon {
+public class DanhSachHoaDon implements QuanLyDanhSach<HoaDon> {
     private ArrayList<HoaDon> listHoaDon;
     private int soLuong = 0;
 
@@ -32,7 +34,7 @@ public class DanhSachHoaDon {
     }
 
     // tim hoa don theo ma
-    public HoaDon timHoaDon(String ma) {
+    public HoaDon tim(String ma) {
         if (listHoaDon == null) {
             return null;
         }
@@ -45,8 +47,16 @@ public class DanhSachHoaDon {
     }
 
     // xoa hoa don
-    public boolean xoaHoaDon(String ma) {
-        HoaDon hoaDon = timHoaDon(ma);
+    public boolean xoa(String ma) {
+        HoaDon hoaDon = tim(ma);
+        if (hoaDon == null) {
+            return false;
+        }
+        soLuong--;
+        return listHoaDon.remove(hoaDon);
+    }
+
+    public boolean xoa(HoaDon hoaDon) {
         if (hoaDon == null) {
             return false;
         }
@@ -55,7 +65,7 @@ public class DanhSachHoaDon {
     }
 
     // them hoa don
-    public boolean themHoaDon(HoaDon hd) {
+    public boolean them(HoaDon hd) {
         if (hd == null) {
             return false;
         }

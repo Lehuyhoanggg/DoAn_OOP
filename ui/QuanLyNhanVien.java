@@ -18,7 +18,7 @@ public class QuanLyNhanVien {
     private void taoNhanVien() {
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         NhanVien nv = TaoDoiTuong.taoNhanVien(db);
-        danhSachNhanVien.themNhanVien(nv);
+        danhSachNhanVien.them(nv);
         System.out.println("Da them nhan vien thanh cong.");
     }
 
@@ -49,7 +49,7 @@ public class QuanLyNhanVien {
     private void suaNhanVien() {
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         String ma = Nhap.nhapStr("Nhap ma nhan vien can sua: ");
-        NhanVien nv = danhSachNhanVien.timNhanVien(ma);
+        NhanVien nv = danhSachNhanVien.tim(ma);
         if (nv == null) {
             System.out.println("Khong tim thay nhan vien.");
             return;
@@ -72,9 +72,9 @@ public class QuanLyNhanVien {
     private void xoaNhanVien() {
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         String ma = Nhap.nhapStr("Nhap ma nhan vien can xoa: ");
-        NhanVien nhanVien = danhSachNhanVien.timNhanVien(ma);
+        NhanVien nhanVien = danhSachNhanVien.tim(ma);
         if (nhanVien != null) {
-            danhSachNhanVien.xoaNhanVien(ma);
+            danhSachNhanVien.xoa(ma);
             System.out.println("Da xoa nhan vien");
         } else {
             System.out.println("Khong tim thay nhan vien de xoa");
@@ -84,7 +84,7 @@ public class QuanLyNhanVien {
     private void traCuuNhanVien() {
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         String ma = Nhap.nhapStr("Nhap ma nhan vien: ");
-        NhanVien nv = danhSachNhanVien.timNhanVien(ma);
+        NhanVien nv = danhSachNhanVien.tim(ma);
         if (nv == null)
             System.out.println("Khong tim thay.");
         else {

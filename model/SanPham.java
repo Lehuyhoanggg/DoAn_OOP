@@ -10,6 +10,8 @@ public class SanPham {
     private String moTa;
     private String trangThai;
 
+    private boolean traHang = false;
+
     public SanPham(String ma, String ten, String danhMuc, String thuongHieu, long gia, int tonKho, String moTa,
             String trangThai) {
         this.ma = ma;
@@ -22,7 +24,22 @@ public class SanPham {
         this.trangThai = trangThai;
     }
 
+    public SanPham(SanPham sanPham) {
+        this.ma = sanPham.ma;
+        this.ten = sanPham.ten;
+        this.danhMuc = sanPham.danhMuc;
+        this.thuongHieu = sanPham.thuongHieu;
+        this.gia = sanPham.gia;
+        this.tonKho = sanPham.tonKho;
+        this.moTa = sanPham.moTa;
+        this.trangThai = sanPham.trangThai;
+    }
+
     public SanPham() {
+    }
+
+    public boolean getTraHang() {
+        return traHang;
     }
 
     public String getDanhMuc() {
@@ -87,6 +104,10 @@ public class SanPham {
 
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public void setTraHang(boolean traHang) {
+        this.traHang = traHang;
     }
 
     public void giamTonKho() {

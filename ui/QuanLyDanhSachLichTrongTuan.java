@@ -21,7 +21,7 @@ public class QuanLyDanhSachLichTrongTuan {
                 db.getDanhSachLichTrongNgay().taoListLichTrongNgay(db, ThoiGian.layNgayDauTuanStr(soTuan)));
         lichTrongTuan.setMa(CapMa.capMaLichTrongTuan(db));
         lichTrongTuan.setNgayThu2(ThoiGian.layNgayDauTuanStr(soTuan));
-        danhSachLichTrongTuan.themLichTrongTuan(lichTrongTuan);
+        danhSachLichTrongTuan.them(lichTrongTuan);
         return lichTrongTuan;
     }
 
@@ -41,7 +41,7 @@ public class QuanLyDanhSachLichTrongTuan {
     }
 
     public void xepLichLamViecTrongTuanSau() {
-        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.timLichTrongTuan(ThoiGian.soTuanHienTai() + 1);
+        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.tim(ThoiGian.soTuanHienTai() + 1);
         if (lichTrongTuan == null) {
             System.out.println("Chua co lich trong tuan sau ban co muon tao moi khong?");
             System.out.println("(1)Co (khac)Khong : ");
@@ -57,7 +57,7 @@ public class QuanLyDanhSachLichTrongTuan {
 
     public void luaChonXepLich() {
         int soTuan = Nhap.nhapInt("Nhap so tuan can xep lich : ");
-        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.timLichTrongTuan(soTuan);
+        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.tim(soTuan);
         if (lichTrongTuan == null) {
             System.out.println("Chua co lich trong tuan " + soTuan + " ban co muon tao moi khong?");
             System.out.println("(1)Co (khac)Khong : ");
@@ -118,7 +118,7 @@ public class QuanLyDanhSachLichTrongTuan {
 
     public void luaChonXemLich() {
         int soTuan = Nhap.nhapInt("Nhap so tuan trong nam de xem lich");
-        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.timLichTrongTuan(soTuan);
+        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.tim(soTuan);
         if (lichTrongTuan == null) {
             System.out.println("lich cua tuan " + soTuan + " chua duoc tao");
             return;

@@ -3,14 +3,15 @@ package file;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Map;
 
+import danhsach.DanhSachChiTietHoaDon;
+import danhsach.DanhSachHoaDon;
+import danhsach.DanhSachSanPhamDaBan;
 import database.Database;
-import interfaces.GhiFile_Datas;
 import model.*;
 import util.XulyString;
 
-public class GhiFile implements GhiFile_Datas {
+public class GhiFile {
     private Database db;
 
     public GhiFile(Database db) {
@@ -199,7 +200,7 @@ public class GhiFile implements GhiFile_Datas {
             for (int i = 0; i < listPhieuTraHang.size(); i++) {
                 line = listPhieuTraHang.get(i).getMaTraHang() + " " +
                         listPhieuTraHang.get(i).getKhachHang().getMaKh() + " " +
-                        listPhieuTraHang.get(i).getSanPham().getMa() + " " +
+                        listPhieuTraHang.get(i).getSanPham().getMa() + " " + listPhieuTraHang.get(i).getSerial() + " " +
                         listPhieuTraHang.get(i).getNgayTra() + " " +
                         XulyString.dongGoiStr(listPhieuTraHang.get(i).getLyDoTra());
                 bw.write(line);
@@ -216,8 +217,8 @@ public class GhiFile implements GhiFile_Datas {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             String line;
             for (int i = 0; i < listChiTietHoaDon.size(); i++) {
-                line = listChiTietHoaDon.get(i).getMa() + " " +
-                        listChiTietHoaDon.get(i).getThanhTien();
+                line = listChiTietHoaDon.get(i).getMa() + " " + listChiTietHoaDon.get(i).getSoSp() + " "
+                        + listChiTietHoaDon.get(i).getSoBh() + " " + listChiTietHoaDon.get(i).getThanhTien();
                 bw.write(line);
                 bw.newLine();
             }
@@ -226,20 +227,30 @@ public class GhiFile implements GhiFile_Datas {
         }
     }
 
-    // chi tiet hoa don san pham
-    public void ghi_ChiTietHoaDon_SanPhamtxt(String path) {
-        ArrayList<ChiTietHoaDon> listChiTietHoaDon = db.getListChiTietHoaDon();
+    public void ghi_SanPhamDaBantxt(String path) {
+        DanhSachSanPhamDaBan danhSachSanPhamDaBan = db.getDanhSachSanPhamDaBan();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-            String line;
-            for (int i = 0; i < listChiTietHoaDon.size(); i++) {
-                line = listChiTietHoaDon.get(i).getMa();
-                Map<SanPham, Integer> mapSanPham = listChiTietHoaDon.get(i).getDanhSachSanPham().getMapSanPham();
-                for (SanPham sanPham : mapSanPham.keySet()) {
-                    for (int j = 0; j < mapSanPham.get(sanPham); j++) {
-                        line += " " + sanPham.getMa();
-                    }
+            for (SanPhamDaBan spDaBan : danhSachSanPhamDaBan.getListSanPhamDaBan()) {
+                String ma = spDaBan.getMaSpDaBan();
+                String serial = spDaBan.getSerial();
+                String maSanPham = (spDaBan.getSanPham() == null) ? "null" : spDaBan.getSanPham().getMa();
+                String maBaoHanh = (spDaBan.getBaoHanh() == null) ? "null" : spDaBan.getBaoHanh().getMaBh();
+                bw.write(ma + " " + serial + " " + maSanPham + " " + maBaoHanh);
+                bw.newLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ghi_SanPhamDaBan_MaGiamGiatxt(String path) {
+        DanhSachSanPhamDaBan danhSachSanPhamDaBan = db.getDanhSachSanPhamDaBan();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+            for (SanPhamDaBan sanPhamDaBan : danhSachSanPhamDaBan.getListSanPhamDaBan()) {
+                bw.write(sanPhamDaBan.getMaSpDaBan());
+                for (MaGiamGia maGiamGia : sanPhamDaBan.getListMaGiamGiaDaDung()) {
+                    bw.write(" " + maGiamGia.getMa());
                 }
-                bw.write(line);
                 bw.newLine();
             }
         } catch (Exception e) {
@@ -247,55 +258,14 @@ public class GhiFile implements GhiFile_Datas {
         }
     }
 
-    // chi tiet hoa don bao hanh
-    public void ghi_ChiTietHoaDon_BaoHanhtxt(String path) {
-        ArrayList<ChiTietHoaDon> listChiTietHoaDon = db.getListChiTietHoaDon();
+    public void ghi_SanPhamDaBan_MaGiamGia_SanPhamtxt(String path) {
+        DanhSachSanPhamDaBan danhSachSanPhamDaBan = db.getDanhSachSanPhamDaBan();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-            String line;
-            for (int i = 0; i < listChiTietHoaDon.size(); i++) {
-                line = listChiTietHoaDon.get(i).getMa();
-                for (int j = 0; j < listChiTietHoaDon.get(i).getListBaoHanh().size(); j++) {
-                    line = line + " " + listChiTietHoaDon.get(i).getListBaoHanh().get(j).getMaBh();
-                }
-                bw.write(line);
-                bw.newLine();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // chi tiet hoa don ma giam gia
-    public void ghi_ChiTietHoaDon_MaGiamGiatxt(String path) {
-        ArrayList<ChiTietHoaDon> listChiTietHoaDon = db.getListChiTietHoaDon();
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-            String line;
-            for (int i = 0; i < listChiTietHoaDon.size(); i++) {
-                line = listChiTietHoaDon.get(i).getMa();
-                for (int j = 0; j < listChiTietHoaDon.get(i).getListMaGiamGiaDaDung().size(); j++) {
-                    line = line + " " + listChiTietHoaDon.get(i).getListMaGiamGiaDaDung().get(j).getMa();
-                }
-                bw.write(line);
-                bw.newLine();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // chi tiet hoa don_ma giam gia_san pham
-    public void ghi_ChiTietHoaDon_MaGiamGia_SanPhamtxt(String path) {
-        ArrayList<ChiTietHoaDon> listChiTietHoaDon = db.getListChiTietHoaDon();
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-            String line;
-            for (int i = 0; i < listChiTietHoaDon.size(); i++) {
-                for (int j = 0; j < listChiTietHoaDon.get(i).getListMaGiamGiaDaDung().size(); j++) {
-                    MaGiamGia mgg = listChiTietHoaDon.get(i).getListMaGiamGiaDaDung().get(j);
-                    if (mgg.getSanPhamDaDung() != null) {
-                        line = listChiTietHoaDon.get(i).getMa() + " " +
-                                mgg.getMa() + " " +
-                                mgg.getSanPhamDaDung().getMa();
-                        bw.write(line);
+            for (SanPhamDaBan sanPhamDaBan : danhSachSanPhamDaBan.getListSanPhamDaBan()) {
+                for (MaGiamGia maGiamGia : sanPhamDaBan.getListMaGiamGiaDaDung()) {
+                    SanPham sanPham = maGiamGia.getSanPhamDaDung();
+                    if (sanPham != null) {
+                        bw.write(sanPhamDaBan.getMaSpDaBan() + " " + maGiamGia.getMa() + " " + sanPham.getMa());
                         bw.newLine();
                     }
                 }
@@ -313,10 +283,39 @@ public class GhiFile implements GhiFile_Datas {
             for (int i = 0; i < listHoaDon.size(); i++) {
                 line = listHoaDon.get(i).getMa() + " " +
                         listHoaDon.get(i).getKhachHang().getMaKh() + " " +
-                        listHoaDon.get(i).getChiTietHoaDon().getMa() + " " +
                         listHoaDon.get(i).getNgayTaoHoaDon() + " " +
-                        XulyString.dongGoiStr(listHoaDon.get(i).getGhiChu());
+                        XulyString.dongGoiStr(listHoaDon.get(i).getGhiChu())+" "+listHoaDon.get(i).getThanhTien();
                 bw.write(line);
+                bw.newLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ghi_HoaDon_ChiTietHoaDontxt(String path) {
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+            for (HoaDon hoaDon : danhSachHoaDon.getListHoaDon()) {
+                bw.write(hoaDon.getMa());
+                for (ChiTietHoaDon chiTiet : hoaDon.getListChiTietHoaDon()) {
+                    bw.write(" " + chiTiet.getMa());
+                }
+                bw.newLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ghi_ChiTietHoaDon_SanPhamDaBantxt(String path) {
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+            for (ChiTietHoaDon chiTietHoaDon : danhSachChiTietHoaDon.getListChiTietHoaDon()) {
+                bw.write(chiTietHoaDon.getMa());
+                for (SanPhamDaBan sanPhamDaBan : chiTietHoaDon.getSanPhamDaBan()) {
+                    bw.write(" " + sanPhamDaBan.getMaSpDaBan());
+                }
                 bw.newLine();
             }
         } catch (Exception e) {
@@ -437,7 +436,8 @@ public class GhiFile implements GhiFile_Datas {
             e.printStackTrace();
         }
     }
-    public void ghi_CaLam_NhanVienDiemDanh(String path){
+
+    public void ghi_CaLam_NhanVienDiemDanh(String path) {
         ArrayList<CaLam> listCaLam = db.getListCaLam();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             String line;
@@ -445,7 +445,7 @@ public class GhiFile implements GhiFile_Datas {
                 line = listCaLam.get(i).getMa();
 
                 for (NhanVien nhanVien : listCaLam.get(i).getListNhanVien().getMapNhanVien().keySet()) {
-                    if (listCaLam.get(i).getListNhanVien().kiemTraDiemDanh(nhanVien)){
+                    if (listCaLam.get(i).getListNhanVien().kiemTraDiemDanh(nhanVien)) {
                         line = line + " " + nhanVien.getMa();
                     }
                 }
@@ -456,6 +456,7 @@ public class GhiFile implements GhiFile_Datas {
             e.printStackTrace();
         }
     }
+
     // ghi lich trong ngay
     public void ghi_LichTrongNgaytxt(String path) {
         ArrayList<LichTrongNgay> listLichTrongNgay = db.getListLichTrongNgay();
@@ -556,11 +557,16 @@ public class GhiFile implements GhiFile_Datas {
         ghi_BaoHanhtxt("datas/BaoHanh.txt");
         ghi_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
         ghi_PhieuTraHangtxt("datas/PhieuTraHang.txt");
+        ghi_SanPhamDaBantxt("datas/SanPhamDaBan.txt");
+
         ghi_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
-        ghi_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");
-        ghi_ChiTietHoaDon_BaoHanhtxt("datas/ChiTietHoaDon_BaoHanh.txt");
-        ghi_ChiTietHoaDon_MaGiamGiatxt("datas/ChiTietHoaDon_MaGiamGia.txt");
-        ghi_ChiTietHoaDon_MaGiamGia_SanPhamtxt("datas/ChiTietHoaDon_MaGiamGia_SanPham.txt");
+
+        ghi_ChiTietHoaDon_SanPhamDaBantxt("datas/ChiTietHoaDon_SanPhamDaBan.txt");
+        ghi_SanPhamDaBan_MaGiamGia_SanPhamtxt("datas/SanPhamDaBan_MaGiamGia_SanPham.txt");
+        ghi_SanPhamDaBan_MaGiamGiatxt("datas/SanPhamDaBan_MaGiamGia.txt");
+        ghi_HoaDontxt("datas/HoaDon.txt");
+        ghi_HoaDon_ChiTietHoaDontxt("datas/HoaDon_ChiTietHoaDon.txt");
+
         ghi_HoaDontxt("datas/HoaDon.txt");
         ghi_KhachHang_PhieuBaoHanhtxt("datas/KhachHang_PhieuBaoHanh.txt");
         ghi_KhachHang_BaoHanhtxt("datas/KhachHang_BaoHanh.txt");
