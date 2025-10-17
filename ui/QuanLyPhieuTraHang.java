@@ -52,7 +52,7 @@ public class QuanLyPhieuTraHang {
         SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Hay hay nhap ma san pham can tra hang : "));
         if (sanPham == null) {
             System.out.println("Khong tim thay san pham");
-            return;
+            return;             
         }
         SanPhamDaBan spDaBan = null;
 

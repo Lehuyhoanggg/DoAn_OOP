@@ -2,10 +2,11 @@ package danhsach;
 
 import java.util.ArrayList;
 
+import interfaces.QuanLyDanhSach;
 import model.TaiKhoan;
 import model.User;
 
-public class DanhSachTaiKhoan{
+public class DanhSachTaiKhoan implements QuanLyDanhSach<TaiKhoan> {
     private ArrayList<TaiKhoan> listTaiKhoan;
     private int soLuong = 0;
 
@@ -61,5 +62,14 @@ public class DanhSachTaiKhoan{
         soLuong--;
         tk.getUser().goTaiKhoan();
         return listTaiKhoan.remove(tk);
+    }
+
+    public TaiKhoan tim(String tenDn) {
+        for (TaiKhoan taiKhoan : listTaiKhoan) {
+            if (taiKhoan.getTenDangNhap().equals(tenDn)) {
+                return taiKhoan;
+            }
+        }
+        return null;
     }
 }

@@ -133,7 +133,7 @@ public class TaoDoiTuong {
         SanPham sanPham = danhSachSanPham.tim(maSanPham);
 
         String ngayBatDau = ThoiGian.layNgayHienTaiStr();
-        String ngayKetThuc = ThoiGian.ngaySauNThang(ngayBatDau, Integer.parseInt(loaiBaoHanh.replace("\\D+", "")));
+        String ngayKetThuc = ThoiGian.ngaySauNThang(ngayBatDau, Integer.parseInt(loaiBaoHanh.replaceAll("\\D+", "")));
         long gia = Nhap.nhapLong("Nhap gia cua bao hanh : ");
         loaiBaoHanh = "BaoHanh" + loaiBaoHanh + "T";
         if (sanPham == null) {
@@ -153,13 +153,13 @@ public class TaoDoiTuong {
             // chon san pham
             SanPham sanPham = null;
             do {
-                String ma = Nhap.nhapStr("Nhap ma san pham can them hoac nhan -1 de thoat: ");
-                if (ma.replaceAll("\\s+", "").equals("-1")) {
+                String ma = Nhap.nhapStr("Nhap ma san pham can them hoac nhan 0 de thoat: ");
+                if (ma.replaceAll("\\s+", "").equals("0")) {
                     return listChiTietHoaDon;
                 }
-                sanPham = new SanPham(danhSachSanPham.tim(ma));
+                sanPham = danhSachSanPham.tim(ma);
 
-                if (danhSachSanPham.tim(ma) == null) {
+                if (sanPham == null) {
                     System.out.println("Ma san pham pham khong hop le, vui long nhap lai");
                 }
                 if (sanPham.getTrangThai().equals("Ngung Kinh Doanh")) {
@@ -190,10 +190,9 @@ public class TaoDoiTuong {
                 ArrayList<BaoHanh> listBaoHanh = danhSachBaoHanh.tim(sanPham); // check bảo hành sản phẩm
                 if (listBaoHanh.size() == 0) {
                     // ko có bảo hành
-                    SanPhamDaBan sanPhamDaBan = new SanPhamDaBan(CapMa.capMaSanPhamDaban(db), sanPham, serial, null);
+                    SanPhamDaBan sanPhamDaBan = new SanPhamDaBan(CapMa.capMaSanPhamDaban(db),new SanPham(sanPham), serial, null);
                     chiTietHoaDon.themSanPhamDaBan(sanPhamDaBan);
                     danhSachSanPhamDaBan.them(sanPhamDaBan);
-                    sanPhamDaBan.setMaSpDaBan(CapMa.capMaSanPhamDaban(db));
                     System.out
                             .println("Da them san pham : " + sanPham.getTen() + "    voi serial : " + serial
                                     + " vao hoa don");
@@ -204,8 +203,7 @@ public class TaoDoiTuong {
                                 + " vao hoa don");
                 int luaChon = Nhap.nhapInt("Them bao hanh cho san pham nay khong? (1)Co (soKhac)Khong: ");
                 if (luaChon != 1) {// ko them
-                    SanPhamDaBan sanPhamDaBan = new SanPhamDaBan(CapMa.capMaSanPhamDaban(db), sanPham, serial, null);
-                    sanPhamDaBan.setMaSpDaBan(CapMa.capMaSanPhamDaban(db));
+                    SanPhamDaBan sanPhamDaBan = new SanPhamDaBan(CapMa.capMaSanPhamDaban(db), new SanPham(sanPham), serial, null);
                     chiTietHoaDon.themSanPhamDaBan(sanPhamDaBan);
                     danhSachSanPhamDaBan.them(sanPhamDaBan);
                     continue;
@@ -227,8 +225,7 @@ public class TaoDoiTuong {
                     baoHanh.setSanPham(sanPham);
                     khachHang.themBaoHanh(baoHanh);
 
-                    SanPhamDaBan sanPhamDaBan = new SanPhamDaBan(CapMa.capMaSanPhamDaban(db), sanPham, serial, baoHanh);
-                    sanPhamDaBan.setMaSpDaBan(CapMa.capMaSanPhamDaban(db));
+                    SanPhamDaBan sanPhamDaBan = new SanPhamDaBan(CapMa.capMaSanPhamDaban(db),new SanPham(sanPham), serial, baoHanh);
                     chiTietHoaDon.themSanPhamDaBan(sanPhamDaBan);
                     danhSachSanPhamDaBan.them(sanPhamDaBan);// them vao db
                 }

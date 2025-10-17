@@ -33,6 +33,7 @@ public class SanPham {
         this.tonKho = sanPham.tonKho;
         this.moTa = sanPham.moTa;
         this.trangThai = sanPham.trangThai;
+        this.traHang = false;
     }
 
     public SanPham() {
