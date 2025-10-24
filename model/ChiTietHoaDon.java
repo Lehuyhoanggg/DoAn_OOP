@@ -4,32 +4,37 @@ import java.util.ArrayList;
 
 public class ChiTietHoaDon {
     private String ma;
-    private ArrayList<SanPhamDaBan> sanPhamDaBan; // chứa cùng 1 sanpham , nhưng khác bảo hành hoặc không có bảo hành
+    private ArrayList<SanPham> listSanPham;
     private int soSp;
     private int soBh;
     private long thanhTien;
+    private ArrayList<MaGiamGia> listMaGiamGia;
 
     public ChiTietHoaDon(String ma, int soSp, int soBh, Long thanhTien) {
         this.ma = ma;
         this.thanhTien = thanhTien;
         this.soSp = soSp;
         this.soBh = soBh;
-        sanPhamDaBan = new ArrayList<>();
+        listSanPham = new ArrayList<>();
+        listMaGiamGia = new ArrayList<>();
     }
 
     public ChiTietHoaDon(String ma) {
         this.ma = ma;
-        sanPhamDaBan = new ArrayList<>();
+        listSanPham = new ArrayList<>();
+        listMaGiamGia = new ArrayList<>();
     }
 
-    public ChiTietHoaDon(String ma, SanPham sanPham, long thanhTien) {
+    public ChiTietHoaDon(String ma, ThongTinSanPham sanPham, long thanhTien) {
         this.ma = ma;
         this.thanhTien = thanhTien;
-        sanPhamDaBan = new ArrayList<>();
+        listSanPham = new ArrayList<>();
+        listMaGiamGia = new ArrayList<>();
     }
 
     public ChiTietHoaDon() {
-        sanPhamDaBan = new ArrayList<>();
+        listSanPham = new ArrayList<>();
+        listMaGiamGia = new ArrayList<>();
     };
 
     public String getMa() {
@@ -40,8 +45,8 @@ public class ChiTietHoaDon {
         return thanhTien;
     }
 
-    public ArrayList<SanPhamDaBan> getSanPhamDaBan() {
-        return sanPhamDaBan;
+    public ArrayList<SanPham> getListSanPham() {
+        return listSanPham;
     }
 
     public int getSoBh() {
@@ -50,6 +55,10 @@ public class ChiTietHoaDon {
 
     public int getSoSp() {
         return soSp;
+    }
+
+    public ArrayList<MaGiamGia> getListMaGiamGia() {
+        return listMaGiamGia;
     }
 
     public void setMa(String ma) {
@@ -62,8 +71,8 @@ public class ChiTietHoaDon {
         this.thanhTien = thanhTien;
     }
 
-    public void setSanPhamDaBan(ArrayList<SanPhamDaBan> sanPhamDaBan) {
-        this.sanPhamDaBan = sanPhamDaBan;
+    public void setListSanPham(ArrayList<SanPham> listSanPham) {
+        this.listSanPham = listSanPham;
     }
 
     public void setSoBh(int soBh) {
@@ -74,27 +83,43 @@ public class ChiTietHoaDon {
         this.soSp = soSp;
     }
 
-    public boolean themSanPhamDaBan(SanPhamDaBan sanPham) {
+    public void setListMaGiamGia(ArrayList<MaGiamGia> listMaGiamGia) {
+        this.listMaGiamGia = listMaGiamGia;
+    }
+
+    public boolean themSanPham(SanPham sanPham) {
         if (sanPham == null)
             return false;
         soSp++;
         if (sanPham.getBaoHanh() != null) {
             soBh++;
         }
-        return sanPhamDaBan.add(sanPham);
+        return listSanPham.add(sanPham);
     }
 
-    public SanPhamDaBan timSanPhamDaBan(SanPham sanPham, String serial) {
-        for (SanPhamDaBan sanPhamDaBan : sanPhamDaBan) {
-            if (sanPhamDaBan.getSanPham().equals(sanPham) && sanPhamDaBan.getSerial().equals(serial)) {
-                return sanPhamDaBan;
-            }
+    public boolean xoaSanPham(SanPham sanPham) {
+        if (sanPham == null) {
+            return false;
         }
-        return null;
+        soSp--;
+        if (sanPham.getBaoHanh() != null) {
+            soBh--;
+        }
+        return listSanPham.remove(sanPham);
     }
 
-    public boolean xoaSanPhamDaBan(SanPhamDaBan spDaBan) {
-        return sanPhamDaBan.remove(spDaBan);
+    public boolean themMaGiamGia(MaGiamGia maGiamGia) {
+        if (maGiamGia == null) {
+            return false;
+        }
+        return listMaGiamGia.add(maGiamGia);
+    }
+
+    public boolean xoaMaGiamGia(MaGiamGia maGiamGia) {
+        if (maGiamGia == null) {
+            return false;
+        }
+        return listMaGiamGia.remove(maGiamGia);
     }
 
     @Override

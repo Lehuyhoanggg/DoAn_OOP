@@ -1,4 +1,4 @@
-package ui;
+package quanli;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ import danhsach.DanhSachUser;
 import database.Database;
 import model.TaiKhoan;
 import model.User;
+import util.Nhap;
 import util.TaoDoiTuong;
 import util.ThoiGian;
 

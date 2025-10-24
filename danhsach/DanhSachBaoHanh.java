@@ -53,7 +53,7 @@ public class DanhSachBaoHanh implements QuanLyDanhSach<BaoHanh> {
         return null;
     }
 
-    public ArrayList<BaoHanh> tim(SanPham sanPham) {
+    public ArrayList<BaoHanh> timBaoHanh(SanPham sanPham) {
         ArrayList<BaoHanh> listBaoHanhs = new ArrayList<>();
         for (int i = 0; i < listBaoHanh.size(); i++) {
             if (listBaoHanh.get(i).getSanPham().getMa().equals(sanPham.getMa())) {

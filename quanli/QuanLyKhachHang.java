@@ -1,4 +1,4 @@
-package ui;
+package quanli;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,7 @@ import model.KhachHang;
 import model.MaGiamGia;
 import model.PhieuBaoHanh;
 import model.PhieuTraHang;
+import util.Nhap;
 import util.TaoDoiTuong;
 import util.XoaManHinh;
 

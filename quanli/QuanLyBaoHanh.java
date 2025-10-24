@@ -1,10 +1,11 @@
-package ui;
+package quanli;
 
 import java.util.ArrayList;
 
 import danhsach.DanhSachBaoHanh;
 import danhsach.DanhSachSanPham;
 import database.Database;
+import util.Nhap;
 import util.TaoDoiTuong;
 import util.XoaManHinh;
 import model.BaoHanh;
@@ -63,8 +64,8 @@ public class QuanLyBaoHanh {
                 System.out.println("Da sua loai bao hanh");
                 break;
             case 2:
-                DanhSachSanPham danhSachSanPham = new DanhSachSanPham(db.getListSanPham());
-                SanPham sanPham = danhSachSanPham.tim("Nhap ma san pham moi trong phieu : ");
+                DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+                SanPham sanPham = danhSachSanPham.tim("Nhap ma serial san pham moi de them vao phieu : ");
                 if (sanPham == null) {
                     System.out.println("Ma san pham khong hop le");
                 } else {

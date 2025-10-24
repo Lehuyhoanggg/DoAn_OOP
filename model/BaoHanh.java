@@ -6,7 +6,6 @@ public class BaoHanh {
     private String maBh;
     private String loaiBaoHanh;
     private SanPham sanPham;
-    private String serial;
     private String ngayBatDau = "";
     private String ngayKetThuc = "";
     private long gia;
@@ -58,10 +57,6 @@ public class BaoHanh {
         return loaiBaoHanh;
     }
 
-    public String getSerial() {
-        return serial;
-    }
-
     public long getGia() {
         return gia;
     }
@@ -94,17 +89,12 @@ public class BaoHanh {
         this.loaiBaoHanh = "BaoHanh" + soThang + "T";
     }
 
-    public void setSerial(String serial) {
-        this.serial = serial;
-    }
-
     @Override
     public String toString() {
         return "maBh : " + maBh + "\n" +
                 "loaiBaoHanh : " + loaiBaoHanh + "\n" +
                 "sanPhamMa : " + (sanPham != null ? sanPham.getMa() : "null") + "\n" +
-                (serial == null ? ""
-                        : "Serial : " + serial + "\n")
+                ((sanPham != null && sanPham.getSerial() != null) ? "Serial : " + sanPham.getSerial() + "\n" : "")
                 + "Gia : " + gia + "\n";
     }
 }

@@ -1,12 +1,14 @@
-package ui;
+package quanli;
 
 import danhsach.DanhSachLichTrongTuan;
 import database.Database;
+import interfaces.GiaoTiep;
 import model.LichTrongTuan;
 import model.QuanLy;
+import util.Nhap;
 import util.XoaManHinh;
 
-public class QuanLyQuanLyTatCa {
+public class QuanLyQuanLyTatCa implements GiaoTiep {
     private Database db;
     private QuanLy ql;
 
@@ -16,7 +18,7 @@ public class QuanLyQuanLyTatCa {
     }
 
     public void quanLySanPham() {
-        QuanLySanPham quanLySanPham = new QuanLySanPham(db);
+        QuanLyThongTinSanPham quanLySanPham = new QuanLyThongTinSanPham(db);
         quanLySanPham.menu();
     }
 

@@ -7,7 +7,6 @@ import model.SanPham;
 
 public class DanhSachSanPham implements QuanLyDanhSach<SanPham> {
     private ArrayList<SanPham> listSanPham;
-    private int soLuong = 0;
 
     public DanhSachSanPham(ArrayList<SanPham> listSanPham) {
         this.listSanPham = listSanPham;
@@ -20,23 +19,14 @@ public class DanhSachSanPham implements QuanLyDanhSach<SanPham> {
         return listSanPham;
     }
 
-    public int getSoLuong() {
-        return soLuong;
-    }
-
     public void setListSanPham(ArrayList<SanPham> listSanPham) {
         this.listSanPham = listSanPham;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
     }
 
     public boolean them(SanPham sanPham) {
         if (sanPham == null) {
             return false;
         }
-        soLuong++;
         return listSanPham.add(sanPham);
     }
 
@@ -48,7 +38,6 @@ public class DanhSachSanPham implements QuanLyDanhSach<SanPham> {
         if (sanPham == null) {
             return false;
         }
-        soLuong--;
         return listSanPham.remove(sanPham);
     }
 
@@ -59,7 +48,6 @@ public class DanhSachSanPham implements QuanLyDanhSach<SanPham> {
         if (sanPham == null) {
             return false;
         }
-        soLuong--;
         return listSanPham.remove(sanPham);
     }
 
@@ -80,7 +68,20 @@ public class DanhSachSanPham implements QuanLyDanhSach<SanPham> {
             return null;
         }
         for (int i = 0; i < listSanPham.size(); i++) {
-            if (listSanPham.get(i).getMa().equals(ma)) {
+            if (listSanPham.get(i).getSerial().equals(ma)) {
+                return listSanPham.get(i);
+            }
+        }
+        return null;
+    }
+
+    public SanPham timSanPhamChuaBan(String serial) {
+        if (listSanPham == null) {
+            return null;
+        }
+        for (int i = 0; i < listSanPham.size(); i++) {
+            if (listSanPham.get(i).getSerial().equals(serial) && !listSanPham.get(i).getDaBan()
+                    && !listSanPham.get(i).getTraHang()) {
                 return listSanPham.get(i);
             }
         }

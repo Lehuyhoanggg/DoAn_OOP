@@ -1,6 +1,8 @@
 package database;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import file.DocFile;
 import danhsach.*;
@@ -12,7 +14,7 @@ public class Database {
     private DanhSachQuanLy danhSachQuanLy;
     private DanhSachHoaDon danhSachHoaDon;
     private DanhSachTaiKhoan danhSachTaiKhoan;
-    private DanhSachSanPham danhSachSanPham;
+    private DanhSachThongTinSanPham danhSachThongTinSanPham;
     private DanhSachChiTietHoaDon danhSachChiTietHoaDon;
     private DanhSachBaoHanh danhSachBaoHanh;
     private DanhSachPhieuBaoHanh danhSachPhieuBaoHanh;
@@ -26,15 +28,16 @@ public class Database {
     private DanhSachLichTrongNgay danhSachLichTrongNgay;
     private DanhSachLichTrongTuan danhSachLichTrongTuan;
     private DanhSachUser danhSachUser;
-    private DanhSachSanPhamDaBan danhSachSanPhamDaBan;
+    private DanhSachSanPham danhSachSanPham;
+    private DanhSachMaGiamGia danhSachMaGiamGiaDaDung;
+    private Set<String> khoSerial;
 
     public Database() {
-        DocFile docFile = new DocFile(this);
         danhSachNhanVien = new DanhSachNhanVien(new ArrayList<NhanVien>());
         danhSachQuanLy = new DanhSachQuanLy(new ArrayList<QuanLy>());
         danhSachHoaDon = new DanhSachHoaDon(new ArrayList<HoaDon>());
         danhSachTaiKhoan = new DanhSachTaiKhoan(new ArrayList<TaiKhoan>());
-        danhSachSanPham = new DanhSachSanPham(new ArrayList<SanPham>());
+        danhSachThongTinSanPham = new DanhSachThongTinSanPham(new ArrayList<ThongTinSanPham>());
         danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(new ArrayList<ChiTietHoaDon>());
         danhSachBaoHanh = new DanhSachBaoHanh(new ArrayList<BaoHanh>());
         danhSachPhieuBaoHanh = new DanhSachPhieuBaoHanh(new ArrayList<PhieuBaoHanh>());
@@ -46,8 +49,11 @@ public class Database {
         danhSachTinNhan = new DanhSachTinNhan(new ArrayList<TinNhan>());
         danhSachCaLam = new DanhSachCaLam(new ArrayList<CaLam>());
         danhSachLichTrongNgay = new DanhSachLichTrongNgay(new ArrayList<LichTrongNgay>());
-        danhSachSanPhamDaBan = new DanhSachSanPhamDaBan(new ArrayList<>());
         danhSachLichTrongTuan = new DanhSachLichTrongTuan(new ArrayList<LichTrongTuan>());
+        danhSachSanPham = new DanhSachSanPham(new ArrayList<SanPham>());
+        danhSachMaGiamGiaDaDung = new DanhSachMaGiamGia(new ArrayList<MaGiamGia>());
+        khoSerial = new HashSet<>();
+        DocFile docFile = new DocFile(this);
         docFile.doc_DatasVaoDatabase();
     }
 
@@ -58,6 +64,14 @@ public class Database {
     // ===== GET =====
     public ArrayList<NhanVien> getListNhanVien() {
         return danhSachNhanVien.getListNhanVien();
+    }
+
+    public ArrayList<SanPham> getListSanPham() {
+        return danhSachSanPham.getListSanPham();
+    }
+
+    public ArrayList<MaGiamGia> getListMaGiamGiaDaDung() {
+        return danhSachMaGiamGiaDaDung.getListMaGiamGia();
     }
 
     public ArrayList<QuanLy> getListQuanLy() {
@@ -72,8 +86,12 @@ public class Database {
         return danhSachTaiKhoan.getListTaiKhoan();
     }
 
-    public ArrayList<SanPham> getListSanPham() {
-        return danhSachSanPham.getListSanPham();
+    public Set<String> getKhoSerial() {
+        return khoSerial;
+    }
+
+    public DanhSachThongTinSanPham getDanhSachThongTinSanPham() {
+        return danhSachThongTinSanPham;
     }
 
     public ArrayList<ChiTietHoaDon> getListChiTietHoaDon() {
@@ -124,6 +142,10 @@ public class Database {
         return danhSachLichTrongTuan.getListLichTrongTuan();
     }
 
+    public ArrayList<ThongTinSanPham> getListThongTinSanPham() {
+        return danhSachThongTinSanPham.getListThongTinSanPham();
+    }
+
     // ===== SET =====
     public void setListNhanVien(ArrayList<NhanVien> listNhanVien) {
         danhSachNhanVien.setListNhanVien(listNhanVien);
@@ -141,8 +163,8 @@ public class Database {
         danhSachTaiKhoan.setListTaiKhoan(listTaiKhoan);
     }
 
-    public void setListSanPham(ArrayList<SanPham> listSanPham) {
-        danhSachSanPham.setListSanPham(listSanPham);
+    public void setDanhSachThongTinSanPham(DanhSachThongTinSanPham danhSachThongTinSanPham) {
+        this.danhSachThongTinSanPham = danhSachThongTinSanPham;
     }
 
     public void setListChiTietHoaDon(ArrayList<ChiTietHoaDon> listChiTietHoaDon) {
@@ -205,6 +227,10 @@ public class Database {
         return danhSachHoaDon;
     }
 
+    public DanhSachMaGiamGia getDanhSachMaGiamGiaDaDung() {
+        return danhSachMaGiamGiaDaDung;
+    }
+
     public DanhSachTaiKhoan getDanhSachTaiKhoan() {
         return danhSachTaiKhoan;
     }
@@ -237,10 +263,6 @@ public class Database {
         return danhSachMaGiamGia;
     }
 
-    public DanhSachSanPhamDaBan getDanhSachSanPhamDaBan() {
-        return danhSachSanPhamDaBan;
-    }
-
     public DanhSachMaGiamGia getDanhSachMaGiamGiaDq() {
         return danhSachMaGiamGiaDq;
     }
@@ -267,6 +289,14 @@ public class Database {
 
     public void setDanhSachNhanVien(DanhSachNhanVien danhSachNhanVien) {
         this.danhSachNhanVien = danhSachNhanVien;
+    }
+
+    public void setDanhSachMaGiamGiaDaDung(DanhSachMaGiamGia danhSachMaGiamGiaDaDung) {
+        this.danhSachMaGiamGiaDaDung = danhSachMaGiamGiaDaDung;
+    }
+
+    public void setKhoSerial(Set<String> khoSerial) {
+        this.khoSerial = khoSerial;
     }
 
     public void setDanhSachQuanLy(DanhSachQuanLy danhSachQuanLy) {
@@ -331,10 +361,6 @@ public class Database {
 
     public void setDanhSachLichTrongTuan(DanhSachLichTrongTuan danhSachLichTrongTuan) {
         this.danhSachLichTrongTuan = danhSachLichTrongTuan;
-    }
-
-    public void setDanhSachSanPhamDaBan(DanhSachSanPhamDaBan danhSachSanPhamDaBan) {
-        this.danhSachSanPhamDaBan = danhSachSanPhamDaBan;
     }
 
     public ArrayList<User> getListUser() {

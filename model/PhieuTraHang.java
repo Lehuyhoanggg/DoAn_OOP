@@ -1,23 +1,28 @@
 package model;
 
-// chi dc tra truoc 7 ngay sau khi mua sann phan, Tra hang can hoa don
-public class PhieuTraHang {
+public class PhieuTraHang {// chi dc tra truoc 3 ngay sau khi mua sann phan, Tra hang can hoa don
     private String maTraHang;
     private KhachHang khachHang;
     private SanPham sanPham;
-    private String serial;
     private String ngayTra;
     private String lyDoTra;
 
     public PhieuTraHang() {
     }
 
-    public PhieuTraHang(String maTraHang, KhachHang khachHang, SanPham sanPham, String serial, String ngayTra,
+    public PhieuTraHang(String maTraHang, KhachHang khachHang, SanPham sanPham, String ngayTra,
             String lyDoTra) {
         this.maTraHang = maTraHang;
         this.khachHang = khachHang;
         this.sanPham = sanPham;
-        this.serial = serial;
+        this.ngayTra = ngayTra;
+        this.lyDoTra = lyDoTra;
+    }
+
+    public PhieuTraHang(String maTraHang, SanPham sanPham, String ngayTra,
+            String lyDoTra) {
+        this.maTraHang = maTraHang;
+        this.sanPham = sanPham;
         this.ngayTra = ngayTra;
         this.lyDoTra = lyDoTra;
     }
@@ -38,16 +43,12 @@ public class PhieuTraHang {
         this.khachHang = khachHang;
     }
 
-    public SanPham getSanPham() {
-        return sanPham;
-    }
-
-    public String getSerial() {
-        return serial;
-    }
-
     public void setSanPham(SanPham sanPham) {
         this.sanPham = sanPham;
+    }
+
+    public SanPham getSanPham() {
+        return sanPham;
     }
 
     public String getNgayTra() {
@@ -66,15 +67,11 @@ public class PhieuTraHang {
         this.lyDoTra = lyDoTra;
     }
 
-    public void setSerial(String serial) {
-        this.serial = serial;
-    }
-
     @Override
     public String toString() {
         return "maTraHang : " + maTraHang + "\n" +
                 "khachHangMa : " + (khachHang != null ? khachHang.getMaKh() : "null") + "\n" +
-                "sanPhamMa : " + (sanPham != null ? sanPham.getMa() : "null") + "\n" +
+                "sanPhamMa : " + (sanPham != null ? sanPham.getSerial() : "null") + "\n" +
                 "ngayTra : " + ngayTra + "\n" +
                 "lyDoTra : " + lyDoTra + "\n";
     }

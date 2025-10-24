@@ -1,10 +1,11 @@
-package ui;
+package quanli;
 
 import database.Database;
 import model.CaLam;
 import model.LichTrongTuan;
 import model.LichTrongNgay;
 import model.NhanVien;
+import util.Nhap;
 import util.ThoiGian;
 import util.XoaManHinh;
 

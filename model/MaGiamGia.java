@@ -9,6 +9,8 @@ public class MaGiamGia {
     private String ngayBatDau;
     private String ngayKetThuc;
     private SanPham sanPhamDaDung = null;
+    private KhachHang khachHangDaDung = null;
+
 
     public MaGiamGia(String ma, String tenMa, String loaiDoanhMuc, String loaiThuongHieu, String tienGiam,
             String ngayBatDau, String ngayKetThuc) {
@@ -30,7 +32,9 @@ public class MaGiamGia {
         this.ngayBatDau = maGiamGia.getNgayBatDau();
         this.ngayKetThuc = maGiamGia.getNgayKetThuc();
     }
-
+    public KhachHang getKhachHangDaDung() {
+        return khachHangDaDung;
+    }
     public String getLoaiDoanhMuc() {
         return loaiDoanhMuc;
     }
@@ -86,7 +90,9 @@ public class MaGiamGia {
     public void setNgayBatDau(String ngayBatDau) {
         this.ngayBatDau = ngayBatDau;
     }
-
+    public void setKhachHangDaDung(KhachHang khachHangDaDung) {
+        this.khachHangDaDung = khachHangDaDung;
+    }
     public void setNgayKetThuc(String ngayKetThuc) {
         this.ngayKetThuc = ngayKetThuc;
     }

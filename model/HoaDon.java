@@ -20,7 +20,7 @@ public class HoaDon {
         this.khachHang = khachHang;
         this.ngayTaoHoaDon = ngayTaoHoaDon;
         this.ghiChu = ghiChu;
-        listChiTietHoaDon = new ArrayList<>();
+        this.listChiTietHoaDon = new ArrayList<>();
         this.thanhTien = thanhTien;
     }
 

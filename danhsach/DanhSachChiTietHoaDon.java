@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import interfaces.QuanLyDanhSach;
 import model.ChiTietHoaDon;
-import model.SanPhamDaBan;
+import model.SanPham;
 
 public class DanhSachChiTietHoaDon implements QuanLyDanhSach<ChiTietHoaDon> {
     private ArrayList<ChiTietHoaDon> listChiTietHoaDon;
@@ -61,10 +61,10 @@ public class DanhSachChiTietHoaDon implements QuanLyDanhSach<ChiTietHoaDon> {
         return null;
     }
 
-    public ChiTietHoaDon tim(SanPhamDaBan sanPhamDaBan) {
+    public ChiTietHoaDon tim(SanPham sanPham) {
         for (ChiTietHoaDon chiTietHoaDon : listChiTietHoaDon) {
-            for (SanPhamDaBan spDaBan : chiTietHoaDon.getSanPhamDaBan()) {
-                if (spDaBan.equals(sanPhamDaBan)) {
+            for (SanPham sp : chiTietHoaDon.getListSanPham()) {
+                if (sp.equals(sanPham)) {
                     return chiTietHoaDon;
                 }
             }

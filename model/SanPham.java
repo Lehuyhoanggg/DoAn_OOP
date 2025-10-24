@@ -1,132 +1,101 @@
 package model;
 
 public class SanPham {
-    private String ma;
-    private String ten;
-    private String danhMuc;
-    private String thuongHieu;
-    private long gia;
-    private int tonKho;
-    private String moTa;
-    private String trangThai;
-
+    private String serial;
+    private ThongTinSanPham thongTinSanPham;
     private boolean traHang = false;
-
-    public SanPham(String ma, String ten, String danhMuc, String thuongHieu, long gia, int tonKho, String moTa,
-            String trangThai) {
-        this.ma = ma;
-        this.ten = ten;
-        this.danhMuc = danhMuc;
-        this.thuongHieu = thuongHieu;
-        this.gia = gia;
-        this.tonKho = tonKho;
-        this.moTa = moTa;
-        this.trangThai = trangThai;
-    }
-
-    public SanPham(SanPham sanPham) {
-        this.ma = sanPham.ma;
-        this.ten = sanPham.ten;
-        this.danhMuc = sanPham.danhMuc;
-        this.thuongHieu = sanPham.thuongHieu;
-        this.gia = sanPham.gia;
-        this.tonKho = sanPham.tonKho;
-        this.moTa = sanPham.moTa;
-        this.trangThai = sanPham.trangThai;
-        this.traHang = false;
-    }
+    private BaoHanh baoHanh = null;
+    private boolean daBan = false;
 
     public SanPham() {
+    }
+
+    public SanPham(String serial, ThongTinSanPham thongTinSanPham) {
+        this.serial = serial;
+        this.thongTinSanPham = thongTinSanPham;
+    }
+
+    public SanPham(String serial, ThongTinSanPham thongTinSanPham, boolean traHang, BaoHanh baoHanh, boolean daBan) {
+        this.serial = serial;
+        this.thongTinSanPham = thongTinSanPham;
+        this.traHang = traHang;
+        this.baoHanh = baoHanh;
+        this.daBan = daBan;
+    }
+
+    public ThongTinSanPham getThongTinSanPham() {
+        return thongTinSanPham;
+    }
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public boolean getDaBan() {
+        return daBan;
     }
 
     public boolean getTraHang() {
         return traHang;
     }
 
-    public String getDanhMuc() {
-        return danhMuc;
+    public void setThongTinSanPham(ThongTinSanPham thongTinSanPham) {
+        this.thongTinSanPham = thongTinSanPham;
     }
 
-    public String getTen() {
-        return ten;
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 
-    public long getGia() {
-        return gia;
+    public void setBaoHanh(BaoHanh baoHanh) {
+        this.baoHanh = baoHanh;
     }
 
-    public String getMa() {
-        return ma;
-    }
-
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public String getThuongHieu() {
-        return thuongHieu;
-    }
-
-    public int getTonKho() {
-        return tonKho;
-    }
-
-    public String getTrangThai() {
-        return trangThai;
-    }
-
-    public void setDanhMuc(String danhMuc) {
-        this.danhMuc = danhMuc;
-    }
-
-    public void setGia(long gia) {
-        this.gia = gia;
-    }
-
-    public void setMa(String ma) {
-        this.ma = ma;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
-
-    public void setTen(String ten) {
-        this.ten = ten;
-    }
-
-    public void setThuongHieu(String thuongHieu) {
-        this.thuongHieu = thuongHieu;
-    }
-
-    public void setTonKho(int tonKho) {
-        this.tonKho = tonKho;
-    }
-
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
+    public void setDaBan(boolean daBan) {
+        this.daBan = daBan;
     }
 
     public void setTraHang(boolean traHang) {
         this.traHang = traHang;
     }
 
-    public void giamTonKho() {
-        if (tonKho == 0) {
-            return;
-        }
-        this.tonKho--;
+    public void doiDaBan() {
+        this.daBan = this.daBan == false ? true : false;
     }
 
-    @Override
-    public String toString() {
-        return "ma : " + ma + "\n" +
-                "ten : " + ten + "\n" +
-                "danhMuc : " + danhMuc + "\n" +
-                "thuongHieu : " + thuongHieu + "\n" +
-                "gia : " + gia + "\n" +
-                "tonKho : " + tonKho + "\n" +
-                "moTa : " + moTa + "\n" +
-                "trangThai : " + trangThai + "\n";
+    public String getMa() {
+        return thongTinSanPham.getMa();
+    }
+
+    public String getTen() {
+        return thongTinSanPham.getTen();
+    }
+
+    public String getDanhMuc() {
+        return thongTinSanPham.getDanhMuc();
+    }
+
+    public String getThuongHieu() {
+        return thongTinSanPham.getThuongHieu();
+    }
+
+    public long getGia() {
+        return thongTinSanPham.getGia();
+    }
+
+    public BaoHanh getBaoHanh() {
+        return baoHanh;
+    }
+
+    public int getTonKho() {
+        return thongTinSanPham.getTonKho();
+    }
+
+    public String getMoTa() {
+        return thongTinSanPham.getMoTa();
+    }
+
+    public String getTrangThai() {
+        return thongTinSanPham.getTrangThai();
     }
 }

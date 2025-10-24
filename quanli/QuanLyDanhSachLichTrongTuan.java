@@ -1,9 +1,10 @@
-package ui;
+package quanli;
 
 import danhsach.DanhSachLichTrongTuan;
 import database.Database;
 import model.LichTrongTuan;
 import util.CapMa;
+import util.Nhap;
 import util.ThoiGian;
 
 public class QuanLyDanhSachLichTrongTuan {

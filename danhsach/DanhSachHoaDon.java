@@ -3,6 +3,7 @@ package danhsach;
 import java.util.ArrayList;
 
 import interfaces.QuanLyDanhSach;
+import model.ChiTietHoaDon;
 import model.HoaDon;
 import util.ThoiGian;
 
@@ -71,6 +72,17 @@ public class DanhSachHoaDon implements QuanLyDanhSach<HoaDon> {
         }
         soLuong++;
         return listHoaDon.add(hd);
+    }
+
+    public HoaDon tim(ChiTietHoaDon chiTietHoaDon) {
+        for (HoaDon hoaDon : listHoaDon) {
+            for (ChiTietHoaDon chiTietHd : hoaDon.getListChiTietHoaDon()) {
+                if (chiTietHd.equals(chiTietHoaDon)) {
+                    return hoaDon;
+                }
+            }
+        }
+        return null;
     }
 
     public long tinhDoanhThuTrongKhoan(String ngayBatDau, String ngayKetThuc) {

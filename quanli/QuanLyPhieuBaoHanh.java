@@ -1,4 +1,4 @@
-package ui;
+package quanli;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,7 @@ import model.BaoHanh;
 import model.KhachHang;
 import model.PhieuBaoHanh;
 import model.SanPham;
+import util.Nhap;
 import util.TaoDoiTuong;
 import util.XoaManHinh;
 
@@ -64,7 +65,7 @@ public class QuanLyPhieuBaoHanh {
                 break;
             case 2:
                 DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-                SanPham sanPham = danhSachSanPham.tim("Nhap ma san pham moi trong phieu : ");
+                SanPham sanPham = danhSachSanPham.tim("Nhap ma serial san pham moi trong phieu : ");
                 if (sanPham == null) {
                     System.out.println("Ma san pham khong hop le");
                 } else {

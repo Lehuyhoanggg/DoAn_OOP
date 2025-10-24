@@ -9,7 +9,6 @@ import model.HoaDon;
 import model.KhachHang;
 import model.MaGiamGia;
 import model.SanPham;
-import model.SanPhamDaBan;
 import util.ThoiGian;
 
 public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
@@ -91,52 +90,72 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
         return false;
     }
 
-    private long appDungMaGiamGia(SanPham sanPham, MaGiamGia maGiamGia, long giaDangXuLi) {
+    private long appDungMaGiamGia(SanPham sanPham, MaGiamGia maGiamGia) {
         if (maGiamGiaThoaMan(sanPham, maGiamGia)) {
             String tienGiam = maGiamGia.getTienGiam();
             if (tienGiam != null && tienGiam.length() >= 2 && tienGiam.charAt(tienGiam.length() - 1) == '%') {
                 Long phanTram = Long.parseLong(tienGiam.substring(0, tienGiam.length() - 1));
                 maGiamGia.setSanPhamDaDung(sanPham);
-                return giaDangXuLi - (sanPham.getGia() * phanTram) / 100;
+                return (sanPham.getGia() * phanTram) / 100;
             } else {
                 maGiamGia.setSanPhamDaDung(sanPham);
-                return giaDangXuLi - Long.parseLong(tienGiam);
+                return Long.parseLong(tienGiam);
             }
 
         }
-        return giaDangXuLi;
+        return 0;
     }
 
-    public void setThanhTienDaApMaGG(HoaDon hoaDon) {
+    public MaGiamGia tim(String ma, KhachHang khachHang) {
+        for (MaGiamGia maGiamGia : listMaGiamGia) {
+            if (maGiamGia.getKhachHangDaDung().equals(khachHang) && maGiamGia.getMa().equals(ma)) {
+                return maGiamGia;
+            }
+        }
+        return null;
+    }
+
+    public void setThanhTienDaApMaGG(HoaDon hoaDon, ArrayList<MaGiamGia> danhGiamGiaDaDung) {
         for (ChiTietHoaDon chiTietHoaDon : hoaDon.getListChiTietHoaDon()) {
-
             long thanhTien = 0;
-            for (int i = 0; i < chiTietHoaDon.getSanPhamDaBan().size(); i++) {
-                SanPham sanPham = chiTietHoaDon.getSanPhamDaBan().get(i).getSanPham();
-                ArrayList<MaGiamGia> listRemove = new ArrayList<>();
+            for (int i = 0; i < chiTietHoaDon.getListSanPham().size(); i++) { // duyệt qua từng sản phẩm trong hóa đơn
+                SanPham sanPham = chiTietHoaDon.getListSanPham().get(i);
+
+                ArrayList<MaGiamGia> listRemove = new ArrayList<>(); // lưu các mã giảm giá đã áp dụng => để xóa khỏi
+                                                                     // kho mã gg của khangHang
                 long giaSanPham = sanPham.getGia();
-                ArrayList<MaGiamGia> maGiamGiaSp = listMaGiamGiaChoSp(sanPham);
+                ArrayList<MaGiamGia> maGiamGiaSp = listMaGiamGiaChoSp(sanPham); // list mã khả dụng của sản phẩm
                 for (int k = 0; k < maGiamGiaSp.size(); k++) {
-                    giaSanPham = appDungMaGiamGia(sanPham, maGiamGiaSp.get(k), giaSanPham);
-
-                    chiTietHoaDon.getSanPhamDaBan().get(i).themMaGiamGiaDaDung(maGiamGiaSp.get(k));
-
-                    listRemove.add(maGiamGiaSp.get(k));
-                    if (giaSanPham <= 0) {
+                    long giaGiam = appDungMaGiamGia(sanPham, maGiamGiaSp.get(k));
+                    // nếu giá giảm là dương thì xử lí ,lưu vào chi tiết hóa đơn và xóa ở kho mgg
+                    // khangHang
+                    if (giaGiam > 0) {
+                        chiTietHoaDon.themMaGiamGia(maGiamGiaSp.get(k));
+                        giaSanPham -= giaGiam;
+                        listRemove.add(maGiamGiaSp.get(k));
+                        maGiamGiaSp.get(k).setKhachHangDaDung(hoaDon.getKhachHang());
+                        maGiamGiaSp.get(k).setSanPhamDaDung(sanPham);
+                        danhGiamGiaDaDung.add(maGiamGiaSp.get(k));
+                    }
+                    if (giaSanPham <= 0) { // giá sản phẩm đã âm
                         giaSanPham = 0;
                         break;
                     }
                 }
-                BaoHanh baoHanh = chiTietHoaDon.getSanPhamDaBan().get(i).getBaoHanh();
+                thanhTien += giaSanPham;
+                /// nếu sản phẩm có bảo hành thì + vào thành tiền
+                BaoHanh baoHanh = sanPham.getBaoHanh();
                 if (baoHanh != null) {
                     thanhTien += baoHanh.getGia();
                 }
-                for (int j = listRemove.size() - 1; j >= 0; j--) {
+
+                /// xóa mã giảm giá cho khachHang
+                for (int j = listRemove.size() - 1; j >= 0; j--) { // duyệt ngược để tránh xung đột
                     listMaGiamGia.remove(listRemove.get(j));
                 }
-                thanhTien += giaSanPham;
             }
-            chiTietHoaDon.setThanhTien(thanhTien);
+
+            chiTietHoaDon.setThanhTien(thanhTien); // lưu thành tiền đã tính vào chiTietHoaDon
         }
         hoaDon.tinhThanhTien();
     }
@@ -168,31 +187,33 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
     public long giaSanPhamSauKhiApDungTatCa(SanPham sanPham) {
         long gia = sanPham.getGia();
         for (MaGiamGia maGiamGia : listMaGiamGia) {
-            gia = appDungMaGiamGia(sanPham, maGiamGia, gia);
+            if (gia > appDungMaGiamGia(sanPham, maGiamGia)) {
+                gia = appDungMaGiamGia(sanPham, maGiamGia);
+            }
+
         }
         return gia;
     }
 
-    public ArrayList<MaGiamGia> xoaSanPhamThuHoiMa(SanPhamDaBan sanPhamDaBan, HoaDon hoaDon) {
+    public ArrayList<MaGiamGia> xoaSanPhamThuHoiMa(SanPham sanPham, HoaDon hoaDon) {
         KhachHang khachHang = hoaDon.getKhachHang();
-        if (sanPhamDaBan.getSanPham() == null) {
+        if (sanPham == null) {
             return null;
         }
-        SanPham sanPham = sanPhamDaBan.getSanPham();
-
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(hoaDon.getListChiTietHoaDon());
+        ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(sanPham);
         ArrayList<MaGiamGia> listMaThuHoi = new ArrayList<>();
         ArrayList<MaGiamGia> listMaGiamGiaSp = null;
-        listMaGiamGiaSp = sanPhamDaBan.getListMaGiamGiaDaDung();
+        listMaGiamGiaSp = chiTietHoaDon.getListMaGiamGia();
         DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(listMaGiamGiaSp);
         long tienGiam = danhSachMaGiamGia.giaSanPhamSauKhiApDungTatCa(sanPham);
-        DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(hoaDon.getListChiTietHoaDon());
-        ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(sanPhamDaBan);
+        if (sanPham.getBaoHanh() != null) {
+            tienGiam += sanPham.getBaoHanh().getGia();
+        }
         chiTietHoaDon.setThanhTien(chiTietHoaDon.getThanhTien() - tienGiam);
         hoaDon.tinhThanhTien();////
-        sanPhamDaBan.xoaSanPham();
-        if (sanPhamDaBan.getBaoHanh() == null) {
-            chiTietHoaDon.xoaSanPhamDaBan(sanPhamDaBan);
-        }
+
+        chiTietHoaDon.xoaSanPham(sanPham);
 
         if (listMaGiamGia == null) {
             return null;

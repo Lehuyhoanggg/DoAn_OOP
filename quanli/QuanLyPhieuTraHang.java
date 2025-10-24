@@ -1,8 +1,10 @@
-package ui;
+package quanli;
 
 import java.util.ArrayList;
 
+import danhsach.DanhSachChiTietHoaDon;
 import danhsach.DanhSachHangThanhVien;
+import danhsach.DanhSachHoaDon;
 import danhsach.DanhSachKhachHang;
 import danhsach.DanhSachMaGiamGia;
 import danhsach.DanhSachPhieuTraHang;
@@ -13,7 +15,7 @@ import model.HoaDon;
 import model.KhachHang;
 import model.PhieuTraHang;
 import model.SanPham;
-import model.SanPhamDaBan;
+import util.Nhap;
 import util.TaoDoiTuong;
 import util.ThoiGian;
 import util.XoaManHinh;
@@ -49,52 +51,41 @@ public class QuanLyPhieuTraHang {
             return;
         }
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-        SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Hay hay nhap ma san pham can tra hang : "));
+        SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Hay hay nhap ma serial san pham can tra hang : "));
         if (sanPham == null) {
             System.out.println("Khong tim thay san pham");
             return;             
         }
-        SanPhamDaBan spDaBan = null;
 
-        String serial = Nhap.nhapStr("Nhap so serial cua san pham : ");
-        String ngayTaoHd = null;
-        HoaDon hd = null;
-        for (HoaDon hoaDon : khachHang.getListHoaDon()) {
-            for (ChiTietHoaDon chiTietHoaDon : hoaDon.getListChiTietHoaDon()) {
-                for (SanPhamDaBan sanPhamDaBan : chiTietHoaDon.getSanPhamDaBan()) {
-                    if (sanPhamDaBan.getSanPham().getMa().equals(sanPham.getMa())
-                            && sanPhamDaBan.getSerial().equals(serial)) {
-                        ngayTaoHd = hoaDon.getNgayTaoHoaDon();
-                        spDaBan = sanPhamDaBan;
-                        hd = hoaDon;
-                    }
-                }
-            }
-        }
-        if (ngayTaoHd == null) {
-            System.out.println("Khach hang chua tung mua san pham " + serial);
+
+        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
+        ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(sanPham);
+        DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
+        HoaDon hoaDon = danhSachHoaDon.tim(chiTietHoaDon);
+        if (hoaDon == null) {
+            System.out.println("Khach hang chua tung mua san pham " + sanPham.getSerial());
             return;
         }
-        if (ThoiGian.khoangCachNgay(ngayTaoHd, ThoiGian.layNgayHienTaiStr()) > 3) {
+        if (ThoiGian.khoangCachNgay(hoaDon.getNgayTaoHoaDon(), ThoiGian.layNgayHienTaiStr()) > 3) {
             System.out.println("Chi duoc tra hang neu loi trong vong 3 ngay");
             return;
         }
 
-        spDaBan.getSanPham().setTraHang(true);
+        sanPham.setTraHang(true); // dấu đây là sản phẩm bị trả hàng
 
-        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(spDaBan.getListMaGiamGiaDaDung());
-        long tienTraLai = 0;
-
-        tienTraLai = danhSachMaGiamGia.giaSanPhamSauKhiApDungTatCa(sanPham);
+        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(chiTietHoaDon.getListMaGiamGia());
+        long tienTraLai = danhSachMaGiamGia.giaSanPhamSauKhiApDungTatCa(sanPham);
 
         System.out.println("So tien hoan lai cho khach hang : " + tienTraLai);
-        khachHang.giamTienDaChi(tienTraLai);
-        hd.giamThanhTien(tienTraLai);
 
+        khachHang.giamTienDaChi(tienTraLai);
+        hoaDon.giamThanhTien(tienTraLai);
         DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
         danhSachHangThanhVien.setHangThanhVienChoKhachHang(khachHang);
 
-        PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(khachHang, sanPham, spDaBan.getSerial(), db);
+        PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(khachHang,sanPham,db);
+
+        khachHang.themPhieuTraHang(pth);
 
         if (danhSachPhieuTraHang.them(pth)) {
             System.out.println("Tao phieu tra hang thanh cong!");
@@ -136,7 +127,7 @@ public class QuanLyPhieuTraHang {
 
             case 2:
                 DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-                pth.setSanPham(danhSachSanPham.tim("Nhap ma san pham de them vao : "));
+                pth.setSanPham(danhSachSanPham.tim("Nhap ma serial san pham de them vao : "));
                 System.out.println("da thay doi san pham");
                 break;
             case 3:

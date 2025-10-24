@@ -1,7 +1,8 @@
-package ui;
+package quanli;
 
 import model.LichTrongTuan;
 import model.NhanVien;
+import util.Nhap;
 import util.XoaManHinh;
 import danhsach.DanhSachLichTrongTuan;
 import database.Database;
@@ -51,8 +52,8 @@ public class NhanVienQuanLy implements GiaoTiep {
     }
 
     public void traCuuSanPham() {
-        QuanLySanPham quanLySanPham = new QuanLySanPham(db);
-        quanLySanPham.traCuuSanPham();
+        QuanLyThongTinSanPham quanLySanPham = new QuanLyThongTinSanPham(db);
+        quanLySanPham.traCuuThongTinSanPham();
     }
 
     public void TraCuuBaoHanh() {

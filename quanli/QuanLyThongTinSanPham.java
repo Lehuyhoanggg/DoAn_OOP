@@ -1,31 +1,32 @@
-package ui;
+package quanli;
 
 import java.util.ArrayList;
 
-import danhsach.DanhSachSanPham;
+import danhsach.DanhSachThongTinSanPham;
 import database.Database;
-import model.SanPham;
+import model.ThongTinSanPham;
+import util.Nhap;
 import util.TaoDoiTuong;
 import util.XoaManHinh;
 
-public class QuanLySanPham {
+public class QuanLyThongTinSanPham {
     private Database db;
 
-    public QuanLySanPham(Database db) {
+    public QuanLyThongTinSanPham(Database db) {
         this.db = db;
     }
 
-    public void hienThiTatCaSanPham() {
-        System.out.println("Danh sach san pham:");
-        for (SanPham sp : db.getListSanPham()) {
-            System.out.println(sp);
+    public void hienThiTatCaThongTinSanPham() {
+        System.out.println("Danh sach thong tin san san pham:");
+        for (ThongTinSanPham ThongTinSp : db.getListThongTinSanPham()) {
+            System.out.println(ThongTinSp);
         }
     }
 
-    public void themSanPham() {
-        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-        SanPham sp = TaoDoiTuong.taoSanPham(db);
-        if (danhSachSanPham.them(sp)) {
+    public void themThongTinSanPham() {
+        DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
+        ThongTinSanPham sp = TaoDoiTuong.taoSanPham(db);
+        if (danhSachThongTinSanPham.them(sp)) {
             System.out.println("Them san pham thanh cong!");
         } else {
             System.out.println("Them san pham khong thanh cong!");
@@ -33,13 +34,13 @@ public class QuanLySanPham {
 
     }
 
-    public void xoaSanPham() {
-        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+    public void xoaThongTinSanPham() {
+        DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
         String ma = Nhap.nhapStr("Nhap ma san pham can xoa: ");
-        if (danhSachSanPham.xoa(ma)) {
-            System.out.println("Xoa san pham thanh cong!");
+        if (danhSachThongTinSanPham.xoa(ma)) {
+            System.out.println("Xoa thong tin san pham thanh cong!");
         } else {
-            System.out.println("Xoa san pham khong thanh cong!");
+            System.out.println("Xoa thong tin san pham khong thanh cong!");
         }
 
     }
@@ -57,7 +58,7 @@ public class QuanLySanPham {
         System.out.println("0. Thoat");
     }
 
-    private void suaThanhPhanSanPham(SanPham sp, int chon) {
+    private void suaThanhPhanThongTinSanPham(ThongTinSanPham sp, int chon) {
         switch (chon) {
             case 1:
                 sp.setTen(Nhap.nhapStr("Nhap ten san pham moi: "));
@@ -95,9 +96,9 @@ public class QuanLySanPham {
         }
     }
 
-    public void suaSanPham() {
-        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-        SanPham sp = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma san pham can sua"));
+    public void suaThongTinSanPham() {
+        DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
+        ThongTinSanPham sp = danhSachThongTinSanPham.tim(Nhap.nhapStr("Nhap ma san pham can sua"));
         if (sp == null) {
             System.out.println("khong tim thay ma san pham");
             return;
@@ -113,16 +114,16 @@ public class QuanLySanPham {
             if (chon == 0) {
                 return;
             }
-            suaThanhPhanSanPham(sp, chon);
+            suaThanhPhanThongTinSanPham(sp, chon);
             Nhap.pause();
         }
     }
 
     //////////
-    public void traCuuSanPham() {
+    public void traCuuThongTinSanPham() {
         String tuKhoa = Nhap.nhapStr("Nhap tu khoa de tim : ");
         boolean timThay = false;
-        ArrayList<SanPham> listSanPham = db.getListSanPham();
+        ArrayList<ThongTinSanPham> listSanPham = db.getListThongTinSanPham();
         if (listSanPham == null || listSanPham.size() == 0) {
             System.out.println("khong tim thay san pham");
             return;
@@ -165,24 +166,31 @@ public class QuanLySanPham {
 
     }
 
+    public void QuanLySanPham() {
+        QuanLySanPham quanLySanPham = new QuanLySanPham(db);
+        quanLySanPham.menu();
+    }
+
     private void xuatMenu() {
-        System.out.println("===== MENU SAN PHAM =====");
-        System.out.println("1. Hien thi tat ca san pham");
-        System.out.println("2. Them san pham");
-        System.out.println("3. Xoa san pham");
-        System.out.println("4. Sua san pham");
-        System.out.println("5. Tra cuu san pham");
+        System.out.println("===== MENU THONG TIN SAN PHAM =====");
+        System.out.println("1. Hien thi tat ca thong tin san pham");
+        System.out.println("2. Them thong tin san pham");
+        System.out.println("3. Xoa thong tin san pham");
+        System.out.println("4. Sua thong tin san pham");
+        System.out.println("5. Tra cuu thong tin san pham");
+        System.out.println("6. Quan Ly San Pham trong kho");// quản lí sản phẩm có trong kho (sản phẩm cụ thể có serial)
         System.out.println("0. Thoat Menu");
     }
 
     private void thucHienChucNang(int choice) {
         switch (choice) {
             case 0 -> System.out.println("Da thoat Menu!");
-            case 1 -> hienThiTatCaSanPham();
-            case 2 -> themSanPham();
-            case 3 -> xoaSanPham();
-            case 4 -> suaSanPham();
-            case 5 -> traCuuSanPham();
+            case 1 -> hienThiTatCaThongTinSanPham();
+            case 2 -> themThongTinSanPham();
+            case 3 -> xoaThongTinSanPham();
+            case 4 -> suaThongTinSanPham();
+            case 5 -> traCuuThongTinSanPham();
+            case 6 -> QuanLySanPham();
             default -> System.out.println("Lua chon khong hop le");
         }
     }

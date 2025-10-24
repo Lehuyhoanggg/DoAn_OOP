@@ -1,10 +1,11 @@
-package ui;
+package quanli;
 
 import java.util.ArrayList;
 
 import danhsach.DanhSachNhanVien;
 import database.Database;
 import model.NhanVien;
+import util.Nhap;
 import util.TaoDoiTuong;
 import util.XoaManHinh;
 

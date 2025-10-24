@@ -77,8 +77,8 @@ public class CapMa {
         return "QL" + soQL;
     }
 
-    public static String capMaSanPham(Database db) {
-        String soSP = String.valueOf(db.getListSanPham().size() + 1);
+    public static String capMaThongTinSanPham(Database db) {
+        String soSP = String.valueOf(db.getListThongTinSanPham().size() + 1);
         while (soSP.length() < 3) {
             soSP = "0" + soSP;
         }
@@ -115,13 +115,5 @@ public class CapMa {
             soLTT = "0" + soLTT;
         }
         return "LTT" + soLTT;
-    }
-
-    public static String capMaSanPhamDaban(Database db) {
-        String soSPDB = String.valueOf(db.getDanhSachSanPhamDaBan().getListSanPhamDaBan().size() + 1);
-        while (soSPDB.length() < 3) {
-            soSPDB = "0" + soSPDB;
-        }
-        return "SPDB" + soSPDB;
     }
 }

@@ -4,9 +4,9 @@ import file.GhiFile;
 import model.NhanVien;
 import model.QuanLy;
 import model.User;
-import ui.NhanVienQuanLy;
-import ui.QuanLyQuanLyTatCa;
-import ui.Nhap;
+import quanli.NhanVienQuanLy;
+import quanli.QuanLyQuanLyTatCa;
+import util.Nhap;
 
 public class Main {
     private User user;
