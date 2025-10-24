@@ -98,4 +98,15 @@ public class SanPham {
     public String getTrangThai() {
         return thongTinSanPham.getTrangThai();
     }
+
+    @Override
+    public String toString() {
+        return "Serial : " + serial + "\n"
+                + "ma : " + thongTinSanPham.getMa() + "\n" +
+                "ten : " + thongTinSanPham.getTen() + "\n" +
+                "danhMuc : " + thongTinSanPham.getDanhMuc() + "\n" +
+                "thuongHieu : " + thongTinSanPham.getThuongHieu() + "\n" +
+                "gia : " + thongTinSanPham.getGia()  + "\n" +
+                "moTa : " + thongTinSanPham.getGia() + "\n"  + "\n" + "Da Ban : " + getDaBan() + "\n" + "Tra hang : " + traHang + "\n";
+    }
 }
