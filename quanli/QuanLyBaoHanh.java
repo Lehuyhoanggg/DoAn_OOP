@@ -3,7 +3,6 @@ package quanli;
 import java.util.ArrayList;
 
 import danhsach.DanhSachBaoHanh;
-import danhsach.DanhSachSanPham;
 import danhsach.DanhSachThongTinSanPham;
 import database.Database;
 import util.Nhap;
