@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import danhsach.DanhSachMaGiamGia;
 import danhsach.DanhSachSanPham;
 import database.Database;
+import model.KhachHang;
 import model.MaGiamGia;
 import model.SanPham;
 import util.Nhap;
@@ -58,6 +59,9 @@ public class QuanLyMaGiamGia {
         MaGiamGia mGG = TaoDoiTuong.taoMaGiamGia(db);
         if (danhSachMaGiamGia.them(mGG)) {
             System.out.println("them ma giam gia thanh cong!");
+            for (KhachHang khachHang : db.getListKhachHang()) {
+                khachHang.themMaGiamGia(new MaGiamGia(mGG));
+            }
         } else {
             System.out.println("them ma giam gia that bai!");
         }
@@ -73,10 +77,14 @@ public class QuanLyMaGiamGia {
         } else {
             if (danhSachMaGiamGia.xoa(mGG)) {
                 System.out.println("xoa ma giam gia thanh cong!");
+                for (KhachHang khachHang : db.getListKhachHang()) {
+                    khachHang.xoaMaGiamGia(mGG);
+                }
             } else {
                 System.out.println("xoa ma giam gia that bai!");
             }
         }
+
     }
 
     // sua ma giam gia
@@ -145,8 +153,8 @@ public class QuanLyMaGiamGia {
     }
 
     public void maGiamGiaApDungChoSp() {
-       DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-       SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma serial san pham de xem : "));
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+        SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma serial san pham de xem : "));
         if (sanPham == null) {
             System.out.println("Khong tim thay san pham");
             return;

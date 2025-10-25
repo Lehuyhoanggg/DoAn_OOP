@@ -50,7 +50,6 @@ public class TaoDoiTuong {
         String danhMuc = Nhap.nhapStr("Nhap danh muc: ");
         String thuongHieu = Nhap.nhapStr("Nhap thuong hieu: ");
         long gia = Nhap.nhapLong("Nhap gia: ");
-        int tonKho = Nhap.nhapInt("Nhap so luong : ");
         String moTa = Nhap.nhapStr("Nhap mo ta: ");
         int trangThai = Nhap.nhapInt("Nhap trang thai (1)Con Hang (2)Het Hang (3)Ngung Kinh Doanh): ");
         String trangThaiStr = "";
@@ -67,12 +66,12 @@ public class TaoDoiTuong {
             default:
                 break;
         }
-        return new ThongTinSanPham(ma, ten, danhMuc, thuongHieu, gia, tonKho, moTa, trangThaiStr);
+        return new ThongTinSanPham(ma, ten, danhMuc, thuongHieu, gia, moTa, trangThaiStr);
     }
 
     public static PhieuTraHang taoPhieuTraHang(KhachHang khachHang, SanPham sanPham,
             Database db) {
-        String maTraHang = CapMa.capMaBaoHanh(db);
+        String maTraHang = CapMa.capMaPhieuTraHang(db);
         String ngayTra = ThoiGian.layNgayHienTaiStr();
         String lyDoTra = Nhap.nhapStr("Nhap ly do tra : ");
         PhieuTraHang phieuTraHang = new PhieuTraHang(maTraHang, khachHang, sanPham, ngayTra, lyDoTra);
@@ -143,7 +142,8 @@ public class TaoDoiTuong {
         return new BaoHanh(maBaoHanh, loaiBaoHanh, sanPham, ngayBatDau, ngayKetThuc, gia);
     }
 
-    public static ArrayList<ChiTietHoaDon> taoListChiTietHoaDon(Database db, KhachHang khachHang) {
+    public static ArrayList<ChiTietHoaDon> taoListChiTietHoaDon(Database db,
+            KhachHang khachHang) {
         ArrayList<ChiTietHoaDon> listChiTietHoaDon = new ArrayList<>();// list chứa chi tiết hóa đơn của 1 hóa đơn
 
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
@@ -152,7 +152,7 @@ public class TaoDoiTuong {
         do {
             // chon san pham
             ThongTinSanPham thongTinSanPham = null;
-            int soLuong;
+            int soLuong=0;
             do {
                 String ma = Nhap.nhapStr("Nhap ma thong tin san pham de tao ChiTietHoaDon hoac nhan 0 de thoat: ");
                 if (ma.replaceAll("\\s+", "").equals("0")) {
@@ -161,6 +161,7 @@ public class TaoDoiTuong {
                 thongTinSanPham = danhSachThongTinSanPham.tim(ma);
                 if (thongTinSanPham == null) {
                     System.out.println("Khong ton tai thong tin cua san pham nay, vui long nhap lai");
+                    continue;
                 }
                 soLuong = Nhap.nhapInt("Nhap so luong san pham nay can them vao: ");
                 if (thongTinSanPham.getTonKho() == 0) {
@@ -174,7 +175,8 @@ public class TaoDoiTuong {
 
             do { /////////////// nhập sao cho đủ số lượng thì thôi
 
-                String maSr = Nhap.nhapStr("Nhap ma serial san pham cua " + thongTinSanPham.getMa() + " : ");
+                String maSr = Nhap.nhapStr("Nhap ma serial san pham cua " +
+                        thongTinSanPham.getMa() + " : ");
                 SanPham sanPham = danhSachSanPham.timSanPhamChuaBan(maSr);
 
                 if (sanPham == null) {
@@ -183,7 +185,8 @@ public class TaoDoiTuong {
                 }
 
                 if (!sanPham.getMa().equals(thongTinSanPham.getMa())) {
-                    System.out.println("Da khong phai la san pham cua " + thongTinSanPham.getMa());
+                    System.out.println("Da khong phai la san pham cua " +
+                            thongTinSanPham.getMa());
                     continue;
                 }
                 if (set.contains(maSr)) {
@@ -203,13 +206,15 @@ public class TaoDoiTuong {
                 thongTinSanPham.giamTonKho();
                 soLuong--;
                 System.out
-                        .println("Da them san pham : " + sanPham.getTen() + "    voi serial : " + sanPham.getSerial()
+                        .println("Da them san pham : " + sanPham.getTen() + " voi serial : " +
+                                sanPham.getSerial()
                                 + " vao hoa don");
-                chiTietHoaDon.themSanPham(sanPham);
                 sanPham.setDaBan(true);
+                chiTietHoaDon.themSanPham(sanPham);
+
                 set.add(maSr);
                 ArrayList<BaoHanh> listBaoHanh = danhSachBaoHanh.timBaoHanh(sanPham); // check danh sách bảo hành sản
-                                                                                      // phẩm
+                // phẩm
                 if (listBaoHanh.size() == 0) {// ko có bảo hành
                     continue;
                 }
@@ -236,6 +241,7 @@ public class TaoDoiTuong {
 
                     sanPham.setBaoHanh(baoHanh);
                     khachHang.themBaoHanh(baoHanh);
+                    chiTietHoaDon.setSoBh(chiTietHoaDon.getSoBh() + 1);
                 }
             } while (soLuong > 0);
 
@@ -243,6 +249,103 @@ public class TaoDoiTuong {
         } while (true);
 
     }
+
+    // public static ArrayList<ChiTietHoaDon> taoListChiTietHoaDon(Database db,
+    // KhachHang khachHang) {
+    // ArrayList<ChiTietHoaDon> listChiTietHoaDon = new ArrayList<>();
+    // do {
+    // ThongTinSanPham thongTinSanPham = null;
+    // DanhSachThongTinSanPham danhSachThongTinSanPham =
+    // db.getDanhSachThongTinSanPham();
+    // DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+    // int soLuong;
+    // do {
+    // String ma = Nhap.nhapStr("Nhap ma thong tin san pham de them vao hoa don hoac
+    // nhap 0 de thoat");
+    // if (ma.replaceAll("\\s+", "").equals("0")) {
+    // return listChiTietHoaDon;
+    // }
+    // thongTinSanPham = danhSachThongTinSanPham.tim(ma);
+    // if (thongTinSanPham == null) {
+    // System.out.println("Khong tim thay thong tin san pham");
+    // }
+    // soLuong = Nhap.nhapInt("Nhap so luong san pham can them vao chitiethoadon");
+    // if (soLuong > thongTinSanPham.getTonKho()) {
+    // System.out.println("So luong ton kho khong du");
+    // continue;
+    // }
+    // } while (thongTinSanPham == null);
+
+    // Set<String> khoSerial = new HashSet<>();
+    // ChiTietHoaDon chiTietHoaDon = new
+    // ChiTietHoaDon(CapMa.capMaChiTietHoaDon(db));
+    // DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
+    // danhSachChiTietHoaDon.them(chiTietHoaDon);
+
+    // do {
+    // String maSr = Nhap.nhapStr("Nhap serial san pham cua " +
+    // thongTinSanPham.getMa() + " ");
+    // SanPham sanPham = danhSachSanPham.timSanPhamChuaBan(maSr);
+    // if (sanPham == null) {
+    // System.out.println("Khong tim thay san pham " + maSr + " kha dung");
+    // continue;
+    // }
+    // if (!sanPham.getThongTinSanPham().equals(thongTinSanPham)) {
+    // System.out.println("San pham khong phai cua " + thongTinSanPham.getMa());
+    // }
+
+    // if (khoSerial.contains(maSr)) {
+    // System.out.println("San pham nay da duoc them vao");
+    // continue;
+    // }
+
+    // if (sanPham.getTrangThai().equals("Ngung kinh doanh")) {
+    // System.out.println("San pham da ngung kinh doanh");
+    // continue;
+    // }
+
+    // chiTietHoaDon.themSanPham(sanPham);
+    // System.out.println("Da them san pham " + sanPham.getSerial() + " vao chi tiet
+    // hoa don");
+    // thongTinSanPham.giamTonKho();
+    // soLuong--;
+    // khoSerial.add(maSr);
+    // sanPham.setDaBan(true);
+
+    // DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
+    // ArrayList<BaoHanh> listBaoHanh = danhSachBaoHanh.timBaoHanh(sanPham);
+    // if (listBaoHanh.size() == 0) {
+    // continue;
+    // }
+    // int luaChon = Nhap.nhapInt("Ban co muon them bao hanh cho san pham khong (1)
+    // co (khach) khong : ");
+    // if (luaChon != 1) {
+    // continue;
+    // }
+
+    // for (int i = 0; i < listBaoHanh.size(); i++) {
+    // System.out.println(i + ". " + listBaoHanh.get(i).getLoaiBaoHanh());
+    // }
+
+    // luaChon = Nhap.nhapInt("Nhap lua chon : ");
+    // if (luaChon >= 0 && luaChon < listBaoHanh.size()) {
+    // BaoHanh baoHanhGoc = listBaoHanh.get(luaChon);
+    // BaoHanh baoHanh = new BaoHanh(baoHanhGoc);
+    // baoHanh.setNgayBatDau(ThoiGian.layNgayHienTaiStr());
+    // baoHanh.setNgayKetThuc();
+    // baoHanh.setSanPham(sanPham);
+
+    // sanPham.setBaoHanh(baoHanh);
+    // khachHang.themBaoHanh(baoHanh);
+
+    // } else {
+    // System.out.println("Lua chon khong hop le");
+    // }
+    // } while (soLuong > 0);
+
+    // listChiTietHoaDon.add(chiTietHoaDon);
+    // } while (true);
+    // }
 
     public static HoaDon taoHoaDon(Database db) {
         String ma = CapMa.capMaHoaDon(db);

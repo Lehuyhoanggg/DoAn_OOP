@@ -11,6 +11,7 @@ import model.SanPham;
 import model.ThongTinSanPham;
 import util.Nhap;
 import util.ThoiGian;
+import util.XoaManHinh;
 
 public class QuanLySanPham {
     private Database db;
@@ -21,10 +22,16 @@ public class QuanLySanPham {
 
     /// hiển thị tất cả sản phẩm có trong kho
     public void hienThiSanPhamTrongKho() {
+        int dem = 0;
         System.out.println("Danh sach san pham dang co trong kho");
         for (SanPham sanPham : db.getListSanPham()) {
             System.out.println(sanPham);
+            if (!sanPham.getDaBan()) {
+                dem++;
+            }
         }
+        System.out.println();
+        System.out.println("Co tong cong : " + dem + " san pham ton tai kha dung trong kho");
     }
 
     /// Nhập kho
@@ -37,9 +44,9 @@ public class QuanLySanPham {
             System.out.println("Khong tim thay thong tin san pham can nhap kho");
             return;
         }
-        int soLuong = Nhap.nhapInt("Nhap so luong san pham can them");
+        int soLuong = Nhap.nhapInt("Nhap so luong san pham can them : ");
         while (soLuong > 0) {
-            String serial = Nhap.nhapStr("Nhap so serial cua " + thongTinSanPham.getMa());
+            String serial = Nhap.nhapStr("Nhap so serial cua " + thongTinSanPham.getMa()+" : ");
             if (db.getKhoSerial().contains(serial)) {
                 System.out.println("Ma serial da ton trong database");
                 continue;
@@ -139,19 +146,22 @@ public class QuanLySanPham {
                 for (int i = 0; i < listBaoHanh.size(); i++) {
                     System.out.println(i + ". " + listBaoHanh.get(i).getLoaiBaoHanh());
                 }
+                System.out.println("-1. Xoa bao hanh");
                 luaChon = Nhap.nhapInt(
                         "Nhap lua chon bao hanh san pham cho " + sanPham.getMa() + " " + sanPham.getSerial() + " : ");
                 BaoHanh baoHanhGoc = null;
                 if (luaChon >= 0 && luaChon < listBaoHanh.size()) {
                     baoHanhGoc = listBaoHanh.get(luaChon);
+                    BaoHanh baoHanh = new BaoHanh(baoHanhGoc);
+                    baoHanh.setNgayBatDau(ThoiGian.layNgayHienTaiStr());
+                    baoHanh.setNgayKetThuc();
+                    sanPham.setBaoHanh(baoHanh);
+                } else if (luaChon == -1) {
+                    sanPham.setBaoHanh(null);
                 } else {
                     System.out.println("Lua chon khong hop le");
                     return;
                 }
-                BaoHanh baoHanh = new BaoHanh(baoHanhGoc);
-                baoHanh.setNgayBatDau(ThoiGian.layNgayHienTaiStr());
-                baoHanh.setNgayKetThuc();
-                sanPham.setBaoHanh(baoHanh);
                 System.out.println("Da thay doi");
                 break;
             case 4:
@@ -176,6 +186,10 @@ public class QuanLySanPham {
             return;
         }
         while (true) {
+            XoaManHinh.xoa();
+            System.out.println("------------------------");
+            System.out.println(sanPham);
+            System.out.println("------------------------");
             xuatSuaSanPham();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {
@@ -199,6 +213,7 @@ public class QuanLySanPham {
 
     public void menu() {
         while (true) {
+            XoaManHinh.xoa();
             xuatMenu();
             int luaChon = Nhap.nhapInt("Nhap lua chon: ");
             switch (luaChon) {
@@ -228,6 +243,7 @@ public class QuanLySanPham {
                 default:
                     System.out.println("Lua chon khong hop le!");
             }
+            Nhap.pause();
         }
     }
 }

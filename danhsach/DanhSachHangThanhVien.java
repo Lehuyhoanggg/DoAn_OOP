@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import interfaces.QuanLyDanhSach;
 import model.HangThanhVien;
 import model.KhachHang;
+import model.MaGiamGia;
 
 public class DanhSachHangThanhVien implements QuanLyDanhSach<HangThanhVien> {
     private ArrayList<HangThanhVien> listHangThanhVien;
@@ -68,14 +69,29 @@ public class DanhSachHangThanhVien implements QuanLyDanhSach<HangThanhVien> {
     }
 
     public void setHangThanhVienChoKhachHang(KhachHang khachHang) {
+        HangThanhVien hangThanhVien = null;
         long tienDaChi = khachHang.getTienDaChi();
         if (tienDaChi >= HangThanhVien.mucDong && tienDaChi < HangThanhVien.mucBac
                 && tienDaChi < HangThanhVien.mucVang) {
-            khachHang.setHangThanhVien(tim("Dong"));
+            hangThanhVien = tim("Dong");
+            khachHang.setHangThanhVien(hangThanhVien);
         } else if (tienDaChi >= HangThanhVien.mucBac && tienDaChi < HangThanhVien.mucVang) {
-            khachHang.setHangThanhVien(tim("Bac"));
+            hangThanhVien = tim("Bac");
+            khachHang.setHangThanhVien(hangThanhVien);
         } else {
-            khachHang.setHangThanhVien(tim("Vang"));
+            hangThanhVien = tim("Vang");
+            khachHang.setHangThanhVien(hangThanhVien);
         }
+        if (hangThanhVien == null) {
+            return;
+        }
+        DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(khachHang.getListMaGiamGia());
+        for (int i = danhSachMaGiamGia.getListMaGiamGia().size() - 1; i >= 0; i--) {
+            MaGiamGia maGiamGia = danhSachMaGiamGia.getListMaGiamGia().get(i);
+            if (danhSachMaGiamGia.laMaGiamGiaDocQuyen(maGiamGia)) {
+                danhSachMaGiamGia.xoa(maGiamGia);
+            }
+        }
+        danhSachMaGiamGia.getListMaGiamGia().addAll(hangThanhVien.getListMaGiamGiaDQ());
     }
 }

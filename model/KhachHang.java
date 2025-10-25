@@ -145,6 +145,19 @@ public class KhachHang {
         return listMaGiamGia.add(maGiamGia);
     }
 
+    public boolean xoaMaGiamGia(MaGiamGia maGiamGia) {
+        if (maGiamGia == null) {
+            return false;
+        }
+        for (MaGiamGia maGg : listMaGiamGia){
+            if (maGg.getMa().equals(maGiamGia.getMa())){
+                listMaGiamGia.remove(maGg);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean themHoaDon(HoaDon hoaDon) {
         if (hoaDon == null) {
             return false;

@@ -6,6 +6,7 @@ import model.LichTrongTuan;
 import util.CapMa;
 import util.Nhap;
 import util.ThoiGian;
+import util.XoaManHinh;
 
 public class QuanLyDanhSachLichTrongTuan {
     private Database db;
@@ -97,6 +98,7 @@ public class QuanLyDanhSachLichTrongTuan {
 
     public void xepLichLamViec() {
         while (true) {
+            XoaManHinh.xoa();
             xuatMenuXepLich();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {
@@ -104,6 +106,7 @@ public class QuanLyDanhSachLichTrongTuan {
             }
             thucHienChucNangXepLich(luaChon);
             ////////////
+            Nhap.pause();
         }
     }
 
@@ -183,6 +186,7 @@ public class QuanLyDanhSachLichTrongTuan {
 
     public void quanLyLichTrongTuan() {
         while (true) {
+            XoaManHinh.xoa();
             xuatMenuQlLich();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {
@@ -194,6 +198,7 @@ public class QuanLyDanhSachLichTrongTuan {
 
     public void xemLichLamViec() {
         while (true) {
+            XoaManHinh.xoa();
             xuatMenuXemLich();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {
@@ -230,6 +235,7 @@ public class QuanLyDanhSachLichTrongTuan {
 
     public void menu() {
         while (true) {
+            XoaManHinh.xoa();
             xuatMenu();
             int luaChon = Nhap.nhapInt("Hay nhap lua chon : ");
             if (luaChon == 0) {

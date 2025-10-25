@@ -106,7 +106,10 @@ public class SanPham {
                 "ten : " + thongTinSanPham.getTen() + "\n" +
                 "danhMuc : " + thongTinSanPham.getDanhMuc() + "\n" +
                 "thuongHieu : " + thongTinSanPham.getThuongHieu() + "\n" +
-                "gia : " + thongTinSanPham.getGia()  + "\n" +
-                "moTa : " + thongTinSanPham.getGia() + "\n"  + "\n" + "Da Ban : " + getDaBan() + "\n" + "Tra hang : " + traHang + "\n";
+                "gia : " + thongTinSanPham.getGia() + "\n" +
+                "moTa : " + thongTinSanPham.getMoTa() + "\n" + "Da Ban : " + getDaBan() + "\n" + "Tra hang : " + traHang
+                + "\n"
+                + "BaoHanh : " + ((baoHanh == null) ? "null" : (baoHanh.getMaBh() + " " + baoHanh.getLoaiBaoHanh()))
+                + "\n";
     }
 }

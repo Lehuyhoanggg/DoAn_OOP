@@ -95,6 +95,7 @@ public class QuanLyBaoHanh {
             return;
         }
         while (true) {
+            XoaManHinh.xoa();
             System.out.println();
             System.out.println("------------------------");
             System.out.println(baoHanh);
@@ -105,6 +106,7 @@ public class QuanLyBaoHanh {
                 return;
             }
             suaThanhPhanBaoHanh(baoHanh, luaChon);
+            Nhap.pause();
         }
     }
 

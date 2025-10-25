@@ -136,6 +136,7 @@ public class QuanLyLichTrongTuan {
 
     public void xepLichLamViec() {
         while (true) {
+            XoaManHinh.xoa();
             xuatMenuXepLich();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {

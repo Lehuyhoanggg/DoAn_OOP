@@ -211,6 +211,7 @@ public class QuanLyKhachHang {
         }
         int xacNhan = 1;
         while (xacNhan == 1) {
+            XoaManHinh.xoa();
             System.out.println();
             System.out.println("------------------------");
             System.out.println(khachHang);

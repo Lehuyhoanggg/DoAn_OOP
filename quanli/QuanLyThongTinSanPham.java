@@ -98,13 +98,14 @@ public class QuanLyThongTinSanPham {
 
     public void suaThongTinSanPham() {
         DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
-        ThongTinSanPham sp = danhSachThongTinSanPham.tim(Nhap.nhapStr("Nhap ma san pham can sua"));
+        ThongTinSanPham sp = danhSachThongTinSanPham.tim(Nhap.nhapStr("Nhap ma san pham can sua : "));
         if (sp == null) {
             System.out.println("khong tim thay ma san pham");
             return;
         }
         int xacNhan = 1;
         while (xacNhan == 1) {
+            XoaManHinh.xoa();
             System.out.println();
             System.out.println("------------------------");
             System.out.println(sp);
@@ -150,8 +151,7 @@ public class QuanLyThongTinSanPham {
             for (int i = 0; i < listSanPham.size(); i++) {
                 if (listSanPham.get(i).getMa().equals(tuKhoa)) {
                     System.out.println("---------------------------");
-                    System.out.println(i + ". " + listSanPham.get(i).getMa() + " " + listSanPham.get(i).getTen()
-                            + " " + listSanPham.get(i).getGia() + " " + listSanPham.get(i).getThuongHieu());
+                    System.out.println(listSanPham.get(i));
                     System.out.println("---------------------------");
                     timThay = true;
                     break;

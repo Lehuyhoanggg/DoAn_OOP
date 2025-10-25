@@ -213,10 +213,7 @@ public class GhiFile {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             String line;
             for (int i = 0; i < listChiTietHoaDon.size(); i++) {
-                line = listChiTietHoaDon.get(i).getMa() + " " +
-                        listChiTietHoaDon.get(i).getSoSp() + " "
-                        + listChiTietHoaDon.get(i).getSoBh() + " " +
-                        listChiTietHoaDon.get(i).getThanhTien();
+                line = listChiTietHoaDon.get(i).getMa() + " " + listChiTietHoaDon.get(i).getThanhTien();
                 bw.write(line);
                 bw.newLine();
             }
@@ -233,7 +230,7 @@ public class GhiFile {
                 String serial = sanPham.getSerial();
                 String traHang = sanPham.getTraHang() ? "true" : "false";
                 String maBaoHanh = (sanPham.getBaoHanh() == null) ? "null" : sanPham.getBaoHanh().getMaBh();
-                String daBan = sanPham.getDaBan() ? "true" : "false";
+                String daBan = sanPham.getDaBan() == true ? "true" : "false";
                 bw.write(maSp + " " + serial + " " + traHang + " " + maBaoHanh + " " + daBan);
                 bw.newLine();
             }

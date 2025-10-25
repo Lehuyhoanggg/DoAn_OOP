@@ -95,6 +95,7 @@ public class QuanLyPhieuBaoHanh {
         }
         int xacNhan = 1;
         while (xacNhan == 1) {
+            XoaManHinh.xoa();
             xuatSuaPhieuBaoHanh();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {

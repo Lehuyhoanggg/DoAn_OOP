@@ -52,10 +52,6 @@ public class QuanLyQuanLyTatCa implements GiaoTiep {
         quanLyTinNhan.xemTatCaTinNhan(ql);
     }
 
-    public void xemTinNhanGanDay() {
-        QuanLyTinNhan quanLyTinNhan = new QuanLyTinNhan(db);
-        quanLyTinNhan.xemTinNhanGanDay(ql);
-    }
 
     public void xemDoanhThu() {
         QuanLyHoaDon quanLyHoaDon = new QuanLyHoaDon(db);

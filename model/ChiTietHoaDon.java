@@ -5,16 +5,14 @@ import java.util.ArrayList;
 public class ChiTietHoaDon {
     private String ma;
     private ArrayList<SanPham> listSanPham;
-    private int soSp;
-    private int soBh;
+    private int soSp=0;
+    private int soBh=0;
     private long thanhTien;
     private ArrayList<MaGiamGia> listMaGiamGia;
 
-    public ChiTietHoaDon(String ma, int soSp, int soBh, Long thanhTien) {
+    public ChiTietHoaDon(String ma, Long thanhTien) {
         this.ma = ma;
         this.thanhTien = thanhTien;
-        this.soSp = soSp;
-        this.soBh = soBh;
         listSanPham = new ArrayList<>();
         listMaGiamGia = new ArrayList<>();
     }
@@ -25,7 +23,7 @@ public class ChiTietHoaDon {
         listMaGiamGia = new ArrayList<>();
     }
 
-    public ChiTietHoaDon(String ma, ThongTinSanPham sanPham, long thanhTien) {
+    public ChiTietHoaDon(String ma, long thanhTien) {
         this.ma = ma;
         this.thanhTien = thanhTien;
         listSanPham = new ArrayList<>();

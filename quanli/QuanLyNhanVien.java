@@ -56,6 +56,7 @@ public class QuanLyNhanVien {
             return;
         }
         while (true) {
+            XoaManHinh.xoa();
             System.out.println();
             System.out.println("------------------------");
             System.out.println(nv);

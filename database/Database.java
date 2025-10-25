@@ -216,6 +216,7 @@ public class Database {
     }
 
     public DanhSachUser getDanhSachUser() {
+        danhSachUser = new DanhSachUser(getListUser());
         return danhSachUser;
     }
 

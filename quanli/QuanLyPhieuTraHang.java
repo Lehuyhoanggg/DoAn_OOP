@@ -54,9 +54,8 @@ public class QuanLyPhieuTraHang {
         SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Hay hay nhap ma serial san pham can tra hang : "));
         if (sanPham == null) {
             System.out.println("Khong tim thay san pham");
-            return;             
+            return;
         }
-
 
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(sanPham);
@@ -72,6 +71,7 @@ public class QuanLyPhieuTraHang {
         }
 
         sanPham.setTraHang(true); // dấu đây là sản phẩm bị trả hàng
+        sanPham.setDaBan(false); // sản phẩm đã trở lại kho
 
         DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(chiTietHoaDon.getListMaGiamGia());
         long tienTraLai = danhSachMaGiamGia.giaSanPhamSauKhiApDungTatCa(sanPham);
@@ -83,7 +83,7 @@ public class QuanLyPhieuTraHang {
         DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
         danhSachHangThanhVien.setHangThanhVienChoKhachHang(khachHang);
 
-        PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(khachHang,sanPham,db);
+        PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(khachHang, sanPham, db);
 
         khachHang.themPhieuTraHang(pth);
 
@@ -160,6 +160,7 @@ public class QuanLyPhieuTraHang {
 
         int tiep = 1;
         while (tiep == 1) {
+            XoaManHinh.xoa();
             System.out.println();
             System.out.println("------------------------");
             System.out.println(pth);

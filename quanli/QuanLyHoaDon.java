@@ -62,7 +62,7 @@ public class QuanLyHoaDon {
         System.out.println("---------------------------");
     }
 
-    private void suaThanhPhanSanPham(SanPham sanPham, HoaDon hoaDon, int chon) {
+    private boolean suaThanhPhanSanPham(SanPham sanPham, HoaDon hoaDon, int chon) {
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(hoaDon.getListChiTietHoaDon());
         switch (chon) {
             case 1:
@@ -74,9 +74,11 @@ public class QuanLyHoaDon {
                 } else {
                     DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(
                             hoaDon.getKhachHang().getListMaGiamGia());
-                    danhSachMaGiamGia.xoaSanPhamThuHoiMa(newSanPham, hoaDon);
+                    danhSachMaGiamGia.xoaSanPhamThuHoiMa(sanPham, hoaDon);
                     chiTietHoaDon.setThanhTien(chiTietHoaDon.getThanhTien() + newSanPham.getGia());
+                    chiTietHoaDon.themSanPham(newSanPham);
                     System.out.println("Da thay doi san pham");
+                    return true;
                 }
                 break;
             case 2:
@@ -90,13 +92,13 @@ public class QuanLyHoaDon {
                 }
 
                 System.out.println("Da xoa san pham");
-                break;
+                return true;
             case 3:
                 DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
                 ArrayList<BaoHanh> listBaoHanh = danhSachBaoHanh.timBaoHanh(sanPham);
                 if (listBaoHanh.size() == 0) {
                     System.out.println("San pham nay khong co bao hanh nao");
-                    return;
+                    return false;
                 }
                 for (int i = 0; i < listBaoHanh.size(); i++) {
                     System.out.println(
@@ -108,7 +110,9 @@ public class QuanLyHoaDon {
                     baoHanh = listBaoHanh.get(luaChon);
                 }
                 chiTietHoaDon = danhSachChiTietHoaDon.tim(sanPham);
-                chiTietHoaDon.setThanhTien(chiTietHoaDon.getThanhTien() - sanPham.getBaoHanh().getGia());
+                if (sanPham.getBaoHanh() != null) {
+                    chiTietHoaDon.setThanhTien(chiTietHoaDon.getThanhTien() - sanPham.getBaoHanh().getGia());
+                }
                 baoHanh.setSanPham(sanPham);
                 sanPham.setBaoHanh(baoHanh);
                 chiTietHoaDon.setThanhTien(chiTietHoaDon.getThanhTien() + baoHanh.getGia());
@@ -130,28 +134,36 @@ public class QuanLyHoaDon {
         }
 
         hoaDon.tinhThanhTien();
+        return false;
     }
 
     private void suaSanPham(SanPham sanPham, HoaDon hoaDon) {
         while (true) {
+            XoaManHinh.xoa();
+            System.out.println("------------------------");
+            System.out.println(sanPham);
+            System.out.println("------------------------");
             xuatSuaHoaDon_SanPham();
             int chon = Nhap.nhapInt("Nhap lua chon : ");
             if (chon == 0) {
                 return;
             }
-            suaThanhPhanSanPham(sanPham, hoaDon, chon);
+            if (suaThanhPhanSanPham(sanPham, hoaDon, chon)) {
+                return;
+            }
             Nhap.pause();
         }
     }
 
     private void suaChiTietHoaDon(HoaDon hoaDon) {
         for (int i = 0; i < hoaDon.getListChiTietHoaDon().size(); i++) {
-            System.out.print(i + ". " + hoaDon.getListChiTietHoaDon().get(i).getMa());
-            String maThongTin = hoaDon.getListChiTietHoaDon().get(i).getListSanPham().size() > 0
+            ChiTietHoaDon chiTietHoaDon = hoaDon.getListChiTietHoaDon().get(i);
+            System.out.print(i + ". " + chiTietHoaDon.getMa());
+            String maThongTin = chiTietHoaDon.getListSanPham().size() > 0
                     ? hoaDon.getListChiTietHoaDon().get(i).getListSanPham().get(0).getMa()
                     : "null";
-            System.out.print("   " + maThongTin + " soSanPham : " + hoaDon.getListChiTietHoaDon().get(i).getSoSp()
-                    + " |    soBaoHanh : " + hoaDon.getListChiTietHoaDon().get(i).getSoBh());
+            System.out.print("   " + maThongTin + " soSanPham : " + chiTietHoaDon.getSoSp()
+                    + " |    soBaoHanh : " + chiTietHoaDon.getSoBh());
             System.out.println();
         }
         int chon = Nhap.nhapInt("Chon chi tiet hoa don can quan li : ");
@@ -228,6 +240,7 @@ public class QuanLyHoaDon {
         }
         int xacNhan = 1;
         while (xacNhan == 1) {
+            XoaManHinh.xoa();
             System.out.println();
             System.out.println("------------------------");
             System.out.println(hoaDon);
@@ -290,6 +303,7 @@ public class QuanLyHoaDon {
     public void xemDoanhThu() {
         int xacNhan = 1;
         while (xacNhan == 1) {
+            XoaManHinh.xoa();
             xuatXemDoanhThu();
             int choice = Nhap.nhapInt("nhap lua chon: ");
             if (choice == 0) {

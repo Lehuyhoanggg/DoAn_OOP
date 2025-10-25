@@ -240,8 +240,7 @@ public class DocFile {
                 }
                 String[] thanhPhan = line.split("\\s+");
                 danhSachChiTietHoaDon.them(
-                        new ChiTietHoaDon(thanhPhan[0], Integer.parseInt(thanhPhan[1]), Integer.parseInt(thanhPhan[2]),
-                                Long.parseLong(thanhPhan[3])));
+                        new ChiTietHoaDon(thanhPhan[0],Long.parseLong(thanhPhan[1])));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -266,8 +265,9 @@ public class DocFile {
                 String serial = thanhPhan[1];
                 boolean traHang = thanhPhan[2].equals("true") ? true : false;
                 BaoHanh baoHanh = thanhPhan[3].equals("null") ? null : danhSachBaoHanh.tim(thanhPhan[3]);
-                boolean daBan = false;
+                boolean daBan = Boolean.parseBoolean(thanhPhan[4]);
                 danhSachSanPham.them(new SanPham(serial, thongTinSanPham, traHang, baoHanh, daBan));
+                db.getKhoSerial().add(serial);
                 thongTinSanPham.tangTonKho();
             }
         } catch (Exception e) {
@@ -291,6 +291,10 @@ public class DocFile {
                 MaGiamGia maGiamGia = danhSachMaGiamGia.tim(thanhPhan[1]);
                 SanPham sanPham = danhSachSanPham.tim(thanhPhan[2]);
                 MaGiamGia maDaDung = new MaGiamGia(maGiamGia);
+                if (sanPham == null) {
+                    System.out.println("Loi o cho nay");
+                }
+
                 maDaDung.setSanPhamDaDung(sanPham);
                 maDaDung.setKhachHangDaDung(khachHang);
                 danhSachMaGiaDaDung.them(maDaDung);
@@ -419,14 +423,14 @@ public class DocFile {
                 }
                 BaoHanh baoHanhGoc = danhSachBaoHanh.tim(thanhPhan[1]);
                 BaoHanh baoHanh = new BaoHanh(baoHanhGoc);
-                  SanPham sanPham = danhSachSanPham.tim(thanhPhan[2]);
+                SanPham sanPham = danhSachSanPham.tim(thanhPhan[2]);
                 baoHanh.setSanPham(sanPham);
                 khachHang.themBaoHanh(baoHanh);
                 if (baoHanh != null) {
                     baoHanh.setNgayBatDau(thanhPhan[3]);
                     baoHanh.setNgayKetThuc();
                 }
-              
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -682,9 +686,9 @@ public class DocFile {
         doc_BaoHanhtxt("datas/BaoHanh.txt");
         doc_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
         doc_PhieuTraHangtxt("datas/PhieuTraHang.txt");
+        doc_SanPhamtxt("datas/SanPham.txt");
         doc_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
         doc_MaGiamGiaDaDungtxt("datas/MaGiamGiaDaDung.txt");
-        doc_SanPhamtxt("datas/SanPham.txt");
         doc_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
         doc_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");
         doc_ChiTietHoaDon_MaGiamGiaDaDungtxt("datas/ChiTietHoaDon_MaGiamGiaDaDung.txt");

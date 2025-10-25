@@ -110,6 +110,7 @@ public class QuanLyHangThanhVien {
             return;
         }
         while (true) {
+            XoaManHinh.xoa();
             System.out.println();
             System.out.println("------------------------");
             System.out.println(hangThanhVien);

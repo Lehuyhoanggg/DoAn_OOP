@@ -5,5 +5,4 @@ public interface GiaoTiep {
 
     public void xemTatCaTinNhan();
 
-    public void xemTinNhanGanDay();
 }
