@@ -84,7 +84,8 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
                         || maGiamGia.getLoaiThuongHieu().equals("Tat_Ca"))
                 && ((maGiamGia.getNgayBatDau().equals("Vinh_Vien") || maGiamGia.getNgayKetThuc().equals("Vinh_Vien") ||
                         ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(), maGiamGia.getNgayBatDau(),
-                                maGiamGia.getNgayKetThuc())))) {
+                                maGiamGia.getNgayKetThuc())))
+                && (maGiamGia.getSanPhamDaDung() == null || maGiamGia.getSanPhamDaDung().equals(sanPham))) {
             return true;
         }
         return false;
@@ -95,7 +96,7 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
             String tienGiam = maGiamGia.getTienGiam();
             if (tienGiam != null && tienGiam.length() >= 2 && tienGiam.charAt(tienGiam.length() - 1) == '%') {
                 Long phanTram = Long.parseLong(tienGiam.substring(0, tienGiam.length() - 1));
-                maGiamGia.setSanPhamDaDung(sanPham);
+                maGiamGia.setSanPhamDaDung(sanPham);/////////
                 return (sanPham.getGia() * phanTram) / 100;
             } else {
                 maGiamGia.setSanPhamDaDung(sanPham);
@@ -187,11 +188,13 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
     public long giaSanPhamSauKhiApDungTatCa(SanPham sanPham) {
         long gia = sanPham.getGia();
         for (MaGiamGia maGiamGia : listMaGiamGia) {
-            if (gia > appDungMaGiamGia(sanPham, maGiamGia)) {
-                gia = appDungMaGiamGia(sanPham, maGiamGia);
+            if (sanPham.getGia() > appDungMaGiamGia(sanPham, maGiamGia)) {
+                gia -= appDungMaGiamGia(sanPham, maGiamGia);
             }
 
         }
+        if (gia < 0)
+            gia = 0;
         return gia;
     }
 
@@ -206,11 +209,11 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
         ArrayList<MaGiamGia> listMaGiamGiaSp = null;
         listMaGiamGiaSp = chiTietHoaDon.getListMaGiamGia();
         DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(listMaGiamGiaSp);
-        long tienGiam = danhSachMaGiamGia.giaSanPhamSauKhiApDungTatCa(sanPham);
+        long thanhTien = danhSachMaGiamGia.giaSanPhamSauKhiApDungTatCa(sanPham);
         if (sanPham.getBaoHanh() != null) {
-            tienGiam += sanPham.getBaoHanh().getGia();
+            thanhTien += sanPham.getBaoHanh().getGia();
         }
-        chiTietHoaDon.setThanhTien(chiTietHoaDon.getThanhTien() - tienGiam);
+        chiTietHoaDon.setThanhTien(chiTietHoaDon.getThanhTien() - thanhTien);
         hoaDon.tinhThanhTien();////
 
         chiTietHoaDon.xoaSanPham(sanPham);
@@ -219,13 +222,8 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
             return null;
         }
         for (int i = listMaGiamGiaSp.size() - 1; i >= 0; i--) {
-            if (listMaGiamGiaSp.get(i).getSanPhamDaDung().equals(sanPham)
-                    && (listMaGiamGiaSp.get(i).getNgayKetThuc().equals("Vinh_Vien")
-                            || listMaGiamGiaSp.get(i).getNgayBatDau().equals("Vinh_Vien")
-                            || ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(),
-                                    listMaGiamGiaSp.get(i).getNgayBatDau(),
-                                    listMaGiamGiaSp.get(i).getNgayKetThuc()))) {
-                khachHang.themMaGiamGia(listMaGiamGiaSp.get(i));
+            if (maGiamGiaThoaMan(sanPham, listMaGiamGiaSp.get(i))) {
+                khachHang.themMaGiamGia(new MaGiamGia(listMaGiamGiaSp.get(i)));
                 listMaThuHoi.add(listMaGiamGiaSp.get(i));
                 listMaGiamGiaSp.remove(i);
             }

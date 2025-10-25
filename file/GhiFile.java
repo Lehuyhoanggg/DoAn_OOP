@@ -86,7 +86,7 @@ public class GhiFile {
             // Ghi ma giam gia thuong
             for (int i = 0; i < listMaGiamGia.size(); i++) {
                 line = listMaGiamGia.get(i).getMa() + " " +
-                        listMaGiamGia.get(i).getTenMa() + " " +
+                        XulyString.dongGoiStr(listMaGiamGia.get(i).getTenMa()) + " " +
                         listMaGiamGia.get(i).getLoaiDoanhMuc() + " " +
                         listMaGiamGia.get(i).getLoaiThuongHieu() + " " +
                         listMaGiamGia.get(i).getTienGiam() + " " +
@@ -98,7 +98,7 @@ public class GhiFile {
             // Ghi ma giam gia doc quyen
             for (int i = 0; i < listMaGiamGiaDq.size(); i++) {
                 line = listMaGiamGiaDq.get(i).getMa() + " " +
-                        listMaGiamGiaDq.get(i).getTenMa() + " " +
+                        XulyString.dongGoiStr(listMaGiamGiaDq.get(i).getTenMa()) + " " +
                         listMaGiamGiaDq.get(i).getLoaiDoanhMuc() + " " +
                         listMaGiamGiaDq.get(i).getLoaiThuongHieu() + " " +
                         listMaGiamGiaDq.get(i).getTienGiam() + " " +
@@ -201,6 +201,7 @@ public class GhiFile {
                         XulyString.dongGoiStr(listPhieuTraHang.get(i).getLyDoTra());
                 bw.write(line);
                 bw.newLine();
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -551,7 +552,6 @@ public class GhiFile {
         ghi_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
         ghi_MaGiamGiaDaDungtxt("datas/MaGiamGiaDaDung.txt");
         ghi_SanPhamtxt("datas/SanPham.txt");
-        ghi_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
         ghi_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");
         ghi_ChiTietHoaDon_MaGiamGiaDaDungtxt("datas/ChiTietHoaDon_MaGiamGiaDaDung.txt");
         ghi_HoaDontxt("datas/HoaDon.txt");
@@ -561,6 +561,7 @@ public class GhiFile {
         ghi_KhachHang_HoaDontxt("datas/KhachHang_HoaDon.txt");
         ghi_KhachHang_PhieuTraHangtxt("datas/KhachHang_PhieuTraHang.txt");
         ghi_CaLamtxt("datas/CaLam.txt");
+        ghi_CaLam_NhanVienDiemDanh("datas/CaLam_NhanVienDiemDanh.txt");/////////////
         ghi_LichTrongNgaytxt("datas/LichTrongNgay.txt");
         ghi_LichTrongTuantxt("datas/LichTrongTuan.txt");
         ghi_TaiKhoantxt("datas/TaiKhoan.txt");

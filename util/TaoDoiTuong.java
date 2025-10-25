@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import danhsach.DanhSachBaoHanh;
-import danhsach.DanhSachChiTietHoaDon;
 import danhsach.DanhSachHangThanhVien;
 import danhsach.DanhSachKhachHang;
 import danhsach.DanhSachMaGiamGia;
@@ -125,21 +124,21 @@ public class TaoDoiTuong {
     }
 
     public static BaoHanh taoBaoHanh(Database db) {
-        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+        DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
         String maBaoHanh = CapMa.capMaBaoHanh(db);
-        String loaiBaoHanh = Nhap.nhapStr("Nhap so thang bao hanh : ");
+        int soThangBaoHanh = Nhap.nhapInt("Nhap so thang bao hanh : ");
 
-        String maSanPham = Nhap.nhapStr("Nhap so serial san pham : ");
-        SanPham sanPham = danhSachSanPham.tim(maSanPham);
-
-        String ngayBatDau = ThoiGian.layNgayHienTaiStr();
-        String ngayKetThuc = ThoiGian.ngaySauNThang(ngayBatDau, Integer.parseInt(loaiBaoHanh.replaceAll("\\D+", "")));
-        long gia = Nhap.nhapLong("Nhap gia cua bao hanh : ");
-        loaiBaoHanh = "BaoHanh" + loaiBaoHanh + "T";
-        if (sanPham == null) {
+        String maSanPham = Nhap.nhapStr("Nhap ma thong tin san pham : ");
+        ThongTinSanPham thongTinSanPham = danhSachThongTinSanPham.tim(maSanPham);
+        if (thongTinSanPham == null) {
+            System.out.println("Khong tim thay thong tin san pham de tao bao hanh");
             return null;
         }
-        return new BaoHanh(maBaoHanh, loaiBaoHanh, sanPham, ngayBatDau, ngayKetThuc, gia);
+        SanPham sanPham = new SanPham();
+        sanPham.setThongTinSanPham(thongTinSanPham);
+        long gia = Nhap.nhapLong("Nhap gia cua bao hanh : ");
+        String loaiBaoHanh = "BaoHanh" + soThangBaoHanh + "T";
+        return new BaoHanh(maBaoHanh, loaiBaoHanh, sanPham, gia);
     }
 
     public static ArrayList<ChiTietHoaDon> taoListChiTietHoaDon(Database db,
@@ -152,7 +151,7 @@ public class TaoDoiTuong {
         do {
             // chon san pham
             ThongTinSanPham thongTinSanPham = null;
-            int soLuong=0;
+            int soLuong = 0;
             do {
                 String ma = Nhap.nhapStr("Nhap ma thong tin san pham de tao ChiTietHoaDon hoac nhan 0 de thoat: ");
                 if (ma.replaceAll("\\s+", "").equals("0")) {
@@ -211,7 +210,7 @@ public class TaoDoiTuong {
                                 + " vao hoa don");
                 sanPham.setDaBan(true);
                 chiTietHoaDon.themSanPham(sanPham);
-
+                db.getDanhSachChiTietHoaDon().them(chiTietHoaDon);
                 set.add(maSr);
                 ArrayList<BaoHanh> listBaoHanh = danhSachBaoHanh.timBaoHanh(sanPham); // check danh sách bảo hành sản
                 // phẩm
@@ -366,10 +365,6 @@ public class TaoDoiTuong {
         ArrayList<ChiTietHoaDon> listChiTietHoaDon = taoListChiTietHoaDon(db, khachHang);
         if (listChiTietHoaDon.size() == 0) {
             return null;
-        }
-        DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
-        for (ChiTietHoaDon chiTietHoaDon : listChiTietHoaDon) {/// đưa vào database
-            danhSachChiTietHoaDon.them(chiTietHoaDon);
         }
 
         String ngayTaoHoaDon = ThoiGian.layNgayHienTaiStr();

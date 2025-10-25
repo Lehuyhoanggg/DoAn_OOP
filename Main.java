@@ -44,7 +44,9 @@ public class Main {
                 }
 
             } while (user == null);
-            dieuHuongMenu();
+            if (user != null) {
+                dieuHuongMenu();
+            }
             dem = 0;
             xacNhan = Nhap.nhapInt("(1)Tiep tuc dang nhap (khac)Thoat : ");
             GhiFile ghiFile = new GhiFile(db);

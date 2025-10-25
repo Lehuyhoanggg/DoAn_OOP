@@ -74,7 +74,14 @@ public class QuanLyHoaDon {
                 } else {
                     DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(
                             hoaDon.getKhachHang().getListMaGiamGia());
-                    danhSachMaGiamGia.xoaSanPhamThuHoiMa(sanPham, hoaDon);
+                    ArrayList<MaGiamGia> listMaGiamGia = danhSachMaGiamGia.xoaSanPhamThuHoiMa(sanPham, hoaDon);
+                    if (listMaGiamGia != null) {
+                        for (MaGiamGia maGiamGia : listMaGiamGia) {
+                            System.out.println("Da thu hoi ma giam gia " + maGiamGia.getMa() + " cho khach hang "
+                                    + hoaDon.getKhachHang().getSdt());
+                        }
+                    }
+
                     chiTietHoaDon.setThanhTien(chiTietHoaDon.getThanhTien() + newSanPham.getGia());
                     chiTietHoaDon.themSanPham(newSanPham);
                     System.out.println("Da thay doi san pham");
@@ -132,8 +139,6 @@ public class QuanLyHoaDon {
             default:
                 break;
         }
-
-        hoaDon.tinhThanhTien();
         return false;
     }
 
@@ -149,8 +154,10 @@ public class QuanLyHoaDon {
                 return;
             }
             if (suaThanhPhanSanPham(sanPham, hoaDon, chon)) {
+                hoaDon.tinhThanhTien();
                 return;
             }
+            hoaDon.tinhThanhTien();
             Nhap.pause();
         }
     }
@@ -166,23 +173,29 @@ public class QuanLyHoaDon {
                     + " |    soBaoHanh : " + chiTietHoaDon.getSoBh());
             System.out.println();
         }
-        int chon = Nhap.nhapInt("Chon chi tiet hoa don can quan li : ");
+        int chon = Nhap.nhapInt("Chon ChiTietHoaDon can quan li : ");
         ChiTietHoaDon chiTietHoaDon = null;
         if (chon >= 0 && chon < hoaDon.getListChiTietHoaDon().size()) {
             chiTietHoaDon = hoaDon.getListChiTietHoaDon().get(chon);
         }
 
         while (true) {
+            if (chiTietHoaDon.getListSanPham().size() == 0) {
+                System.out.println("danh sach san pham trong");
+                return;
+            }
             for (int i = 0; i < chiTietHoaDon.getListSanPham().size(); i++) {
                 System.out.println(i + ". " + chiTietHoaDon.getListSanPham().get(i).getTen()
                         + " voi ma serial :  "
                         + chiTietHoaDon.getListSanPham().get(i).getSerial()
                         + (chiTietHoaDon.getListSanPham().get(i).getTraHang() ? "(Da tra hang)" : ""));
             }
+
             chon = Nhap.nhapInt("Chon san pham de quan li hoac nhan -1 de thoat : ");
             if (chon == -1) {
                 return;
             }
+
             SanPham sanPham = null;
             if (chon >= 0 && chon < chiTietHoaDon.getListSanPham().size()) {
                 sanPham = chiTietHoaDon.getListSanPham().get(chon);
@@ -200,7 +213,7 @@ public class QuanLyHoaDon {
         System.out.println("1. Sua Khach hang");
         System.out.println("2. Sua ngay tao hoa don");
         System.out.println("3. Sua ghi chu");
-        System.out.println("4. Sua chi tiet tiet hoa don");
+        System.out.println("4. Sua ChiTietHoaDon");
         System.out.println("0. Thoat");
         System.out.println("---------------------------");
     }

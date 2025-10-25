@@ -86,8 +86,9 @@ public class DanhSachHangThanhVien implements QuanLyDanhSach<HangThanhVien> {
             return;
         }
         DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(khachHang.getListMaGiamGia());
-        for (int i = danhSachMaGiamGia.getListMaGiamGia().size() - 1; i >= 0; i--) {
-            MaGiamGia maGiamGia = danhSachMaGiamGia.getListMaGiamGia().get(i);
+
+        for (int i = khachHang.getListMaGiamGia().size() - 1; i >= 0; i--) {
+            MaGiamGia maGiamGia = khachHang.getListMaGiamGia().get(i);
             if (danhSachMaGiamGia.laMaGiamGiaDocQuyen(maGiamGia)) {
                 danhSachMaGiamGia.xoa(maGiamGia);
             }

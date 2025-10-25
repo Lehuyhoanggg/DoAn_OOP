@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import danhsach.DanhSachBaoHanh;
 import danhsach.DanhSachSanPham;
+import danhsach.DanhSachThongTinSanPham;
 import database.Database;
 import util.Nhap;
 import util.TaoDoiTuong;
 import util.XoaManHinh;
 import model.BaoHanh;
 import model.SanPham;
+import model.ThongTinSanPham;
 
 public class QuanLyBaoHanh {
     private Database db;
@@ -64,9 +66,12 @@ public class QuanLyBaoHanh {
                 System.out.println("Da sua loai bao hanh");
                 break;
             case 2:
-                DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-                SanPham sanPham = danhSachSanPham.tim("Nhap ma serial san pham moi de them vao phieu : ");
-                if (sanPham == null) {
+                DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
+                ThongTinSanPham thongTinSanPham = danhSachThongTinSanPham
+                        .tim(Nhap.nhapStr("Nhap ma thong tin san pham moi de them vao phieu : "));
+                SanPham sanPham = new SanPham();
+                sanPham.setThongTinSanPham(thongTinSanPham);
+                if (thongTinSanPham == null) {
                     System.out.println("Ma san pham khong hop le");
                 } else {
                     baoHanh.setSanPham(sanPham);

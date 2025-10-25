@@ -46,7 +46,7 @@ public class QuanLySanPham {
         }
         int soLuong = Nhap.nhapInt("Nhap so luong san pham can them : ");
         while (soLuong > 0) {
-            String serial = Nhap.nhapStr("Nhap so serial cua " + thongTinSanPham.getMa()+" : ");
+            String serial = Nhap.nhapStr("Nhap so serial cua " + thongTinSanPham.getMa() + " : ");
             if (db.getKhoSerial().contains(serial)) {
                 System.out.println("Ma serial da ton trong database");
                 continue;
@@ -166,7 +166,7 @@ public class QuanLySanPham {
                 break;
             case 4:
                 System.out.println("Trang thai hien tai la : " + sanPham.getDaBan());
-                int xacNhan = Nhap.nhapInt("(1)Thay doi  (Khach)giu nguyen");
+                int xacNhan = Nhap.nhapInt("(1)Thay doi  (Khac)giu nguyen : ");
                 if (xacNhan == 1) {
                     sanPham.doiDaBan();
                     System.out.println("Da thay doi");

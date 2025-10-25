@@ -84,8 +84,7 @@ public class QuanLyPhieuTraHang {
         danhSachHangThanhVien.setHangThanhVienChoKhachHang(khachHang);
 
         PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(khachHang, sanPham, db);
-
-        khachHang.themPhieuTraHang(pth);
+        System.out.println(pth.getSanPham());
 
         if (danhSachPhieuTraHang.them(pth)) {
             System.out.println("Tao phieu tra hang thanh cong!");

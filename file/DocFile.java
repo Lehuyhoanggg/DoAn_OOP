@@ -103,6 +103,7 @@ public class DocFile {
                 String[] thanhPhan = line.split("\\s+");
                 String ma = thanhPhan[0];
                 String tenMa = thanhPhan[1];
+                tenMa = XulyString.chuyenLaiDangStrMacDinh(tenMa);
                 String loaiDoanhMuc = thanhPhan[2];
                 String loaiThuongHieu = thanhPhan[3];
                 String tienGiam = thanhPhan[4];
@@ -124,7 +125,7 @@ public class DocFile {
 
     public void doc_HangThanhVientxt(String path) {
         DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
-        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
+        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGiaDq();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -240,7 +241,7 @@ public class DocFile {
                 }
                 String[] thanhPhan = line.split("\\s+");
                 danhSachChiTietHoaDon.them(
-                        new ChiTietHoaDon(thanhPhan[0],Long.parseLong(thanhPhan[1])));
+                        new ChiTietHoaDon(thanhPhan[0], Long.parseLong(thanhPhan[1])));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -266,6 +267,7 @@ public class DocFile {
                 boolean traHang = thanhPhan[2].equals("true") ? true : false;
                 BaoHanh baoHanh = thanhPhan[3].equals("null") ? null : danhSachBaoHanh.tim(thanhPhan[3]);
                 boolean daBan = Boolean.parseBoolean(thanhPhan[4]);
+
                 danhSachSanPham.them(new SanPham(serial, thongTinSanPham, traHang, baoHanh, daBan));
                 db.getKhoSerial().add(serial);
                 thongTinSanPham.tangTonKho();
@@ -290,11 +292,10 @@ public class DocFile {
                 KhachHang khachHang = danhSachKhachHang.tim(thanhPhan[0]);
                 MaGiamGia maGiamGia = danhSachMaGiamGia.tim(thanhPhan[1]);
                 SanPham sanPham = danhSachSanPham.tim(thanhPhan[2]);
-                MaGiamGia maDaDung = new MaGiamGia(maGiamGia);
-                if (sanPham == null) {
-                    System.out.println("Loi o cho nay");
+                if (maGiamGia == null) {
+                    continue;
                 }
-
+                MaGiamGia maDaDung = new MaGiamGia(maGiamGia);
                 maDaDung.setSanPhamDaDung(sanPham);
                 maDaDung.setKhachHangDaDung(khachHang);
                 danhSachMaGiaDaDung.them(maDaDung);
@@ -343,7 +344,7 @@ public class DocFile {
                 if (chiTietHoaDon == null) {
                     continue;
                 }
-                for (int i = 1; i < thanhPhan.length; i++) {
+                for (int i = 2; i < thanhPhan.length; i++) {
                     MaGiamGia maGiamGia = danhSachMaGiamGiaDaDung.tim(thanhPhan[i], khachHang);
                     chiTietHoaDon.themMaGiamGia(maGiamGia);
                 }
@@ -440,7 +441,7 @@ public class DocFile {
     public void doc_KhachHang_MaGiamGiatxt(String path) {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
-        DanhSachMaGiamGia danhSachMaGiamGiaDq = db.getDanhSachMaGiamGia();
+        DanhSachMaGiamGia danhSachMaGiamGiaDq = db.getDanhSachMaGiamGiaDq();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -685,11 +686,10 @@ public class DocFile {
         doc_KhachHangtxt("datas/KhachHang.txt");
         doc_BaoHanhtxt("datas/BaoHanh.txt");
         doc_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
-        doc_PhieuTraHangtxt("datas/PhieuTraHang.txt");
         doc_SanPhamtxt("datas/SanPham.txt");
+        doc_PhieuTraHangtxt("datas/PhieuTraHang.txt");
         doc_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
         doc_MaGiamGiaDaDungtxt("datas/MaGiamGiaDaDung.txt");
-        doc_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
         doc_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");
         doc_ChiTietHoaDon_MaGiamGiaDaDungtxt("datas/ChiTietHoaDon_MaGiamGiaDaDung.txt");
         doc_HoaDontxt("datas/HoaDon.txt");
@@ -699,6 +699,7 @@ public class DocFile {
         doc_KhachHang_HoaDontxt("datas/KhachHang_HoaDon.txt");
         doc_KhachHang_PhieuTraHangtxt("datas/KhachHang_PhieuTraHang.txt");
         doc_CaLamtxt("datas/CaLam.txt");
+        doc_CaLam_NhanVienDiemDanh("datas/CaLam_NhanVienDiemDanh.txt");
         doc_LichTrongNgaytxt("datas/LichTrongNgay.txt");
         doc_LichTrongTuantxt("datas/LichTrongTuan.txt");
         db.taoDanhSachUser();
