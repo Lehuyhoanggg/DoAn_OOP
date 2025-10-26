@@ -5,16 +5,19 @@ import model.TaiKhoan;
 import model.User;
 
 public class DanhSachUser {
-    private ArrayList<User> listUser;
+    private ArrayList<User> listUser; // danh sách user
 
+    // constructor
     public DanhSachUser(ArrayList<User> listUser) {
         this.listUser = listUser;
     }
 
+    // getter
     public ArrayList<User> getListUser() {
         return listUser;
     }
 
+    // tìm user theo mã
     public User timUser(String ma) {
         if (listUser == null) {
             return null;
@@ -27,15 +30,16 @@ public class DanhSachUser {
         return null;
     }
 
+    // gán tài khoản cho user theo tên đăng nhập
     public boolean ganTaiKhoanChoUser(TaiKhoan taiKhoan) {
         if (taiKhoan == null) {
             return false;
         }
-        String ma = taiKhoan.getTenDangNhap();
-        User user = timUser(ma);
+        String ma = taiKhoan.getTenDangNhap(); // dùng tên đăng nhập làm mã
+        User user = timUser(ma); // tìm user tương ứng
         if (user == null) {
             return false;
         }
-        return user.capTaiKhoan(taiKhoan);
+        return user.capTaiKhoan(taiKhoan); // gán tài khoản cho user
     }
 }

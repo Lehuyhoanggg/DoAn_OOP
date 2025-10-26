@@ -1,6 +1,7 @@
 package model;
 
-public class PhieuTraHang {// chi dc tra truoc 3 ngay sau khi mua sann phan, Tra hang can hoa don
+public class PhieuTraHang {
+    // chi dc tra truoc 3 ngay sau khi mua sann phan, Tra hang can hoa don
     private String maTraHang;
     private KhachHang khachHang;
     private SanPham sanPham;

@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class KhachHang {
     private String maKh;
     private String tenKh;
-    private String sdt;
+    private String sdt; 
     private HangThanhVien hangThanhVien;
     private long tienDaChi;
 
-    private ArrayList<PhieuBaoHanh> listPhieuBaoHanh;
-    private ArrayList<BaoHanh> listBaoHanh;
-    private ArrayList<MaGiamGia> listMaGiamGia;
-    private ArrayList<HoaDon> listHoaDon;
-    private ArrayList<PhieuTraHang> listPhieuTraHang;
+    private ArrayList<PhieuBaoHanh> listPhieuBaoHanh; // list phiếu bảo hành khi cần bảo hành sản phẩm hỏng (phải có bảo hành tương ứng)
+    private ArrayList<BaoHanh> listBaoHanh; // list bảo hành của 1 sản phẩm cụ thể
+    private ArrayList<MaGiamGia> listMaGiamGia; // list mã giảm giá (tạo riêng 1 đối tượng giống thông tin trong database để xóa dễ hơn)
+    private ArrayList<HoaDon> listHoaDon; // list Hóa đơn
+    private ArrayList<PhieuTraHang> listPhieuTraHang; // List Phiếu trả hàng khi trả sản phẩm
 
     public KhachHang(String maKh, String tenKh, String sdt, HangThanhVien hangThanhVien) {
         this.maKh = maKh;

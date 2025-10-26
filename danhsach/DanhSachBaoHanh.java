@@ -17,6 +17,7 @@ public class DanhSachBaoHanh implements QuanLyDanhSach<BaoHanh> {
         this.listBaoHanh = listBaoHanh;
     }
 
+    //// get set
     public ArrayList<BaoHanh> getListBaoHanh() {
         return listBaoHanh;
     }
@@ -33,6 +34,9 @@ public class DanhSachBaoHanh implements QuanLyDanhSach<BaoHanh> {
         this.soLuong = soLuong;
     }
 
+    ///////
+
+    // thêm bảo hành vào danh sách
     public boolean them(BaoHanh baoHanh) {
         if (baoHanh == null) {
             return false;
@@ -41,6 +45,7 @@ public class DanhSachBaoHanh implements QuanLyDanhSach<BaoHanh> {
         return listBaoHanh.add(baoHanh);
     }
 
+    /// tìm bảo hành theo mã
     public BaoHanh tim(String ma) {
         if (listBaoHanh == null) {
             return null;
@@ -53,6 +58,8 @@ public class DanhSachBaoHanh implements QuanLyDanhSach<BaoHanh> {
         return null;
     }
 
+    // trả về list bảo hành khả dụng cho sản phẩm dự trên danh sách bảo hành hiện
+    // tại
     public ArrayList<BaoHanh> timBaoHanh(SanPham sanPham) {
         ArrayList<BaoHanh> listBaoHanhs = new ArrayList<>();
         for (int i = 0; i < listBaoHanh.size(); i++) {
@@ -63,6 +70,7 @@ public class DanhSachBaoHanh implements QuanLyDanhSach<BaoHanh> {
         return listBaoHanhs;
     }
 
+    // xóa bảo hành khỏi danh sách theo mã
     public boolean xoa(String ma) {
         BaoHanh baoHanh = tim(ma);
         if (baoHanh != null) {
@@ -72,6 +80,7 @@ public class DanhSachBaoHanh implements QuanLyDanhSach<BaoHanh> {
         return listBaoHanh.remove(baoHanh);
     }
 
+    // xóa bảo hành khỏi danh sách
     public boolean xoa(BaoHanh baoHanh) {
         if (baoHanh != null) {
             return false;

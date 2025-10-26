@@ -33,6 +33,7 @@ public class DanhSachChiTietHoaDon implements QuanLyDanhSach<ChiTietHoaDon> {
         return soLuong;
     }
 
+    // thêm chiTietHoaDon vào danh sạch hiện tại
     public boolean them(ChiTietHoaDon chiTietHoaDon) {
         if (chiTietHoaDon == null) {
             return false;
@@ -41,6 +42,7 @@ public class DanhSachChiTietHoaDon implements QuanLyDanhSach<ChiTietHoaDon> {
         return listChiTietHoaDon.add(chiTietHoaDon);
     }
 
+    // xóa chitiethoadon khỏi danh sách
     public boolean xoa(ChiTietHoaDon chiTietHoaDon) {
         if (chiTietHoaDon == null) {
             return false;
@@ -49,6 +51,7 @@ public class DanhSachChiTietHoaDon implements QuanLyDanhSach<ChiTietHoaDon> {
         return listChiTietHoaDon.remove(chiTietHoaDon);
     }
 
+    // tìm chitiethoadon theo mã
     public ChiTietHoaDon tim(String ma) {
         if (listChiTietHoaDon == null) {
             return null;
@@ -61,6 +64,7 @@ public class DanhSachChiTietHoaDon implements QuanLyDanhSach<ChiTietHoaDon> {
         return null;
     }
 
+    // tìm chi tiết hóa đơn chứ sản phẩm (duy nhất) , nếu không tìm thấy trả về null
     public ChiTietHoaDon tim(SanPham sanPham) {
         for (ChiTietHoaDon chiTietHoaDon : listChiTietHoaDon) {
             for (SanPham sp : chiTietHoaDon.getListSanPham()) {

@@ -1,14 +1,14 @@
 package danhsach;
 
 import java.util.ArrayList;
-
 import interfaces.QuanLyDanhSach;
 import model.TinNhan;
 
 public class DanhSachTinNhan implements QuanLyDanhSach<TinNhan> {
-    private ArrayList<TinNhan> listTinNhan;
-    private int soLuong = 0;
+    private ArrayList<TinNhan> listTinNhan; // danh sách tin nhắn
+    private int soLuong = 0; // số lượng tin nhắn
 
+    // constructor
     public DanhSachTinNhan(ArrayList<TinNhan> listTinNhan) {
         this.listTinNhan = listTinNhan;
     }
@@ -16,6 +16,7 @@ public class DanhSachTinNhan implements QuanLyDanhSach<TinNhan> {
     public DanhSachTinNhan() {
     }
 
+    // getter & setter
     public ArrayList<TinNhan> getListTinNhan() {
         return listTinNhan;
     }
@@ -32,6 +33,7 @@ public class DanhSachTinNhan implements QuanLyDanhSach<TinNhan> {
         this.soLuong = soLuong;
     }
 
+    // tìm tin nhắn theo mã
     public TinNhan tim(String ma) {
         if (listTinNhan == null) {
             return null;
@@ -44,6 +46,7 @@ public class DanhSachTinNhan implements QuanLyDanhSach<TinNhan> {
         return null;
     }
 
+    // thêm tin nhắn object
     public boolean them(TinNhan tinNhan) {
         if (tinNhan == null) {
             return false;
@@ -51,6 +54,7 @@ public class DanhSachTinNhan implements QuanLyDanhSach<TinNhan> {
         return listTinNhan.add(tinNhan);
     }
 
+    // thêm tin nhắn theo mã (nếu tồn tại)
     public boolean them(String ma) {
         TinNhan tinNhan = tim(ma);
         if (tinNhan == null) {
@@ -59,6 +63,7 @@ public class DanhSachTinNhan implements QuanLyDanhSach<TinNhan> {
         return listTinNhan.add(tinNhan);
     }
 
+    // xóa tin nhắn object
     public boolean xoa(TinNhan tinNhan) {
         if (tinNhan == null) {
             return false;
@@ -66,6 +71,7 @@ public class DanhSachTinNhan implements QuanLyDanhSach<TinNhan> {
         return listTinNhan.remove(tinNhan);
     }
 
+    // xóa tin nhắn theo mã
     public boolean xoa(String ma) {
         TinNhan tinNhan = tim(ma);
         if (tinNhan == null) {

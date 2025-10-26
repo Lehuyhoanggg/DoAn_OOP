@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NhanVienDiemDanh {
+    //// thuộc tính của ca làm, theo giỏi list nhân viên và tính trạng điểm danh
     private Map<NhanVien, Boolean> mapNhanVien;
 
     public NhanVienDiemDanh() {

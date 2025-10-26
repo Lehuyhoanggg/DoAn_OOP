@@ -36,6 +36,7 @@ public class DanhSachCaLam implements QuanLyDanhSach<CaLam> {
         this.soLuong = soLuong;
     }
 
+    // tìm ca làm theo mã
     public CaLam tim(String ma) {
         if (listCaLam == null) {
             return null;
@@ -48,6 +49,7 @@ public class DanhSachCaLam implements QuanLyDanhSach<CaLam> {
         return null;
     }
 
+    // thêm ca làm vào danh sách
     public boolean them(CaLam caLam) {
         if (caLam == null) {
             return false;
@@ -56,6 +58,7 @@ public class DanhSachCaLam implements QuanLyDanhSach<CaLam> {
         return listCaLam.add(caLam);
     }
 
+    // xóa ca làm khỏi danh sách
     public boolean xoa(CaLam caLam) {
         if (caLam == null) {
             return false;
@@ -64,6 +67,7 @@ public class DanhSachCaLam implements QuanLyDanhSach<CaLam> {
         return listCaLam.remove(caLam);
     }
 
+    // xóa ca làm theo mã
     public boolean xoaCaLam(String ma) {
         CaLam caLam = tim(ma);
         if (caLam == null) {
@@ -73,6 +77,7 @@ public class DanhSachCaLam implements QuanLyDanhSach<CaLam> {
         return listCaLam.remove(caLam);
     }
 
+    // tìm ca làm của 1 ngày cụ thể dự trên số ca , và lichtrongngay truyền vào
     public CaLam tim(int soCa, LichTrongNgay lichTrongNgay) {
         if (lichTrongNgay == null) {
             return null;
@@ -86,6 +91,7 @@ public class DanhSachCaLam implements QuanLyDanhSach<CaLam> {
         return null;
     }
 
+    // trả về ca làm hiện tại (dự theo giờ thực tế) của 1 lịch trong ngày truyền vào
     public CaLam caLamHienTai(LichTrongNgay lichTrongNgay) {
         if (lichTrongNgay == null) {
             return null;
@@ -103,6 +109,8 @@ public class DanhSachCaLam implements QuanLyDanhSach<CaLam> {
         return null;
     }
 
+    // tạo ra 1 list 3 caLam để giúp khởi tạo thuộc tính listCaLam trong lịch trong
+    // ngày
     public ArrayList<CaLam> taoListCaLamTrongTrongNgay(Database db) {
         ArrayList<CaLam> listCaLamMau = new ArrayList<>();
         DanhSachCaLam danhSachCaLam = db.getDanhSachCaLam();

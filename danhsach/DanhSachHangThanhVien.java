@@ -31,6 +31,7 @@ public class DanhSachHangThanhVien implements QuanLyDanhSach<HangThanhVien> {
         this.soLuong = soLuong;
     }
 
+    // tìm hạng thành viên
     public HangThanhVien tim(String ten) {
         if (listHangThanhVien == null) {
             return null;
@@ -43,6 +44,7 @@ public class DanhSachHangThanhVien implements QuanLyDanhSach<HangThanhVien> {
         return null;
     }
 
+    // thêm một hạng thành viên vào danh sách
     public boolean them(HangThanhVien hangThanhVien) {
         if (hangThanhVien == null || tim(hangThanhVien.getTenHang()) != null) {
             return false; // đã tồn tại hoac truyen null vao
@@ -51,6 +53,7 @@ public class DanhSachHangThanhVien implements QuanLyDanhSach<HangThanhVien> {
         return listHangThanhVien.add(hangThanhVien);
     }
 
+    // xóa một hạng thành viên vào danh sách
     public boolean xoa(String ten) {
         HangThanhVien htv = tim(ten);
         if (htv != null) {
@@ -68,31 +71,49 @@ public class DanhSachHangThanhVien implements QuanLyDanhSach<HangThanhVien> {
         return false;
     }
 
+    /// kiểm tra tiền đã chi của khachHang và gán hạng thành viên dựa trên nó
     public void setHangThanhVienChoKhachHang(KhachHang khachHang) {
         HangThanhVien hangThanhVien = null;
         long tienDaChi = khachHang.getTienDaChi();
         if (tienDaChi >= HangThanhVien.mucDong && tienDaChi < HangThanhVien.mucBac
                 && tienDaChi < HangThanhVien.mucVang) {
+            if (khachHang.getHangThanhVien() != null && khachHang.getHangThanhVien().getTenHang().equals("Dong")) { // không
+                                                                                                                    // thay
+                                                                                                                    // dổi
+                return;
+            }
             hangThanhVien = tim("Dong");
             khachHang.setHangThanhVien(hangThanhVien);
         } else if (tienDaChi >= HangThanhVien.mucBac && tienDaChi < HangThanhVien.mucVang) {
+            if (khachHang.getHangThanhVien() != null && khachHang.getHangThanhVien().getTenHang().equals("Bac")) { // không
+                                                                                                                   // thay
+                                                                                                                   // dổi
+                return;
+            }
             hangThanhVien = tim("Bac");
             khachHang.setHangThanhVien(hangThanhVien);
         } else {
+            if (khachHang.getHangThanhVien() != null && khachHang.getHangThanhVien().getTenHang().equals("Vang")) { // không
+                                                                                                                    // thay
+                                                                                                                    // dổi
+                return;
+            }
             hangThanhVien = tim("Vang");
             khachHang.setHangThanhVien(hangThanhVien);
+
         }
         if (hangThanhVien == null) {
             return;
         }
         DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(khachHang.getListMaGiamGia());
-
+        /// xóa mã giảm giá độc quyền của hạng thành viên cũ
         for (int i = khachHang.getListMaGiamGia().size() - 1; i >= 0; i--) {
             MaGiamGia maGiamGia = khachHang.getListMaGiamGia().get(i);
             if (danhSachMaGiamGia.laMaGiamGiaDocQuyen(maGiamGia)) {
                 danhSachMaGiamGia.xoa(maGiamGia);
             }
         }
+        // thêm mã giảm mới
         danhSachMaGiamGia.getListMaGiamGia().addAll(hangThanhVien.getListMaGiamGiaDQ());
     }
 }

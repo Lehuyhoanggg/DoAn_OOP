@@ -9,7 +9,8 @@ import danhsach.*;
 import model.*;
 
 public class Database {
-    // danh sach
+    // Chứa các dánh sách đối tượng đối tượng của chương trình, quản lí phải lấy
+    // tham chiếu thông qua đây
     private DanhSachNhanVien danhSachNhanVien;
     private DanhSachQuanLy danhSachQuanLy;
     private DanhSachHoaDon danhSachHoaDon;
@@ -29,7 +30,6 @@ public class Database {
     private LichTrongTuan lichTrongTuanNay;
     private DanhSachUser danhSachUser;
     private DanhSachSanPham danhSachSanPham;
-    private DanhSachMaGiamGia danhSachMaGiamGiaDaDung;
     private Set<String> khoSerial;
 
     public Database() {
@@ -51,7 +51,6 @@ public class Database {
         danhSachLichTrongNgay = new DanhSachLichTrongNgay(new ArrayList<LichTrongNgay>());
         lichTrongTuanNay = null;
         danhSachSanPham = new DanhSachSanPham(new ArrayList<SanPham>());
-        danhSachMaGiamGiaDaDung = new DanhSachMaGiamGia(new ArrayList<MaGiamGia>());
         khoSerial = new HashSet<>();
         DocFile docFile = new DocFile(this);
         docFile.doc_DatasVaoDatabase();
@@ -68,10 +67,6 @@ public class Database {
 
     public ArrayList<SanPham> getListSanPham() {
         return danhSachSanPham.getListSanPham();
-    }
-
-    public ArrayList<MaGiamGia> getListMaGiamGiaDaDung() {
-        return danhSachMaGiamGiaDaDung.getListMaGiamGia();
     }
 
     public ArrayList<QuanLy> getListQuanLy() {
@@ -224,10 +219,6 @@ public class Database {
         return danhSachHoaDon;
     }
 
-    public DanhSachMaGiamGia getDanhSachMaGiamGiaDaDung() {
-        return danhSachMaGiamGiaDaDung;
-    }
-
     public DanhSachTaiKhoan getDanhSachTaiKhoan() {
         return danhSachTaiKhoan;
     }
@@ -286,10 +277,6 @@ public class Database {
 
     public void setDanhSachNhanVien(DanhSachNhanVien danhSachNhanVien) {
         this.danhSachNhanVien = danhSachNhanVien;
-    }
-
-    public void setDanhSachMaGiamGiaDaDung(DanhSachMaGiamGia danhSachMaGiamGiaDaDung) {
-        this.danhSachMaGiamGiaDaDung = danhSachMaGiamGiaDaDung;
     }
 
     public void setKhoSerial(Set<String> khoSerial) {

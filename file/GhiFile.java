@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import database.Database;
 import model.*;
+import util.ThoiGian;
 import util.XulyString;
 
 public class GhiFile {
@@ -196,11 +197,12 @@ public class GhiFile {
             for (int i = 0; i < listPhieuTraHang.size(); i++) {
                 line = listPhieuTraHang.get(i).getMaTraHang() + " " +
                         listPhieuTraHang.get(i).getKhachHang().getMaKh() + " " +
-                        listPhieuTraHang.get(i).getSanPham() == null
+                        ((listPhieuTraHang.get(i).getSanPham() == null)
                                 ? "null"
-                                : listPhieuTraHang.get(i).getSanPham().getSerial() + " " +
-                                        listPhieuTraHang.get(i).getNgayTra() + " " +
-                                        XulyString.dongGoiStr(listPhieuTraHang.get(i).getLyDoTra());
+                                : listPhieuTraHang.get(i).getSanPham().getSerial())
+                        + " " +
+                        listPhieuTraHang.get(i).getNgayTra() + " " +
+                        XulyString.dongGoiStr(listPhieuTraHang.get(i).getLyDoTra());
                 bw.write(line);
                 bw.newLine();
 
@@ -242,19 +244,6 @@ public class GhiFile {
         }
     }
 
-    public void ghi_MaGiamGiaDaDungtxt(String path) {
-        ArrayList<MaGiamGia> listMaGiamGia = db.getListMaGiamGiaDaDung();
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-            for (MaGiamGia maGiamGia : listMaGiamGia) {
-                bw.write(maGiamGia.getKhachHangDaDung().getMaKh() + " " + maGiamGia.getMa() + " "
-                        + maGiamGia.getSanPhamDaDung().getSerial());
-                bw.newLine();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void ghi_ChiTietHoaDon_SanPhamtxt(String path) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             for (ChiTietHoaDon chiTietHoaDon : db.getListChiTietHoaDon()) {
@@ -276,19 +265,18 @@ public class GhiFile {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             for (HoaDon hoaDon : db.getListHoaDon()) {
                 for (ChiTietHoaDon chiTietHoaDon : hoaDon.getListChiTietHoaDon()) {
-
                     for (MaGiamGia maGiamGia : chiTietHoaDon.getListMaGiamGia()) {
-                        String line = hoaDon.getKhachHang().getMaKh() + " " + chiTietHoaDon.getMa() + " "
-                                + maGiamGia.getMa();
+                        String line = chiTietHoaDon.getMa() + " "
+                                + maGiamGia.getMa() + " " + maGiamGia.getSanPhamDaDung().getSerial();
                         bw.write(line);
                         bw.newLine();
                     }
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     // hoa don
@@ -475,7 +463,8 @@ public class GhiFile {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             String line;
             LichTrongTuan lichTrongTuan = db.getLichTrongTuanNay();
-            if (lichTrongTuan == null) {
+            if (lichTrongTuan == null || !ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(),
+                    lichTrongTuan.getNgayThu2(), lichTrongTuan.getNgayCn())) {
                 return;
             }
             line = lichTrongTuan.getMa() + " " + lichTrongTuan.getNgayThu2() + " " +
@@ -555,7 +544,6 @@ public class GhiFile {
         ghi_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
         ghi_PhieuTraHangtxt("datas/PhieuTraHang.txt");
         ghi_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
-        ghi_MaGiamGiaDaDungtxt("datas/MaGiamGiaDaDung.txt");
         ghi_SanPhamtxt("datas/SanPham.txt");
         ghi_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");
         ghi_ChiTietHoaDon_MaGiamGiaDaDungtxt("datas/ChiTietHoaDon_MaGiamGiaDaDung.txt");

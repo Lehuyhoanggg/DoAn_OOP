@@ -290,7 +290,7 @@ public class TaoDoiTuong {
         if (hoaDon != null) {
             // đưa danh sách mã giảm giá của khách hàng để xử lí
             DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(khachHang.getListMaGiamGia());
-            danhSachMaGiamGia.setThanhTienDaApMaGG(hoaDon, db.getListMaGiamGiaDaDung()); // tính thành tiền tổng cho hóa
+            danhSachMaGiamGia.setThanhTienDaApMaGG(hoaDon); // tính thành tiền tổng cho hóa
                                                                                          // đơn , và áp dụng mã giảm giá
             // nếu có
         }

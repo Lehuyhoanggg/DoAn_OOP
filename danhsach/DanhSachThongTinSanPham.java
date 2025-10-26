@@ -1,14 +1,14 @@
 package danhsach;
 
 import java.util.ArrayList;
-
 import interfaces.QuanLyDanhSach;
 import model.ThongTinSanPham;
 
 public class DanhSachThongTinSanPham implements QuanLyDanhSach<ThongTinSanPham> {
-    private ArrayList<ThongTinSanPham> listThongTinSanPham;
-    private int soLuong = 0;
+    private ArrayList<ThongTinSanPham> listThongTinSanPham; // danh sách thông tin sản phẩm
+    private int soLuong = 0; // số lượng sản phẩm
 
+    // constructor
     public DanhSachThongTinSanPham(ArrayList<ThongTinSanPham> listSanPham) {
         this.listThongTinSanPham = listSanPham;
     }
@@ -16,6 +16,7 @@ public class DanhSachThongTinSanPham implements QuanLyDanhSach<ThongTinSanPham> 
     public DanhSachThongTinSanPham() {
     }
 
+    // getter & setter
     public ArrayList<ThongTinSanPham> getListThongTinSanPham() {
         return listThongTinSanPham;
     }
@@ -32,6 +33,7 @@ public class DanhSachThongTinSanPham implements QuanLyDanhSach<ThongTinSanPham> 
         this.soLuong = soLuong;
     }
 
+    // thêm sản phẩm mới
     public boolean them(ThongTinSanPham sanPham) {
         if (sanPham == null) {
             return false;
@@ -40,6 +42,7 @@ public class DanhSachThongTinSanPham implements QuanLyDanhSach<ThongTinSanPham> 
         return listThongTinSanPham.add(sanPham);
     }
 
+    // xóa sản phẩm theo mã
     public boolean xoa(String ma) {
         if (listThongTinSanPham == null) {
             return false;
@@ -52,17 +55,16 @@ public class DanhSachThongTinSanPham implements QuanLyDanhSach<ThongTinSanPham> 
         return listThongTinSanPham.remove(sanPham);
     }
 
+    // xóa sản phẩm theo object
     public boolean xoa(ThongTinSanPham sanPham) {
-        if (listThongTinSanPham == null) {
-            return false;
-        }
-        if (sanPham == null) {
+        if (listThongTinSanPham == null || sanPham == null) {
             return false;
         }
         soLuong--;
         return listThongTinSanPham.remove(sanPham);
     }
 
+    // tìm sản phẩm theo tên
     public ThongTinSanPham timSanPhamTheoTen(String ten) {
         if (listThongTinSanPham == null) {
             return null;
@@ -75,6 +77,7 @@ public class DanhSachThongTinSanPham implements QuanLyDanhSach<ThongTinSanPham> 
         return null;
     }
 
+    // tìm sản phẩm theo mã
     public ThongTinSanPham tim(String ma) {
         if (listThongTinSanPham == null) {
             return null;

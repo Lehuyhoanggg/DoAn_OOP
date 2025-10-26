@@ -12,44 +12,54 @@ import model.SanPham;
 import util.ThoiGian;
 
 public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
-    ArrayList<MaGiamGia> listMaGiamGia;
-    private int soLuong = 0;
+    ArrayList<MaGiamGia> listMaGiamGia; // Danh sách các mã giảm giá
+    private int soLuong = 0; // Số lượng mã giảm giá hiện có
 
+    // Constructor có tham số
     public DanhSachMaGiamGia(ArrayList<MaGiamGia> listMaGiamGia) {
         this.listMaGiamGia = listMaGiamGia;
     }
 
+    // Constructor mặc định
     public DanhSachMaGiamGia() {
 
     }
 
+    // Getter - trả về danh sách mã giảm giá
     public ArrayList<MaGiamGia> getListMaGiamGia() {
         return listMaGiamGia;
     }
 
+    // Getter - trả về số lượng mã
     public int getSoLuong() {
         return soLuong;
     }
 
+    // Setter - gán danh sách mã giảm giá
     public void setListMaGiamGia(ArrayList<MaGiamGia> listMaGiamGia) {
         this.listMaGiamGia = listMaGiamGia;
     }
 
+    // Setter - gán số lượng
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
 
+    // ==================== CÁC HÀM XỬ LÝ DANH SÁCH ====================
+
+    // Thêm mã giảm giá mới
     public boolean them(MaGiamGia maGiamGia) {
         if (maGiamGia == null) {
-            return false;
+            return false; // Không thêm nếu mã null
         }
         if (tim(maGiamGia.getMa()) != null) {
-            return false;
+            return false; // Không thêm nếu mã đã tồn tại
         }
         soLuong++;
         return listMaGiamGia.add(maGiamGia);
     }
 
+    // Xóa mã giảm giá theo đối tượng
     public boolean xoa(MaGiamGia ma) {
         if (ma == null) {
             return false;
@@ -58,6 +68,7 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
         return listMaGiamGia.remove(ma);
     }
 
+    // Tìm mã giảm giá theo mã
     public MaGiamGia tim(String ma) {
         if (listMaGiamGia == null) {
             return null;
@@ -70,14 +81,19 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
         return null;
     }
 
+    // ==================== KIỂM TRA MÃ GIẢM GIÁ ====================
+
+    // Kiểm tra xem mã giảm giá có cùng danh mục với sản phẩm không
     private boolean trungDanhMuc(MaGiamGia maGiamGia, SanPham sanPham) {
         return maGiamGia.getLoaiDoanhMuc().equals(sanPham.getDanhMuc());
     }
 
+    // Kiểm tra xem mã giảm giá có cùng thương hiệu với sản phẩm không
     private boolean trungThuongHieu(MaGiamGia maGiamGia, SanPham sanPham) {
         return maGiamGia.getLoaiThuongHieu().equals(sanPham.getThuongHieu());
     }
 
+    // Kiểm tra xem mã giảm giá có thể áp dụng cho sản phẩm không
     public boolean maGiamGiaThoaMan(SanPham sanPham, MaGiamGia maGiamGia) {
         if ((trungDanhMuc(maGiamGia, sanPham) || maGiamGia.getLoaiDoanhMuc().equals("Tat_Ca"))
                 && (trungThuongHieu(maGiamGia, sanPham)
@@ -91,76 +107,61 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
         return false;
     }
 
+    // ==================== ÁP DỤNG MÃ GIẢM GIÁ ====================
+
+    // Tính số tiền được giảm cho sản phẩm nếu áp dụng mã
     private long appDungMaGiamGia(SanPham sanPham, MaGiamGia maGiamGia) {
         if (maGiamGiaThoaMan(sanPham, maGiamGia)) {
             String tienGiam = maGiamGia.getTienGiam();
             if (tienGiam != null && tienGiam.length() >= 2 && tienGiam.charAt(tienGiam.length() - 1) == '%') {
+                // Nếu là giảm theo phần trăm
                 Long phanTram = Long.parseLong(tienGiam.substring(0, tienGiam.length() - 1));
-                maGiamGia.setSanPhamDaDung(sanPham);/////////
                 return (sanPham.getGia() * phanTram) / 100;
             } else {
-                maGiamGia.setSanPhamDaDung(sanPham);
+                // Nếu là giảm theo số tiền cụ thể
                 return Long.parseLong(tienGiam);
             }
-
         }
         return 0;
     }
 
-    public MaGiamGia tim(String ma, KhachHang khachHang) {
-        for (MaGiamGia maGiamGia : listMaGiamGia) {
-            if (maGiamGia.getKhachHangDaDung().equals(khachHang) && maGiamGia.getMa().equals(ma)) {
-                return maGiamGia;
-            }
-        }
-        return null;
-    }
-
-    public void setThanhTienDaApMaGG(HoaDon hoaDon, ArrayList<MaGiamGia> danhGiamGiaDaDung) {
+    // Tính và cập nhật thành tiền đã áp dụng mã giảm giá cho hóa đơn
+    public void setThanhTienDaApMaGG(HoaDon hoaDon) {
         for (ChiTietHoaDon chiTietHoaDon : hoaDon.getListChiTietHoaDon()) {
             long thanhTien = 0;
-            for (int i = 0; i < chiTietHoaDon.getListSanPham().size(); i++) { // duyệt qua từng sản phẩm trong hóa đơn
+            // Duyệt từng sản phẩm trong chi tiết hóa đơn
+            for (int i = 0; i < chiTietHoaDon.getListSanPham().size(); i++) {
                 SanPham sanPham = chiTietHoaDon.getListSanPham().get(i);
-
-                ArrayList<MaGiamGia> listRemove = new ArrayList<>(); // lưu các mã giảm giá đã áp dụng => để xóa khỏi
-                                                                     // kho mã gg của khangHang
                 long giaSanPham = sanPham.getGia();
-                ArrayList<MaGiamGia> maGiamGiaSp = listMaGiamGiaChoSp(sanPham); // list mã khả dụng của sản phẩm
-                for (int k = 0; k < maGiamGiaSp.size(); k++) {
+
+                ArrayList<MaGiamGia> maGiamGiaSp = listMaGiamGiaChoSp(sanPham); // Lấy các mã hợp lệ cho sản phẩm
+                for (int k = maGiamGiaSp.size() - 1; k >= 0; k--) {
                     long giaGiam = appDungMaGiamGia(sanPham, maGiamGiaSp.get(k));
-                    // nếu giá giảm là dương thì xử lí ,lưu vào chi tiết hóa đơn và xóa ở kho mgg
-                    // khangHang
                     if (giaGiam > 0) {
+                        // Nếu có giảm giá -> áp dụng, đánh dấu mã đã dùng và trừ giá
+                        maGiamGiaSp.get(k).setSanPhamDaDung(sanPham);
                         chiTietHoaDon.themMaGiamGia(maGiamGiaSp.get(k));
                         giaSanPham -= giaGiam;
-                        listRemove.add(maGiamGiaSp.get(k));
-                        maGiamGiaSp.get(k).setKhachHangDaDung(hoaDon.getKhachHang());
-                        maGiamGiaSp.get(k).setSanPhamDaDung(sanPham);
-                        danhGiamGiaDaDung.add(maGiamGiaSp.get(k));
+                        xoa(maGiamGiaSp.get(k)); // Xóa mã khỏi kho
                     }
-                    if (giaSanPham <= 0) { // giá sản phẩm đã âm
+                    if (giaSanPham <= 0) {
                         giaSanPham = 0;
                         break;
                     }
                 }
                 thanhTien += giaSanPham;
-                /// nếu sản phẩm có bảo hành thì + vào thành tiền
+                // Nếu sản phẩm có bảo hành thì cộng thêm giá bảo hành
                 BaoHanh baoHanh = sanPham.getBaoHanh();
                 if (baoHanh != null) {
                     thanhTien += baoHanh.getGia();
                 }
-
-                /// xóa mã giảm giá cho khachHang
-                for (int j = listRemove.size() - 1; j >= 0; j--) { // duyệt ngược để tránh xung đột
-                    listMaGiamGia.remove(listRemove.get(j));
-                }
             }
-
-            chiTietHoaDon.setThanhTien(thanhTien); // lưu thành tiền đã tính vào chiTietHoaDon
+            chiTietHoaDon.setThanhTien(thanhTien); // Lưu tổng tiền vào chi tiết hóa đơn
         }
-        hoaDon.tinhThanhTien();
+        hoaDon.tinhThanhTien(); // Cập nhật lại tổng hóa đơn
     }
 
+    // Lấy danh sách các mã giảm giá có thể áp dụng cho sản phẩm
     public ArrayList<MaGiamGia> listMaGiamGiaChoSp(SanPham sanPham) {
         ArrayList<MaGiamGia> listMaGiamGiaTM = new ArrayList<>();
         for (int i = 0; i < listMaGiamGia.size(); i++) {
@@ -171,6 +172,9 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
         return listMaGiamGiaTM;
     }
 
+    // ==================== MÃ GIẢM GIÁ ĐỘC QUYỀN ====================
+
+    // Kiểm tra xem mã có thuộc nhóm độc quyền không (đồng, bạc, vàng)
     private boolean maDocQuyen(String ma) {
         String maDong = "MGGDONG";
         String maBac = "MGGBAC";
@@ -178,54 +182,65 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
         return ma.startsWith(maDong) || ma.startsWith(maBac) || ma.startsWith(maVang);
     }
 
+    // Xác định mã có phải mã độc quyền không
     public boolean laMaGiamGiaDocQuyen(MaGiamGia maGiamGia) {
-        if (maDocQuyen(maGiamGia.getMa())) {
-            return true;
-        }
-        return false;
+        return maDocQuyen(maGiamGia.getMa());
     }
 
+    // ==================== TÍNH TOÁN GIÁ SAU KHI ÁP DỤNG ====================
+
+    // Tính giá sản phẩm sau khi áp dụng tất cả mã giảm giá có thể
     public long giaSanPhamSauKhiApDungTatCa(SanPham sanPham) {
         long gia = sanPham.getGia();
         for (MaGiamGia maGiamGia : listMaGiamGia) {
-            if (appDungMaGiamGia(sanPham, maGiamGia) > 0) {
-                gia -= appDungMaGiamGia(sanPham, maGiamGia);
+            long giaGiam = appDungMaGiamGia(sanPham, maGiamGia);
+            if (giaGiam > 0) {
+                gia -= giaGiam;
             }
-
         }
         if (gia < 0)
             gia = 0;
         return gia;
     }
 
+    // ==================== THU HỒI MÃ KHI XÓA SẢN PHẨM ====================
+
+    // Khi xóa sản phẩm khỏi hóa đơn, thu hồi lại các mã giảm giá đã áp dụng
     public ArrayList<MaGiamGia> xoaSanPhamThuHoiMa(SanPham sanPham, HoaDon hoaDon) {
         KhachHang khachHang = hoaDon.getKhachHang();
         if (sanPham == null) {
             return null;
         }
+
+        // Tìm chi tiết hóa đơn chứa sản phẩm cần xóa
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(hoaDon.getListChiTietHoaDon());
         ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(sanPham);
+
         ArrayList<MaGiamGia> listMaThuHoi = new ArrayList<>();
-        ArrayList<MaGiamGia> listMaGiamGiaSp = null;
-        listMaGiamGiaSp = chiTietHoaDon.getListMaGiamGia();
+        ArrayList<MaGiamGia> listMaGiamGiaSp = chiTietHoaDon.getListMaGiamGia();
+
+        // Tính lại thành tiền sau khi thu hồi mã
         DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(listMaGiamGiaSp);
         long thanhTien = danhSachMaGiamGia.giaSanPhamSauKhiApDungTatCa(sanPham);
         if (sanPham.getBaoHanh() != null) {
             thanhTien += sanPham.getBaoHanh().getGia();
         }
         chiTietHoaDon.setThanhTien(chiTietHoaDon.getThanhTien() - thanhTien);
-        hoaDon.tinhThanhTien();////
+        hoaDon.tinhThanhTien();
 
+        // Xóa sản phẩm khỏi chi tiết hóa đơn
         chiTietHoaDon.xoaSanPham(sanPham);
 
         if (listMaGiamGia == null) {
             return null;
         }
+
+        // Thu hồi mã đã dùng về cho khách hàng
         for (int i = listMaGiamGiaSp.size() - 1; i >= 0; i--) {
             if (maGiamGiaThoaMan(sanPham, listMaGiamGiaSp.get(i))) {
-                khachHang.themMaGiamGia(new MaGiamGia(listMaGiamGiaSp.get(i)));
-                listMaThuHoi.add(listMaGiamGiaSp.get(i));
-                listMaGiamGiaSp.remove(i);
+                khachHang.themMaGiamGia(new MaGiamGia(listMaGiamGiaSp.get(i))); // Hoàn lại mã cho KH
+                listMaThuHoi.add(listMaGiamGiaSp.get(i)); // Lưu danh sách mã thu hồi
+                listMaGiamGiaSp.remove(i); // Xóa mã khỏi sản phẩm
             }
         }
         return listMaThuHoi;

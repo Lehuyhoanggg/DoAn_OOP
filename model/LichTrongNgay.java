@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class LichTrongNgay {
     private String ma;
-    private int thu;
-    private String ngay;
+    private int thu; // thứ (2-8)
+    private String ngay; // ngày
     private ArrayList<CaLam> listCaLam; // 1 ngay gom nhieu ca lam
-    
+
     public LichTrongNgay(String ma, int thu, String ngay) {
         this.ma = ma;
         this.thu = thu;

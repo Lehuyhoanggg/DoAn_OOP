@@ -278,34 +278,6 @@ public class DocFile {
         }
     }
 
-    public void doc_MaGiamGiaDaDungtxt(String path) {
-        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang(); /// xác định đây là mã của khách hành nào dùng
-        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham(); // tìm sản phẩm
-        DanhSachMaGiamGia danhSachMaGiaDaDung = db.getDanhSachMaGiamGiaDaDung(); //// mãGG đã set sanPham
-        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia(); ////// lấy đối tượng mã giảm giá gốc
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.replaceAll("\\s+", "").length() == 0) {
-                    continue;
-                }
-                String[] thanhPhan = line.split("\\s+");
-                KhachHang khachHang = danhSachKhachHang.tim(thanhPhan[0]);
-                MaGiamGia maGiamGia = danhSachMaGiamGia.tim(thanhPhan[1]);
-                SanPham sanPham = danhSachSanPham.tim(thanhPhan[2]);
-                if (maGiamGia == null) {
-                    continue;
-                }
-                MaGiamGia maDaDung = new MaGiamGia(maGiamGia);
-                maDaDung.setSanPhamDaDung(sanPham);
-                maDaDung.setKhachHangDaDung(khachHang);
-                danhSachMaGiaDaDung.them(maDaDung);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }// khachhang_maGG_seriSp
-
     public void doc_ChiTietHoaDon_SanPhamtxt(String path) { //////////////
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
@@ -330,9 +302,10 @@ public class DocFile {
     }
 
     public void doc_ChiTietHoaDon_MaGiamGiaDaDungtxt(String path) { /// khachHang ChiTietHoaDon_MaGGDaDung
-        DanhSachMaGiamGia danhSachMaGiamGiaDaDung = db.getDanhSachMaGiamGiaDaDung();//////
-        DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
+        DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
+        DanhSachMaGiamGia danhSachMaGiamGiaDq = db.getDanhSachMaGiamGiaDq();
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -340,15 +313,21 @@ public class DocFile {
                     continue;
                 }
                 String[] thanhPhan = line.split("\\s+");
-                KhachHang khachHang = danhSachKhachHang.tim(thanhPhan[0]);
-                ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(thanhPhan[1]);
+
+                ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(thanhPhan[0]);
                 if (chiTietHoaDon == null) {
                     continue;
                 }
-                for (int i = 2; i < thanhPhan.length; i++) {
-                    MaGiamGia maGiamGia = danhSachMaGiamGiaDaDung.tim(thanhPhan[i], khachHang);
-                    chiTietHoaDon.themMaGiamGia(maGiamGia);
+                MaGiamGia maGiamGia = danhSachMaGiamGia.tim(thanhPhan[1]);
+                if (maGiamGia == null) {
+                    maGiamGia = danhSachMaGiamGiaDq.tim(thanhPhan[1]);
                 }
+
+                SanPham sanPham = danhSachSanPham.tim(thanhPhan[2]);
+
+                MaGiamGia maDaDung = new MaGiamGia(maGiamGia);
+                maDaDung.setSanPhamDaDung(sanPham);
+                chiTietHoaDon.themMaGiamGia(maDaDung);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -682,12 +661,11 @@ public class DocFile {
         doc_MaGiamGiatxt("datas/MaGiamGia.txt");
         doc_HangThanhVientxt("datas/HangThanhVien.txt");
         doc_KhachHangtxt("datas/KhachHang.txt");
-        doc_SanPhamtxt("datas/SanPham.txt");
         doc_BaoHanhtxt("datas/BaoHanh.txt");
+        doc_SanPhamtxt("datas/SanPham.txt");
         doc_PhieuTraHangtxt("datas/PhieuTraHang.txt");
         doc_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
         doc_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
-        doc_MaGiamGiaDaDungtxt("datas/MaGiamGiaDaDung.txt");
         doc_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");
         doc_ChiTietHoaDon_MaGiamGiaDaDungtxt("datas/ChiTietHoaDon_MaGiamGiaDaDung.txt");
         doc_HoaDontxt("datas/HoaDon.txt");

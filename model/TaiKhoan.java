@@ -56,13 +56,14 @@ public class TaiKhoan {
         this.ngayTao = ngayTao;
     }
 
+    // tương tự equals()
     public boolean kiemTraTaiKhoan(String tenDangNhap, String matKhau) {
         if (getTenDangNhap().equals(tenDangNhap) && getMatKhau().equals(matKhau)) {
             return true;
         }
         return false;
     }
-
+    // đổi mật khẩu
     public void doiMatKhau(String matKhau) {
         setMatKhau(matKhau);
     }

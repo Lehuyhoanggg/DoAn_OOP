@@ -56,7 +56,10 @@ public class QuanLyPhieuTraHang {
             System.out.println("Khong tim thay san pham");
             return;
         }
-
+        if (sanPham.getTraHang()) {
+            System.out.println("Khach hang da tra san pham nay roi");
+            return;
+        }
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(sanPham);
         DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();

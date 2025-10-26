@@ -2,11 +2,11 @@ package model;
 
 public class CaLam {
     private String ma;
-    private int so;
+    private int so; // số ca (1,2,3)
     private String gioBatDau;
     private String gioKetThuc;
     private int soLuongCan;
-    private NhanVienDiemDanh listNhanVien;
+    private NhanVienDiemDanh listNhanVien; // Nhân viên trong ca
 
     public CaLam(String ma, int so, String gioBatBau, String gioKetThuc, int soLuongCan) {
         this.ma = ma;
@@ -98,9 +98,11 @@ public class CaLam {
     public boolean xoaNhanVienKhoiCa(NhanVien nhanVien) {
         return listNhanVien.xoaNhanVien(nhanVien);
     }
-    public int soNguoiThieu(){
+
+    public int soNguoiThieu() {
         return soLuongCan - soNguoiTrongCa();
     }
+
     @Override
     public String toString() {
         return "Gio bat dau: " + getGioBatDau() + "\n" +

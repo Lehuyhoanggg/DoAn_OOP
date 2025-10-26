@@ -46,7 +46,7 @@ public class QuanLyBaoHanh {
     }
 
     private void xuatSuaBaoHanh() {
-        System.out.println("======= Quan Ly Bao Hanh =======");        
+        System.out.println("======= Quan Ly Bao Hanh =======");
         System.out.println("1. Sua so thang bao hanh");
         System.out.println("2. Sua san pham");
         System.out.println("3. Sua ngay bat dau");
@@ -140,7 +140,7 @@ public class QuanLyBaoHanh {
     }
 
     public void xuatMenu() {
-        System.out.println("\nQUAN LY BAO HANH");
+        System.out.println("======= Quan Ly Bao Hanh =======");
         System.out.println("1. Tao bao hanh");
         System.out.println("2. Sua bao hanh");
         System.out.println("3. Xoa bao hanh");

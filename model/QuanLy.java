@@ -4,7 +4,7 @@ public class QuanLy extends User {
     public QuanLy(String ma, String cccd, String ten,
             String ngaySinh, String sdt, String gioiTinh) {
         super(ma, cccd, ten, ngaySinh, sdt, gioiTinh);
-        setQuyenHang("QuanLy");
+        setQuyenHang("QuanLy"); // phân quyền
     }
 
     @Override

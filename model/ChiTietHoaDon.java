@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class ChiTietHoaDon {
     private String ma;
-    private ArrayList<SanPham> listSanPham;
-    private int soSp=0;
-    private int soBh=0;
+    private ArrayList<SanPham> listSanPham; // chứa sản phẩm cùng thông tin sản phẩm, SanPham{serial,BaoHanh...}
+    private int soSp = 0;
+    private int soBh = 0;
     private long thanhTien;
-    private ArrayList<MaGiamGia> listMaGiamGia;
+    private ArrayList<MaGiamGia> listMaGiamGia; // chứa danh sách mã đã dùng để khi xóa thì tính lại thành tiền, tiền đã chi cho khách hàng
 
     public ChiTietHoaDon(String ma, Long thanhTien) {
         this.ma = ma;

@@ -1,11 +1,12 @@
 package model;
 
 public class SanPham {
-    private String serial;
-    private ThongTinSanPham thongTinSanPham;
-    private boolean traHang = false;
-    private BaoHanh baoHanh = null;
-    private boolean daBan = false;
+    private String serial; // mã duy nhất của sản phẩm phân biệt với các sản phẩm khác
+    private ThongTinSanPham thongTinSanPham; // thông tin của sản phẩm (lưu trong database)
+    private boolean traHang = false; // theo giỏi tình trạng trả hàng
+    private BaoHanh baoHanh = null; // Bảo hành của riêng sản phẩm (đối tượng giống thông tin được tách ra từ đôi
+                                    // tượng trong database)
+    private boolean daBan = false;// theo giỏi xem còn trong kho không
 
     public SanPham() {
     }

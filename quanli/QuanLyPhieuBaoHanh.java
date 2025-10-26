@@ -56,7 +56,6 @@ public class QuanLyPhieuBaoHanh {
 
         PhieuBaoHanh phieuBaoHanh = TaoDoiTuong.taoPhieuBaoHanh(sanPham.getBaoHanh(), khachHang, db);
         danhSachPhieuBaoHanh.them(phieuBaoHanh);
-        khachHang.themPhieuBaoHanh(phieuBaoHanh);
         System.out.println("Da tao phieu bao hanh thanh cong.");
     }
 

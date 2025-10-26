@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class HoaDon {
     private String ma;
-    private KhachHang khachHang;
-    private ArrayList<ChiTietHoaDon> listChiTietHoaDon;
+    private KhachHang khachHang; // 1 hoadon thuộc về 1 khách hàng
+    private ArrayList<ChiTietHoaDon> listChiTietHoaDon; // 1 hoadon có nhiều chi tiết hóa đơn
     private String ngayTaoHoaDon;
     private String ghiChu;
     private long thanhTien;
@@ -96,7 +96,8 @@ public class HoaDon {
         this.thanhTien -= value;
     }
 
-    public void tinhThanhTien() {
+    public void tinhThanhTien() { // tính thanhtien dự trên giá của các chi tiết hóa đơn (đảm bảo chitiethoadon
+                                  // được tính xong thì dùng)
         thanhTien = 0;
         for (ChiTietHoaDon chiTietHoaDon : listChiTietHoaDon) {
             thanhTien += chiTietHoaDon.getThanhTien();

@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class HangThanhVien {
+    // tiền đã chi của khách hàng đã mức thì được cấp hạng thành viên tương ứng
     public static long mucDong = 1000000;
     public static long mucBac = 5000000;
     public static long mucVang = 10000000;
