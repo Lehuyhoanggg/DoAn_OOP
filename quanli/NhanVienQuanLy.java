@@ -3,8 +3,8 @@ package quanli;
 import model.LichTrongTuan;
 import model.NhanVien;
 import util.Nhap;
+import util.ThoiGian;
 import util.XoaManHinh;
-import danhsach.DanhSachLichTrongTuan;
 import database.Database;
 import interfaces.GiaoTiep;
 
@@ -17,20 +17,13 @@ public class NhanVienQuanLy implements GiaoTiep {
         this.nv = nv;
     }
 
-    public void diemDanhCaLam() {
-        DanhSachLichTrongTuan danhSachLichTrongTuan = db.getDanhSachLichTrongTuan();
-        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.lichTrongTuanNay();
-        QuanLyLichTrongTuan quanLyLichTrongTuan = new QuanLyLichTrongTuan(db, lichTrongTuan);
-        if (quanLyLichTrongTuan.diemDanh(nv)) {
-            System.out.println("Diem danh thanh cong");
-        } else {
-            System.out.println("Diem danh that bai , hien khong co ca lam");
-        }
-    }
-
     public void xemLichLamViecTrongTuanNay() {
-        DanhSachLichTrongTuan danhSachLichTrongTuan = db.getDanhSachLichTrongTuan();
-        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.lichTrongTuanNay();
+        LichTrongTuan lichTrongTuan = db.getLichTrongTuanNay();
+        if (lichTrongTuan == null || !ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(), lichTrongTuan.getNgayThu2(),
+                lichTrongTuan.getNgayCn())) {
+            System.out.println("Tuan nay chua xep lich");
+            return;
+        }
         QuanLyLichTrongTuan quanLyLichTrongTuan = new QuanLyLichTrongTuan(db, lichTrongTuan);
         quanLyLichTrongTuan.xemLichLamViec();
     }
@@ -102,20 +95,20 @@ public class NhanVienQuanLy implements GiaoTiep {
     }
 
     public void xuatMenu() {
+        System.out.println("======= Nhan Vien Quan Ly =======");
         System.out.println("1.  Hien thi thong tin");
-        System.out.println("2.  Diem danh ca lam");
-        System.out.println("3.  Tra cuu thong tin khanh hang");
-        System.out.println("4.  Tao hoa don");
-        System.out.println("5.  Doi/Tra hang");
-        System.out.println("6.  Tim kiem san pham");
-        System.out.println("7.  Xem tat ca ma giam gia");
-        System.out.println("8.  Xem lich lam trong tuan");
-        System.out.println("9.  Doi mat khau");
-        System.out.println("10. Tra cuu thong tin bao hanh");
-        System.out.println("11. Tao phieu bao hanh");
-        System.out.println("12. Gui Tin Nhan");
-        System.out.println("13. Hop thu");
-        System.out.println("0.  Thoat Menu");
+        System.out.println("2.  Tra cuu thong tin khach hang");
+        System.out.println("3.  Tao hoa don");
+        System.out.println("4.  Tao Phieu tra hang");
+        System.out.println("5.  Tim kiem san pham");
+        System.out.println("6.  Xem tat ca ma giam gia");
+        System.out.println("7.  Xem lich lam trong tuan");
+        System.out.println("8.  Tra cuu thong tin bao hanh");
+        System.out.println("9.  Tao phieu bao hanh");
+        System.out.println("10. Gui Tin Nhan");
+        System.out.println("11. Hop thu");
+        System.out.println("12. Doi mat khau");
+        System.out.println("0.  Thoat");
         System.out.println("---------------------------");
     }
 
@@ -123,18 +116,17 @@ public class NhanVienQuanLy implements GiaoTiep {
     public void thucHienChucNang(int choice) {
         switch (choice) {
             case 1 -> hienThiThongTin();
-            case 2 -> diemDanhCaLam();
-            case 3 -> traCuuThongTinKhachHang();
-            case 4 -> taoHoaDon();
-            case 5 -> doiTraHang();
-            case 6 -> traCuuSanPham();
-            case 7 -> xemTatCaMaGiamGia();
-            case 8 -> xemLichLamViecTrongTuanNay();
-            case 9 -> doiMatKhau();
-            case 10 -> TraCuuBaoHanh();
-            case 11 -> taoPhieuBaoHanh();
-            case 12 -> guiTinNhan();
-            case 13 -> xemTatCaTinNhan();
+            case 2 -> traCuuThongTinKhachHang();
+            case 3 -> taoHoaDon();
+            case 4 -> doiTraHang();
+            case 5 -> traCuuSanPham();
+            case 6 -> xemTatCaMaGiamGia();
+            case 7 -> xemLichLamViecTrongTuanNay();
+            case 8 -> TraCuuBaoHanh();
+            case 9 -> taoPhieuBaoHanh();
+            case 10 -> guiTinNhan();
+            case 11 -> xemTatCaTinNhan();
+            case 12 -> doiMatKhau();
             default -> System.out.println("Da thoat Menu!");
         }
     }

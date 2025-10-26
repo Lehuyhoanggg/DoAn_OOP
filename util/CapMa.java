@@ -1,11 +1,20 @@
 package util;
 
 import database.Database;
+import model.HangThanhVien;
 
 public class CapMa {
 
     public static String capMaPhieuTraHang(Database db) {
-        String soPTH = String.valueOf(db.getListPhieuTraHang().size() + 1);
+        String soPTH = "1";
+        if (db.getListPhieuTraHang().size() > 0) {
+            soPTH = String.valueOf(Integer.parseInt(
+                    db.getListPhieuTraHang()
+                            .get(db.getListPhieuTraHang().size() - 1)
+                            .getMaTraHang()
+                            .replaceAll("PTH", ""))
+                    + 1);
+        }
         while (soPTH.length() < 3) {
             soPTH = "0" + soPTH;
         }
@@ -13,7 +22,15 @@ public class CapMa {
     }
 
     public static String capMaBaoHanh(Database db) {
-        String soBH = String.valueOf(db.getListBaoHanh().size() + 1);
+        String soBH = "1";
+        if (db.getListBaoHanh().size() > 0) {
+            soBH = String.valueOf(Integer.parseInt(
+                    db.getListBaoHanh()
+                            .get(db.getListBaoHanh().size() - 1)
+                            .getMaBh()
+                            .replaceAll("BH", ""))
+                    + 1);
+        }
         while (soBH.length() < 3) {
             soBH = "0" + soBH;
         }
@@ -21,7 +38,15 @@ public class CapMa {
     }
 
     public static String capMaPhieuBaoHanh(Database db) {
-        String soPBH = String.valueOf(db.getListPhieuBaoHanh().size() + 1);
+        String soPBH = "1";
+        if (db.getListPhieuBaoHanh().size() > 0) {
+            soPBH = String.valueOf(Integer.parseInt(
+                    db.getListPhieuBaoHanh()
+                            .get(db.getListPhieuBaoHanh().size() - 1)
+                            .getMaBaoHanh()
+                            .replaceAll("PBH", ""))
+                    + 1);
+        }
         while (soPBH.length() < 3) {
             soPBH = "0" + soPBH;
         }
@@ -29,16 +54,31 @@ public class CapMa {
     }
 
     public static String capMaKhachHang(Database db) {
-        String soKh = String.valueOf(db.getListKhachHang().size() + 1);
-        while (soKh.length() < 3) {
-            soKh = "0" + soKh;
+        String soKH = "1";
+        if (db.getListKhachHang().size() > 0) {
+            soKH = String.valueOf(Integer.parseInt(
+                    db.getListKhachHang()
+                            .get(db.getListKhachHang().size() - 1)
+                            .getMaKh()
+                            .replaceAll("KH", ""))
+                    + 1);
         }
-        return "KH" + soKh;
-
+        while (soKH.length() < 3) {
+            soKH = "0" + soKH;
+        }
+        return "KH" + soKH;
     }
 
     public static String capMaChiTietHoaDon(Database db) {
-        String soCTHD = String.valueOf(db.getListChiTietHoaDon().size() + 1);
+        String soCTHD = "1";
+        if (db.getListChiTietHoaDon().size() > 0) {
+            soCTHD = String.valueOf(Integer.parseInt(
+                    db.getListChiTietHoaDon()
+                            .get(db.getListChiTietHoaDon().size() - 1)
+                            .getMa()
+                            .replaceAll("CTHD", ""))
+                    + 1);
+        }
         while (soCTHD.length() < 3) {
             soCTHD = "0" + soCTHD;
         }
@@ -46,7 +86,15 @@ public class CapMa {
     }
 
     public static String capMaHoaDon(Database db) {
-        String soHD = String.valueOf(db.getListHoaDon().size() + 1);
+        String soHD = "1";
+        if (db.getListHoaDon().size() > 0) {
+            soHD = String.valueOf(Integer.parseInt(
+                    db.getListHoaDon()
+                            .get(db.getListHoaDon().size() - 1)
+                            .getMa()
+                            .replaceAll("HD", ""))
+                    + 1);
+        }
         while (soHD.length() < 3) {
             soHD = "0" + soHD;
         }
@@ -54,23 +102,61 @@ public class CapMa {
     }
 
     public static String capMaMaGiamGia(Database db) {
-        String soMGG = String.valueOf(db.getListMaGiamGia().size() + 1);
+        String soMGG = "1";
+        if (db.getListMaGiamGia().size() > 0) {
+            soMGG = String.valueOf(Integer.parseInt(
+                    db.getListMaGiamGia()
+                            .get(db.getListMaGiamGia().size() - 1)
+                            .getMa()
+                            .replaceAll("MGG", ""))
+                    + 1);
+        }
         while (soMGG.length() < 3) {
             soMGG = "0" + soMGG;
         }
         return "MGG" + soMGG;
     }
 
+    public static String capMaMaGiamGiaDocQuyen(Database db, HangThanhVien hangThanhVien) {
+        String soMGG = "1";
+        if (hangThanhVien.getListMaGiamGiaDQ().size() > 0) {
+            soMGG = String.valueOf(Integer.parseInt(
+                    db.getListMaGiamGia()
+                            .get(hangThanhVien.getListMaGiamGiaDQ().size() - 1)
+                            .getMa()
+                            .replaceAll("\\D+", ""))
+                    + 1);
+        }
+
+        return "MGG" + hangThanhVien.getTenHang().toUpperCase() + soMGG;
+    }
+
     public static String capMaNhanVien(Database db) {
-        String soNV = String.valueOf(db.getListNhanVien().size() + 1);
+        String soNV = "1";
+        if (db.getListNhanVien().size() > 0) {
+            soNV = String.valueOf(Integer.parseInt(
+                    db.getListNhanVien()
+                            .get(db.getListNhanVien().size() - 1)
+                            .getMa()
+                            .replaceAll("NV", ""))
+                    + 1);
+        }
         while (soNV.length() < 3) {
             soNV = "0" + soNV;
         }
         return "NV" + soNV;
     }
 
-    public static String capMaQuanly(Database db) {
-        String soQL = String.valueOf(db.getListQuanLy().size() + 1);
+    public static String capMaQuanLy(Database db) {
+        String soQL = "1";
+        if (db.getListQuanLy().size() > 0) {
+            soQL = String.valueOf(Integer.parseInt(
+                    db.getListQuanLy()
+                            .get(db.getListQuanLy().size() - 1)
+                            .getMa()
+                            .replaceAll("QL", ""))
+                    + 1);
+        }
         while (soQL.length() < 3) {
             soQL = "0" + soQL;
         }
@@ -78,7 +164,15 @@ public class CapMa {
     }
 
     public static String capMaThongTinSanPham(Database db) {
-        String soSP = String.valueOf(db.getListThongTinSanPham().size() + 1);
+        String soSP = "1";
+        if (db.getListThongTinSanPham().size() > 0) {
+            soSP = String.valueOf(Integer.parseInt(
+                    db.getListThongTinSanPham()
+                            .get(db.getListThongTinSanPham().size() - 1)
+                            .getMa()
+                            .replaceAll("SP", ""))
+                    + 1);
+        }
         while (soSP.length() < 3) {
             soSP = "0" + soSP;
         }
@@ -86,7 +180,15 @@ public class CapMa {
     }
 
     public static String capMaTinNhan(Database db) {
-        String soTN = String.valueOf(db.getListTinNhan().size() + 1);
+        String soTN = "1";
+        if (db.getListTinNhan().size() > 0) {
+            soTN = String.valueOf(Integer.parseInt(
+                    db.getListTinNhan()
+                            .get(db.getListTinNhan().size() - 1)
+                            .getMa()
+                            .replaceAll("TN", ""))
+                    + 1);
+        }
         while (soTN.length() < 3) {
             soTN = "0" + soTN;
         }
@@ -94,7 +196,15 @@ public class CapMa {
     }
 
     public static String capMaCaLam(Database db) {
-        String soCL = String.valueOf(db.getListCaLam().size() + 1);
+        String soCL = "1";
+        if (db.getListCaLam().size() > 0) {
+            soCL = String.valueOf(Integer.parseInt(
+                    db.getListCaLam()
+                            .get(db.getListCaLam().size() - 1)
+                            .getMa()
+                            .replaceAll("CA", ""))
+                    + 1);
+        }
         while (soCL.length() < 3) {
             soCL = "0" + soCL;
         }
@@ -102,7 +212,15 @@ public class CapMa {
     }
 
     public static String capMaLichTrongNgay(Database db) {
-        String soLTN = String.valueOf(db.getListLichTrongNgay().size() + 1);
+        String soLTN = "1";
+        if (db.getListLichTrongNgay().size() > 0) {
+            soLTN = String.valueOf(Integer.parseInt(
+                    db.getListLichTrongNgay()
+                            .get(db.getListLichTrongNgay().size() - 1)
+                            .getMa()
+                            .replaceAll("LTN", ""))
+                    + 1);
+        }
         while (soLTN.length() < 3) {
             soLTN = "0" + soLTN;
         }
@@ -110,10 +228,6 @@ public class CapMa {
     }
 
     public static String capMaLichTrongTuan(Database db) {
-        String soLTT = String.valueOf(db.getListLichTrongTuan().size() + 1);
-        while (soLTT.length() < 3) {
-            soLTT = "0" + soLTT;
-        }
-        return "LTT" + soLTT;
+        return "LTT" + "001";
     }
 }

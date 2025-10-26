@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import danhsach.DanhSachCaLam;
 import danhsach.DanhSachLichTrongNgay;
-import danhsach.DanhSachLichTrongTuan;
 import danhsach.DanhSachNhanVien;
 
 public class QuanLyLichTrongTuan {
@@ -28,9 +27,7 @@ public class QuanLyLichTrongTuan {
     // diem danh khi da co doi tuong nhan vien
     public boolean diemDanh(NhanVien nhanVien) {
         DanhSachCaLam danhSachCaLam = db.getDanhSachCaLam();
-        DanhSachLichTrongTuan danhSachLichTrongTuan = db.getDanhSachLichTrongTuan();
         DanhSachLichTrongNgay danhSachLichTrongNgay = db.getDanhSachLichTrongNgay();
-        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.lichTrongTuanNay();
         if (lichTrongTuan == null) {
             return false;
         }
@@ -46,9 +43,13 @@ public class QuanLyLichTrongTuan {
     }
 
     // diem danh
-    public boolean diemDanh() {
+    public void diemDanh() {
         NhanVien nhanVien = db.getDanhSachNhanVien().tim(Nhap.nhapStr("Nhap ma nhan vien can diem danh : "));
-        return diemDanh(nhanVien);
+        if (diemDanh(nhanVien)) {
+            System.out.println("Diem danh thanh cong");
+        } else {
+            System.out.println("Nhan vien " + nhanVien.getMa() + " khong co ca lam hien tai");
+        }
     }
 
     private void xoaNhanVienKhoiCa() {
@@ -79,7 +80,11 @@ public class QuanLyLichTrongTuan {
 
     private void themNhanVienVaoCa() {
         xemLichLamViec();
-        int index = Nhap.nhapInt("Chon thu can chinh sua : ") - 2;
+        int index = Nhap.nhapInt("Chon thu can chinh sua ( thu2 - thu8 (cn) ) : ") - 2;
+        if (!(index >= 0 && index <= 6)) {
+            System.out.println("Lua chon khong hop le");
+            return;
+        }
         LichTrongNgay lichTrongNgay = lichTrongTuan.getLichTuan().get(index);
         int soCa = Nhap.nhapInt("Nhap so CaLam can chinh sua : ");
         CaLam caLam = db.getDanhSachCaLam().tim(soCa, lichTrongNgay);
@@ -283,10 +288,11 @@ public class QuanLyLichTrongTuan {
 
     // menu hien thi
     private void xuatMenu() {
-        System.out.println("\nQUAN LY LICH LAM VIEC");
+        System.out.println("======= Quan Ly Lich Trong Tuan =======");
         System.out.println("1. Thong ke diem danh trong tuan");
         System.out.println("2. Xep lich lam viec");
         System.out.println("3. Xem lich lam viec");
+        System.out.println("4. Diem danh cho nhan vien");
         System.out.println("0. Thoat");
         System.out.println("---------------------------");
     }
@@ -297,6 +303,7 @@ public class QuanLyLichTrongTuan {
             case 1 -> thongKeDiemDanhTrongTuan();
             case 2 -> xepLichLamViec();
             case 3 -> xemLichLamViec();
+            case 4 -> diemDanh();
             default -> System.out.println("Lua chon khong hop le");
         }
     }
@@ -313,13 +320,5 @@ public class QuanLyLichTrongTuan {
             thucHienChucNang(luaChon);
             Nhap.pause();
         }
-    }
-
-    public static void main(String[] args) {
-        Database db = new Database();
-        DanhSachLichTrongTuan danhSachLichTrongTuan = db.getDanhSachLichTrongTuan();
-        QuanLyLichTrongTuan quanLyLichTrongTuan = new QuanLyLichTrongTuan(db,
-                danhSachLichTrongTuan.lichTrongTuanNay());
-        quanLyLichTrongTuan.xemLichLamViec();
     }
 }

@@ -200,7 +200,7 @@ public class QuanLySanPham {
     }
 
     private void xuatMenu() {
-        System.out.println("===== MENU QUAN LY SAN PHAM =====");
+        System.out.println("======= Quan Ly San Pham =======");
         System.out.println("1. Hien thi tat ca san pham trong kho");
         System.out.println("2. Nhap kho (them san pham moi)");
         System.out.println("3. Xoa san pham");

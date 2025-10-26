@@ -133,7 +133,8 @@ public class DocFile {
                     continue;
                 }
                 String[] thanhPhan = line.split("\\s+");
-                HangThanhVien hangThanhVien = new HangThanhVien(thanhPhan[0], thanhPhan[1]);
+                HangThanhVien hangThanhVien = new HangThanhVien(thanhPhan[0],
+                        XulyString.chuyenLaiDangStrMacDinh(thanhPhan[1]));
                 for (int i = 2; i < thanhPhan.length; i++) {
                     hangThanhVien.themMaGiamGia(danhSachMaGiamGia.tim(thanhPhan[i]));
                 }
@@ -592,24 +593,21 @@ public class DocFile {
     }
 
     public void doc_LichTrongTuantxt(String path) {
-        DanhSachLichTrongTuan danhSachLichTrongTuan = db.getDanhSachLichTrongTuan();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.replaceAll("\\s+", "").length() == 0) {
-                    continue;
-                }
-                String[] thanhPhan = line.split("\\s+");
-                String ma = thanhPhan[0];
-                String ngayThu2 = thanhPhan[1];
-                String ngayCn = thanhPhan[2];
-                LichTrongTuan lichTrongTuan = new LichTrongTuan(ma, ngayThu2, ngayCn);
-                DanhSachLichTrongNgay danhSachLichTrongNgay = db.getDanhSachLichTrongNgay();
-                for (int i = 3; i < thanhPhan.length; i++) {
-                    lichTrongTuan.themLichTrongNgay(danhSachLichTrongNgay.tim(thanhPhan[i]));
-                }
-                danhSachLichTrongTuan.them(lichTrongTuan);
+            String line = br.readLine();
+            if (line == null) {
+                return;
             }
+            String[] thanhPhan = line.split("\\s+");
+            String ma = thanhPhan[0];
+            String ngayThu2 = thanhPhan[1];
+            String ngayCn = thanhPhan[2];
+            LichTrongTuan lichTrongTuan = new LichTrongTuan(ma, ngayThu2, ngayCn);
+            DanhSachLichTrongNgay danhSachLichTrongNgay = db.getDanhSachLichTrongNgay();
+            for (int i = 3; i < thanhPhan.length; i++) {
+                lichTrongTuan.themLichTrongNgay(danhSachLichTrongNgay.tim(thanhPhan[i]));
+            }
+            db.setLichTrongTuanNay(lichTrongTuan);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -684,10 +682,10 @@ public class DocFile {
         doc_MaGiamGiatxt("datas/MaGiamGia.txt");
         doc_HangThanhVientxt("datas/HangThanhVien.txt");
         doc_KhachHangtxt("datas/KhachHang.txt");
-        doc_BaoHanhtxt("datas/BaoHanh.txt");
-        doc_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
         doc_SanPhamtxt("datas/SanPham.txt");
+        doc_BaoHanhtxt("datas/BaoHanh.txt");
         doc_PhieuTraHangtxt("datas/PhieuTraHang.txt");
+        doc_PhieuBaoHanhtxt("datas/PhieuBaoHanh.txt");
         doc_ChiTietHoaDontxt("datas/ChiTietHoaDon.txt");
         doc_MaGiamGiaDaDungtxt("datas/MaGiamGiaDaDung.txt");
         doc_ChiTietHoaDon_SanPhamtxt("datas/ChiTietHoaDon_SanPham.txt");

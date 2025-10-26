@@ -26,7 +26,7 @@ public class Database {
     private DanhSachTinNhan danhSachTinNhan;
     private DanhSachCaLam danhSachCaLam;
     private DanhSachLichTrongNgay danhSachLichTrongNgay;
-    private DanhSachLichTrongTuan danhSachLichTrongTuan;
+    private LichTrongTuan lichTrongTuanNay;
     private DanhSachUser danhSachUser;
     private DanhSachSanPham danhSachSanPham;
     private DanhSachMaGiamGia danhSachMaGiamGiaDaDung;
@@ -49,7 +49,7 @@ public class Database {
         danhSachTinNhan = new DanhSachTinNhan(new ArrayList<TinNhan>());
         danhSachCaLam = new DanhSachCaLam(new ArrayList<CaLam>());
         danhSachLichTrongNgay = new DanhSachLichTrongNgay(new ArrayList<LichTrongNgay>());
-        danhSachLichTrongTuan = new DanhSachLichTrongTuan(new ArrayList<LichTrongTuan>());
+        lichTrongTuanNay = null;
         danhSachSanPham = new DanhSachSanPham(new ArrayList<SanPham>());
         danhSachMaGiamGiaDaDung = new DanhSachMaGiamGia(new ArrayList<MaGiamGia>());
         khoSerial = new HashSet<>();
@@ -136,10 +136,6 @@ public class Database {
 
     public ArrayList<LichTrongNgay> getListLichTrongNgay() {
         return danhSachLichTrongNgay.getListLichTrongNgay();
-    }
-
-    public ArrayList<LichTrongTuan> getListLichTrongTuan() {
-        return danhSachLichTrongTuan.getListLichTrongTuan();
     }
 
     public ArrayList<ThongTinSanPham> getListThongTinSanPham() {
@@ -256,6 +252,10 @@ public class Database {
         return danhSachPhieuTraHang;
     }
 
+    public LichTrongTuan getLichTrongTuanNay() {
+        return lichTrongTuanNay;
+    }
+
     public DanhSachKhachHang getDanhSachKhachHang() {
         return danhSachKhachHang;
     }
@@ -274,10 +274,6 @@ public class Database {
 
     public DanhSachTinNhan getDanhSachTinNhan() {
         return danhSachTinNhan;
-    }
-
-    public DanhSachLichTrongTuan getDanhSachLichTrongTuan() {
-        return danhSachLichTrongTuan;
     }
 
     public DanhSachCaLam getDanhSachCaLam() {
@@ -360,8 +356,8 @@ public class Database {
         this.danhSachLichTrongNgay = danhSachLichTrongNgay;
     }
 
-    public void setDanhSachLichTrongTuan(DanhSachLichTrongTuan danhSachLichTrongTuan) {
-        this.danhSachLichTrongTuan = danhSachLichTrongTuan;
+    public void setLichTrongTuanNay(LichTrongTuan lichTrongTuanNay) {
+        this.lichTrongTuanNay = lichTrongTuanNay;
     }
 
     public ArrayList<User> getListUser() {

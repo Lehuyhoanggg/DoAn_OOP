@@ -119,7 +119,7 @@ public class GhiFile {
             String line;
             for (int i = 0; i < listHangThanhVien.size(); i++) {
                 line = listHangThanhVien.get(i).getTenHang() + " " +
-                        listHangThanhVien.get(i).getMoTa();
+                        XulyString.dongGoiStr(listHangThanhVien.get(i).getMoTa());
                 for (int j = 0; j < listHangThanhVien.get(i).getListMaGiamGiaDQ().size(); j++) {
                     line = line + " " +
                             listHangThanhVien.get(i).getListMaGiamGiaDQ().get(j).getMa();
@@ -179,7 +179,7 @@ public class GhiFile {
                         listPhieuBaoHanh.get(i).getKhachHang().getMaKh() + " " +
                         listPhieuBaoHanh.get(i).getSanPham().getSerial() + " " +
                         listPhieuBaoHanh.get(i).getNgayBaoHanh() + " " +
-                        listPhieuBaoHanh.get(i).getChiTietLoi();
+                        XulyString.dongGoiStr(listPhieuBaoHanh.get(i).getChiTietLoi());
                 bw.write(line);
                 bw.newLine();
             }
@@ -196,9 +196,11 @@ public class GhiFile {
             for (int i = 0; i < listPhieuTraHang.size(); i++) {
                 line = listPhieuTraHang.get(i).getMaTraHang() + " " +
                         listPhieuTraHang.get(i).getKhachHang().getMaKh() + " " +
-                        listPhieuTraHang.get(i).getSanPham().getSerial() + " " +
-                        listPhieuTraHang.get(i).getNgayTra() + " " +
-                        XulyString.dongGoiStr(listPhieuTraHang.get(i).getLyDoTra());
+                        listPhieuTraHang.get(i).getSanPham() == null
+                                ? "null"
+                                : listPhieuTraHang.get(i).getSanPham().getSerial() + " " +
+                                        listPhieuTraHang.get(i).getNgayTra() + " " +
+                                        XulyString.dongGoiStr(listPhieuTraHang.get(i).getLyDoTra());
                 bw.write(line);
                 bw.newLine();
 
@@ -472,15 +474,18 @@ public class GhiFile {
     public void ghi_LichTrongTuantxt(String path) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             String line;
-            for (LichTrongTuan lichTrongTuan : db.getListLichTrongTuan()) {
-                line = lichTrongTuan.getMa() + " " + lichTrongTuan.getNgayThu2() + " " +
-                        lichTrongTuan.getNgayCn();
-                for (LichTrongNgay lichTrongNgay : lichTrongTuan.getListLichTrongNgay()) {
-                    line += " " + lichTrongNgay.getMa();
-                }
-                bw.write(line);
-                bw.newLine();
+            LichTrongTuan lichTrongTuan = db.getLichTrongTuanNay();
+            if (lichTrongTuan == null) {
+                return;
             }
+            line = lichTrongTuan.getMa() + " " + lichTrongTuan.getNgayThu2() + " " +
+                    lichTrongTuan.getNgayCn();
+            for (LichTrongNgay lichTrongNgay : lichTrongTuan.getListLichTrongNgay()) {
+                line += " " + lichTrongNgay.getMa();
+            }
+            bw.write(line);
+            bw.newLine();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

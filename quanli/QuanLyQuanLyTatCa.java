@@ -1,11 +1,11 @@
 package quanli;
 
-import danhsach.DanhSachLichTrongTuan;
 import database.Database;
 import interfaces.GiaoTiep;
 import model.LichTrongTuan;
 import model.QuanLy;
 import util.Nhap;
+import util.ThoiGian;
 import util.XoaManHinh;
 
 public class QuanLyQuanLyTatCa implements GiaoTiep {
@@ -52,15 +52,13 @@ public class QuanLyQuanLyTatCa implements GiaoTiep {
         quanLyTinNhan.xemTatCaTinNhan(ql);
     }
 
-
     public void xemDoanhThu() {
         QuanLyHoaDon quanLyHoaDon = new QuanLyHoaDon(db);
         quanLyHoaDon.xemDoanhThu();
     }
 
     public void xemLichLamViecTrongTuan() {
-        DanhSachLichTrongTuan danhSachLichTrongTuan = db.getDanhSachLichTrongTuan();
-        LichTrongTuan lichTrongTuan = danhSachLichTrongTuan.lichTrongTuanNay();
+        LichTrongTuan lichTrongTuan = db.getLichTrongTuanNay();
         if (lichTrongTuan == null) {
             System.out.println("Tuan nay chua co lich");
             return;
@@ -69,9 +67,20 @@ public class QuanLyQuanLyTatCa implements GiaoTiep {
         quanLyLichTrongTuan.xemLichLamViec();
     }
 
-    public void quanLyDanhSachLichLamViec() {
-        QuanLyDanhSachLichTrongTuan quanLyDanhSachLichTrongTuan = new QuanLyDanhSachLichTrongTuan(db);
-        quanLyDanhSachLichTrongTuan.menu();
+    public void quanLyLichTuanNay() {
+
+        LichTrongTuan lichTrongTuan = db.getLichTrongTuanNay();
+        if (lichTrongTuan == null || !ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(), lichTrongTuan.getNgayThu2(),
+                lichTrongTuan.getNgayCn())) {
+            System.out.println("Tuan nay chua co lich");
+            System.out.println("Ban co muon tao moi khong (1)Co (khac)Khong");
+            if (Nhap.nhapInt("Nhap lua chon : ") != 1) {
+                return;
+            }
+            db.setLichTrongTuanNay(LichTrongTuan.taoLichTrongTuan(ThoiGian.soTuanHienTai(), db));
+        }
+        QuanLyLichTrongTuan quanLyLichTrongTuan = new QuanLyLichTrongTuan(db, db.getLichTrongTuanNay());
+        quanLyLichTrongTuan.menu();
     }
 
     public void quanLyPhieuBaoHanh() {
@@ -87,6 +96,11 @@ public class QuanLyQuanLyTatCa implements GiaoTiep {
     public void quanLyMaGiamGia() {
         QuanLyMaGiamGia quanLyMaGiamGia = new QuanLyMaGiamGia(db);
         quanLyMaGiamGia.menu();
+    }
+
+    public void QuanLyHangThanhVien() {
+        QuanLyHangThanhVien quanLyHangThanhVien = new QuanLyHangThanhVien(db);
+        quanLyHangThanhVien.menu();
     }
 
     public void doiMatKhau() {
@@ -105,23 +119,25 @@ public class QuanLyQuanLyTatCa implements GiaoTiep {
     }
 
     public void xuatMenu() {
-        System.out.println("1. Hien thong tin");
-        System.out.println("2. Quan ly nhan vien");
-        System.out.println("3. Quan ly san pham");
-        System.out.println("4. Quan ly don hang");
-        System.out.println("5. Quan ly bao hanh san pham");
-        System.out.println("6. Quan ly phieu bao hanh san pham");
-        System.out.println("7. Quan ly tra hang");
-        System.out.println("8. Quan ly khach hang");
-        System.out.println("9. Quan ly ma giam gia");
-        System.out.println("10. Quan ly danh sach lich lam viec trong tuan");
-        System.out.println("11. Xem doanh thu");
-        System.out.println("12. Gui tin nhan");
-        System.out.println("13. Hop thu");
-        System.out.println("14. Xem lich trong tuan nay");
-        System.out.println("15. Doi mat khau");
-        System.out.println("16. Cap tai khoan cho user");
-        System.out.println("0. Thoat");
+        System.out.println("======= Quan Ly Tat Ca =======");
+        System.out.println("1.  Hien thong tin");
+        System.out.println("2.  Quan ly nhan vien");
+        System.out.println("3.  Quan ly san pham");
+        System.out.println("4.  Quan ly don hang");
+        System.out.println("5.  Quan ly bao hanh san pham");
+        System.out.println("6.  Quan ly phieu bao hanh san pham");
+        System.out.println("7.  Quan ly tra hang");
+        System.out.println("8.  Quan ly khach hang");
+        System.out.println("9.  Quan ly ma giam gia");
+        System.out.println("10. Quan ly hang thanh vien");
+        System.out.println("11. Quan ly lich trong tuan nay");
+        System.out.println("12. Xem doanh thu");
+        System.out.println("13. Gui tin nhan");
+        System.out.println("14. Hop thu");
+        System.out.println("15. Xem lich trong tuan nay");
+        System.out.println("16. Doi mat khau");
+        System.out.println("17. Cap tai khoan cho user");
+        System.out.println("0.  Thoat");
         System.out.println("-------------------------------------------------");
     }
 
@@ -134,15 +150,16 @@ public class QuanLyQuanLyTatCa implements GiaoTiep {
             case 5 -> quanLyBaoHanh();
             case 6 -> quanLyPhieuBaoHanh();
             case 7 -> quanLyPhieuTraHang();
-            case 8 -> quanLyKhachHang(); // sửa tên cho đúng chính tả
+            case 8 -> quanLyKhachHang();
             case 9 -> quanLyMaGiamGia();
-            case 10 -> quanLyDanhSachLichLamViec();
-            case 11 -> xemDoanhThu();
-            case 12 -> guiTinNhan();
-            case 13 -> xemTatCaTinNhan(); // Hop thu
-            case 14 -> xemLichLamViecTrongTuan(); // Xem lich trong tuan nay
-            case 15 -> doiMatKhau();
-            case 16 -> capTaiKhoanChoUser();
+            case 10 -> QuanLyHangThanhVien();
+            case 11 -> quanLyLichTuanNay();
+            case 12 -> xemDoanhThu();
+            case 13 -> guiTinNhan();
+            case 14 -> xemTatCaTinNhan(); // Hop thu
+            case 15 -> xemLichLamViecTrongTuan(); // Xem lich trong tuan nay
+            case 16 -> doiMatKhau();
+            case 17 -> capTaiKhoanChoUser();
             case 0 -> System.out.println("Da thoat!");
             default -> System.out.println("Lua chon khong hop le!");
         }

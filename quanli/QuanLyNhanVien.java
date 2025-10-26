@@ -110,7 +110,7 @@ public class QuanLyNhanVien {
     }
 
     private void xuatMenu() {
-        System.out.println("\nQUAN LY NHAN VIEN");
+       System.out.println("======= Quan Ly Nhan Vien =======");
         System.out.println("1. Them nhan vien");
         System.out.println("2. Sua thong tin");
         System.out.println("3. Xoa nhan vien");

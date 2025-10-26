@@ -2,12 +2,12 @@ package quanli;
 
 import java.util.ArrayList;
 
-import danhsach.DanhSachBaoHanh;
+import danhsach.DanhSachChiTietHoaDon;
 import danhsach.DanhSachKhachHang;
 import danhsach.DanhSachPhieuBaoHanh;
 import danhsach.DanhSachSanPham;
 import database.Database;
-import model.BaoHanh;
+import model.HoaDon;
 import model.KhachHang;
 import model.PhieuBaoHanh;
 import model.SanPham;
@@ -25,14 +25,36 @@ public class QuanLyPhieuBaoHanh {
     public void taoPhieuBaoHanh() {
         DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = db.getDanhSachPhieuBaoHanh();
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
-        DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
+        DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         KhachHang khachHang = danhSachKhachHang.timKhachHangTheoSdt(Nhap.nhapStr("Nhap sdt khach hang de bao hanh : "));
-        BaoHanh baoHanh = danhSachBaoHanh.tim(Nhap.nhapStr("Nhap ma bao hanh de tao phieu bao hanh : "));
-        if (baoHanh == null) {
-            System.out.println("Khong tim thay bao hanh de tao phieu");
+        if (khachHang == null) {
+            System.out.println("Khong tim thay khach hang");
             return;
         }
-        PhieuBaoHanh phieuBaoHanh = TaoDoiTuong.taoPhieuBaoHanh(baoHanh, khachHang, db);
+        SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma serial san pham can bao hanh : "));
+
+        if (sanPham == null) {
+            System.out.println("Khong tim thay san pham");
+            return;
+        }
+        boolean tonTai = false;
+        for (HoaDon hoaDon : khachHang.getListHoaDon()) {
+            DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(hoaDon.getListChiTietHoaDon());
+            if (danhSachChiTietHoaDon.tim(sanPham) != null) {
+                tonTai = true;
+            }
+        }
+        if (!tonTai) {
+            System.out.println("Khach hang chua mua san pham nay");
+            return;
+        }
+
+        if (sanPham.getBaoHanh() == null) {
+            System.out.println("San pham nay khong co bao hanh");
+            return;
+        }
+
+        PhieuBaoHanh phieuBaoHanh = TaoDoiTuong.taoPhieuBaoHanh(sanPham.getBaoHanh(), khachHang, db);
         danhSachPhieuBaoHanh.them(phieuBaoHanh);
         khachHang.themPhieuBaoHanh(phieuBaoHanh);
         System.out.println("Da tao phieu bao hanh thanh cong.");
@@ -55,7 +77,7 @@ public class QuanLyPhieuBaoHanh {
             case 1:
                 DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
                 KhachHang khachHang = danhSachKhachHang
-                        .tim("Nhap ma khach hang can thay doi vao trong phieu : ");
+                        .tim(Nhap.nhapStr("Nhap ma khach hang can thay doi vao trong phieu : "));
                 if (khachHang == null) {
                     System.out.println("Ma khach hang khong hop le");
                 } else {
@@ -65,7 +87,7 @@ public class QuanLyPhieuBaoHanh {
                 break;
             case 2:
                 DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-                SanPham sanPham = danhSachSanPham.tim("Nhap ma serial san pham moi trong phieu : ");
+                SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma serial san pham moi trong phieu : "));
                 if (sanPham == null) {
                     System.out.println("Ma san pham khong hop le");
                 } else {
@@ -96,6 +118,9 @@ public class QuanLyPhieuBaoHanh {
         int xacNhan = 1;
         while (xacNhan == 1) {
             XoaManHinh.xoa();
+            System.out.println("------------------------");
+            System.out.println(phieuBaoHanh);
+            System.out.println("------------------------");
             xuatSuaPhieuBaoHanh();
             int luaChon = Nhap.nhapInt("Nhap lua chon : ");
             if (luaChon == 0) {
@@ -149,7 +174,7 @@ public class QuanLyPhieuBaoHanh {
     }
 
     private void xuatMenu() {
-        System.out.println("\nQUAN LY PHIEU BAO HANH");
+        System.out.println("======= Quan Ly Phieu Bao Hanh =======");
         System.out.println("1. Tao phieu bao hanh");
         System.out.println("2. Sua phieu bao hanh");
         System.out.println("3. Xoa phieu bao hanh");

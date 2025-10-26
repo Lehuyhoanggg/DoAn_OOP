@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import database.Database;
+import util.CapMa;
 import util.ThoiGian;
 
 public class LichTrongTuan {
@@ -51,7 +53,7 @@ public class LichTrongTuan {
 
     public void setNgayThu2(String ngayThu2) {/////
         this.ngayThu2 = ngayThu2;
-        this.ngayCn = ThoiGian.nNgayTiepTheo(ngayThu2, 7);
+        this.ngayCn = ThoiGian.nNgayTiepTheo(ngayThu2, 6);
     }
 
     public void setNgayCn(String ngayCn) {////
@@ -65,4 +67,13 @@ public class LichTrongTuan {
         return listLichTrongNgay.add(lichTrongNgay);
     }
 
+    public static LichTrongTuan taoLichTrongTuan(int soTuan, Database db) {
+        LichTrongTuan lichTrongTuan = new LichTrongTuan();
+        lichTrongTuan.setListLichTrongNgay(
+                db.getDanhSachLichTrongNgay().taoListLichTrongNgay(db, ThoiGian.layNgayDauTuanStr(soTuan)));
+        lichTrongTuan.setMa(CapMa.capMaLichTrongTuan(db));
+        lichTrongTuan.setNgayThu2(ThoiGian.layNgayDauTuanStr(soTuan));
+        db.setLichTrongTuanNay(lichTrongTuan);
+        return lichTrongTuan;
+    }
 }

@@ -188,7 +188,7 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
     public long giaSanPhamSauKhiApDungTatCa(SanPham sanPham) {
         long gia = sanPham.getGia();
         for (MaGiamGia maGiamGia : listMaGiamGia) {
-            if (sanPham.getGia() > appDungMaGiamGia(sanPham, maGiamGia)) {
+            if (appDungMaGiamGia(sanPham, maGiamGia) > 0) {
                 gia -= appDungMaGiamGia(sanPham, maGiamGia);
             }
 

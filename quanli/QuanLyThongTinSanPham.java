@@ -172,14 +172,14 @@ public class QuanLyThongTinSanPham {
     }
 
     private void xuatMenu() {
-        System.out.println("===== MENU THONG TIN SAN PHAM =====");
+        System.out.println("======= Quan Ly Thong Tin San Pham =======");
         System.out.println("1. Hien thi tat ca thong tin san pham");
         System.out.println("2. Them thong tin san pham");
         System.out.println("3. Xoa thong tin san pham");
         System.out.println("4. Sua thong tin san pham");
         System.out.println("5. Tra cuu thong tin san pham");
         System.out.println("6. Quan Ly San Pham trong kho");// quản lí sản phẩm có trong kho (sản phẩm cụ thể có serial)
-        System.out.println("0. Thoat Menu");
+        System.out.println("0. Thoat");
     }
 
     private void thucHienChucNang(int choice) {

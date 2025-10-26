@@ -270,6 +270,7 @@ public class QuanLyHoaDon {
 
     // 4.xem doanh thu
     private void xuatXemDoanhThu() {
+        System.out.println("======= Quan Ly Hoa Don =======");
         System.out.println("1. xem doanh thu hom nay");
         System.out.println("2. xem doanh thu tuan");
         System.out.println("3. xem doanh thu thang");
@@ -352,6 +353,19 @@ public class QuanLyHoaDon {
                     System.out.println("--------------------------------");
                 }
                 System.out.println("=======================================");
+            }
+
+            System.out.println();
+            System.out.println("Danh sach ma giam gia da ap dung :");
+            boolean trong = true;
+            for (ChiTietHoaDon chiTietHoaDon : hoaDon.getListChiTietHoaDon()) {
+                for (MaGiamGia maGiamGia : chiTietHoaDon.getListMaGiamGia()) {
+                    System.out.println(maGiamGia);
+                    trong = true;
+                }
+            }
+            if (trong) {
+                System.out.println("Khong co ma giam gia da ap dung");
             }
         }
     }

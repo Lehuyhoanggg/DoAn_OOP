@@ -172,6 +172,7 @@ public class QuanLyMaGiamGia {
     }
 
     private void xuatMenu() {
+        System.out.println("======= Quan Ly Lich Trong Tuan =======");
         System.out.println("1. Them ma giam gia");
         System.out.println("2. Xoa ma giam gia");
         System.out.println("3. Tra cuu ma giam gia");

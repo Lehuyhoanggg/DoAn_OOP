@@ -8,3 +8,4 @@ MGG007 Giam_30_TatCa Tat_Ca Tat_Ca 30% Vinh_Vien Vinh_Vien
 MGGDONG1 Giam_Hang_Dong Tat_Ca Tat_Ca 40% Vinh_Vien Vinh_Vien
 MGGBAC1 Giam_Hang_Bac Tat_Ca Tat_Ca 50% Vinh_Vien Vinh_Vien
 MGGVANG1 Giam_Hang_Vang Tat_Ca Tat_Ca 60% Vinh_Vien Vinh_Vien
+MGGVANG2 Bao LapTop Tat_Ca 100000 20/10/2025 20/12/2025

@@ -84,7 +84,6 @@ public class QuanLyPhieuTraHang {
         danhSachHangThanhVien.setHangThanhVienChoKhachHang(khachHang);
 
         PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(khachHang, sanPham, db);
-        System.out.println(pth.getSanPham());
 
         if (danhSachPhieuTraHang.them(pth)) {
             System.out.println("Tao phieu tra hang thanh cong!");
@@ -120,14 +119,23 @@ public class QuanLyPhieuTraHang {
         switch (chon) {
             case 1:
                 DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
-                pth.setKhachHang(danhSachKhachHang.tim(Nhap.nhapStr("Nhap ma khach hang de them vao : ")));
+                KhachHang khachHang = danhSachKhachHang.tim(Nhap.nhapStr("Nhap ma khach hang de them vao : "));
+                if (khachHang == null) {
+                    System.out.println("Khong tim thay khach hang de them vao");
+                    return;
+                }
+                pth.setKhachHang(khachHang);
                 System.out.println("Da thay doi khach hang");
                 break;
 
             case 2:
                 DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
-                pth.setSanPham(danhSachSanPham.tim("Nhap ma serial san pham de them vao : "));
-                System.out.println("da thay doi san pham");
+                SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma serial san pham de them vao : "));
+                if (sanPham == null) {
+                    System.out.println("Khong tim thay san pham de them vao");
+                    return;
+                }
+                pth.setSanPham(sanPham);
                 break;
             case 3:
                 pth.setNgayTra(Nhap.nhapNgay("Nhap ngay tra moi (yyyy-MM-dd): "));
@@ -189,7 +197,7 @@ public class QuanLyPhieuTraHang {
 
     ////////
     private void xuatMenu() {
-        System.out.println("===== MENU PHIEU TRA HANG =====");
+        System.out.println("======= Quan Ly Phieu Tra Hang =======");
         System.out.println("1. Tao phieu tra hang");
         System.out.println("2. Sua phieu tra hang");
         System.out.println("3. Tra cuu phieu tra hang");

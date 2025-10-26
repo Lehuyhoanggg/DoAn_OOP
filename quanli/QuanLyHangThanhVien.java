@@ -30,32 +30,12 @@ public class QuanLyHangThanhVien {
         }
     }
 
-    public void taoHangThanhVien() {
-        DanhSachHangThanhVien service = db.getDanhSachHangThanhVien();
-        HangThanhVien htv = TaoDoiTuong.taoHangThanhVien(db);
-        if (service.them(htv)) {
-            System.out.println("Tao hang thanh vien thanh cong!");
-        } else {
-            System.out.println("Tao hang thanh vien that bai!");
-        }
-    }
-
-    public void xoaHangThanhVien() {
-        DanhSachHangThanhVien service = db.getDanhSachHangThanhVien();
-        String ten = Nhap.nhapStr("Nhap ten hang thanh vien can xoa: ");
-        if (service.xoa(ten)) {
-            System.out.println("Xoa hang thanh vien thanh cong!");
-        } else {
-            System.out.println("Khong tim thay hang thanh vien hoac xoa that bai!");
-        }
-    }
-
     /// sua hang thanh vien
 
     private void xuatSuaHangThanhVien() {
         System.out.println("1. Sua ten hang thanh vien");
         System.out.println("2. Sua mo ta hang thanh vien");
-        System.out.println("3. Them ma giam gia cho hang thanh vien");
+        System.out.println("3. Tao them ma giam gia cho hang thanh vien");
         System.out.println("4. Xoa ma giam gia cho hang thanh vien");
         System.out.println("0. Thoat");
         System.out.println("---------------------------");
@@ -72,28 +52,22 @@ public class QuanLyHangThanhVien {
                 System.out.println("Da sua mo ta cua hang thanh vien");
                 break;
             case 3:
-                DanhSachMaGiamGia maGiamGiaService = db.getDanhSachMaGiamGia();
-                MaGiamGia maGiamGia = maGiamGiaService.tim("Nhap ma giam gia de them vao hang thanh vien : ");
-                if (maGiamGia == null) {
-                    System.out.println("Khong tim thay ma giam gia");
-                    return;
-                }
+                DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGiaDq();
+                MaGiamGia maGiamGia = TaoDoiTuong.taoMaGiamGiaDocQuyen(db, hangThanhVien);
+                danhSachMaGiamGia.them(maGiamGia);
                 hangThanhVien.themMaGiamGia(maGiamGia);
                 System.out.println("Them ma giam gia thanh cong");
                 break;
             case 4:
-                DanhSachMaGiamGia maGiamGiaService1 = db.getDanhSachMaGiamGia();
+                DanhSachMaGiamGia maGiamGiaService1 = db.getDanhSachMaGiamGiaDq();
                 MaGiamGia maGiamGia1 = maGiamGiaService1
-                        .tim("Nhap ma giam gia de them vao hang thanh vien : ");
+                        .tim(Nhap.nhapStr("Nhap ma giam gia de them vao hang thanh vien : "));
                 if (maGiamGia1 == null) {
                     System.out.println("Khong tim thay ma giam gia");
                     return;
                 }
                 hangThanhVien.xoaMaGiamGia(maGiamGia1);
                 System.out.println("Da xoa ma giam gia thanh cong");
-                break;
-            case 0:
-                System.out.println("Thoat sua hang thanh vien");
                 break;
             default:
                 System.out.println("Lua chon khong hop le");
@@ -104,7 +78,7 @@ public class QuanLyHangThanhVien {
 
     public void suaHangThanhVien() {
         DanhSachHangThanhVien hangThanhVienService = db.getDanhSachHangThanhVien();
-        HangThanhVien hangThanhVien = hangThanhVienService.tim("Nhap ten hang thanh vien can sua : ");
+        HangThanhVien hangThanhVien = hangThanhVienService.tim(Nhap.nhapStr("Nhap ten hang thanh vien can sua : "));
         if (hangThanhVien == null) {
             System.out.println("Khong tim thay hang thanh vien");
             return;
@@ -145,38 +119,20 @@ public class QuanLyHangThanhVien {
     }
 
     private void xuatMenu() {
-        System.out.println("1. Tao hang thanh vien moi");
-        System.out.println("2. Xoa hang thanh vien");
-        System.out.println("3. Tra cuu hang thanh vien");
-        System.out.println("4. Sua hang thanh vien");
-        System.out.println("5. hien thi thong tin tat ca hang thanh vien");
+        System.out.println("======= Quan Ly Hang Thanh Vien =======");
+        System.out.println("1. Tra cuu hang thanh vien");
+        System.out.println("2. Sua hang thanh vien");
+        System.out.println("3. Hien thi thong tin tat ca hang thanh vien");
         System.out.println("0. Thoat");
         System.out.println("---------------------------");
     }
 
     private void thucHienChucNang(int chon) {
         switch (chon) {
-            case 1:
-                taoHangThanhVien();
-                break;
-            case 2:
-                xoaHangThanhVien();
-                break;
-            case 3:
-                traCuuHangThanhVien();
-                break;
-            case 4:
-                suaHangThanhVien();
-                break;
-            case 5:
-                xemTatCaHangThanhVien();
-                break;
-            case 0:
-                System.out.println("Thoat menu hang thanh vien");
-                break;
-            default:
-                System.out.println("Lua chon khong hop le");
-                break;
+            case 1 -> traCuuHangThanhVien();
+            case 2 -> suaHangThanhVien();
+            case 3 -> xemTatCaHangThanhVien();
+            default -> System.out.println("Lua chon khong hop le");
         }
     }
 

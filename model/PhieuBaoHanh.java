@@ -59,7 +59,7 @@ public class PhieuBaoHanh {
     public String toString() {
         return "maBaoHanh : " + maBaoHanh + "\n" +
                 "khachHangMa : " + (khachHang != null ? khachHang.getMaKh() : "null") + "\n" +
-                "sanPhamMa : " + (sanPham != null ? sanPham.getMa() : "null") + "\n" +
+                "sanPhamMa : " + (sanPham != null ? sanPham.getSerial() : "null") + "\n" +
                 "ngayBaoHanh : " + ngayBaoHanh + "\n" +
                 "ChiTietLoi : " + ChiTietLoi + "\n";
     }

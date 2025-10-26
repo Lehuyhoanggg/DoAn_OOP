@@ -227,6 +227,7 @@ public class QuanLyKhachHang {
     }
 
     private void xuatMenu() {
+        System.out.println("======= Quan Ly Khach Hang =======");
         System.out.println("1. Tao khach hang");
         System.out.println("2. Tra cuu thong tin khach hang");
         System.out.println("3. Xoa khach hang");
