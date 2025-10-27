@@ -160,12 +160,14 @@ public class CapMa {
     public static String capMaQuanLy(Database db) {
         String soQL = "1";
         if (db.getListQuanLy().size() > 0) {
-            soQL = String.valueOf(Integer.parseInt(
-                    db.getListQuanLy()
-                            .get(db.getListQuanLy().size() - 1)
-                            .getMa()
-                            .replaceAll("QL", ""))
-                    + 1);
+            String ma = db.getListQuanLy()
+                    .get(db.getListQuanLy().size() - 1)
+                    .getMa()
+                    .replaceAll("\\D+", "");
+            if (ma.length() > 0) {
+                soQL = String.valueOf(Integer.parseInt(ma) + 1);
+            }
+
         }
         while (soQL.length() < 3) {
             soQL = "0" + soQL;

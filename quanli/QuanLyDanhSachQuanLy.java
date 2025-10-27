@@ -7,10 +7,17 @@ import database.Database;
 import model.QuanLy;
 import util.Nhap;
 import util.TaoDoiTuong;
+import util.XoaManHinh;
 
 public class QuanLyDanhSachQuanLy {
     Database db; // cơ sở dữ liệu chính
-    QuanLy ql; // đối tượng quản lý tạm thời
+
+    public QuanLyDanhSachQuanLy() {
+    };
+
+    public QuanLyDanhSachQuanLy(Database db) {
+        this.db = db;
+    }
 
     // hiển thị tất cả quản lý
     public void hienThiTatCaQuanLy() {
@@ -52,7 +59,7 @@ public class QuanLyDanhSachQuanLy {
     }
 
     // tra cứu quản lý theo mã
-    public void traCuuQuangLy() {
+    public void traCuuQuanLy() {
         String ma = Nhap.nhapStr("nhap ma quang ly can tra cuu: ");
         DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
         QuanLy ql = danhSachQuanLy.tim(ma);
@@ -95,17 +102,55 @@ public class QuanLyDanhSachQuanLy {
             System.out.println("Khong tim thay quan ly can sua.");
             return;
         }
-        int tiep = 1;
-        while (tiep == 1) { // cho phép sửa liên tục cho đến khi người dùng thoát
+        while (true) { // cho phép sửa liên tục cho đến khi người dùng thoát
+            XoaManHinh.xoa();
             System.out.println();
             System.out.println("------------------------");
             System.out.println(ql);
             System.out.println("------------------------");
             xuatSuaQuanLy(); // in menu sửa
             int chon = Nhap.nhapInt("Chon muc: ");
+            if (chon==0){
+                return;
+            }
             thucHienChucNangSuaQuanLy(ql, chon); // sửa thuộc tính tương ứng
-            tiep = Nhap.nhapInt("(1) Tiep tuc sua | (Khac) Thoat: ");
+           Nhap.pause();
         }
-        System.out.println("Da cap nhat thong tin quang ly.");
+    }
+
+    public void xuatMenu() {
+        System.out.println("======= QUAN LY DANH SACH QUAN LY =======");
+        System.out.println("1. Hien thi tat ca quan ly");
+        System.out.println("2. Them quan ly moi");
+        System.out.println("3. Sua thong tin quan ly");
+        System.out.println("4. Xoa quan ly");
+        System.out.println("5. Tra cuu quan ly theo ma");
+        System.out.println("0. Thoat");
+        System.out.println("----------------------------------------");
+    }
+
+    public void menu() {
+        int chon;
+        do {
+            XoaManHinh.xoa();
+            xuatMenu();
+            chon = Nhap.nhapInt("Nhap lua chon: ");
+            switch (chon) {
+                case 1 -> hienThiTatCaQuanLy();
+                case 2 -> themQuanLy();
+                case 3 -> SuaQuanLy();
+                case 4 -> xoaQuanLy();
+                case 5 -> traCuuQuanLy();
+                case 0 -> System.out.println("Thoat chuong trinh quan ly.");
+                default -> System.out.println("Lua chon khong hop le, vui long chon lai.");
+            }
+            Nhap.pause();
+        } while (chon != 0);
+    }
+
+    public static void main(String[] args) {
+        Database db = new Database();
+        QuanLyDanhSachQuanLy quanLy = new QuanLyDanhSachQuanLy(db);
+        quanLy.menu();
     }
 }
