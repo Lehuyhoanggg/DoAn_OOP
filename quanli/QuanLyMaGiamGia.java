@@ -15,12 +15,12 @@ import util.XoaManHinh;
 public class QuanLyMaGiamGia {
     private Database db;
 
-    // contructor
+    // constructor - nhận database để thao tác
     public QuanLyMaGiamGia(Database db) {
         this.db = db;
     }
 
-    // tim kiem ma giam gia
+    // tìm kiếm mã giảm giá theo mã nhập từ người dùng
     public void timKiemMaGiamGia() {
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can tim: ");
@@ -32,10 +32,11 @@ public class QuanLyMaGiamGia {
         }
     }
 
-    // xuat all ma giam gia
+    // hiển thị toàn bộ mã giảm giá thường và độc quyền
     public void xemTatCaMaGiamGia() {
         System.out.println("====Tat ca ma giam gia====");
         ArrayList<MaGiamGia> listMaGiamGia = db.getListMaGiamGia();
+        // in danh sách mã giảm giá thường
         if (!(listMaGiamGia == null || listMaGiamGia.size() == 0)) {
             System.out.println("Danh sach ma giam gia thuong : ");
             System.out.println();
@@ -43,6 +44,7 @@ public class QuanLyMaGiamGia {
                 System.out.println(listMaGiamGia.get(i));
             }
         }
+        // in danh sách mã giảm giá độc quyền
         ArrayList<MaGiamGia> listMaGiamGiaDq = db.getListMaGiamGiaDq();
         if (!(listMaGiamGiaDq == null || listMaGiamGiaDq.size() == 0)) {
             System.out.println("Danh sach ma giam gia doc quyen : ");
@@ -53,12 +55,13 @@ public class QuanLyMaGiamGia {
         }
     }
 
-    // them ma giam gia
+    // thêm một mã giảm giá mới và gán cho tất cả khách hàng hiện có
     public void themMaGiamGia() {
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         MaGiamGia mGG = TaoDoiTuong.taoMaGiamGia(db);
         if (danhSachMaGiamGia.them(mGG)) {
             System.out.println("them ma giam gia thanh cong!");
+            // thêm bản sao mã giảm giá cho tất cả khách hàng
             for (KhachHang khachHang : db.getListKhachHang()) {
                 khachHang.themMaGiamGia(new MaGiamGia(mGG));
             }
@@ -67,7 +70,7 @@ public class QuanLyMaGiamGia {
         }
     }
 
-    // xoa ma giam gia
+    // xóa mã giảm giá khỏi hệ thống và khỏi danh sách của từng khách hàng
     public void xoaMaGiamGia() {
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can xoa: ");
@@ -77,6 +80,7 @@ public class QuanLyMaGiamGia {
         } else {
             if (danhSachMaGiamGia.xoa(mGG)) {
                 System.out.println("xoa ma giam gia thanh cong!");
+                // xóa mã giảm giá khỏi từng khách hàng
                 for (KhachHang khachHang : db.getListKhachHang()) {
                     khachHang.xoaMaGiamGia(mGG);
                 }
@@ -84,10 +88,9 @@ public class QuanLyMaGiamGia {
                 System.out.println("xoa ma giam gia that bai!");
             }
         }
-
     }
 
-    // sua ma giam gia
+    // menu hiển thị các mục chỉnh sửa thông tin mã giảm giá
     public void xuatMenuSuaMaGiamGia() {
         System.out.println("====Sua Ma Giam Gia====");
         System.out.println("1. sua ten ma giam gia");
@@ -100,6 +103,7 @@ public class QuanLyMaGiamGia {
         System.out.println("---------------------------");
     }
 
+    // thực hiện chức năng sửa tương ứng theo lựa chọn người dùng
     private void thucHienChucNangSua(MaGiamGia mGG, int choice) {
         switch (choice) {
             case 1:
@@ -133,6 +137,7 @@ public class QuanLyMaGiamGia {
         }
     }
 
+    // menu chính để sửa thông tin của 1 mã giảm giá cụ thể
     public void suaMaGiamGia() {
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         String ma = Nhap.nhapStr("nhap ma cua ma giam gia can xoa: ");
@@ -152,6 +157,7 @@ public class QuanLyMaGiamGia {
         }
     }
 
+    // liệt kê các mã giảm giá có thể áp dụng cho 1 sản phẩm cụ thể
     public void maGiamGiaApDungChoSp() {
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma serial san pham de xem : "));
@@ -171,6 +177,7 @@ public class QuanLyMaGiamGia {
         }
     }
 
+    // xuất menu quản lý mã giảm giá tổng thể
     private void xuatMenu() {
         System.out.println("======= Quan Ly Lich Trong Tuan =======");
         System.out.println("1. Them ma giam gia");
@@ -183,6 +190,7 @@ public class QuanLyMaGiamGia {
         System.out.println("---------------------------");
     }
 
+    // xử lý hành động tương ứng với lựa chọn người dùng
     private void thucHienChucNang(int luaChon) {
         switch (luaChon) {
             case 1 -> themMaGiamGia();
@@ -195,6 +203,7 @@ public class QuanLyMaGiamGia {
         }
     }
 
+    // menu chính cho quản lý mã giảm giá (vòng lặp liên tục đến khi thoát)
     public void menu() {
         int xacNhan = 1;
         while (xacNhan == 1) {

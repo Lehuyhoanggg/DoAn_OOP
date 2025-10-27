@@ -27,12 +27,15 @@ import model.TaiKhoan;
 import model.TinNhan;
 
 public class TaoDoiTuong {
+
+    // Tạo TinNhan mới với người gửi và nội dung nhập từ bàn phím
     public static TinNhan taoTinNhan(String tenNG, Database db) {
         String maNG = CapMa.capMaTinNhan(db);
         String noiDung = Nhap.nhapStr("Nhap noi dung : ");
         return new TinNhan(maNG, tenNG, noiDung, ThoiGian.layNgayHienTaiStr());
     }
 
+    // Tạo NhanVien mới với dữ liệu nhập từ bàn phím
     public static NhanVien taoNhanVien(Database db) {
         String ma = CapMa.capMaNhanVien(db);
         String cccd = Nhap.nhapStr("Nhap cccd: ");
@@ -43,6 +46,7 @@ public class TaoDoiTuong {
         return new NhanVien(ma, cccd, ten, ngaySinh, sdt, gioiTinh);
     }
 
+    // Tạo ThongTinSanPham mới với dữ liệu nhập từ bàn phím
     public static ThongTinSanPham taoSanPham(Database db) {
         String ma = CapMa.capMaThongTinSanPham(db);
         String ten = Nhap.nhapStr("Nhap ten san pham: ");
@@ -68,8 +72,8 @@ public class TaoDoiTuong {
         return new ThongTinSanPham(ma, ten, danhMuc, thuongHieu, gia, moTa, trangThaiStr);
     }
 
-    public static PhieuTraHang taoPhieuTraHang(KhachHang khachHang, SanPham sanPham,
-            Database db) {
+    // Tạo PhieuTraHang mới với dữ liệu từ KhachHang, SanPham và thời gian hiện tại
+    public static PhieuTraHang taoPhieuTraHang(KhachHang khachHang, SanPham sanPham, Database db) {
         String maTraHang = CapMa.capMaPhieuTraHang(db);
         String ngayTra = ThoiGian.layNgayHienTaiStr();
         String lyDoTra = Nhap.nhapStr("Nhap ly do tra : ");
@@ -77,12 +81,14 @@ public class TaoDoiTuong {
         return phieuTraHang;
     }
 
+    // Tạo HangThanhVien mới với tên và mô tả nhập từ bàn phím
     public static HangThanhVien taoHangThanhVien(Database db) {
         String ten = Nhap.nhapStr("Nhap ten hang thanh vien: ");
         String moTa = Nhap.nhapStr("Nhap mo ta: ");
         return new HangThanhVien(ten, moTa);
     }
 
+    // Tạo MaGiamGia mới, dữ liệu nhập từ bàn phím
     public static MaGiamGia taoMaGiamGia(Database db) {
         String ma = CapMa.capMaMaGiamGia(db);
         String tenMa = Nhap.nhapStr("Nhap ten ma: ");
@@ -95,6 +101,7 @@ public class TaoDoiTuong {
         return new MaGiamGia(ma, tenMa, loaiDoanhMuc, loaiThuongHieu, soTienGiam, ngayBatDau, ngayKetThuc);
     }
 
+    // Tạo MaGiamGia doc quyen cho HangThanhVien cụ thể
     public static MaGiamGia taoMaGiamGiaDocQuyen(Database db, HangThanhVien hangThanhVien) {
         String ma = CapMa.capMaMaGiamGiaDocQuyen(db, hangThanhVien);
         String tenMa = Nhap.nhapStr("Nhap ten ma: ");
@@ -106,6 +113,8 @@ public class TaoDoiTuong {
         return new MaGiamGia(ma, tenMa, loaiDoanhMuc, loaiThuongHieu, soTienGiam, ngayBatDau, ngayKetThuc);
     }
 
+    // Tạo KhachHang mới với dữ liệu nhập từ bàn phím, gán danh sách mã giảm giá từ
+    // DB
     public static KhachHang taoKhachHang(Database db) {
         String maKh = CapMa.capMaKhachHang(db);
         String tenKh = Nhap.nhapStr("Nhap ten khach hang: ");///
@@ -115,6 +124,7 @@ public class TaoDoiTuong {
         return khachHang;
     }
 
+    // Tạo KhachHang mới với số điện thoại đã cho, thêm các mã giảm giá từ DB
     public static KhachHang taoKhachHang(Database db, String sdt) {
         String maKh = CapMa.capMaKhachHang(db);
         String tenKh = Nhap.nhapStr("Nhap ten khach hang: ");////
@@ -125,6 +135,7 @@ public class TaoDoiTuong {
         return khachHang;
     }
 
+    // Tạo PhieuBaoHanh mới cho KhachHang và SanPham cụ thể
     public static PhieuBaoHanh taoPhieuBaoHanh(BaoHanh baoHanh, KhachHang khachHang, Database db) {
         System.out.println("Tao phieu bao hanh");
         String maPhieuBaoHanh = CapMa.capMaPhieuBaoHanh(db);
@@ -136,6 +147,7 @@ public class TaoDoiTuong {
         return phieuBaoHanh;
     }
 
+    // Tạo BaoHanh mới dựa trên ThongTinSanPham và dữ liệu nhập từ bàn phím
     public static BaoHanh taoBaoHanh(Database db) {
         DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
         String maBaoHanh = CapMa.capMaBaoHanh(db);
@@ -154,8 +166,8 @@ public class TaoDoiTuong {
         return new BaoHanh(maBaoHanh, loaiBaoHanh, sanPham, gia);
     }
 
-    public static ArrayList<ChiTietHoaDon> taoListChiTietHoaDon(Database db,
-            KhachHang khachHang) {
+    // Tạo danh sách ChiTietHoaDon cho 1 KhachHang
+    public static ArrayList<ChiTietHoaDon> taoListChiTietHoaDon(Database db, KhachHang khachHang) {
         ArrayList<ChiTietHoaDon> listChiTietHoaDon = new ArrayList<>();// list chứa chi tiết hóa đơn của 1 hóa đơn
 
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
@@ -182,6 +194,7 @@ public class TaoDoiTuong {
                 }
             } while (thongTinSanPham == null);
 
+            // Tạo ChiTietHoaDon và thêm từng sản phẩm với bảo hành nếu có
             ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(CapMa.capMaChiTietHoaDon(db));
             Set<String> set = new HashSet<>();
             db.getDanhSachChiTietHoaDon().them(chiTietHoaDon);
@@ -215,6 +228,7 @@ public class TaoDoiTuong {
                     continue;
                 }
 
+                // Giảm số lượng tồn kho, đánh dấu sản phẩm đã bán, thêm bảo hành nếu có
                 thongTinSanPham.giamTonKho();
                 soLuong--;
                 System.out
@@ -225,7 +239,7 @@ public class TaoDoiTuong {
                 chiTietHoaDon.themSanPham(sanPham);
                 set.add(maSr);
                 ArrayList<BaoHanh> listBaoHanh = danhSachBaoHanh.timBaoHanh(sanPham); // check danh sách bảo hành sản
-                // phẩm
+                                                                                      // phẩm
                 if (listBaoHanh.size() == 0) {// ko có bảo hành
                     continue;
                 }
@@ -261,6 +275,8 @@ public class TaoDoiTuong {
 
     }
 
+    // Tạo HoaDon mới cho KhachHang, bao gồm các ChiTietHoaDon, tính thành tiền và
+    // áp dụng mã giảm giá
     public static HoaDon taoHoaDon(Database db) {
         String ma = CapMa.capMaHoaDon(db);
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
@@ -290,9 +306,8 @@ public class TaoDoiTuong {
         if (hoaDon != null) {
             // đưa danh sách mã giảm giá của khách hàng để xử lí
             DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(khachHang.getListMaGiamGia());
-            danhSachMaGiamGia.setThanhTienDaApMaGG(hoaDon); // tính thành tiền tổng cho hóa
-                                                                                         // đơn , và áp dụng mã giảm giá
-            // nếu có
+            danhSachMaGiamGia.setThanhTienDaApMaGG(hoaDon); // tính thành tiền tổng cho hóa đơn, và áp dụng mã giảm giá
+                                                            // nếu có
         }
 
         // xử lí đưa hoadon cho khách hàng
@@ -302,7 +317,7 @@ public class TaoDoiTuong {
         DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
         danhSachHangThanhVien.setHangThanhVienChoKhachHang(khachHang);
 
-        // hiễn thị các mã giảm giá đã áp dụng
+        // hiển thị các mã giảm giá đã áp dụng
         System.out.println("Danh sach ma giam gia da dung :");
         boolean timThay = false;
 
@@ -319,12 +334,14 @@ public class TaoDoiTuong {
         return hoaDon;
     }
 
+    // Tạo TaiKhoan mới với tên đăng nhập và mật khẩu nhập từ bàn phím
     public static TaiKhoan taoTaiKhoan() {
         String tenDangNhap = Nhap.nhapStr("Nhap ten dang nhap : ");
         String matKhau = Nhap.nhapStr("Nhap mat khau : ");
         return new TaiKhoan(tenDangNhap, matKhau);
     }
 
+    // Tạo QuanLy mới với dữ liệu nhập từ bàn phím
     public static QuanLy TaoDoiTuongQuanLy(Database db) {
         String ma = CapMa.capMaQuanLy(db);
         String cccd = Nhap.nhapStr("Nhap cccd: ");

@@ -2,101 +2,110 @@ package quanli;
 
 import java.util.ArrayList;
 
-import danhsach.DanhSachChiTietHoaDon;
-import danhsach.DanhSachHangThanhVien;
-import danhsach.DanhSachHoaDon;
-import danhsach.DanhSachKhachHang;
-import danhsach.DanhSachMaGiamGia;
-import danhsach.DanhSachPhieuTraHang;
-import danhsach.DanhSachSanPham;
+import danhsach.*;
 import database.Database;
-import model.ChiTietHoaDon;
-import model.HoaDon;
-import model.KhachHang;
-import model.PhieuTraHang;
-import model.SanPham;
-import util.Nhap;
-import util.TaoDoiTuong;
-import util.ThoiGian;
-import util.XoaManHinh;
+import model.*;
+import util.*;
 
+// Quản lý các phiếu trả hàng
 public class QuanLyPhieuTraHang {
-    private Database db;
+    private Database db; // CSDL tổng chứa các danh sách
 
     public QuanLyPhieuTraHang(Database db) {
         this.db = db;
     }
 
+    // Hiển thị toàn bộ phiếu trả hàng
     public void hienThiTatCaPhieuTraHang() {
         System.out.println("===== DANH SACH PHIEU TRA HANG =====");
         ArrayList<PhieuTraHang> listPhieuTraHang = db.getListPhieuTraHang();
 
-        if (listPhieuTraHang.size() == 0) {
+        if (listPhieuTraHang.size() == 0) { // Nếu danh sách trống
             System.out.println("khong tim thay phieu tra hang nao");
             return;
         }
 
+        // In từng phiếu trả hàng
         for (int i = 0; i < listPhieuTraHang.size(); i++) {
             System.out.println("---------------------------");
             System.out.println(listPhieuTraHang.get(i));
         }
     }
 
+    // Tạo mới phiếu trả hàng
     public void taoPhieuTraHang() {
         DanhSachPhieuTraHang danhSachPhieuTraHang = db.getDanhSachPhieuTraHang();
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
+
+        // Tìm khách hàng bằng số điện thoại
         KhachHang khachHang = danhSachKhachHang.timKhachHangTheoSdt(Nhap.nhapStr("Nhap sdt khach hang de tra hang : "));
         if (khachHang == null) {
             System.out.println("Khong tim thay khach hang");
             return;
         }
+
+        // Tìm sản phẩm cần trả bằng serial
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Hay hay nhap ma serial san pham can tra hang : "));
         if (sanPham == null) {
             System.out.println("Khong tim thay san pham");
             return;
         }
+
+        // Kiểm tra nếu sản phẩm đã được trả
         if (sanPham.getTraHang()) {
             System.out.println("Khach hang da tra san pham nay roi");
             return;
         }
+
+        // Tìm chi tiết hóa đơn chứa sản phẩm này
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(sanPham);
+
+        // Tìm hóa đơn tương ứng
         DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         HoaDon hoaDon = danhSachHoaDon.tim(chiTietHoaDon);
         if (hoaDon == null) {
             System.out.println("Khach hang chua tung mua san pham " + sanPham.getSerial());
             return;
         }
+
+        // Kiểm tra thời gian trả hàng <= 3 ngày kể từ ngày mua
         if (ThoiGian.khoangCachNgay(hoaDon.getNgayTaoHoaDon(), ThoiGian.layNgayHienTaiStr()) > 3) {
             System.out.println("Chi duoc tra hang neu loi trong vong 3 ngay");
             return;
         }
 
-        sanPham.setTraHang(true); // dấu đây là sản phẩm bị trả hàng
-        sanPham.setDaBan(false); // sản phẩm đã trở lại kho
+        // Đánh dấu sản phẩm là đã trả
+        sanPham.setTraHang(true);
+        sanPham.setDaBan(false);
 
+        // Tính tiền hoàn lại của sản phẩm (bảo gồm cả mã giảm giá sản phẩm đó)
         DanhSachMaGiamGia danhSachMaGiamGia = new DanhSachMaGiamGia(chiTietHoaDon.getListMaGiamGia());
         long tienTraLai = danhSachMaGiamGia.giaSanPhamSauKhiApDungTatCa(sanPham);
-
         System.out.println("So tien hoan lai cho khach hang : " + tienTraLai);
 
+        // Cập nhật thông tin khách hàng và hóa đơn
         khachHang.giamTienDaChi(tienTraLai);
         hoaDon.giamThanhTien(tienTraLai);
+
+        // Cập nhật lại hạng thành viên của khách
         DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
         danhSachHangThanhVien.setHangThanhVienChoKhachHang(khachHang);
 
+        // Tạo phiếu trả hàng mới
         PhieuTraHang pth = TaoDoiTuong.taoPhieuTraHang(khachHang, sanPham, db);
 
+        // Thêm phiếu trả hàng vào danh sách
         if (danhSachPhieuTraHang.them(pth)) {
             System.out.println("Tao phieu tra hang thanh cong!");
             khachHang.themPhieuTraHang(pth);
-
         } else {
             System.out.println("Tao phieu tra hang that bai!");
         }
     }
 
+    // Xóa phiếu trả hàng
     public void xoaPhieuTraHang() {
         DanhSachPhieuTraHang danhSachPhieuTraHang = db.getDanhSachPhieuTraHang();
         String ma = Nhap.nhapStr("Nhap ma phieu can xoa: ");
@@ -107,7 +116,7 @@ public class QuanLyPhieuTraHang {
         }
     }
 
-    /// sua phieu tra hang
+    // Hiển thị menu sửa phiếu trả hàng
     private void xuatSuaTraHang() {
         System.out.println("===== SUA PHIEU TRA HANG =====");
         System.out.println("1. Sua khach hang");
@@ -118,9 +127,10 @@ public class QuanLyPhieuTraHang {
         System.out.println("---------------------------");
     }
 
+    // Sửa thông tin cụ thể trong phiếu trả hàng
     private void suaThanhPhanPhieuTraHang(PhieuTraHang pth, int chon) {
         switch (chon) {
-            case 1:
+            case 1: // Sửa khách hàng
                 DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
                 KhachHang khachHang = danhSachKhachHang.tim(Nhap.nhapStr("Nhap ma khach hang de them vao : "));
                 if (khachHang == null) {
@@ -131,7 +141,7 @@ public class QuanLyPhieuTraHang {
                 System.out.println("Da thay doi khach hang");
                 break;
 
-            case 2:
+            case 2: // Sửa sản phẩm
                 DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
                 SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma serial san pham de them vao : "));
                 if (sanPham == null) {
@@ -140,14 +150,17 @@ public class QuanLyPhieuTraHang {
                 }
                 pth.setSanPham(sanPham);
                 break;
-            case 3:
+
+            case 3: // Sửa ngày trả
                 pth.setNgayTra(Nhap.nhapNgay("Nhap ngay tra moi (yyyy-MM-dd): "));
                 System.out.println("Da thay doi ngay tra");
                 break;
-            case 4:
+
+            case 4: // Sửa lý do trả
                 pth.setLyDoTra(Nhap.nhapStr("Nhap ly do moi: "));
                 System.out.println("Da thay doi ly do tra");
                 break;
+
             case 0:
                 System.out.println("Thoat sua phieu tra hang.");
                 break;
@@ -158,6 +171,7 @@ public class QuanLyPhieuTraHang {
         }
     }
 
+    // Sửa phiếu trả hàng
     public void suaPhieuTraHang() {
         DanhSachPhieuTraHang danhSachPhieuTraHang = db.getDanhSachPhieuTraHang();
         String ma = Nhap.nhapStr("Nhap ma phieu can sua: ");
@@ -185,6 +199,7 @@ public class QuanLyPhieuTraHang {
         }
     }
 
+    // Tra cứu phiếu trả hàng theo mã
     public void traCuuPhieuTraHang() {
         DanhSachPhieuTraHang danhSachPhieuTraHang = db.getDanhSachPhieuTraHang();
         String ma = Nhap.nhapStr("Nhap ma phieu bao hanh can tim : ");
@@ -198,7 +213,7 @@ public class QuanLyPhieuTraHang {
         }
     }
 
-    ////////
+    // Xuất menu chính
     private void xuatMenu() {
         System.out.println("======= Quan Ly Phieu Tra Hang =======");
         System.out.println("1. Tao phieu tra hang");
@@ -210,6 +225,7 @@ public class QuanLyPhieuTraHang {
         System.out.println("---------------------------");
     }
 
+    // Xử lý lựa chọn menu
     private void thucHienChucNang(int chon) {
         switch (chon) {
             case 1 -> taoPhieuTraHang();
@@ -222,6 +238,7 @@ public class QuanLyPhieuTraHang {
         }
     }
 
+    // Vòng lặp menu chính
     public void menu() {
         int xacNhan = 1;
         while (xacNhan == 1) {

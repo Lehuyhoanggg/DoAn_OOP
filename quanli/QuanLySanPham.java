@@ -14,19 +14,19 @@ import util.ThoiGian;
 import util.XoaManHinh;
 
 public class QuanLySanPham {
-    private Database db;
+    private Database db; // CSDL lưu toàn bộ thông tin
 
     public QuanLySanPham(Database db) {
-        this.db = db;
+        this.db = db; // Gán đối tượng database
     }
 
     /// hiển thị tất cả sản phẩm có trong kho
     public void hienThiSanPhamTrongKho() {
-        int dem = 0;
+        int dem = 0; // đếm sản phẩm còn trong kho
         System.out.println("Danh sach san pham dang co trong kho");
         for (SanPham sanPham : db.getListSanPham()) {
             System.out.println(sanPham);
-            if (!sanPham.getDaBan()) {
+            if (!sanPham.getDaBan()) { // nếu chưa bán thì tăng đếm
                 dem++;
             }
         }
@@ -34,11 +34,12 @@ public class QuanLySanPham {
         System.out.println("Co tong cong : " + dem + " san pham ton tai kha dung trong kho");
     }
 
-    /// Nhập kho
+    /// Nhập kho (thêm sản phẩm mới)
     public void nhapKho() {
         System.out.println("==== Nhap kho ====");
         DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+        // tìm thông tin sản phẩm cần nhập
         ThongTinSanPham thongTinSanPham = danhSachThongTinSanPham.tim(Nhap.nhapStr("Nhap ma thong tin san pham : "));
         if (thongTinSanPham == null) {
             System.out.println("Khong tim thay thong tin san pham can nhap kho");
@@ -47,6 +48,7 @@ public class QuanLySanPham {
         int soLuong = Nhap.nhapInt("Nhap so luong san pham can them : ");
         while (soLuong > 0) {
             String serial = Nhap.nhapStr("Nhap so serial cua " + thongTinSanPham.getMa() + " : ");
+            // kiểm tra trùng serial
             if (db.getKhoSerial().contains(serial)) {
                 System.out.println("Ma serial da ton trong database");
                 continue;
@@ -58,10 +60,11 @@ public class QuanLySanPham {
             danhSachSanPham.them(sanPham);
         }
     }
-    // xóa sản phẩm khỏi kho
 
+    // xóa sản phẩm khỏi kho
     public void xoaSanPham() {
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
+        // tìm sản phẩm theo serial
         SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma serial san pham can xoa: "));
         if (sanPham == null) {
             System.out.println("Khong tim thay san pham can xoa");
@@ -71,8 +74,7 @@ public class QuanLySanPham {
         System.out.println("Xoa san pham thanh cong");
     }
 
-    // hiển thi tất cả sản phẩm của 1 thông tin sản phẩm
-
+    // hiển thị tất cả sản phẩm của một thông tin sản phẩm
     public void timSanPhamCuaTTSanPham() {
         DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
         ThongTinSanPham thongTinSanPham = danhSachThongTinSanPham.tim(Nhap.nhapStr("Nhap ma thong tin san pham : "));
@@ -88,7 +90,7 @@ public class QuanLySanPham {
         }
     }
 
-    // hiễn thị tất cả sản phẩm đã bị trả hàng
+    // hiển thị tất cả sản phẩm đã bị trả hàng
     public void hienThiSanPhamTraHang() {
         System.out.println("Danh sach san pham bi tra hang :");
         for (SanPham sanPham : db.getListSanPham()) {
@@ -98,7 +100,7 @@ public class QuanLySanPham {
         }
     }
 
-    // hiễn thị sản phẩm đã bán
+    // hiển thị sản phẩm đã bán
     public void hienThiSanPhamDaBan() {
         System.out.println("Danh sach san pham da ban :");
         for (SanPham sanPham : db.getListSanPham()) {
@@ -108,8 +110,7 @@ public class QuanLySanPham {
         }
     }
 
-    // Sửa sản phẩm
-
+    // Menu chỉnh sửa sản phẩm
     private void xuatSuaSanPham() {
         System.out.println("1. Sua serial");
         System.out.println("2. Sua thong tin san pham");
@@ -118,9 +119,10 @@ public class QuanLySanPham {
         System.out.println("0. Thoat");
     }
 
+    // Xử lý logic sửa từng phần của sản phẩm
     private void suaThanhPhanSanPham(int luaChon, SanPham sanPham) {
         switch (luaChon) {
-            case 1:
+            case 1: // sửa serial
                 String serial = Nhap.nhapStr("Nhap ma serial moi : ");
                 if (db.getKhoSerial().contains(serial)) {
                     System.out.println("Serial da ton tai trong database");
@@ -129,7 +131,8 @@ public class QuanLySanPham {
                 sanPham.setSerial(serial);
                 System.out.println("Da thay doi");
                 break;
-            case 2:
+
+            case 2: // sửa thông tin sản phẩm
                 DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
                 ThongTinSanPham thongTinSanPham = danhSachThongTinSanPham
                         .tim(Nhap.nhapStr("Nhap ma thong thong tin san pham moi :"));
@@ -140,7 +143,8 @@ public class QuanLySanPham {
                 sanPham.setThongTinSanPham(thongTinSanPham);
                 System.out.println("Da thay doi");
                 break;
-            case 3:
+
+            case 3: // sửa bảo hành
                 DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
                 ArrayList<BaoHanh> listBaoHanh = danhSachBaoHanh.timBaoHanh(sanPham);
                 for (int i = 0; i < listBaoHanh.size(); i++) {
@@ -164,7 +168,8 @@ public class QuanLySanPham {
                 }
                 System.out.println("Da thay doi");
                 break;
-            case 4:
+
+            case 4: // sửa trạng thái đã bán
                 System.out.println("Trang thai hien tai la : " + sanPham.getDaBan());
                 int xacNhan = Nhap.nhapInt("(1)Thay doi  (Khac)giu nguyen : ");
                 if (xacNhan == 1) {
@@ -172,12 +177,14 @@ public class QuanLySanPham {
                     System.out.println("Da thay doi");
                 }
                 break;
+
             default:
                 System.out.println("Lua chon khong hop le");
                 break;
         }
     }
 
+    // menu sửa sản phẩm tổng hợp
     public void suaSanPham() {
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
         SanPham sanPham = danhSachSanPham.tim(Nhap.nhapStr("Nhap ma serial san pham can sua : "));
@@ -199,6 +206,7 @@ public class QuanLySanPham {
         }
     }
 
+    // menu chính của quản lý sản phẩm
     private void xuatMenu() {
         System.out.println("======= Quan Ly San Pham =======");
         System.out.println("1. Hien thi tat ca san pham trong kho");
@@ -211,6 +219,7 @@ public class QuanLySanPham {
         System.out.println("0. Thoat");
     }
 
+    // vòng lặp menu điều khiển
     public void menu() {
         while (true) {
             XoaManHinh.xoa();
@@ -243,7 +252,7 @@ public class QuanLySanPham {
                 default:
                     System.out.println("Lua chon khong hop le!");
             }
-            Nhap.pause();
+            Nhap.pause(); // dừng chờ người dùng nhấn Enter
         }
     }
 }

@@ -16,22 +16,25 @@ import util.Nhap;
 import util.TaoDoiTuong;
 import util.XoaManHinh;
 
+// Lớp quản lý khách hàng (thêm, xóa, sửa, tìm kiếm, hiển thị, v.v.)
 public class QuanLyKhachHang {
-    private Database db;
-    ArrayList<KhachHang> listKhachHang;
+    private Database db; // truy cập dữ liệu chung
+    ArrayList<KhachHang> listKhachHang; // danh sách khách hàng trong hệ thống
 
     public QuanLyKhachHang(Database db) {
         this.db = db;
-        this.listKhachHang = db.getListKhachHang();
+        this.listKhachHang = db.getListKhachHang(); // lấy danh sách khách hàng từ database
     }
 
+    // tạo khách hàng mới
     public void taoKhachHang() {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
-        KhachHang khachHang = TaoDoiTuong.taoKhachHang(db);
-        danhSachKhachHang.them(khachHang);
+        KhachHang khachHang = TaoDoiTuong.taoKhachHang(db); // gọi lớp tiện ích để tạo khách hàng
+        danhSachKhachHang.them(khachHang); // thêm vào danh sách
         System.out.println("Da tao khach hang thanh cong");
     }
 
+    // in ra toàn bộ các danh sách con trong một khách hàng (bảo hành, hóa đơn, mã giảm giá, ...)
     private void xuatListTrongKhachHang(KhachHang khachHang) {
         ArrayList<BaoHanh> listBaoHanh = khachHang.getListBaoHanh();
         ArrayList<PhieuBaoHanh> listPhieuBaoHanh = khachHang.getListPhieuBaoHanh();
@@ -39,6 +42,7 @@ public class QuanLyKhachHang {
         ArrayList<HoaDon> listHoaDon = khachHang.getListHoaDon();
         ArrayList<PhieuTraHang> listPhieuTraHang = khachHang.getListPhieuTraHang();
 
+        // in từng danh sách nếu có dữ liệu
         if (!listBaoHanh.isEmpty()) {
             System.out.println("Danh sach Bao Hanh:");
             for (BaoHanh bh : listBaoHanh) {
@@ -75,16 +79,19 @@ public class QuanLyKhachHang {
         }
     }
 
+    // tra cứu thông tin khách hàng bằng từ khóa (sdt, mã, hoặc tên)
     public void traCuuThongTinKhachHang() {
         String tuKhoa = Nhap.nhapStr("Nhap tu khoa de tim : ");
         boolean timThay = false;
         ArrayList<KhachHang> listKhachHang = db.getListKhachHang();
 
+        // kiểm tra rỗng
         if (listKhachHang == null || listKhachHang.size() == 0) {
             System.out.println("khong tim thay khach hang");
             return;
         }
 
+        // tìm theo số điện thoại
         for (int i = 0; i < listKhachHang.size(); i++) {
             if (listKhachHang.get(i).getSdt().contains(tuKhoa)) {
                 timThay = true;
@@ -93,6 +100,7 @@ public class QuanLyKhachHang {
             }
         }
 
+        // nếu tìm thấy theo sdt
         if (timThay) {
             int luaChon = Nhap.nhapInt("lua chon khach hang de hien thi : ");
             if (listKhachHang.size() > luaChon || 0 < luaChon) {
@@ -104,7 +112,7 @@ public class QuanLyKhachHang {
                 System.out.println("lua chon khong hop le");
             }
         } else {
-            // neu tim theo ten khong thay thi tim theo ma
+            // tìm theo mã khách hàng
             for (int i = 0; i < listKhachHang.size(); i++) {
                 if (listKhachHang.get(i).getMaKh().equals(tuKhoa)) {
                     System.out.println("---------------------------");
@@ -115,6 +123,7 @@ public class QuanLyKhachHang {
                     break;
                 }
             }
+            // nếu vẫn chưa thấy thì tìm theo tên
             if (!timThay) {
                 for (int i = 0; i < listKhachHang.size(); i++) {
                     if (listKhachHang.get(i).getTenKh().contains(tuKhoa)) {
@@ -144,6 +153,7 @@ public class QuanLyKhachHang {
         }
     }
 
+    // xóa khách hàng theo mã
     public void xoaKhachHang() {
         ArrayList<KhachHang> listKhachHang = db.getListKhachHang();
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
@@ -159,6 +169,7 @@ public class QuanLyKhachHang {
         }
     }
 
+    // sửa từng thành phần thông tin khách hàng
     private void suaThanhPhanKhachHang(KhachHang khachHang, int luaChon) {
         switch (luaChon) {
             case 0:
@@ -173,6 +184,7 @@ public class QuanLyKhachHang {
                 System.out.println("Da thay doi");
                 break;
             case 3:
+                // đổi hạng thành viên
                 DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
                 HangThanhVien hangThanhVienMoi = danhSachHangThanhVien
                         .tim(Nhap.nhapStr("Nhap hang thanh vien moi : "));
@@ -188,12 +200,14 @@ public class QuanLyKhachHang {
         }
     }
 
+    // hiển thị toàn bộ khách hàng trong danh sách
     public void xemTatCaKhachHang() {
         for (int i = 0; i < listKhachHang.size(); i++) {
             System.out.println(listKhachHang.get(i));
         }
     }
 
+    // menu chỉnh sửa thông tin khách hàng
     private void xuatSuaKhachHang() {
         System.out.println("1. Sua ten khach hang");
         System.out.println("2. Sua so dien thoai");
@@ -202,6 +216,7 @@ public class QuanLyKhachHang {
         System.out.println("---------------------------");
     }
 
+    // xử lý quy trình sửa thông tin khách hàng
     public void suaThongTinKhachHang() {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         KhachHang khachHang = danhSachKhachHang.tim(Nhap.nhapStr("Nhap ma khach hang can sau : "));
@@ -226,6 +241,7 @@ public class QuanLyKhachHang {
         }
     }
 
+    // hiển thị menu chính
     private void xuatMenu() {
         System.out.println("======= Quan Ly Khach Hang =======");
         System.out.println("1. Tao khach hang");
@@ -237,6 +253,7 @@ public class QuanLyKhachHang {
         System.out.println("---------------------------");
     }
 
+    // xử lý từng chức năng người dùng chọn
     private void thucHienChucNang(int luaChon) {
         switch (luaChon) {
             case 0:
@@ -262,6 +279,7 @@ public class QuanLyKhachHang {
         }
     }
 
+    // vòng lặp menu chính
     public void menu() {
         int xacNhan = 1;
         while (xacNhan == 1) {

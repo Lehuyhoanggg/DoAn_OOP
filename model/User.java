@@ -11,7 +11,7 @@ public abstract class User {
     private String sdt;
     private String gioiTinh;
     private TaiKhoan taiKhoan = null;
-    private ArrayList<TinNhan> listTinNhan;
+    private ArrayList<TinNhan> listTinNhan; // kho lưu trử tin nhắn riêng cho một user
 
     public User() {
     }

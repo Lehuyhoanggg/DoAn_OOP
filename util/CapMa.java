@@ -5,6 +5,7 @@ import model.HangThanhVien;
 
 public class CapMa {
 
+    // PTHxxx: Mã phiếu trả hàng
     public static String capMaPhieuTraHang(Database db) {
         String soPTH = "1";
         if (db.getListPhieuTraHang().size() > 0) {
@@ -21,6 +22,7 @@ public class CapMa {
         return "PTH" + soPTH;
     }
 
+    // BHxxx: Mã bảo hành
     public static String capMaBaoHanh(Database db) {
         String soBH = "1";
         if (db.getListBaoHanh().size() > 0) {
@@ -37,6 +39,7 @@ public class CapMa {
         return "BH" + soBH;
     }
 
+    // PBHxxx: Mã phiếu bảo hành
     public static String capMaPhieuBaoHanh(Database db) {
         String soPBH = "1";
         if (db.getListPhieuBaoHanh().size() > 0) {
@@ -53,6 +56,7 @@ public class CapMa {
         return "PBH" + soPBH;
     }
 
+    // KHxxx: Mã khách hàng
     public static String capMaKhachHang(Database db) {
         String soKH = "1";
         if (db.getListKhachHang().size() > 0) {
@@ -69,6 +73,7 @@ public class CapMa {
         return "KH" + soKH;
     }
 
+    // CTHDxxx: Mã chi tiết hóa đơn
     public static String capMaChiTietHoaDon(Database db) {
         String soCTHD = "1";
         if (db.getListChiTietHoaDon().size() > 0) {
@@ -85,6 +90,7 @@ public class CapMa {
         return "CTHD" + soCTHD;
     }
 
+    // HDxxx: Mã hóa đơn
     public static String capMaHoaDon(Database db) {
         String soHD = "1";
         if (db.getListHoaDon().size() > 0) {
@@ -101,6 +107,7 @@ public class CapMa {
         return "HD" + soHD;
     }
 
+    // MGGxxx: Mã giảm giá
     public static String capMaMaGiamGia(Database db) {
         String soMGG = "1";
         if (db.getListMaGiamGia().size() > 0) {
@@ -117,6 +124,7 @@ public class CapMa {
         return "MGG" + soMGG;
     }
 
+    // MGG+HANGxxx: Mã giảm giá độc quyền theo hạng thành viên
     public static String capMaMaGiamGiaDocQuyen(Database db, HangThanhVien hangThanhVien) {
         String soMGG = "1";
         if (hangThanhVien.getListMaGiamGiaDQ().size() > 0) {
@@ -131,6 +139,7 @@ public class CapMa {
         return "MGG" + hangThanhVien.getTenHang().toUpperCase() + soMGG;
     }
 
+    // NVxxx: Mã nhân viên
     public static String capMaNhanVien(Database db) {
         String soNV = "1";
         if (db.getListNhanVien().size() > 0) {
@@ -147,6 +156,7 @@ public class CapMa {
         return "NV" + soNV;
     }
 
+    // QLxxx: Mã quản lý
     public static String capMaQuanLy(Database db) {
         String soQL = "1";
         if (db.getListQuanLy().size() > 0) {
@@ -163,6 +173,7 @@ public class CapMa {
         return "QL" + soQL;
     }
 
+    // SPxxx: Mã thông tin sản phẩm
     public static String capMaThongTinSanPham(Database db) {
         String soSP = "1";
         if (db.getListThongTinSanPham().size() > 0) {
@@ -179,6 +190,7 @@ public class CapMa {
         return "SP" + soSP;
     }
 
+    // TNxxx: Mã tin nhắn
     public static String capMaTinNhan(Database db) {
         String soTN = "1";
         if (db.getListTinNhan().size() > 0) {
@@ -195,6 +207,7 @@ public class CapMa {
         return "TN" + soTN;
     }
 
+    // CAxxx: Mã ca làm
     public static String capMaCaLam(Database db) {
         String soCL = "1";
         if (db.getListCaLam().size() > 0) {
@@ -211,6 +224,7 @@ public class CapMa {
         return "CA" + soCL;
     }
 
+    // LTNxxx: Mã lịch trong ngày
     public static String capMaLichTrongNgay(Database db) {
         String soLTN = "1";
         if (db.getListLichTrongNgay().size() > 0) {
@@ -227,6 +241,7 @@ public class CapMa {
         return "LTN" + soLTN;
     }
 
+    // LTT001: Mã lịch trong tuần (mặc định 001)
     public static String capMaLichTrongTuan(Database db) {
         return "LTT" + "001";
     }

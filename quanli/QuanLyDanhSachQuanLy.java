@@ -9,26 +9,26 @@ import util.Nhap;
 import util.TaoDoiTuong;
 
 public class QuanLyDanhSachQuanLy {
-    Database db;
-    QuanLy ql;
+    Database db; // cơ sở dữ liệu chính
+    QuanLy ql; // đối tượng quản lý tạm thời
 
-    // hien thi tat ca
+    // hiển thị tất cả quản lý
     public void hienThiTatCaQuanLy() {
-        ArrayList<QuanLy> listQuanLy = db.getListQuanLy();
+        ArrayList<QuanLy> listQuanLy = db.getListQuanLy(); // lấy danh sách quản lý
         if (listQuanLy == null || listQuanLy.isEmpty()) {
             System.out.println("chua co quang ly nao");
             return;
         }
         for (int i = 0; i < listQuanLy.size(); i++) {
             System.out.println("---------------------------");
-            System.out.println(listQuanLy.get(i));
+            System.out.println(listQuanLy.get(i)); // in từng quản lý
         }
     }
 
-    // them quan ly
+    // thêm quản lý mới
     public void themQuanLy() {
-        QuanLy ql = TaoDoiTuong.TaoDoiTuongQuanLy(db);
-        DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
+        QuanLy ql = TaoDoiTuong.TaoDoiTuongQuanLy(db); // tạo đối tượng quản lý mới
+        DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy(); // lấy danh sách quản lý
         if (danhSachQuanLy.them(ql)) {
             System.out.println("them quan ly thanh cong!");
         } else {
@@ -36,10 +36,10 @@ public class QuanLyDanhSachQuanLy {
         }
     }
 
-    // xoa quan ly
+    // xóa quản lý theo mã
     public void xoaQuanLy() {
         DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
-        String ma = Nhap.nhapStr("nhap ma quang ly can xoa: ");
+        String ma = Nhap.nhapStr("nhap ma quang ly can xoa: "); // nhập mã cần xóa
         QuanLy ql = danhSachQuanLy.tim(ma);
         if (ql == null) {
             System.out.println("khong tim thay quang ly can xoa!");
@@ -51,7 +51,7 @@ public class QuanLyDanhSachQuanLy {
         }
     }
 
-    // tra cuu quang ly theo ma
+    // tra cứu quản lý theo mã
     public void traCuuQuangLy() {
         String ma = Nhap.nhapStr("nhap ma quang ly can tra cuu: ");
         DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
@@ -59,10 +59,10 @@ public class QuanLyDanhSachQuanLy {
         if (ql == null) {
             System.out.println("khong tim thay quang ly can tra cuu!");
         }
-        System.out.println(ql);
+        System.out.println(ql); // hiển thị thông tin quản lý
     }
 
-    // sua quan ly
+    // xuất menu sửa quản lý
     public void xuatSuaQuanLy() {
         System.out.println("1. Sua ten");
         System.out.println("2. Sua sdt");
@@ -73,6 +73,7 @@ public class QuanLyDanhSachQuanLy {
         System.out.println("---------------------------");
     }
 
+    // thực hiện chức năng sửa theo lựa chọn
     public void thucHienChucNangSuaQuanLy(QuanLy ql, int luaChon) {
         switch (luaChon) {
             case 1 -> ql.setTen(Nhap.nhapStr("Nhap ten moi: "));
@@ -85,23 +86,24 @@ public class QuanLyDanhSachQuanLy {
         }
     }
 
+    // sửa thông tin quản lý theo mã
     public void SuaQuanLy() {
         DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
-        String ma = Nhap.nhapStr("Nhap ma quan ly can sua: ");
+        String ma = Nhap.nhapStr("Nhap ma quan ly can sua: "); // nhập mã quản lý cần sửa
         QuanLy ql = danhSachQuanLy.tim(ma);
         if (ql == null) {
             System.out.println("Khong tim thay quan ly can sua.");
             return;
         }
         int tiep = 1;
-        while (tiep == 1) {
+        while (tiep == 1) { // cho phép sửa liên tục cho đến khi người dùng thoát
             System.out.println();
             System.out.println("------------------------");
             System.out.println(ql);
             System.out.println("------------------------");
-            xuatSuaQuanLy();
+            xuatSuaQuanLy(); // in menu sửa
             int chon = Nhap.nhapInt("Chon muc: ");
-            thucHienChucNangSuaQuanLy(ql, chon);
+            thucHienChucNangSuaQuanLy(ql, chon); // sửa thuộc tính tương ứng
             tiep = Nhap.nhapInt("(1) Tiep tuc sua | (Khac) Thoat: ");
         }
         System.out.println("Da cap nhat thong tin quang ly.");

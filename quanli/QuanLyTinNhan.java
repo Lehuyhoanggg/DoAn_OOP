@@ -15,7 +15,7 @@ public class QuanLyTinNhan {
     public QuanLyTinNhan(Database db) {
         this.db = db;
     }
-
+    // gửi tin nhắn
     public void guiTinNhan(User nguoiGui) {
         DanhSachUser danhSachUser = db.getDanhSachUser();
         User nguoiNhan = danhSachUser.timUser(Nhap.nhapStr("Nhap ma nguoi nhan : "));
@@ -24,7 +24,7 @@ public class QuanLyTinNhan {
         db.getDanhSachTinNhan().them(tinNhan);
         System.out.println("Da gui tin nhan thanh cong");
     }
-
+    /// xem tất cả tin nhắn
     public void xemTatCaTinNhan(User user) {
         ArrayList<TinNhan> listTinNhan = user.getListTinNhan();
         if (listTinNhan == null || listTinNhan.size() == 0) {

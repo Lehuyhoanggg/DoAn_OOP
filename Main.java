@@ -11,7 +11,7 @@ import util.Nhap;
 public class Main {
     private User user;
     private Database db = new Database();
-
+    /// điều hướng ra 2 menu quản lý chính dự trên phân quyền
     public void dieuHuongMenu() {
         if (user.getQuyenHang().equals("NhanVien")) {
             NhanVienQuanLy menuNhanVien = new NhanVienQuanLy(db, (NhanVien) user);
@@ -23,22 +23,22 @@ public class Main {
             System.out.println("Tai Khoan chua duoc cap quyen");
         }
     }
-
+    /// đăng nhập 
     public void dangNhap() {
         int xacNhan = 1;
         do {
             int dem = 0;
-            DanhSachTaiKhoan taiKhoanService = new DanhSachTaiKhoan(db.getListTaiKhoan());
+            DanhSachTaiKhoan danhSachTaiKhoan = db.getDanhSachTaiKhoan();
             String tenTaiKhoan;
             String matKhau;
             do {
-                if (dem == 3) {
+                if (dem == 3) { // nếu 3 lần sài tk mk thì kết thức chương trình
                     break;
                 }
                 dem++;
                 tenTaiKhoan = Nhap.nhapStr("Tai khoan : ");
                 matKhau = Nhap.nhapStr("Mat khau : ");
-                user = taiKhoanService.layUserBangTk(tenTaiKhoan, matKhau);
+                user = danhSachTaiKhoan.layUserBangTk(tenTaiKhoan, matKhau);
                 if (user == null) {
                     System.out.println("Tai khoan hoac mat khau khong khong dung vui long nhap lai");
                 }
@@ -47,14 +47,14 @@ public class Main {
             if (user != null) {
                 dieuHuongMenu();
             }
-            dem = 0;
+            dem = 0; 
             xacNhan = Nhap.nhapInt("(1)Tiep tuc dang nhap (khac)Thoat : ");
             GhiFile ghiFile = new GhiFile(db);
-            ghiFile.ghi_DatasVaoDatabase();
+            ghiFile.ghi_DatasVaoDatabase(); // ghi dữ liệu thay đổi vào file txt
         } while (xacNhan == 1);
         System.out.println("Da thoat khoi chuong trinh");
     }
-
+    /// hàm main để chạy cả chương trình
     public static void main(String[] args) {
         Main cellPhoneX = new Main();
         cellPhoneX.dangNhap();

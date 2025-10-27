@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Nhap {
     static Scanner sc = new Scanner(System.in);
 
+    // Kiểm tra chuỗi có phải số nguyên không
     private static boolean laSo(String so) {
         if (so == "") {
             return false;
@@ -19,6 +20,7 @@ public class Nhap {
         return true;
     }
 
+    // Kiểm tra chuỗi có phải số thực không
     private static boolean laSoThuc(String so) {
         try {
             Double.parseDouble(so);
@@ -28,6 +30,7 @@ public class Nhap {
         }
     }
 
+    // Nhập số nguyên từ người dùng, kiểm tra hợp lệ
     public static int nhapInt(String tuKhoa) {
         String luaChon;
         do {
@@ -41,6 +44,7 @@ public class Nhap {
         return Integer.parseInt(luaChon);
     }
 
+    // Nhập số thực từ người dùng, kiểm tra hợp lệ
     public static double nhapDouble(String tuKhoa) {
         String luaChon;
         do {
@@ -54,6 +58,7 @@ public class Nhap {
         return Double.parseDouble(luaChon);
     }
 
+    // Nhập số nguyên dài (long) từ người dùng
     public static long nhapLong(String tuKhoa) {
         String luaChon;
         do {
@@ -67,11 +72,13 @@ public class Nhap {
         return Long.parseLong(luaChon);
     }
 
+    // Nhập chuỗi từ người dùng
     public static String nhapStr(String tuKhoa) {
         System.out.print(tuKhoa);
         return sc.nextLine();
     }
 
+    // Nhập ký tự, đảm bảo chỉ nhập 1 ký tự
     public static char nhapChar(String tuKhoa) {
         String luaChon;
         do {
@@ -85,12 +92,14 @@ public class Nhap {
         return luaChon.charAt(0);
     }
 
+    // Tạm dừng chương trình, chờ enter
     public static void pause() {
         System.out.println();
         System.out.println("----------------------");
         Nhap.nhapStr("Nhan enter de tiep tuc");
     }
 
+    // Kiểm tra định dạng ngày hợp lệ dd/mm/yyyy
     private static boolean ngayHopLe(String ngay) {
         if (ngay == null) {
             return false;
@@ -106,6 +115,7 @@ public class Nhap {
         return true;
     }
 
+    // Nhập ngày, chuẩn hóa định dạng dd/mm/yyyy
     public static String nhapNgay(String tuKhoa) {
         String ngay;
         do {
@@ -127,9 +137,5 @@ public class Nhap {
             thanhPhan[2] = "0" + thanhPhan[2];
         }
         return thanhPhan[0] + "/" + thanhPhan[1] + "/" + thanhPhan[2];
-    }
-
-    public static void main(String[] args) {
-        System.out.println(Nhap.nhapNgay("Nhap ngay : "));
     }
 }

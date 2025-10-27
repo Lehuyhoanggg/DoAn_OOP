@@ -9,14 +9,15 @@ import database.Database;
 import interfaces.GiaoTiep;
 
 public class NhanVienQuanLy implements GiaoTiep {
-    private Database db;
-    private NhanVien nv;
+    private Database db; // cơ sở dữ liệu tổng
+    private NhanVien nv; // nhân viên đang đăng nhập
 
     public NhanVienQuanLy(Database db, NhanVien nv) {
         this.db = db;
         this.nv = nv;
     }
 
+    // xem lịch làm việc của tuần hiện tại
     public void xemLichLamViecTrongTuanNay() {
         LichTrongTuan lichTrongTuan = db.getLichTrongTuanNay();
         if (lichTrongTuan == null || !ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(), lichTrongTuan.getNgayThu2(),
@@ -28,72 +29,84 @@ public class NhanVienQuanLy implements GiaoTiep {
         quanLyLichTrongTuan.xemLichLamViec();
     }
 
+    // tra cứu thông tin khách hàng
     public void traCuuThongTinKhachHang() {
         QuanLyKhachHang quanLyKhachHang = new QuanLyKhachHang(db);
         quanLyKhachHang.traCuuThongTinKhachHang();
     }
 
+    // tạo hóa đơn bán hàng
     public void taoHoaDon() {
         QuanLyHoaDon quanLyHoaDon = new QuanLyHoaDon(db);
         quanLyHoaDon.taoHoaDon();
-
     }
 
+    // tạo phiếu trả hàng
     public void taoPhieuTraHang() {
         QuanLyPhieuTraHang quanLyPhieuTraHang = new QuanLyPhieuTraHang(db);
         quanLyPhieuTraHang.taoPhieuTraHang();
     }
 
+    // tìm kiếm sản phẩm
     public void traCuuSanPham() {
         QuanLyThongTinSanPham quanLySanPham = new QuanLyThongTinSanPham(db);
         quanLySanPham.traCuuThongTinSanPham();
     }
 
+    // tra cứu bảo hành
     public void TraCuuBaoHanh() {
         QuanLyBaoHanh quanLyBaoHanh = new QuanLyBaoHanh(db);
         quanLyBaoHanh.traCuuBaoHanh();
     }
 
+    // tạo phiếu bảo hành
     public void taoPhieuBaoHanh() {
         QuanLyPhieuBaoHanh quanLyPhieuBaoHanh = new QuanLyPhieuBaoHanh(db);
         quanLyPhieuBaoHanh.taoPhieuBaoHanh();
     }
 
+    // xem toàn bộ mã giảm giá
     public void xemTatCaMaGiamGia() {
         QuanLyMaGiamGia quanLyMaGiamGia = new QuanLyMaGiamGia(db);
         quanLyMaGiamGia.xemTatCaMaGiamGia();
     }
 
-    //
+    // đổi mật khẩu cho nhân viên
     public void doiMatKhau() {
         QuanLyTaiKhoan quanLyTaiKhoan = new QuanLyTaiKhoan(db);
         quanLyTaiKhoan.doiMatKhau(nv);
     }
 
+    // xử lý đổi/trả hàng
     public void doiTraHang() {
         QuanLyPhieuTraHang quanLyPhieuTraHang = new QuanLyPhieuTraHang(db);
         quanLyPhieuTraHang.taoPhieuTraHang();
     }
 
+    // hiển thị thông tin nhân viên hiện tại
     public void hienThiThongTin() {
         System.out.println(nv);
     }
 
+    // gửi tin nhắn cho người khác
     public void guiTinNhan() {
         QuanLyTinNhan quanLyTinNhan = new QuanLyTinNhan(db);
         quanLyTinNhan.guiTinNhan(nv);
     }
 
+    // xem tất cả tin nhắn
     public void xemTatCaTinNhan() {
         QuanLyTinNhan quanLyTinNhan = new QuanLyTinNhan(db);
         quanLyTinNhan.xemTatCaTinNhan(nv);
     }
 
+    // xem tin nhắn gần đây
     public void xemTinNhanGanDay() {
         QuanLyTinNhan quanLyTinNhan = new QuanLyTinNhan(db);
         quanLyTinNhan.xemTatCaTinNhan(nv);
     }
 
+    // menu hiển thị các chức năng
     public void xuatMenu() {
         System.out.println("======= Nhan Vien Quan Ly =======");
         System.out.println("1.  Hien thi thong tin");
@@ -112,7 +125,7 @@ public class NhanVienQuanLy implements GiaoTiep {
         System.out.println("---------------------------");
     }
 
-    // thuc hien chuc nang
+    // thực hiện hành động dựa theo lựa chọn
     public void thucHienChucNang(int choice) {
         switch (choice) {
             case 1 -> hienThiThongTin();
@@ -131,18 +144,18 @@ public class NhanVienQuanLy implements GiaoTiep {
         }
     }
 
-    // nhap lua chon thuc hien chuc nang
+    // hiển thị menu và nhận lựa chọn từ người dùng
     public void menu() {
         int xacNhan = 1;
         while (xacNhan == 1) {
-            XoaManHinh.xoa();
-            xuatMenu();
+            XoaManHinh.xoa(); // dọn màn hình
+            xuatMenu(); // hiển thị menu
             int luaChon = Nhap.nhapInt("Nhap lua Chon : ");
             if (luaChon == 0) {
                 return;
             }
-            thucHienChucNang(luaChon);
-            Nhap.pause();
+            thucHienChucNang(luaChon); // thực hiện chức năng tương ứng
+            Nhap.pause(); // dừng chờ người dùng bấm phím
         }
     }
 }

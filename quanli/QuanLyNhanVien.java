@@ -10,20 +10,20 @@ import util.TaoDoiTuong;
 import util.XoaManHinh;
 
 public class QuanLyNhanVien {
-    private Database db;
+    private Database db; // Đối tượng cơ sở dữ liệu chung
 
     public QuanLyNhanVien(Database db) {
-        this.db = db;
+        this.db = db; // Gán database vào quản lý nhân viên
     }
 
-    private void taoNhanVien() {
+    private void taoNhanVien() { // Tạo và thêm nhân viên mới
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         NhanVien nv = TaoDoiTuong.taoNhanVien(db);
         danhSachNhanVien.them(nv);
         System.out.println("Da them nhan vien thanh cong.");
     }
 
-    private void xuatSuaNhanVien() {
+    private void xuatSuaNhanVien() { // Menu lựa chọn khi sửa nhân viên
         System.out.println("1. Sua ten");
         System.out.println("2. Sua sdt");
         System.out.println("3. Sua gioi tinh");
@@ -34,7 +34,7 @@ public class QuanLyNhanVien {
         System.out.println("---------------------------");
     }
 
-    private void suaThanhPhan(NhanVien nv, int luaChon) {
+    private void suaThanhPhan(NhanVien nv, int luaChon) { // Sửa thuộc tính cụ thể theo lựa chọn
         switch (luaChon) {
             case 1 -> nv.setTen(Nhap.nhapStr("Nhap ten moi: "));
             case 2 -> nv.setSdt(Nhap.nhapStr("Nhap sdt moi: "));
@@ -47,7 +47,7 @@ public class QuanLyNhanVien {
         }
     }
 
-    private void suaNhanVien() {
+    private void suaNhanVien() { // Sửa thông tin của nhân viên theo mã
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         String ma = Nhap.nhapStr("Nhap ma nhan vien can sua: ");
         NhanVien nv = danhSachNhanVien.tim(ma);
@@ -56,22 +56,22 @@ public class QuanLyNhanVien {
             return;
         }
         while (true) {
-            XoaManHinh.xoa();
+            XoaManHinh.xoa(); // Xóa màn hình trước khi hiển thị
             System.out.println();
             System.out.println("------------------------");
-            System.out.println(nv);
+            System.out.println(nv); // Hiển thị thông tin nhân viên hiện tại
             System.out.println("------------------------");
-            xuatSuaNhanVien();
+            xuatSuaNhanVien(); // Gọi menu sửa
             int chon = Nhap.nhapInt("Chon muc: ");
             if (chon == 0) {
-                return;
+                return; // Thoát nếu chọn 0
             }
-            suaThanhPhan(nv, chon);
-            Nhap.pause();
+            suaThanhPhan(nv, chon); // Gọi hàm sửa thuộc tính tương ứng
+            Nhap.pause(); // Dừng màn hình chờ người dùng
         }
     }
 
-    private void xoaNhanVien() {
+    private void xoaNhanVien() { // Xóa nhân viên theo mã
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         String ma = Nhap.nhapStr("Nhap ma nhan vien can xoa: ");
         NhanVien nhanVien = danhSachNhanVien.tim(ma);
@@ -83,7 +83,7 @@ public class QuanLyNhanVien {
         }
     }
 
-    private void traCuuNhanVien() {
+    private void traCuuNhanVien() { // Tìm kiếm và hiển thị nhân viên theo mã
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         String ma = Nhap.nhapStr("Nhap ma nhan vien: ");
         NhanVien nv = danhSachNhanVien.tim(ma);
@@ -96,7 +96,7 @@ public class QuanLyNhanVien {
         }
     }
 
-    private void xemTatCaNhanVien() {
+    private void xemTatCaNhanVien() { // In danh sách tất cả nhân viên
         ArrayList<NhanVien> list = db.getListNhanVien();
         if (list == null || list.isEmpty()) {
             System.out.println("Chua co nhan vien nao.");
@@ -109,8 +109,8 @@ public class QuanLyNhanVien {
         }
     }
 
-    private void xuatMenu() {
-       System.out.println("======= Quan Ly Nhan Vien =======");
+    private void xuatMenu() { // In menu chính của quản lý nhân viên
+        System.out.println("======= Quan Ly Nhan Vien =======");
         System.out.println("1. Them nhan vien");
         System.out.println("2. Sua thong tin");
         System.out.println("3. Xoa nhan vien");
@@ -120,7 +120,7 @@ public class QuanLyNhanVien {
         System.out.println("---------------------------");
     }
 
-    public void thucHienChucNang(int chon) {
+    public void thucHienChucNang(int chon) { // Thực hiện chức năng tương ứng với lựa chọn
         switch (chon) {
             case 0 -> {
                 System.out.println("Thoat menu quan ly nhan vien");
@@ -135,7 +135,7 @@ public class QuanLyNhanVien {
         }
     }
 
-    public void menu() {
+    public void menu() { // Menu lặp chính cho quản lý nhân viên
         int xacNhan = 1;
         while (xacNhan == 1) {
             XoaManHinh.xoa();

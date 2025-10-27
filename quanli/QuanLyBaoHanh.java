@@ -13,13 +13,14 @@ import model.SanPham;
 import model.ThongTinSanPham;
 
 public class QuanLyBaoHanh {
-    private Database db;
+    private Database db; // lưu tham chiếu đến cơ sở dữ liệu chính
 
     public QuanLyBaoHanh(Database db) {
-        this.db = db;
+        this.db = db; // khởi tạo với database hiện có
     }
 
     public void taoBaoHanh() {
+        // tạo đối tượng bảo hành mới và thêm vào danh sách
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         BaoHanh baoHanh = TaoDoiTuong.taoBaoHanh(db);
         if (baoHanh == null) {
@@ -31,6 +32,7 @@ public class QuanLyBaoHanh {
     }
 
     public void xoaBaoHanh() {
+        // xóa phiếu bảo hành theo mã
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         String ma = Nhap.nhapStr("Nhap ma bao hanh can xoa: ");
         BaoHanh baoHanh = danhSachBaoHanh.tim(ma);
@@ -46,6 +48,7 @@ public class QuanLyBaoHanh {
     }
 
     private void xuatSuaBaoHanh() {
+        // hiển thị menu lựa chọn khi sửa thông tin bảo hành
         System.out.println("======= Quan Ly Bao Hanh =======");
         System.out.println("1. Sua so thang bao hanh");
         System.out.println("2. Sua san pham");
@@ -56,6 +59,7 @@ public class QuanLyBaoHanh {
     }
 
     private void suaThanhPhanBaoHanh(BaoHanh baoHanh, int luaChon) {
+        // xử lý sửa từng thuộc tính của bảo hành tùy theo lựa chọn
         switch (luaChon) {
             case 0:
                 System.out.println("Thoat sua bao hanh");
@@ -92,6 +96,7 @@ public class QuanLyBaoHanh {
     }
 
     public void suaBaoHanh() {
+        // tìm bảo hành theo mã rồi cho phép sửa thông tin trong vòng lặp
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         String maBaoHanh = Nhap.nhapStr("Nhap ma phieu bao hanh can sua: ");
         BaoHanh baoHanh = danhSachBaoHanh.tim(maBaoHanh);
@@ -116,6 +121,7 @@ public class QuanLyBaoHanh {
     }
 
     public void xemTatCaBaoHanh() {
+        // in toàn bộ danh sách các phiếu bảo hành
         ArrayList<BaoHanh> listBaoHanh = db.getListBaoHanh();
         if (listBaoHanh == null || listBaoHanh.size() == 0) {
             System.out.println("khong co bao hanh nao");
@@ -127,6 +133,7 @@ public class QuanLyBaoHanh {
     }
 
     public void traCuuBaoHanh() {
+        // tra cứu bảo hành theo mã và in ra thông tin chi tiết
         String ma = Nhap.nhapStr("Nhap ma bao hanh can tra cuu : ");
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         BaoHanh baoHanh = danhSachBaoHanh.tim(ma);
@@ -140,6 +147,7 @@ public class QuanLyBaoHanh {
     }
 
     public void xuatMenu() {
+        // in menu chính quản lý bảo hành
         System.out.println("======= Quan Ly Bao Hanh =======");
         System.out.println("1. Tao bao hanh");
         System.out.println("2. Sua bao hanh");
@@ -151,6 +159,7 @@ public class QuanLyBaoHanh {
     }
 
     public void thucHienChucNang(int luaChon) {
+        // xử lý chức năng theo lựa chọn từ menu
         switch (luaChon) {
             case 0 -> {
                 System.out.println("Thoat menu phieu bao hanh");
@@ -166,6 +175,7 @@ public class QuanLyBaoHanh {
     }
 
     public void menu() {
+        // vòng lặp hiển thị menu và thực thi chức năng
         int xacNhan = 1;
         while (xacNhan == 1) {
             XoaManHinh.xoa();
