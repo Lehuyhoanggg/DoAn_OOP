@@ -282,10 +282,12 @@ public class DocFile {
                 boolean traHang = thanhPhan[2].equals("true") ? true : false;
                 BaoHanh baoHanh = thanhPhan[3].equals("null") ? null : danhSachBaoHanh.tim(thanhPhan[3]);
                 boolean daBan = Boolean.parseBoolean(thanhPhan[4]);
-
-                danhSachSanPham.them(new SanPham(serial, thongTinSanPham, traHang, baoHanh, daBan));
+                SanPham sanPham = new SanPham(serial, thongTinSanPham, traHang, baoHanh, daBan);
+                danhSachSanPham.them(sanPham);
                 db.getKhoSerial().add(serial);
-                thongTinSanPham.tangTonKho();
+                if (!sanPham.getDaBan()) {
+                    thongTinSanPham.tangTonKho();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
