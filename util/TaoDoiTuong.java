@@ -77,6 +77,9 @@ public class TaoDoiTuong {
         String maTraHang = CapMa.capMaPhieuTraHang(db);
         String ngayTra = ThoiGian.layNgayHienTaiStr();
         String lyDoTra = Nhap.nhapStr("Nhap ly do tra : ");
+        if (lyDoTra.length()==0){
+            lyDoTra="trong";
+        }
         PhieuTraHang phieuTraHang = new PhieuTraHang(maTraHang, khachHang, sanPham, ngayTra, lyDoTra);
         return phieuTraHang;
     }
@@ -142,6 +145,9 @@ public class TaoDoiTuong {
         SanPham sanPham = baoHanh.getSanPham();
         String ngayBaoHanh = ThoiGian.layNgayHienTaiStr();
         String chiTietLoi = Nhap.nhapStr("Nhap chi tiet loi : ");
+        if (chiTietLoi.length() == 0) {
+            chiTietLoi = "trong";
+        }
         PhieuBaoHanh phieuBaoHanh = new PhieuBaoHanh(maPhieuBaoHanh, khachHang, sanPham, ngayBaoHanh, chiTietLoi);
         khachHang.themPhieuBaoHanh(phieuBaoHanh);
         return phieuBaoHanh;
@@ -300,6 +306,9 @@ public class TaoDoiTuong {
 
         String ngayTaoHoaDon = ThoiGian.layNgayHienTaiStr();
         String ghiChu = Nhap.nhapStr("Nhap ghi chu neu co : ");
+        if (ghiChu.length() == 0) {
+            ghiChu = "trong";
+        }
         HoaDon hoaDon = new HoaDon(ma, khachHang, ngayTaoHoaDon, ghiChu);
         hoaDon.setListChiTietHoaDon(listChiTietHoaDon);
 

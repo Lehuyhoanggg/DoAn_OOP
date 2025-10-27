@@ -57,7 +57,11 @@ public class QuanLyPhieuTraHang {
             System.out.println("Khach hang da tra san pham nay roi");
             return;
         }
-
+        DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = new DanhSachPhieuBaoHanh(khachHang.getListPhieuBaoHanh());
+        if (danhSachPhieuBaoHanh.tim(sanPham) != null) {
+            System.out.println("San pham dang duoc bao hanh");
+            return;
+        }
         // Tìm chi tiết hóa đơn chứa sản phẩm này
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(sanPham);

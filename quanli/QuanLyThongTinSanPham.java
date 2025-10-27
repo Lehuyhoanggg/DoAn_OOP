@@ -1,6 +1,8 @@
 package quanli;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import danhsach.DanhSachThongTinSanPham;
 import database.Database;
@@ -133,16 +135,22 @@ public class QuanLyThongTinSanPham {
             return;
         }
         // Tìm theo tên
+        Set<Integer> setLuaChon = new HashSet<>();
         for (int i = 0; i < listSanPham.size(); i++) {
             if (listSanPham.get(i).getTen().contains(tuKhoa)) {
                 timThay = true;
                 System.out.println(i + ". " + listSanPham.get(i).getMa() + " " + listSanPham.get(i).getTen() + " "
                         + listSanPham.get(i).getGia() + " " + listSanPham.get(i).getThuongHieu());
+                        setLuaChon.add(i);
             }
         }
 
         if (timThay) {
             int luaChon = Nhap.nhapInt("lua chon san pham de hien thi : ");
+             if (!setLuaChon.contains(luaChon)) {
+                System.out.println("Lua chon khong nam trong pham vi");
+                return;
+            }
             if (listSanPham.size() > luaChon && 0 <= luaChon) {
                 System.out.println("---------------------------");
                 System.out.println(listSanPham.get(luaChon));

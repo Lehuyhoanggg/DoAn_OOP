@@ -101,6 +101,8 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
                 && ((maGiamGia.getNgayBatDau().equals("Vinh_Vien") || maGiamGia.getNgayKetThuc().equals("Vinh_Vien") ||
                         ThoiGian.ngayTrongKhoan(ThoiGian.layNgayHienTaiStr(), maGiamGia.getNgayBatDau(),
                                 maGiamGia.getNgayKetThuc())))
+                /// nếu đây là một giảm giá đã dùng (sanphamDadung!=null) thì check xem nó có
+                /// phải của sản phẩm đó không
                 && (maGiamGia.getSanPhamDaDung() == null || maGiamGia.getSanPhamDaDung().equals(sanPham))) {
             return true;
         }
@@ -240,7 +242,7 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
             if (maGiamGiaThoaMan(sanPham, listMaGiamGiaSp.get(i))) {
                 khachHang.themMaGiamGia(new MaGiamGia(listMaGiamGiaSp.get(i))); // Hoàn lại mã cho KH
                 listMaThuHoi.add(listMaGiamGiaSp.get(i)); // Lưu danh sách mã thu hồi
-                listMaGiamGiaSp.remove(i); // Xóa mã khỏi sản phẩm
+                listMaGiamGiaSp.remove(i); // Xóa mã khỏi chitiethoadon
             }
         }
         return listMaThuHoi;

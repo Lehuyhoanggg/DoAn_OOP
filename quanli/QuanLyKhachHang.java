@@ -1,6 +1,8 @@
 package quanli;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import danhsach.DanhSachHangThanhVien;
 import danhsach.DanhSachKhachHang;
@@ -34,7 +36,8 @@ public class QuanLyKhachHang {
         System.out.println("Da tao khach hang thanh cong");
     }
 
-    // in ra toàn bộ các danh sách con trong một khách hàng (bảo hành, hóa đơn, mã giảm giá, ...)
+    // in ra toàn bộ các danh sách con trong một khách hàng (bảo hành, hóa đơn, mã
+    // giảm giá, ...)
     private void xuatListTrongKhachHang(KhachHang khachHang) {
         ArrayList<BaoHanh> listBaoHanh = khachHang.getListBaoHanh();
         ArrayList<PhieuBaoHanh> listPhieuBaoHanh = khachHang.getListPhieuBaoHanh();
@@ -90,19 +93,24 @@ public class QuanLyKhachHang {
             System.out.println("khong tim thay khach hang");
             return;
         }
-
+        Set<Integer> setLuaChon = new HashSet<>();
         // tìm theo số điện thoại
         for (int i = 0; i < listKhachHang.size(); i++) {
             if (listKhachHang.get(i).getSdt().contains(tuKhoa)) {
                 timThay = true;
                 System.out.println(i + ". " + listKhachHang.get(i).getMaKh() + " " + listKhachHang.get(i).getTenKh()
                         + " " + listKhachHang.get(i).getSdt());
+                setLuaChon.add(i);
             }
         }
 
         // nếu tìm thấy theo sdt
         if (timThay) {
             int luaChon = Nhap.nhapInt("lua chon khach hang de hien thi : ");
+            if (!setLuaChon.contains(luaChon)) {
+                System.out.println("Lua chon khong nam trong pham vi");
+                return;
+            }
             if (listKhachHang.size() > luaChon || 0 < luaChon) {
                 System.out.println("---------------------------");
                 System.out.println(listKhachHang.get(luaChon));
@@ -125,16 +133,22 @@ public class QuanLyKhachHang {
             }
             // nếu vẫn chưa thấy thì tìm theo tên
             if (!timThay) {
+                setLuaChon.clear();
                 for (int i = 0; i < listKhachHang.size(); i++) {
                     if (listKhachHang.get(i).getTenKh().contains(tuKhoa)) {
                         timThay = true;
                         System.out.println(
                                 i + ". " + listKhachHang.get(i).getMaKh() + " " + listKhachHang.get(i).getTenKh()
                                         + " " + listKhachHang.get(i).getSdt());
+                        setLuaChon.add(i);
                     }
                 }
                 if (timThay) {
                     int luaChon = Nhap.nhapInt("lua chon khach hang de hien thi : ");
+                    if (!setLuaChon.contains(luaChon)) {
+                        System.out.println("Lua chon khong nam trong pham vi");
+                        return;
+                    }
                     if (listKhachHang.size() > luaChon || 0 < luaChon) {
                         System.out.println("---------------------------");
                         System.out.println(listKhachHang.get(luaChon));
@@ -219,7 +233,7 @@ public class QuanLyKhachHang {
     // xử lý quy trình sửa thông tin khách hàng
     public void suaThongTinKhachHang() {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
-        KhachHang khachHang = danhSachKhachHang.tim(Nhap.nhapStr("Nhap ma khach hang can sau : "));
+        KhachHang khachHang = danhSachKhachHang.tim(Nhap.nhapStr("Nhap ma khach hang can sua : "));
         if (khachHang == null) {
             System.out.println("Khong tim thay khach hang");
             return;

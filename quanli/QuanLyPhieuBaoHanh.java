@@ -41,6 +41,15 @@ public class QuanLyPhieuBaoHanh {
             System.out.println("Khong tim thay san pham");
             return;
         }
+        DanhSachPhieuBaoHanh danhSachPhieuBaoHanhKh = new DanhSachPhieuBaoHanh(khachHang.getListPhieuBaoHanh());
+        if (danhSachPhieuBaoHanhKh.tim(sanPham) != null) {
+            System.out.println("San pham dang duoc bao hanh");
+            return;
+        }
+        if (sanPham.getTraHang()) {
+            System.out.println("San pham da duoc tra hang");
+            return;
+        }
 
         // Kiểm tra sản phẩm có trong hóa đơn của khách hàng không
         boolean tonTai = false;

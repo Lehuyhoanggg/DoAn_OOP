@@ -293,7 +293,7 @@ public class QuanLyHoaDon {
 
     // lựa chon xem doanh thu
     private void xuatXemDoanhThu() {
-        System.out.println("======= Quan Ly Hoa Don =======");
+        System.out.println("======= Quan Ly Doanh Thu =======");
         System.out.println("1. xem doanh thu hom nay");
         System.out.println("2. xem doanh thu tuan");
         System.out.println("3. xem doanh thu thang");
@@ -389,7 +389,7 @@ public class QuanLyHoaDon {
         for (ChiTietHoaDon chiTietHoaDon : hoaDon.getListChiTietHoaDon()) {
             for (MaGiamGia maGiamGia : chiTietHoaDon.getListMaGiamGia()) {
                 System.out.println(maGiamGia);
-                trong = true;
+                trong = false;
             }
         }
         if (trong) {
@@ -412,6 +412,7 @@ public class QuanLyHoaDon {
 
     // lựa chon quản lí hóa đơn
     private void xuatMenu() {
+        System.out.println("======= Quan Ly Hoa Don =======");
         System.out.println("1. Tao hoa don mua hang cho khach");
         System.out.println("2. Xoa hoa don mua Hang");
         System.out.println("3. Sua hoa don mua hang theo ma");

@@ -3,6 +3,7 @@ package danhsach;
 import java.util.ArrayList;
 import interfaces.QuanLyDanhSach;
 import model.PhieuBaoHanh;
+import model.SanPham;
 
 public class DanhSachPhieuBaoHanh implements QuanLyDanhSach<PhieuBaoHanh> {
     private ArrayList<PhieuBaoHanh> listPhieuBaoHanh; // danh sách phiếu bảo hành
@@ -72,5 +73,15 @@ public class DanhSachPhieuBaoHanh implements QuanLyDanhSach<PhieuBaoHanh> {
             return listPhieuBaoHanh.remove(phieuBaoHanh);
         }
         return false;
+    }
+
+    // tìm bảo hành của một sản phẩm cụ thể
+    public PhieuBaoHanh tim(SanPham sanPham) {
+        for (PhieuBaoHanh phieuBaoHanh : listPhieuBaoHanh) {
+            if (phieuBaoHanh.getSanPham().equals(sanPham)) {
+                return phieuBaoHanh;
+            }
+        }
+        return null;
     }
 }
