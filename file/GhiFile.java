@@ -15,7 +15,7 @@ public class GhiFile {
         this.db = db;
     }
 
-    // nhan vien
+    // ghi_NhanVientxt: maNV_cmnd_hoTen_ngaySinh_sdt_gioiTinh_luong
     public void ghi_NhanVientxt(String path) {
         ArrayList<NhanVien> listNhanVien = db.getListNhanVien();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -37,7 +37,7 @@ public class GhiFile {
         }
     }
 
-    // quan ly
+    // ghi_QuanLytxt: maQL_cmnd_hoTen_ngaySinh_sdt_gioiTinh
     public void ghi_QuanLytxt(String path) {
         ArrayList<QuanLy> listQuanly = db.getListQuanLy();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -57,7 +57,7 @@ public class GhiFile {
         }
     }
 
-    // san pham
+    // ghi_QuanLytxt: maQL_cmnd_hoTen_ngaySinh_sdt_gioiTinh
     public void ghi_ThongTinSanPhamtxt(String path) {
         ArrayList<ThongTinSanPham> listSanPham = db.getListThongTinSanPham();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -78,7 +78,8 @@ public class GhiFile {
         }
     }
 
-    // ma giam gia
+    // ghi_MaGiamGiatxt:
+    // ma_tenMa_loaiDoanhMuc_loaiThuongHieu_tienGiam_ngayBatDau_ngayKetThuc
     public void ghi_MaGiamGiatxt(String path) {
         ArrayList<MaGiamGia> listMaGiamGia = db.getListMaGiamGia();
         ArrayList<MaGiamGia> listMaGiamGiaDq = db.getListMaGiamGiaDq();
@@ -113,7 +114,7 @@ public class GhiFile {
         }
     }
 
-    // hang thanh vien
+    // ghi_HangThanhVientxt: tenHang_moTa_[danhSachMaGiamGiaDQ]
     public void ghi_HangThanhVientxt(String path) {
         ArrayList<HangThanhVien> listHangThanhVien = db.getListHangThanhVien();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -133,7 +134,7 @@ public class GhiFile {
         }
     }
 
-    // khach hang
+    // ghi_KhachHangtxt: maKh_tenKh_sdt_hangThanhVien
     public void ghi_KhachHangtxt(String path) {
         ArrayList<KhachHang> listKhachHang = db.getListKhachHang();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -152,7 +153,7 @@ public class GhiFile {
         }
     }
 
-    // bao hanh
+    // ghi_BaoHanhtxt: maBh_loaiBaoHanh_maSanPham_gia
     public void ghi_BaoHanhtxt(String path) {
         ArrayList<BaoHanh> listBaoHanh = db.getListBaoHanh();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -170,7 +171,8 @@ public class GhiFile {
         }
     }
 
-    // phieu bao hanh
+    // ghi_PhieuBaoHanhtxt:
+    // maBaoHanh_maKhachHang_serialSanPham_ngayBaoHanh_chiTietLoi
     public void ghi_PhieuBaoHanhtxt(String path) {
         ArrayList<PhieuBaoHanh> listPhieuBaoHanh = db.getListPhieuBaoHanh();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -189,7 +191,7 @@ public class GhiFile {
         }
     }
 
-    // phieu tra hang
+    // ghi_PhieuTraHangtxt: maTraHang_maKhachHang_serialSanPham_ngayTra_lyDoTra
     public void ghi_PhieuTraHangtxt(String path) {
         ArrayList<PhieuTraHang> listPhieuTraHang = db.getListPhieuTraHang();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -212,7 +214,7 @@ public class GhiFile {
         }
     }
 
-    // chi tiet hoa don
+    // ghi_ChiTietHoaDontxt: maChiTietHoaDon_thanhTien
     public void ghi_ChiTietHoaDontxt(String path) {
         ArrayList<ChiTietHoaDon> listChiTietHoaDon = db.getListChiTietHoaDon();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -227,6 +229,7 @@ public class GhiFile {
         }
     }
 
+    // ghi_SanPhamtxt: maSanPham_serial_traHang_maBaoHanh_daBan
     public void ghi_SanPhamtxt(String path) {
         ArrayList<SanPham> listSanPham = db.getListSanPham();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -244,6 +247,7 @@ public class GhiFile {
         }
     }
 
+    // ghi_ChiTietHoaDon_SanPhamtxt: maChiTietHoaDon_[danhSachSerial]
     public void ghi_ChiTietHoaDon_SanPhamtxt(String path) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             for (ChiTietHoaDon chiTietHoaDon : db.getListChiTietHoaDon()) {
@@ -261,6 +265,8 @@ public class GhiFile {
 
     }
 
+    // ghi_ChiTietHoaDon_MaGiamGiaDaDungtxt:
+    // maChiTietHoaDon_maMaGiamGia_serialSanPhamDaDung
     public void ghi_ChiTietHoaDon_MaGiamGiaDaDungtxt(String path) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             for (HoaDon hoaDon : db.getListHoaDon()) {
@@ -279,7 +285,8 @@ public class GhiFile {
         }
     }
 
-    // hoa don
+    // ghi_HoaDontxt:
+    // maHoaDon_maKhachHang_ngayTaoHoaDon_ghiChu_thanhTien_[danhSachChiTietHoaDon]
     public void ghi_HoaDontxt(String path) {
         ArrayList<HoaDon> listHoaDon = db.getListHoaDon();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -302,7 +309,7 @@ public class GhiFile {
         }
     }
 
-    // khach hang _ phieu bao hanh
+    // ghi_KhachHang_PhieuBaoHanhtxt: maKhachHang_[danhSachPhieuBaoHanh]
     public void ghi_KhachHang_PhieuBaoHanhtxt(String path) {
         ArrayList<KhachHang> listKhachHang = db.getListKhachHang();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -321,7 +328,7 @@ public class GhiFile {
         }
     }
 
-    // khach hang bao hanh
+    // ghi_KhachHang_BaoHanhtxt: maKhachHang_maBaoHanh_serialSanPham_ngayBatDau
     public void ghi_KhachHang_BaoHanhtxt(String path) {
         ArrayList<KhachHang> listKhachHang = db.getListKhachHang();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -341,7 +348,7 @@ public class GhiFile {
         }
     }
 
-    // khach hang_ma giam gia
+    // ghi_KhachHang_MaGiamGiatxt: maKhachHang_[danhSachMaGiamGia]
     public void ghi_KhachHang_MaGiamGiatxt(String path) {
         ArrayList<KhachHang> listKhachHang = db.getListKhachHang();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -359,7 +366,7 @@ public class GhiFile {
         }
     }
 
-    // khach hang_hoa don
+    // ghi_KhachHang_HoaDontxt: maKhachHang_[danhSachHoaDon]
     public void ghi_KhachHang_HoaDontxt(String path) {
         ArrayList<KhachHang> listKhachHang = db.getListKhachHang();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -377,7 +384,7 @@ public class GhiFile {
         }
     }
 
-    // khach hang_phieu tra hang
+    // ghi_KhachHang_PhieuTraHangtxt: maKhachHang_[danhSachPhieuTraHang]
     public void ghi_KhachHang_PhieuTraHangtxt(String path) {
         ArrayList<KhachHang> listKhachHang = db.getListKhachHang();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -396,7 +403,7 @@ public class GhiFile {
         }
     }
 
-    // ghi ca lam
+    // ghi_CaLamtxt: maCaLam_soCa_gioBatDau_gioKetThuc_soLuongCan_[danhSachNhanVien]
     public void ghi_CaLamtxt(String path) {
         ArrayList<CaLam> listCaLam = db.getListCaLam();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -418,6 +425,7 @@ public class GhiFile {
         }
     }
 
+    // ghi_CaLam_NhanVienDiemDanh: maCaLam_[danhSachNhanVienDiemDanh]
     public void ghi_CaLam_NhanVienDiemDanh(String path) {
         ArrayList<CaLam> listCaLam = db.getListCaLam();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -438,7 +446,7 @@ public class GhiFile {
         }
     }
 
-    // ghi lich trong ngay
+    // ghi_LichTrongNgaytxt: maLichTrongNgay_thu_ngay_[danhSachCaLam]
     public void ghi_LichTrongNgaytxt(String path) {
         ArrayList<LichTrongNgay> listLichTrongNgay = db.getListLichTrongNgay();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -458,7 +466,8 @@ public class GhiFile {
         }
     }
 
-    // ghi lich lam viec
+    // ghi_LichTrongTuantxt:
+    // maLichTrongTuan_ngayThu2_ngayChuNhat_[danhSachLichTrongNgay]
     public void ghi_LichTrongTuantxt(String path) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             String line;
@@ -480,7 +489,7 @@ public class GhiFile {
         }
     }
 
-    // ghi tai khoan
+    // ghi_TaiKhoantxt: tenDangNhap_matKhau
     public void ghi_TaiKhoantxt(String path) {
         ArrayList<TaiKhoan> listTaiKhoan = db.getListTaiKhoan();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -496,7 +505,7 @@ public class GhiFile {
         }
     }
 
-    // ghi tin nhan
+    // ghi_TinNhantxt: maTinNhan_tenNguoiGui_noiDung_ngayGui
     public void ghi_TinNhantxt(String path) {
         ArrayList<TinNhan> listTinNhan = db.getListTinNhan();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -514,7 +523,7 @@ public class GhiFile {
         }
     }
 
-    // ghi user_TinNhan
+    // ghi_User_TinNhantxt: maUser_[danhSachTinNhan]
     public void ghi_User_TinNhantxt(String path) {
         ArrayList<User> listUser = db.getListUser();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
@@ -532,7 +541,7 @@ public class GhiFile {
         }
     }
 
-    // ghi database vao data
+    // ghi database vao data , ko quan trọng thứ tự
     public void ghi_DatasVaoDatabase() {
         ghi_NhanVientxt("datas/NhanVien.txt");
         ghi_QuanLytxt("datas/QuanLy.txt");
@@ -554,7 +563,7 @@ public class GhiFile {
         ghi_KhachHang_HoaDontxt("datas/KhachHang_HoaDon.txt");
         ghi_KhachHang_PhieuTraHangtxt("datas/KhachHang_PhieuTraHang.txt");
         ghi_CaLamtxt("datas/CaLam.txt");
-        ghi_CaLam_NhanVienDiemDanh("datas/CaLam_NhanVienDiemDanh.txt");/////////////
+        ghi_CaLam_NhanVienDiemDanh("datas/CaLam_NhanVienDiemDanh.txt");
         ghi_LichTrongNgaytxt("datas/LichTrongNgay.txt");
         ghi_LichTrongTuantxt("datas/LichTrongTuan.txt");
         ghi_TaiKhoantxt("datas/TaiKhoan.txt");

@@ -16,6 +16,8 @@ public class DocFile {
     }
 
     ////////////////////////////////// doc file tu datas
+
+    // maNV_cmnd_hoTen_ngaySinh_sdt_gioiTinh_luong
     public void doc_NhanVientxt(String path) {
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -41,6 +43,7 @@ public class DocFile {
         }
     }
 
+    // doc_QuanLytxt: maQL_cmnd_hoTen_ngaySinh_sdt_gioiTinh
     public void doc_QuanLytxt(String path) {
         DanhSachQuanLy danhSachQuanLy = db.getDanhSachQuanLy();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -65,6 +68,7 @@ public class DocFile {
         }
     }
 
+    // doc_ThongTinSanPhamtxt: ma_ten_danhMuc_thuongHieu_gia_moTa_trangThai
     public void doc_ThongTinSanPhamtxt(String path) {
         DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -91,6 +95,8 @@ public class DocFile {
         }
     }
 
+    // doc_MaGiamGiatxt:
+    // ma_tenMa_loaiDoanhMuc_loaiThuongHieu_tienGiam_ngayBatDau_ngayKet
     public void doc_MaGiamGiatxt(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
@@ -123,6 +129,7 @@ public class DocFile {
         }
     }
 
+    // doc_HangThanhVientxt: tenHang_moTa_[danhSachMaGiamGiaDQ]
     public void doc_HangThanhVientxt(String path) {
         DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGiaDq();
@@ -145,6 +152,7 @@ public class DocFile {
         }
     }
 
+    // doc_KhachHangtxt: maKh_tenKh_sdt_hangThanhVien
     public void doc_KhachHangtxt(String path) {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         DanhSachHangThanhVien danhSachHangThanhVien = db.getDanhSachHangThanhVien();
@@ -169,6 +177,7 @@ public class DocFile {
         }
     }
 
+    // doc_BaoHanhtxt: maBh_loaiBaoHanh_maSanPham_gia
     public void doc_BaoHanhtxt(String path) {
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
@@ -190,6 +199,8 @@ public class DocFile {
         }
     }
 
+    // doc_PhieuBaoHanhtxt:
+    // maBaoHanh_maKhachHang_serialSanPham_ngayBaoHanh_chiTietLoi
     public void doc_PhieuBaoHanhtxt(String path) {
         DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = db.getDanhSachPhieuBaoHanh();
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
@@ -211,6 +222,7 @@ public class DocFile {
         }
     }
 
+    // doc_PhieuTraHangtxt: maTraHang_maKhachHang_serialSanPham_ngayTra_lyDoTra
     public void doc_PhieuTraHangtxt(String path) { ///////
         DanhSachPhieuTraHang danhSachPhieuTraHang = db.getDanhSachPhieuTraHang();
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
@@ -232,6 +244,7 @@ public class DocFile {
         }
     }
 
+    // doc_ChiTietHoaDontxt: maChiTietHoaDon_thanhTien
     public void doc_ChiTietHoaDontxt(String path) {
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -249,6 +262,7 @@ public class DocFile {
         }
     }
 
+    // doc_SanPhamtxt: maSanPham_serial_traHang_maBaoHanh_daBan
     public void doc_SanPhamtxt(String path) {
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
         DanhSachThongTinSanPham danhSachThongTinSanPham = db.getDanhSachThongTinSanPham();
@@ -278,6 +292,7 @@ public class DocFile {
         }
     }
 
+    // doc_ChiTietHoaDon_SanPhamtxt: maChiTietHoaDon_[danhSachSerial]
     public void doc_ChiTietHoaDon_SanPhamtxt(String path) { //////////////
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         DanhSachSanPham danhSachSanPham = db.getDanhSachSanPham();
@@ -301,7 +316,9 @@ public class DocFile {
         }
     }
 
-    public void doc_ChiTietHoaDon_MaGiamGiaDaDungtxt(String path) { /// khachHang ChiTietHoaDon_MaGGDaDung
+    // doc_ChiTietHoaDon_MaGiamGiaDaDungtxt:
+    // maChiTietHoaDon_maMaGiamGia_serialSanPhamDaDung
+    public void doc_ChiTietHoaDon_MaGiamGiaDaDungtxt(String path) {
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = db.getDanhSachChiTietHoaDon();
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
         DanhSachMaGiamGia danhSachMaGiamGiaDq = db.getDanhSachMaGiamGiaDq();
@@ -334,6 +351,8 @@ public class DocFile {
         }
     }
 
+    // doc_HoaDontxt:
+    // maHoaDon_maKhachHang_ngayTaoHoaDon_ghiChu_thanhTien_[danhSachChiTietHoaDon]
     public void doc_HoaDontxt(String path) {
         DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
@@ -363,7 +382,7 @@ public class DocFile {
         }
     }
 
-    ////////////////////////
+    // doc_KhachHang_PhieuBaoHanhtxt: maKhachHang_[danhSachPhieuBaoHanh]
     public void doc_KhachHang_PhieuBaoHanhtxt(String path) {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         DanhSachPhieuBaoHanh danhSachPhieuBaoHanh = db.getDanhSachPhieuBaoHanh();
@@ -387,6 +406,7 @@ public class DocFile {
         }
     }
 
+    // doc_KhachHang_BaoHanhtxt: maKhachHang_maBaoHanh_serialSanPham_ngayBatDau
     public void doc_KhachHang_BaoHanhtxt(String path) { /// ////////////////////////////
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
@@ -418,6 +438,7 @@ public class DocFile {
         }
     }
 
+    // doc_KhachHang_MaGiamGiatxt: maKhachHang_[danhSachMaGiamGia]
     public void doc_KhachHang_MaGiamGiatxt(String path) {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
@@ -450,6 +471,7 @@ public class DocFile {
         }
     }
 
+    // doc_KhachHang_HoaDontxt: maKhachHang_[danhSachHoaDon]
     public void doc_KhachHang_HoaDontxt(String path) {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         DanhSachHoaDon danhSachHoaDon = db.getDanhSachHoaDon();
@@ -474,6 +496,7 @@ public class DocFile {
         }
     }
 
+    // doc_KhachHang_PhieuTraHangtxt: maKhachHang_[danhSachPhieuTraHang]
     public void doc_KhachHang_PhieuTraHangtxt(String path) {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         DanhSachPhieuTraHang danhSachPhieuTraHang = db.getDanhSachPhieuTraHang();
@@ -497,6 +520,7 @@ public class DocFile {
         }
     }
 
+    // doc_CaLamtxt: maCaLam_soCa_gioBatDau_gioKetThuc_soLuongCan_[danhSachNhanVien]
     public void doc_CaLamtxt(String path) {
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         DanhSachCaLam danhSachCaLam = db.getDanhSachCaLam();
@@ -523,6 +547,7 @@ public class DocFile {
         }
     }
 
+    // doc_CaLam_NhanVienDiemDanh: maCaLam_[danhSachNhanVienDiemDanh]
     public void doc_CaLam_NhanVienDiemDanh(String path) {
         DanhSachNhanVien danhSachNhanVien = db.getDanhSachNhanVien();
         DanhSachCaLam danhSachCaLam = db.getDanhSachCaLam();
@@ -547,6 +572,7 @@ public class DocFile {
         }
     }
 
+    // doc_LichTrongNgaytxt: maLichTrongNgay_thu_ngay_[danhSachCaLam]
     public void doc_LichTrongNgaytxt(String path) {
         DanhSachCaLam danhSachCaLam = db.getDanhSachCaLam();
         DanhSachLichTrongNgay danhSachLichTrongNgay = db.getDanhSachLichTrongNgay();
@@ -571,6 +597,8 @@ public class DocFile {
         }
     }
 
+    // doc_LichTrongTuantxt:
+    // maLichTrongTuan_ngayThu2_ngayChuNhat_[danhSachLichTrongNgay]
     public void doc_LichTrongTuantxt(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line = br.readLine();
@@ -592,6 +620,7 @@ public class DocFile {
         }
     }
 
+    // doc_TaiKhoantxt: tenDangNhap_matKhau
     public void doc_TaiKhoantxt(String path) {
         DanhSachTaiKhoan danhSachTaiKhoan = db.getDanhSachTaiKhoan();
         DanhSachUser danhSachUser = db.getDanhSachUser();
@@ -611,6 +640,7 @@ public class DocFile {
         }
     }
 
+    // doc_TinNhantxt: maTinNhan_tenNguoiGui_noiDung_ngayGui
     public void doc_TinNhantxt(String path) {
         DanhSachTinNhan danhSachTinNhan = db.getDanhSachTinNhan();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -633,6 +663,7 @@ public class DocFile {
         }
     }
 
+    // doc_User_TinNhantxt: maUser_[danhSachTinNhan]
     public void doc_User_TinNhantxt(String path) {
         DanhSachTinNhan danhSachTinNhan = db.getDanhSachTinNhan();
         DanhSachUser danhSachUser = db.getDanhSachUser();
@@ -653,7 +684,8 @@ public class DocFile {
         }
     }
 
-    ////////////////////////////////
+    //////////////////////////////// hàm gọi tất cả , thứ tự gọi hàm cực kì
+    /// quan trọng
     public void doc_DatasVaoDatabase() {
         doc_NhanVientxt("datas/NhanVien.txt");
         doc_QuanLytxt("datas/QuanLy.txt");
