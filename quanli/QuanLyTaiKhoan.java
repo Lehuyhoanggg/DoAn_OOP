@@ -54,6 +54,10 @@ public class QuanLyTaiKhoan {
         }
 
         // Hiển thị user chưa có tài khoản
+        if (listUserChuaCoTk != null) {
+            System.out.println("Danh sach user chua co tai khoan");
+            System.out.println("=================================");
+        }
         for (User user : listUserChuaCoTk) {
             System.out.println(user);
             System.out.println("--------------------------");

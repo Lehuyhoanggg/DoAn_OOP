@@ -64,11 +64,11 @@ public class GhiFile {
             String line;
             for (int i = 0; i < listSanPham.size(); i++) {
                 line = listSanPham.get(i).getMa() + " " +
-                        listSanPham.get(i).getTen() + " " +
-                        listSanPham.get(i).getDanhMuc() + " " +
-                        listSanPham.get(i).getThuongHieu() + " " +
+                        XulyString.dongGoiStr(listSanPham.get(i).getTen()) + " " +
+                        XulyString.dongGoiStr(listSanPham.get(i).getDanhMuc()) + " " +
+                        XulyString.dongGoiStr(listSanPham.get(i).getThuongHieu()) + " " +
                         listSanPham.get(i).getGia() + " " +
-                        listSanPham.get(i).getMoTa() + " " +
+                        XulyString.dongGoiStr(listSanPham.get(i).getMoTa()) + " " +
                         XulyString.dongGoiStr(listSanPham.get(i).getTrangThai());
                 bw.write(line);
                 bw.newLine();

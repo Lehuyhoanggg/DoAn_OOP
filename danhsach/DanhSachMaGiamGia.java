@@ -217,7 +217,10 @@ public class DanhSachMaGiamGia implements QuanLyDanhSach<MaGiamGia> {
         // Tìm chi tiết hóa đơn chứa sản phẩm cần xóa
         DanhSachChiTietHoaDon danhSachChiTietHoaDon = new DanhSachChiTietHoaDon(hoaDon.getListChiTietHoaDon());
         ChiTietHoaDon chiTietHoaDon = danhSachChiTietHoaDon.tim(sanPham);
-
+        if (sanPham.getTraHang()) {
+            chiTietHoaDon.xoaSanPham(sanPham);
+            return null;
+        }
         ArrayList<MaGiamGia> listMaThuHoi = new ArrayList<>();
         ArrayList<MaGiamGia> listMaGiamGiaSp = chiTietHoaDon.getListMaGiamGia();
 

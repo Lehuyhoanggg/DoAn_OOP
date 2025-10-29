@@ -32,6 +32,10 @@ public class QuanLyKhachHang {
     public void taoKhachHang() {
         DanhSachKhachHang danhSachKhachHang = db.getDanhSachKhachHang();
         KhachHang khachHang = TaoDoiTuong.taoKhachHang(db); // gọi lớp tiện ích để tạo khách hàng
+        if (danhSachKhachHang.timKhachHangTheoSdt(khachHang.getSdt()) != null) {
+            System.out.println("Them that bai! \nDa ton tai khach hang voi so dien thoai " + khachHang.getSdt());
+            return;
+        }
         danhSachKhachHang.them(khachHang); // thêm vào danh sách
         System.out.println("Da tao khach hang thanh cong");
     }
@@ -149,7 +153,7 @@ public class QuanLyKhachHang {
                         System.out.println("Lua chon khong nam trong pham vi");
                         return;
                     }
-                    if (listKhachHang.size() > luaChon || 0 < luaChon) {
+                    if (luaChon >= 0 && luaChon < listKhachHang.size()) {
                         System.out.println("---------------------------");
                         System.out.println(listKhachHang.get(luaChon));
                         xuatListTrongKhachHang(listKhachHang.get(luaChon));

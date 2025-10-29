@@ -170,7 +170,7 @@ public class QuanLyPhieuBaoHanh {
         khachHang.getListPhieuBaoHanh().remove(phieuBaoHanh);
         // Xóa khỏi danh sách tổng
         danhSachPhieuBaoHanh.xoa(ma);
-        System.out.println("Da xoa phieu bao hanh (neu ton tai).");
+        System.out.println("Da xoa phieu bao hanh");
     }
 
     public void xemTatCaPhieu() {

@@ -47,6 +47,10 @@ public class QuanLyLichTrongTuan {
     // điểm danh thủ công theo mã nhân viên
     public void diemDanh() {
         NhanVien nhanVien = db.getDanhSachNhanVien().tim(Nhap.nhapStr("Nhap ma nhan vien can diem danh : "));
+        if (nhanVien == null) {
+            System.out.println("Khong tim thay nhan vien");
+            return;
+        }
         if (diemDanh(nhanVien)) {
             System.out.println("Diem danh thanh cong");
         } else {

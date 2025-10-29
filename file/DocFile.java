@@ -79,12 +79,12 @@ public class DocFile {
                 }
                 String[] thanhPhan = line.split("\\s+");
                 String ma = thanhPhan[0];
-                String ten = thanhPhan[1];
-                String danhMuc = thanhPhan[2];
-                String thuongHieu = thanhPhan[3];
+                String ten = XulyString.chuyenLaiDangStrMacDinh(thanhPhan[1]);
+                String danhMuc = XulyString.chuyenLaiDangStrMacDinh(thanhPhan[2]);
+                String thuongHieu = XulyString.chuyenLaiDangStrMacDinh(thanhPhan[3]);
                 long gia = Long.parseLong(thanhPhan[4]);
-                String moTa = thanhPhan[5];
-                String trangThai = thanhPhan[6];
+                String moTa = XulyString.chuyenLaiDangStrMacDinh(thanhPhan[5]);
+                String trangThai = XulyString.chuyenLaiDangStrMacDinh(thanhPhan[6]);
                 trangThai = XulyString.chuyenLaiDangStrMacDinh(trangThai);
                 ThongTinSanPham newTTSp = new ThongTinSanPham(ma, ten, danhMuc, thuongHieu, gia, moTa,
                         trangThai);

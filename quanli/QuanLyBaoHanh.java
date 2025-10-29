@@ -52,8 +52,7 @@ public class QuanLyBaoHanh {
         System.out.println("======= Quan Ly Bao Hanh =======");
         System.out.println("1. Sua so thang bao hanh");
         System.out.println("2. Sua san pham");
-        System.out.println("3. Sua ngay bat dau");
-        System.out.println("4. Sua gia");
+        System.out.println("3. Sua gia");
         System.out.println("0. Thoat");
         System.out.println("---------------------------");
     }
@@ -61,9 +60,6 @@ public class QuanLyBaoHanh {
     private void suaThanhPhanBaoHanh(BaoHanh baoHanh, int luaChon) {
         // xử lý sửa từng thuộc tính của bảo hành tùy theo lựa chọn
         switch (luaChon) {
-            case 0:
-                System.out.println("Thoat sua bao hanh");
-                break;
             case 1:
                 int soThang = Nhap.nhapInt("Nhap so thang bao hanh moi : ");
                 baoHanh.setLoaiBaoHanh(soThang);
@@ -83,10 +79,6 @@ public class QuanLyBaoHanh {
                 }
                 break;
             case 3:
-                baoHanh.setNgayBatDau(Nhap.nhapNgay("Nhap ngay bat dau bao hanh moi : "));
-                baoHanh.setNgayKetThuc();
-                break;
-            case 4:
                 baoHanh.setGia(Nhap.nhapLong("Hay nhap gia moi : "));
                 break;
             default:
@@ -98,7 +90,7 @@ public class QuanLyBaoHanh {
     public void suaBaoHanh() {
         // tìm bảo hành theo mã rồi cho phép sửa thông tin trong vòng lặp
         DanhSachBaoHanh danhSachBaoHanh = db.getDanhSachBaoHanh();
-        String maBaoHanh = Nhap.nhapStr("Nhap ma phieu bao hanh can sua: ");
+        String maBaoHanh = Nhap.nhapStr("Nhap ma bao hanh can sua: ");
         BaoHanh baoHanh = danhSachBaoHanh.tim(maBaoHanh);
         if (baoHanh == null) {
             System.out.println("Khong tim thay bao hanh");

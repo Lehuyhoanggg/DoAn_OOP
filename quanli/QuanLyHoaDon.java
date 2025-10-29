@@ -197,6 +197,9 @@ public class QuanLyHoaDon {
         ChiTietHoaDon chiTietHoaDon = null;
         if (chon >= 0 && chon < hoaDon.getListChiTietHoaDon().size()) {
             chiTietHoaDon = hoaDon.getListChiTietHoaDon().get(chon); // đã chọn chitiethoadon này quản lí
+        } else {
+            System.out.println("Lua chon khong lop le");
+            return;
         }
 
         while (true) {

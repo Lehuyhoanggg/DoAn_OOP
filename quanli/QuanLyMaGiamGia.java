@@ -111,7 +111,7 @@ public class QuanLyMaGiamGia {
                 System.out.println("thay doi ten ma giam gia thanh cong!");
                 break;
             case 2:
-                mGG.setLoaiDoanhMuc(Nhap.nhapStr("nhap loai danh muc moi "));
+                mGG.setLoaiDoanhMuc(Nhap.nhapStr("nhap loai danh muc moi: "));
                 System.out.println("thay doi danh muc moi thanh cong!");
                 break;
             case 3:
@@ -119,7 +119,7 @@ public class QuanLyMaGiamGia {
                 System.out.println("thay doi loai thuong hieu thanh cong!");
                 break;
             case 4:
-                mGG.setTienGiam(Nhap.nhapStr("nhap so phan tram giam moi: "));
+                mGG.setTienGiam(Nhap.nhapStr("nhap so tien giam moi: "));
                 System.out.println("da thay doi so tien giam thanh cong!");
                 break;
             case 5:
@@ -140,8 +140,12 @@ public class QuanLyMaGiamGia {
     // menu chính để sửa thông tin của 1 mã giảm giá cụ thể
     public void suaMaGiamGia() {
         DanhSachMaGiamGia danhSachMaGiamGia = db.getDanhSachMaGiamGia();
-        String ma = Nhap.nhapStr("nhap ma cua ma giam gia can xoa: ");
+        String ma = Nhap.nhapStr("nhap ma cua ma giam gia can sua: ");
         MaGiamGia mGG = danhSachMaGiamGia.tim(ma);
+        if (mGG == null) {
+            System.out.println("Khong tim thay ma");
+            return;
+        }
         while (true) {
             System.out.println();
             System.out.println("------------------------");

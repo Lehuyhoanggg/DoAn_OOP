@@ -1,8 +1,8 @@
 SP001 SP001A15 false null false
 SP001 SP001B96 false null false
 SP001 SP001A99 false null false
-SP001 SP001B46 false null false
-SP001 SP001A69 false null false
+SP001 SP001B46 true BH043 false
+SP001 SP001A69 false null true
 SP001 SP001B34 false null false
 SP001 SP001A24 false null false
 SP001 SP001B71 false BH001 true
@@ -61,7 +61,7 @@ SP001 SP001B04 false null false
 SP001 SP001A19 false null false
 SP001 SP001B92 false null false
 SP001 SP001A69 false null false
-SP001 SP001B54 false null false
+SP001 SP001B54 false null true
 SP001 SP001A48 false null false
 SP001 SP001B78 false null false
 SP001 SP001A00 false null false
@@ -95,7 +95,7 @@ SP002 SP002B74 false null false
 SP002 SP002A63 false null false
 SP002 SP002B22 false null false
 SP002 SP002A81 false null false
-SP002 SP002B47 false null false
+SP002 SP002B47 false BH021 true
 SP002 SP002A41 false null false
 SP002 SP002B07 false BH021 true
 SP002 SP002A16 false BH021 true
@@ -124,7 +124,7 @@ SP002 SP002A75 false null false
 SP002 SP002B79 false BH021 true
 SP002 SP002A73 false null false
 SP002 SP002B47 false null false
-SP002 SP002A43 false null false
+SP002 SP002A43 false null true
 SP002 SP002B69 false null false
 SP002 SP002A08 false null false
 SP002 SP002B08 false null false
@@ -166,10 +166,10 @@ SP003 SP003A98 false null false
 SP003 SP003B05 false null false
 SP003 SP003A51 false null false
 SP003 SP003B99 false null false
-SP003 SP003A86 false null false
+SP003 SP003A86 false null true
 SP003 SP003B23 false null false
 SP003 SP003A78 false null false
-SP003 SP003B15 false null false
+SP003 SP003B15 false null true
 SP003 SP003A36 false null false
 SP003 SP003B13 false null false
 SP003 SP003A39 false null true
@@ -5940,3 +5940,6 @@ SP100 SP100A70 false null false
 SP100 SP100B25 false null false
 SP100 SP100A66 false null false
 SP002 4545454545 false null false
+SP002 779 false null false
+SP001 123 false null false
+SP001 111111 false null false
